@@ -13,7 +13,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
 public class BackgroundWorker extends AsyncTask<String, Void, String> {
-    private final String login_URL = "http://192.168.1.3:8080/phpmyadmin/tracks_api/login.php";
+    private final String login_URL = "http://bosh.live:7536/phpmyadmin/tracks_api/login.php";
     AlertDialog alertDialog;
     private Context context;
 
