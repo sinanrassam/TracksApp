@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Tracks</string>
-    <string name="etUsername"></string>
-    <string name="etPassword"></string>
+    <string name="etUsername"/>
+    <string name="etPassword"/>
     <string name="btnLoginText">Login</string>
 </resources>

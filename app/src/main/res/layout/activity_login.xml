@@ -16,7 +16,8 @@
             app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent" android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp"
-            app:layout_constraintStart_toStartOf="parent" android:autofillHints=""/>
+            app:layout_constraintStart_toStartOf="parent" android:autofillHints=""
+            app:layout_constraintHorizontal_bias="0.501" app:layout_constraintVertical_bias="0.303"/>
     <EditText
             android:layout_width="wrap_content"
             android:layout_height="23dp"
@@ -27,7 +28,8 @@
             app:layout_constraintTop_toBottomOf="@+id/etUsername" android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent" android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp"
-            app:layout_constraintStart_toStartOf="parent" android:autofillHints=""/>
+            app:layout_constraintStart_toStartOf="parent" android:autofillHints=""
+            app:layout_constraintHorizontal_bias="0.498" app:layout_constraintVertical_bias="0.132"/>
     <Button
             android:text="@string/btnLoginText"
             android:layout_width="wrap_content"
@@ -37,5 +39,6 @@
             android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp" android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:onClick="OnLogin"/>
+            android:onClick="OnLogin" app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintVertical_bias="0.204"/>
 </android.support.constraint.ConstraintLayout>

@@ -1,27 +1,27 @@
 package com.lostanimals.tracks;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import java.io.*;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
 public class BackgroundWorker extends AsyncTask<String, Void, String> {
-    private final String login_URL = "http://bosh.live:7536/phpmyadmin/tracks_api/login.php";
-    AlertDialog alertDialog;
+    @SuppressLint("StaticFieldLeak")
     private Context context;
 
-    public BackgroundWorker(Context context) {
+    private AlertDialog alertDialog;
+
+    BackgroundWorker(Context context) {
         setContext(context);
     }
 
-    public Context getContext() {
+    Context getContext() {
         return context;
     }
 
@@ -36,13 +36,11 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
         String username = params[1];
         String password = params[2];
 
-        // Moved to class variable
-        // String login_URL = "http://192.168.1.3:8080/phpmyadmin/tracks_api/login.php";
-
         if (type.equals("login")) {
             try {
                 // Create a connection to the server/login.php file
-                URL url = new URL(login_URL);
+                final String LOGIN_SCRIPT = "http://bosh.live:7536/phpmyadmin/tracks_api/login.php";
+                URL url = new URL(LOGIN_SCRIPT);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true);
@@ -61,37 +59,36 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
                 // A return will be sent, so create an input stream to capture this and read it.
                 InputStream inputStream = connection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.ISO_8859_1));
-                String result = null;
-                String line = null;
+                String result = "";
+                String line;
+
+                // Read in the received message
                 while ((line = bufferedReader.readLine()) != null) {
-                    Log.d("STATE", line);
                     result += line;
-                    Log.d("STATE", result);
                 }
+
+                // Close Streams and disconnect the HTTP connection
                 bufferedReader.close();
                 inputStream.close();
-
-                // Disconnect the HTTP connection
                 connection.disconnect();
 
                 return result;
-
-            } catch (MalformedURLException e) {
-                // TODO: Maybe Log these?
-                e.printStackTrace();
             } catch (IOException e) {
+                // TODO: Maybe Log these?
                 e.printStackTrace();
             }
         }
         return null;
     }
 
+    // This method runs before the button is click
     @Override
     protected void onPreExecute() {
         alertDialog = new AlertDialog.Builder(getContext()).create();
         alertDialog.setTitle("Login Status");
     }
 
+    // When the login button is clicked, this method fires.
     @Override
     protected void onPostExecute(String result) {
         alertDialog.setMessage(result);
