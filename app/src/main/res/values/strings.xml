@@ -2,15 +2,15 @@
     <!-- App wide Strings -->
     <string name="app_name">Tracks</string>
     <!-- Login Activity Strings -->
-    <string name="hint_username">Username</>
-    <string name="hint_password">Password</>
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
     <string name="login_btn">Login</string>
     <string name="login_btn_register">Register</string>
     <!-- Register Activity Strings -->
     <string name="register_btn">Register</string>
     <string name="hint_name">Name</string>
-    <string name="register_et_name">Username</>
-    <string name="RegisterPasswordET">Password</>
+    <string name="register_et_name">Username</string>
+    <string name="RegisterPasswordET">Password</string>
     <string name="txt_name">Your full name:</string>
     <string name="txt_username">Your username:</string>
     <string name="txt_password">Your password:</string>
