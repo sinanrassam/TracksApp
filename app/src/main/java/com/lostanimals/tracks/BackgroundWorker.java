@@ -14,19 +14,10 @@ import java.nio.charset.StandardCharsets;
 public class BackgroundWorker extends AsyncTask<String, Void, String> {
     @SuppressLint("StaticFieldLeak")
     private Context context;
-
     private AlertDialog alertDialog;
 
     BackgroundWorker(Context context) {
         setContext(context);
-    }
-
-    Context getContext() {
-        return context;
-    }
-
-    private void setContext(Context context) {
-        this.context = context;
     }
 
     @Override
@@ -84,19 +75,39 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
     // This method runs before the button is click
     @Override
     protected void onPreExecute() {
-        alertDialog = new AlertDialog.Builder(getContext()).create();
-        alertDialog.setTitle("Login Status");
+        setAlertDialog(new AlertDialog.Builder(getContext()).create());
+        //alertDialog = new AlertDialog.Builder(getContext()).create();
+        getAlertDialog().setTitle("Login Status");
+        //alertDialog.setTitle("Login Status");
     }
 
     // When the login button is clicked, this method fires.
     @Override
     protected void onPostExecute(String result) {
-        alertDialog.setMessage(result);
-        alertDialog.show();
+        getAlertDialog().setMessage(result);
+        getAlertDialog().show();
+        //alertDialog.setMessage(result);
+        //alertDialog.show();
     }
 
     @Override
     protected void onProgressUpdate(Void... values) {
         super.onProgressUpdate(values);
+    }
+
+    private Context getContext() {
+        return context;
+    }
+
+    private void setContext(Context context) {
+        this.context = context;
+    }
+
+    private AlertDialog getAlertDialog() {
+        return alertDialog;
+    }
+
+    private void setAlertDialog(AlertDialog alertDialog) {
+        this.alertDialog = alertDialog;
     }
 }
