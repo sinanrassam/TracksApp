@@ -16,7 +16,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
     @SuppressLint("StaticFieldLeak")
     private Context context;
     private AlertDialog alertDialog;
-    private final String URL = "http://bosh.live:7536/phpmyadmin/tracks_api/";
+    private final String scriptURL = "http://bosh.live:7536/phpmyadmin/tracks_api/";
 
     BackgroundWorker(Context context) {
         setContext(context);
@@ -31,9 +31,8 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
             String password = params[2];
             try {
                 // Create a connection to the server/login.php file
-                final String LOGIN_SCRIPT = "http://bosh.live:7536/phpmyadmin/tracks_api/login.php";
-                URL url = new URL(LOGIN_SCRIPT);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                HttpURLConnection connection = openConnection(scriptURL + "login.php");
+
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true);
                 connection.setDoInput(true);
@@ -81,7 +80,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
                 post_data += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8") + "&";
                 post_data += URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
 
-                HttpURLConnection conn = openConnection(URL + "register.php");
+                HttpURLConnection conn = openConnection(scriptURL + "register.php");
 
                 String result = processRequest(conn, post_data);
 
@@ -131,13 +130,11 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
         return result;
     }
 
-    // This method runs before the button is click
+    // This method runs before the button is clicked
     @Override
     protected void onPreExecute() {
         setAlertDialog(new AlertDialog.Builder(getContext()).create());
-        //alertDialog = new AlertDialog.Builder(getContext()).create();
         getAlertDialog().setTitle("Login Status");
-        //alertDialog.setTitle("Login Status");
     }
 
     // When the login button is clicked, this method fires.
@@ -145,8 +142,6 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String result) {
         getAlertDialog().setMessage(result);
         getAlertDialog().show();
-        //alertDialog.setMessage(result);
-        //alertDialog.show();
     }
 
     @Override
