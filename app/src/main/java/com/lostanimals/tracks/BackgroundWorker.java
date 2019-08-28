@@ -30,38 +30,11 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
             String username = params[1];
             String password = params[2];
             try {
-                // Create a connection to the server/login.php file
-                HttpURLConnection connection = openConnection(scriptURL + "login.php");
+                // Create a connection to the server/register.php file
+                String post_data = URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8") + "&";
+                post_data += URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
 
-                connection.setRequestMethod("POST");
-                connection.setDoOutput(true);
-                connection.setDoInput(true);
-
-                // Send a request
-                OutputStream outputStream = connection.getOutputStream();
-                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
-                String post_data = URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8") + "&"
-                        + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
-                bufferedWriter.write(post_data);
-                bufferedWriter.flush();
-                bufferedWriter.close();
-                outputStream.close();
-
-                // A return will be sent, so create an input stream to capture this and read it.
-                InputStream inputStream = connection.getInputStream();
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.ISO_8859_1));
-                String result = "";
-                String line;
-
-                // Read in the received message
-                while ((line = bufferedReader.readLine()) != null) {
-                    result += line;
-                }
-
-                // Close Streams and disconnect the HTTP connection
-                bufferedReader.close();
-                inputStream.close();
-                connection.disconnect();
+                String result = processRequest(scriptURL + "login.php", post_data);
 
                 return result;
             } catch (IOException e) {
@@ -80,12 +53,9 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
                 post_data += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8") + "&";
                 post_data += URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
 
-                HttpURLConnection conn = openConnection(scriptURL + "register.php");
 
-                String result = processRequest(conn, post_data);
+                String result = processRequest(scriptURL + "register.php", post_data);
 
-                //disconnect the HTTP connection
-                conn.disconnect();
                 return result;
             } catch (IOException e) {
                 // TODO: Maybe Log these?
@@ -104,9 +74,10 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
         return connection;
     }
 
-    protected String processRequest(HttpURLConnection connection, String data) throws IOException {
+    protected String processRequest(String link, String data) throws IOException {
+        HttpURLConnection conn = openConnection(link);
         // Send a request
-        OutputStream outputStream = connection.getOutputStream();
+        OutputStream outputStream = conn.getOutputStream();
         BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
         bufferedWriter.write(data);
         bufferedWriter.flush();
@@ -114,7 +85,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
         outputStream.close();
 
         // A return will be sent, so create an input stream to capture this and read it.
-        InputStream inputStream = connection.getInputStream();
+        InputStream inputStream = conn.getInputStream();
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.ISO_8859_1));
         String result = "";
         String line;
@@ -127,6 +98,8 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
         // Close Streams
         bufferedReader.close();
         inputStream.close();
+        //disconnect the HTTP connection
+        conn.disconnect();
         return result;
     }
 
