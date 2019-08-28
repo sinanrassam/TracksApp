@@ -2,12 +2,12 @@ package com.lostanimals.tracks;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
 public class RegisterActivity extends AppCompatActivity {
     private EditText etName, etUsername, etPassword;
-    private String name, username, password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,9 +20,18 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void OnRegister(View view) {
-        setName(getName());
-        setPassword(getPassword());
+        String name = etName.getText().toString();
+        String username = etUsername.getText().toString();
+        String password = etPassword.getText().toString();
 
+
+        Log.d("OnRegister", "Name = " + name);
+        Log.d("OnRegister", "username = " + username);
+        Log.d("OnRegister", "password = " + password);
+
+        // Run the register script
+        BackgroundWorker bgWorker = new BackgroundWorker(this);
+        bgWorker.execute("register", name, username, password);
     }
 
     public EditText getEtName() {
@@ -49,27 +58,4 @@ public class RegisterActivity extends AppCompatActivity {
         this.etPassword = etPassword;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }

@@ -1,5 +1,6 @@
 package com.lostanimals.tracks;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -45,5 +46,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private void setEtPassword(EditText etPassword) {
         this.etPassword = etPassword;
+    }
+
+    public void openRegisterActivity(View view) {
+        startActivity(new Intent(this, RegisterActivity.class));
     }
 }
