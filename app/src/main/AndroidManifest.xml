@@ -16,6 +16,8 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".FeedActivity">
+        </activity>
         <activity android:name=".NewPostActivity">
         </activity>
         <activity android:name=".RegisterActivity">
