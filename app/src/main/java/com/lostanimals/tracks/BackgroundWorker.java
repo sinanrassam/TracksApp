@@ -12,6 +12,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
+// TODO: Rewrite to use JSON instead of Strings
 public class BackgroundWorker extends AsyncTask<String, Void, String> {
     @SuppressLint("StaticFieldLeak")
     private Context context;
@@ -110,6 +111,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
     }
 
     // When the login button is clicked, this method fires.
+    // The return from onBackGround is fed into this method
     @Override
     protected void onPostExecute(String result) {
         getAlertDialog().setMessage(result);

@@ -30,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
         // Run the login script
         BackgroundWorker bgWorker = new BackgroundWorker(this);
         bgWorker.execute(type, username, password);
+        // if (bgWorker.execute(type, username, password).getStatus() == AsyncTask.Status.FINISHED && )
     }
 
     private EditText getEtUser() {
@@ -51,4 +52,5 @@ public class LoginActivity extends AppCompatActivity {
     public void openRegisterActivity(View view) {
         startActivity(new Intent(this, RegisterActivity.class));
     }
+
 }
