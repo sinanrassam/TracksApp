@@ -16,6 +16,16 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
+        <!-- TODO: Test Main empty Activity. To be removed if not using -->
+        <activity
+                android:name=".MainEmptyActivity"
+                android:theme="@android:style/Theme.NoDisplay">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
         <activity android:name=".FeedActivity">
         </activity>
         <activity android:name=".NewPostActivity">

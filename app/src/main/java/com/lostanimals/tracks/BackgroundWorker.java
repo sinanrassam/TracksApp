@@ -118,6 +118,15 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
         getAlertDialog().show();
     }
 
+    /**
+     * Test class for creating a token on user sign in, returning to EmptyActivity
+     *
+     * @return
+     */
+    public static boolean getToken() {
+        return true;
+    }
+
     @Override
     protected void onProgressUpdate(Void... values) {
         super.onProgressUpdate(values);

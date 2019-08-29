@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText etUser, etPassword;
+    private Button loginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,15 @@ public class LoginActivity extends AppCompatActivity {
 
     public void openRegisterActivity(View view) {
         startActivity(new Intent(this, RegisterActivity.class));
+    }
+
+
+    /**
+     * Placeholder for moving ontop feed activity when user is signed in.
+     */
+    public void openFeedActivity() {
+        Intent intent = new Intent(this, FeedActivity.class);
+        startActivity(intent);
     }
 
 }
