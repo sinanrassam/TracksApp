@@ -14,4 +14,11 @@
     <string name="txt_name">Your full name:</string>
     <string name="txt_username">Your username:</string>
     <string name="txt_password">Your password:</string>
+    <!-- New Post Activity Strings -->
+    <string name="post_txt_title">Create new post</string>
+    <string name="post_txt_post_title">Post title</string>
+    <string name="hint_post_title">Missing Dog in Kingsland…</string>
+    <string name="post_txt_post_desc">Enter a description</string>
+    <string name="hint_desc">Last seen…</string>
+    <string name="post_btn_post">Post</string>
 </resources>
