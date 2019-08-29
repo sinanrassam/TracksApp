@@ -57,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     /**
-     * Placeholder for moving ontop feed activity when user is signed in.
+     * Placeholder for moving to feed activity when user is signed in.
      */
     public void openFeedActivity() {
         Intent intent = new Intent(this, FeedActivity.class);
