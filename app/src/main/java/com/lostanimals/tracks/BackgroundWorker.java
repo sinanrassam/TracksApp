@@ -53,7 +53,6 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
                 post_data += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8") + "&";
                 post_data += URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
 
-
                 String result = processRequest(scriptURL + "register.php", post_data);
 
                 return result;
