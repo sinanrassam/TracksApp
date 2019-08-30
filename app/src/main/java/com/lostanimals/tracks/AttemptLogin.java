@@ -67,6 +67,12 @@ public class AttemptLogin extends AsyncTask<String, Void, JSONObject> {
                 // TODO: Maybe Log these?
                 e.printStackTrace();
             }
+        } else if (type.equals("reset password")) {
+            Log.d("BackgroundWorker", "Entered new post state");
+        } else if (type.equals("new post")) {
+            Log.d("BackgroundWorker", "Entered new post state");
+        } else if (type.equals("get post")) {
+            Log.d("BackgroundWorker", "Entered new post state");
         }
         return json;
     }
