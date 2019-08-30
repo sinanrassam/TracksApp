@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
         String type = "login";
 
         // Run the login script
-        BackgroundWorker bgWorker = new BackgroundWorker(this);
+        AttemptLogin bgWorker = new AttemptLogin(this);
         bgWorker.execute(type, username, password);
         // if (bgWorker.execute(type, username, password).getStatus() == AsyncTask.Status.FINISHED && )
     }
