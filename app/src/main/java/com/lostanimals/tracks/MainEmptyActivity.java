@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 /**
  * Test class based off this link:
  * https://android.jlelse.eu/login-and-main-activity-flow-a52b930f8351
- * Good way to either go to logn activity (if user is not signed in)
+ * Good way to either go to login activity (if user is not signed in)
  * Or go to feed if they are.
  */
 public class MainEmptyActivity extends AppCompatActivity {
