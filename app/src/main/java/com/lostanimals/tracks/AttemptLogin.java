@@ -33,12 +33,17 @@ public class AttemptLogin extends AsyncTask<String, Void, JSONObject> {
     protected JSONObject doInBackground(String... params) {
         JSONObject json = null;
         String type = params[0];
+        String postData = null;
+        try {
+            postData = URLEncoder.encode("type", "UTF-8") + "=" + URLEncoder.encode(type, "UTF-8") + "&";
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         if (type.equalsIgnoreCase("login")) {
             String username = params[1];
             String password = params[2];
             try {
                 // Create a connection to the server/register.php file
-                String postData = URLEncoder.encode("type", "UTF-8") + "=" + URLEncoder.encode(type, "UTF-8") + "&";
                 postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8") + "&";
                 postData += URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
 
@@ -48,7 +53,20 @@ public class AttemptLogin extends AsyncTask<String, Void, JSONObject> {
                 e.printStackTrace();
             }
         } else if (type.equalsIgnoreCase("register")) {
-            
+            String name = params[1];
+            String username = params[2];
+            String password = params[3];
+            try {
+                // Create a connection to the server/register.php file
+                postData += URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(name, "UTF-8") + "&";
+                postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8") + "&";
+                postData += URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
+
+                json = processRequest(SCRIPT_URL + "user.php", postData);
+            } catch (IOException | JSONException e) {
+                // TODO: Maybe Log these?
+                e.printStackTrace();
+            }
         }
         return json;
     }
@@ -72,6 +90,14 @@ public class AttemptLogin extends AsyncTask<String, Void, JSONObject> {
             if (data.get("response").equals("successful")) {
                 Log.d("onPostExecute", "success");
                 if (data.get("purpose").equals("login")) {
+                    alertDialog.setTitle("Login Status");
+                    JSONObject details = (JSONObject) data.get("details");
+                    Log.d("details: ", (String) details.get("name"));
+                    Log.d("details: ", (String) details.get("username"));
+                    Log.d("details: ", (String) details.get("email"));
+                    alertDialog.setMessage("Login successful");
+                    alertDialog.show();
+                } else if (data.get("purpose").equals("login")) {
                     alertDialog.setTitle("Login Status");
                     JSONObject details = (JSONObject) data.get("details");
                     Log.d("details: ", (String) details.get("name"));

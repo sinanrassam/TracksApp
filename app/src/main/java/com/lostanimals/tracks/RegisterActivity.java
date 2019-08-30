@@ -28,7 +28,7 @@ public class RegisterActivity extends AppCompatActivity {
         String password = etPassword.getText().toString();
 
         // Run the register script
-        BackgroundWorker bgWorker = new BackgroundWorker(this);
+        AttemptLogin bgWorker = new AttemptLogin(this);
         bgWorker.execute("register", name, username, password);
     }
 
