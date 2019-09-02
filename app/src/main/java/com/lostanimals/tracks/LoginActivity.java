@@ -18,6 +18,15 @@ public class LoginActivity extends AppCompatActivity {
 
         setEtUser((EditText) findViewById(R.id.login_et_username));
         setEtPassword((EditText) findViewById(R.id.login_et_password));
+
+        /*
+          Check is user is logged in, if so, skip this activity
+         */
+        if (SaveSharedPreference.getLoggedStatus(getApplicationContext())) {
+            Intent feedIntent = new Intent(getApplicationContext(), FeedActivity.class);
+            startActivity(feedIntent);
+        }
+
     }
 
     // This method is called when Login button is pressed
