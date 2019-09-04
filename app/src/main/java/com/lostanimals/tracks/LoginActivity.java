@@ -4,12 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText etUser, etPassword;
-    private Button loginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +24,6 @@ public class LoginActivity extends AppCompatActivity {
             Intent feedIntent = new Intent(getApplicationContext(), FeedActivity.class);
             startActivity(feedIntent);
         }
-
     }
 
     // This method is called when Login button is pressed
@@ -41,19 +38,10 @@ public class LoginActivity extends AppCompatActivity {
         // Run the login script
         AttemptLogin bgWorker = new AttemptLogin(this);
         bgWorker.execute(type, username, password);
-        // if (bgWorker.execute(type, username, password).getStatus() == AsyncTask.Status.FINISHED && )
-    }
-
-    private EditText getEtUser() {
-        return etUser;
     }
 
     private void setEtUser(EditText etUser) {
         this.etUser = etUser;
-    }
-
-    private EditText getEtPassword() {
-        return etPassword;
     }
 
     private void setEtPassword(EditText etPassword) {
@@ -64,7 +52,6 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(new Intent(this, RegisterActivity.class));
     }
 
-
     /**
      * Placeholder for moving to feed activity when user is signed in.
      */
@@ -72,5 +59,4 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(this, FeedActivity.class);
         startActivity(intent);
     }
-
 }

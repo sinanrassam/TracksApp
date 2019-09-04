@@ -14,13 +14,22 @@ import java.nio.charset.StandardCharsets;
 
 // TODO: Rewrite to use JSON instead of Strings
 public class BackgroundWorker extends AsyncTask<String, Void, String> {
+    private final String scriptURL = "http://bosh.live:7536/phpmyadmin/tracks_api/";
     @SuppressLint("StaticFieldLeak")
     private Context context;
     private AlertDialog alertDialog;
-    private final String scriptURL = "http://bosh.live:7536/phpmyadmin/tracks_api/";
 
     BackgroundWorker(Context context) {
         setContext(context);
+    }
+
+    /**
+     * Test class for creating a token on user sign in, returning to EmptyActivity
+     *
+     * @return
+     */
+    public static boolean getToken() {
+        return true;
     }
 
     @Override
@@ -116,15 +125,6 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String result) {
         getAlertDialog().setMessage(result);
         getAlertDialog().show();
-    }
-
-    /**
-     * Test class for creating a token on user sign in, returning to EmptyActivity
-     *
-     * @return
-     */
-    public static boolean getToken() {
-        return true;
     }
 
     @Override

@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import static com.lostanimals.tracks.PreferencesUtility.LOGGED_IN_PREF;
+import static com.lostanimals.tracks.PreferencesUtility.USERNAME;
 
 public class SaveSharedPreference {
 
@@ -18,9 +19,10 @@ public class SaveSharedPreference {
      * @param context
      * @param loggedIn
      */
-    public static void setLoggedIn(Context context, boolean loggedIn) {
+    public static void setLoggedIn(Context context, boolean loggedIn, String username) {
         SharedPreferences.Editor editor = getPreferences(context).edit();
         editor.putBoolean(LOGGED_IN_PREF, loggedIn);
+        editor.putString(USERNAME, username);
         editor.apply();
     }
 

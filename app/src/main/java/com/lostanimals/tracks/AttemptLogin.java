@@ -20,9 +20,10 @@ import java.nio.charset.StandardCharsets;
  * This allows doInBackground to return a JSONObject to onPostExecute.
  */
 public class AttemptLogin extends AsyncTask<String, Void, JSONObject> {
+    private final String SCRIPT_URL = "http://bosh.live:7536/phpmyadmin/tracks_api/";
     Context context;
     private AlertDialog alertDialog;
-    private final String SCRIPT_URL = "http://bosh.live:7536/phpmyadmin/tracks_api/";
+
 
     AttemptLogin(Context context) {
         this.context = context;
@@ -96,7 +97,7 @@ public class AttemptLogin extends AsyncTask<String, Void, JSONObject> {
     // This method runs before the button is clicked
     @Override
     protected void onPreExecute() {
-        alertDialog =  new AlertDialog.Builder(context).create();
+        alertDialog = new AlertDialog.Builder(context).create();
     }
 
     /**
@@ -120,6 +121,10 @@ public class AttemptLogin extends AsyncTask<String, Void, JSONObject> {
                         Log.d("details: ", (String) details.get("email"));
                         alertDialog.setMessage("Login successful");
                         alertDialog.show();
+
+                        // TODO: Properly test shared prefs:
+                        SaveSharedPreference.setLoggedIn(context, true, details.getString("username"));
+
                     } else if (data.get("purpose").equals("register")) {
                         alertDialog.setTitle("Register Status");
                         JSONObject details = (JSONObject) data.get("details");
