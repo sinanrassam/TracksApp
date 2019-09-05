@@ -17,12 +17,6 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
-
-/**
- * Test class for rewriting the BGworker class to JSONObjects
- * In the AsyncTask extension, a JSONObject is specified as the 3rd argument.
- * This allows doInBackground to return a JSONObject to onPostExecute.
- */
 public class ServerManager extends AsyncTask<String, Void, JSONObject> {
     private final String SCRIPT_URL = "http://bosh.live:7536/phpmyadmin/tracks_api/";
     @SuppressLint("StaticFieldLeak")
@@ -149,7 +143,7 @@ public class ServerManager extends AsyncTask<String, Void, JSONObject> {
         }
     }
 
-    protected HttpURLConnection openConnection(String link) throws IOException {
+    public HttpURLConnection openConnection(String link) throws IOException {
         URL url = new URL(link);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("POST");
@@ -158,7 +152,7 @@ public class ServerManager extends AsyncTask<String, Void, JSONObject> {
         return connection;
     }
 
-    protected JSONObject processRequest(String link, String data) throws IOException, JSONException {
+    public JSONObject processRequest(String link, String data) throws IOException, JSONException {
         HttpURLConnection conn = openConnection(link);
         // Send a request
         OutputStream outputStream = conn.getOutputStream();
