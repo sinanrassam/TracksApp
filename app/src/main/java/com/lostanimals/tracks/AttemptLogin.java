@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -24,6 +25,7 @@ public class AttemptLogin extends AsyncTask<String, Void, JSONObject> {
     private final String SCRIPT_URL = "http://bosh.live:7536/phpmyadmin/tracks_api/";
     Context context;
     private AlertDialog alertDialog;
+    private Toast toast;
 
     AttemptLogin(Context context) {
         this.context = context;
@@ -92,48 +94,41 @@ public class AttemptLogin extends AsyncTask<String, Void, JSONObject> {
     @Override
     protected void onPreExecute() {
         alertDialog = new AlertDialog.Builder(context).create();
+        toast = Toast.makeText(context.getApplicationContext(), "", Toast.LENGTH_SHORT);
     }
 
     @Override
     protected void onPostExecute(JSONObject data) {
-        if (data != null) {
+        if (data == null) {
+            alertDialog.setMessage("Server Error");
+            alertDialog.show();
+        } else {
+            String msg = null;
             try {
                 if (data.get("response").equals("successful")) {
                     Log.d("onPostExecute", "success");
                     if (data.get("purpose").equals("login")) {
-                        alertDialog.setTitle("Login Status");
                         JSONObject details = (JSONObject) data.get("details");
-                        Log.d("details: ", (String) details.get("name"));
-                        Log.d("details: ", (String) details.get("username"));
-                        Log.d("details: ", (String) details.get("email"));
-                        alertDialog.setMessage("Login successful");
-                        alertDialog.show();
 
                         // TODO: Properly test shared prefs:
                         SaveSharedPreference.setLoggedIn(context, true, details.getString("username"), details.getString("name"), details.getString("email"));
-
+                        msg = "Login Successful";
                         Intent feedIntent = new Intent(context, FeedActivity.class);
                         feedIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(feedIntent);
-
                     } else if (data.get("purpose").equals("register")) {
-                        alertDialog.setTitle("Register Status");
-                        JSONObject details = (JSONObject) data.get("details");
-                        Log.d("details: ", (String) details.get("name"));
-                        Log.d("details: ", (String) details.get("username"));
-                        Log.d("details: ", (String) details.get("email"));
-                        alertDialog.setMessage("Register successful");
-                        alertDialog.show();
+                        msg = "Login Successful";
+                        Intent feedIntent = new Intent(context, FeedActivity.class);
+                        feedIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(feedIntent);
                     } else if (data.get("purpose").equals("new post")) {
-                        alertDialog.setTitle("New Post Status");
-                        alertDialog.setMessage("New post successful");
-                        alertDialog.show();
+                        msg = "Post created";
                     }
                 } else {
-                    alertDialog.setTitle("Error");
-                    alertDialog.setMessage("Operation Failed");
-                    alertDialog.show();
+                    msg = data.get("reason").toString();
                 }
+                toast.setText(msg);
+                toast.show();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
