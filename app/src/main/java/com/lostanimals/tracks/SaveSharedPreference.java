@@ -12,7 +12,7 @@ import static com.lostanimals.tracks.PreferencesUtility.*;
  *
  * @version 1.0
  */
-class SaveSharedPreference {
+public class SaveSharedPreference {
 
     static SharedPreferences getPreferences(Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context);
