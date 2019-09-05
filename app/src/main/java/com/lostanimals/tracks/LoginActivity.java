@@ -28,7 +28,6 @@ public class LoginActivity extends AppCompatActivity {
         mPreferencesUtility = new PreferencesUtility(sharedPreferences);
 
 
-
         setEtUser((EditText) findViewById(R.id.login_et_username));
         setEtPassword((EditText) findViewById(R.id.login_et_password));
 

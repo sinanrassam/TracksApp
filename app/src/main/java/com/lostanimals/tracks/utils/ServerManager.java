@@ -8,8 +8,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 import com.lostanimals.tracks.FeedActivity;
-import com.lostanimals.tracks.utils.PreferenceEntry;
-import com.lostanimals.tracks.utils.PreferencesUtility;
 import org.json.JSONException;
 import org.json.JSONObject;
 
