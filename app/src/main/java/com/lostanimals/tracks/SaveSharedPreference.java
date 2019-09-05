@@ -3,9 +3,6 @@ package com.lostanimals.tracks;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-
-import static com.lostanimals.tracks.PreferencesUtility.LOGGED_IN_PREF;
-import static com.lostanimals.tracks.PreferencesUtility.USERNAME;
 import static com.lostanimals.tracks.PreferencesUtility.*;
 
 /**

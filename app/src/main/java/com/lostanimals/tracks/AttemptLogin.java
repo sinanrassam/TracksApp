@@ -2,6 +2,7 @@ package com.lostanimals.tracks;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import org.json.JSONException;
@@ -110,6 +111,10 @@ public class AttemptLogin extends AsyncTask<String, Void, JSONObject> {
 
                         // TODO: Properly test shared prefs:
                         SaveSharedPreference.setLoggedIn(context, true, details.getString("username"), details.getString("name"), details.getString("email"));
+
+                        Intent feedIntent = new Intent(context, FeedActivity.class);
+                        feedIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(feedIntent);
 
                     } else if (data.get("purpose").equals("register")) {
                         alertDialog.setTitle("Register Status");

@@ -7,7 +7,10 @@ import android.view.View;
 import android.widget.EditText;
 
 public class LoginActivity extends AppCompatActivity {
-    public static final boolean DEV_MODE = true;
+    /*
+    DEV_MODE: Change this to false to run in user mode.
+     */
+    static final boolean DEV_MODE = true;
     private EditText etUser, etPassword;
 
     @Override
