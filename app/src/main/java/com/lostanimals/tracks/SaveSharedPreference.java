@@ -6,6 +6,7 @@ import android.preference.PreferenceManager;
 
 import static com.lostanimals.tracks.PreferencesUtility.LOGGED_IN_PREF;
 import static com.lostanimals.tracks.PreferencesUtility.USERNAME;
+import static com.lostanimals.tracks.PreferencesUtility.*;
 
 /**
  * This class is for making changes to the SharedPreferences of the user.
@@ -27,11 +28,15 @@ class SaveSharedPreference {
      * @param context Application context fed from calling method in Login class.
      * @param loggedIn Boolean to save the state of the user login.
      * @param username The user's username once validated by the MySQL Database.
+     * @param name The user's name once validated.
+     * @param email the user's email once validated.
      */
-    static void setLoggedIn(Context context, boolean loggedIn, String username) {
+    static void setLoggedIn(Context context, boolean loggedIn, String username, String name, String email) {
         SharedPreferences.Editor editor = getPreferences(context).edit();
         editor.putBoolean(LOGGED_IN_PREF, loggedIn);
         editor.putString(USERNAME, username);
+        editor.putString(NAME, name);
+        editor.putString(EMAIL, email);
         editor.apply();
     }
 

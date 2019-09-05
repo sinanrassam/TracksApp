@@ -69,9 +69,7 @@ public class AttemptLogin extends AsyncTask<String, Void, JSONObject> {
                 e.printStackTrace();
             }
         } else if (type.equals("reset password")) {
-            Log.d("BackgroundWorker", "Entered new post state");
         } else if (type.equals("new post")) {
-            Log.d("BackgroundWorker", "Entered new post state");
             String postTitle = params[1];
             String postDesc = params[2];
             String username = params[3];
@@ -88,8 +86,6 @@ public class AttemptLogin extends AsyncTask<String, Void, JSONObject> {
                 e.printStackTrace();
             }
         } else if (type.equals("get post")) {
-            Log.d("BackgroundWorker", "Entered get post state");
-
         }
         return json;
     }
@@ -123,7 +119,7 @@ public class AttemptLogin extends AsyncTask<String, Void, JSONObject> {
                         alertDialog.show();
 
                         // TODO: Properly test shared prefs:
-                        SaveSharedPreference.setLoggedIn(context, true, details.getString("username"));
+                        SaveSharedPreference.setLoggedIn(context, true, details.getString("username"), details.getString("name"), details.getString("email"));
 
                     } else if (data.get("purpose").equals("register")) {
                         alertDialog.setTitle("Register Status");
