@@ -7,8 +7,8 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
-import com.lostanimals.tracks.utils.PreferenceEntry;
 import com.lostanimals.tracks.utils.PreferencesUtility;
+import com.lostanimals.tracks.utils.ServerManager;
 
 public class LoginActivity extends AppCompatActivity {
     /*
@@ -48,9 +48,9 @@ public class LoginActivity extends AppCompatActivity {
         String type = "login";
 
         // Run the login script
-        AttemptLogin attemptLogin = new AttemptLogin(this);
-        attemptLogin.setPreferencesUtility(mPreferencesUtility);
-        attemptLogin.execute(type, username, password);
+        ServerManager serverManager = new ServerManager(this);
+        serverManager.setPreferencesUtility(mPreferencesUtility);
+        serverManager.execute(type, username, password);
     }
 
     private void setEtUser(EditText etUser) {

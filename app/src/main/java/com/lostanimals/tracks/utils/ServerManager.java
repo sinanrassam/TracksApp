@@ -1,4 +1,4 @@
-package com.lostanimals.tracks;
+package com.lostanimals.tracks.utils;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
+import com.lostanimals.tracks.FeedActivity;
 import com.lostanimals.tracks.utils.PreferenceEntry;
 import com.lostanimals.tracks.utils.PreferencesUtility;
 import org.json.JSONException;
@@ -24,7 +25,7 @@ import java.nio.charset.StandardCharsets;
  * In the AsyncTask extension, a JSONObject is specified as the 3rd argument.
  * This allows doInBackground to return a JSONObject to onPostExecute.
  */
-public class AttemptLogin extends AsyncTask<String, Void, JSONObject> {
+public class ServerManager extends AsyncTask<String, Void, JSONObject> {
     private final String SCRIPT_URL = "http://bosh.live:7536/phpmyadmin/tracks_api/";
     @SuppressLint("StaticFieldLeak")
     private
@@ -33,7 +34,7 @@ public class AttemptLogin extends AsyncTask<String, Void, JSONObject> {
     private Toast toast;
     private PreferencesUtility mPreferencesUtility;
 
-    AttemptLogin(Context context) {
+    public ServerManager(Context context) {
         this.context = context;
     }
 

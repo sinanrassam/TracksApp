@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import com.lostanimals.tracks.utils.ServerManager;
 
 public class RegisterActivity extends AppCompatActivity {
     private EditText etName, etUsername, etPassword;
@@ -28,8 +29,8 @@ public class RegisterActivity extends AppCompatActivity {
         String password = etPassword.getText().toString();
 
         // Run the register script
-        AttemptLogin bgWorker = new AttemptLogin(this);
-        bgWorker.execute("register", name, username, password);
+        ServerManager serverManager = new ServerManager(this);
+        serverManager.execute("register", name, username, password);
     }
 
     @Override

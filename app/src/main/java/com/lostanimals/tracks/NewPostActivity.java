@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import com.lostanimals.tracks.utils.ServerManager;
 
 public class NewPostActivity<CurrentActivity> extends AppCompatActivity {
     private EditText etTitle, etDescription;
@@ -27,8 +28,8 @@ public class NewPostActivity<CurrentActivity> extends AppCompatActivity {
         String username = "USER";
 
         // Run the register script
-        AttemptLogin bgWorker = new AttemptLogin(this);
-        bgWorker.execute("new post", title, description, username);
+        ServerManager serverManager = new ServerManager(this);
+        serverManager.execute("new post", title, description, username);
     }
 
     @Override
