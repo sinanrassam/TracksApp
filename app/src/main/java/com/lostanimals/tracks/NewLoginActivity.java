@@ -209,7 +209,7 @@ public class NewLoginActivity extends AppCompatActivity implements LoaderCallbac
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            showProgress(true);
+            showProgress(false);
 
             //mAuthTask = new UserLoginTask(email, password);
             //mAuthTask.execute((Void) null);
@@ -222,12 +222,14 @@ public class NewLoginActivity extends AppCompatActivity implements LoaderCallbac
 
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
-        return email.contains("@");
+//        return email.contains("@");
+        return true;
     }
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        return password.length() > 4;
+//        return password.length() > 4;
+        return true;
     }
 
     /**

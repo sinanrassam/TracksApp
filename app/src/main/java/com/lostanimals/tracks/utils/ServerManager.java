@@ -1,10 +1,12 @@
 package com.lostanimals.tracks.utils;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.widget.Toast;
 import com.lostanimals.tracks.FeedActivity;
@@ -115,19 +117,20 @@ public class ServerManager extends AsyncTask<String, Void, JSONObject> {
 
                         // TODO: Properly test shared prefs:
                         PreferenceEntry preferenceEntry = new PreferenceEntry(details.getString("name"), details.getString("username"), details.getString("email"), true);
-                        boolean userLogin = mPreferencesUtility.setUserInfo(preferenceEntry);
-                        if (userLogin) {
-                            Toast.makeText(this.context, "Login Successful", Toast.LENGTH_LONG).show();
-                        }
-                        //SaveSharedPreference.setLoggedIn(context, true, details.getString("username"), details.getString("name"), details.getString("email"));
+//                        boolean userLogin = mPreferencesUtility.setUserInfo(preferenceEntry);
+//                        if (userLogin) {
+//                            Toast.makeText(this.context, "Login Successful", Toast.LENGTH_LONG).show();
+//                        }
                         msg = "Login Successful";
                         Intent feedIntent = new Intent(context, FeedActivity.class);
                         feedIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        ActivityCompat.finishAffinity((Activity) context);
                         context.startActivity(feedIntent);
                     } else if (data.get("purpose").equals("register")) {
                         msg = "Login Successful";
                         Intent feedIntent = new Intent(context, FeedActivity.class);
                         feedIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        ActivityCompat.finishAffinity((Activity) context);
                         context.startActivity(feedIntent);
                     } else if (data.get("purpose").equals("new post")) {
                         msg = "Post created";
