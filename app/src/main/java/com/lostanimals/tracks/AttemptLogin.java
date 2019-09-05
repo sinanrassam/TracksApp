@@ -24,12 +24,10 @@ public class AttemptLogin extends AsyncTask<String, Void, JSONObject> {
     Context context;
     private AlertDialog alertDialog;
 
-
     AttemptLogin(Context context) {
         this.context = context;
     }
 
-    // for testing JSON.
     @Override
     protected JSONObject doInBackground(String... params) {
         JSONObject json = null;
@@ -65,10 +63,10 @@ public class AttemptLogin extends AsyncTask<String, Void, JSONObject> {
 
                 json = processRequest(SCRIPT_URL + "user.php", postData);
             } catch (IOException | JSONException e) {
-                // TODO: Maybe Log these?
                 e.printStackTrace();
             }
         } else if (type.equals("reset password")) {
+            // TODO: create code
         } else if (type.equals("new post")) {
             String postTitle = params[1];
             String postDesc = params[2];
@@ -82,27 +80,19 @@ public class AttemptLogin extends AsyncTask<String, Void, JSONObject> {
 
                 json = processRequest(SCRIPT_URL + "post.php", postData);
             } catch (IOException | JSONException e) {
-                // TODO: Maybe Log these?
                 e.printStackTrace();
             }
         } else if (type.equals("get post")) {
+            // TODO: write this logic
         }
         return json;
     }
 
-    // This method runs before the button is clicked
     @Override
     protected void onPreExecute() {
         alertDialog = new AlertDialog.Builder(context).create();
     }
 
-    /**
-     * data.get("xyz") is just used for explanation purposes.
-     * This is what I think the method may look like, but
-     * I really don't know yet.
-     *
-     * @param data
-     */
     @Override
     protected void onPostExecute(JSONObject data) {
         if (data != null) {
@@ -170,7 +160,6 @@ public class AttemptLogin extends AsyncTask<String, Void, JSONObject> {
         String line;
 
         StringBuilder sb = new StringBuilder();
-        // Read in the received message
         while ((line = bufferedReader.readLine()) != null) {
             sb.append(line);
         }
@@ -178,10 +167,8 @@ public class AttemptLogin extends AsyncTask<String, Void, JSONObject> {
 
         Log.d("JSON Holds:", json.toString());
 
-        // Close Streams
         bufferedReader.close();
         inputStream.close();
-        //disconnect the HTTP connection
         conn.disconnect();
         return json;
     }
