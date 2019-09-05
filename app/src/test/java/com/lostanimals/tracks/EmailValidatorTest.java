@@ -1,5 +1,6 @@
 package com.lostanimals.tracks;
 
+import com.lostanimals.tracks.utils.EmailValidator;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;

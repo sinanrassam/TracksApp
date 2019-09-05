@@ -1,4 +1,4 @@
-package com.lostanimals.tracks;
+package com.lostanimals.tracks.utils;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -43,8 +43,11 @@ public class EmailValidator implements TextWatcher {
     }
 
     @Override
-    final public void beforeTextChanged(CharSequence s, int start, int count, int after) {/*No-op*/}
+    final public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
 
     @Override
-    final public void onTextChanged(CharSequence s, int start, int before, int count) {/*No-op*/}
+    final public void onTextChanged(CharSequence s, int start, int before, int count) {
+    }
 }

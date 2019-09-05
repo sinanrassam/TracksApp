@@ -1,11 +1,14 @@
 package com.lostanimals.tracks;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
+import com.lostanimals.tracks.utils.PreferenceEntry;
+import com.lostanimals.tracks.utils.PreferencesUtility;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -23,12 +26,19 @@ import java.nio.charset.StandardCharsets;
  */
 public class AttemptLogin extends AsyncTask<String, Void, JSONObject> {
     private final String SCRIPT_URL = "http://bosh.live:7536/phpmyadmin/tracks_api/";
+    @SuppressLint("StaticFieldLeak")
+    private
     Context context;
     private AlertDialog alertDialog;
     private Toast toast;
+    private PreferencesUtility mPreferencesUtility;
 
     AttemptLogin(Context context) {
         this.context = context;
+    }
+
+    public void setPreferencesUtility(PreferencesUtility preferencesUtility) {
+        this.mPreferencesUtility = preferencesUtility;
     }
 
     @Override
@@ -111,7 +121,12 @@ public class AttemptLogin extends AsyncTask<String, Void, JSONObject> {
                         JSONObject details = (JSONObject) data.get("details");
 
                         // TODO: Properly test shared prefs:
-                        SaveSharedPreference.setLoggedIn(context, true, details.getString("username"), details.getString("name"), details.getString("email"));
+                        PreferenceEntry preferenceEntry = new PreferenceEntry(details.getString("name"), details.getString("username"), details.getString("email"), true);
+                        boolean userLogin = mPreferencesUtility.setUserInfo(preferenceEntry);
+                        if (userLogin) {
+                            Toast.makeText(this.context, "Login Successful", Toast.LENGTH_LONG).show();
+                        }
+                        //SaveSharedPreference.setLoggedIn(context, true, details.getString("username"), details.getString("name"), details.getString("email"));
                         msg = "Login Successful";
                         Intent feedIntent = new Intent(context, FeedActivity.class);
                         feedIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);

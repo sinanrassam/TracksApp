@@ -1,28 +1,39 @@
 package com.lostanimals.tracks;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+import com.lostanimals.tracks.utils.PreferenceEntry;
+import com.lostanimals.tracks.utils.PreferencesUtility;
 
 public class LoginActivity extends AppCompatActivity {
     /*
     DEV_MODE: Change this to false to run in user mode.
      */
-    static final boolean DEV_MODE = true;
+    static final boolean DEV_MODE = false;
     private EditText etUser, etPassword;
+    private PreferencesUtility mPreferencesUtility;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mPreferencesUtility = new PreferencesUtility(sharedPreferences);
+
+
 
         setEtUser((EditText) findViewById(R.id.login_et_username));
         setEtPassword((EditText) findViewById(R.id.login_et_password));
 
         if (!DEV_MODE) {
-            if (SaveSharedPreference.getLoggedStatus(getApplicationContext())) {
+            if (mPreferencesUtility.getUserInfo() == null) {
                 Intent feedIntent = new Intent(getApplicationContext(), FeedActivity.class);
                 startActivity(feedIntent);
             }
@@ -38,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // Run the login script
         AttemptLogin attemptLogin = new AttemptLogin(this);
+        attemptLogin.setPreferencesUtility(mPreferencesUtility);
         attemptLogin.execute(type, username, password);
     }
 
