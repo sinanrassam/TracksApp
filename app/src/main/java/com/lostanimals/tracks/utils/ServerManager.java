@@ -116,7 +116,7 @@ public class ServerManager extends AsyncTask<String, Void, JSONObject> {
                         JSONObject details = (JSONObject) data.get("details");
 
                         // TODO: Properly test shared prefs:
-                        PreferenceEntry preferenceEntry = new PreferenceEntry(details.getString("name"), details.getString("username"), details.getString("email"), true);
+//                        PreferenceEntry preferenceEntry = new PreferenceEntry(details.getString("name"), details.getString("username"), details.getString("email"), true);
 //                        boolean userLogin = mPreferencesUtility.setUserInfo(preferenceEntry);
 //                        if (userLogin) {
 //                            Toast.makeText(this.context, "Login Successful", Toast.LENGTH_LONG).show();

@@ -22,6 +22,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -76,21 +77,22 @@ public class NewLoginActivity extends AppCompatActivity implements LoaderCallbac
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_login);
-        // Set up the login form.
-        mEmailView = findViewById(R.id.email);
-        populateAutoComplete();
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mPreferencesUtility = new PreferencesUtility(sharedPreferences);
 
         if (!DEV_MODE) {
-            if (mPreferencesUtility.getUserInfo() == null) {
+            if (mPreferencesUtility.getUserInfo() != null) {
                 Intent feedIntent = new Intent(getApplicationContext(), FeedActivity.class);
                 startActivity(feedIntent);
                 finish();
             }
         }
+
+        setContentView(R.layout.activity_new_login);
+        // Set up the login form.
+        mEmailView = findViewById(R.id.email);
+        populateAutoComplete();
 
         mPasswordView = findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
