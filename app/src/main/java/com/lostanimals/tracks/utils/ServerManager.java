@@ -116,11 +116,11 @@ public class ServerManager extends AsyncTask<String, Void, JSONObject> {
                         JSONObject details = (JSONObject) data.get("details");
 
                         // TODO: Properly test shared prefs:
-//                        PreferenceEntry preferenceEntry = new PreferenceEntry(details.getString("name"), details.getString("username"), details.getString("email"), true);
-//                        boolean userLogin = mPreferencesUtility.setUserInfo(preferenceEntry);
-//                        if (userLogin) {
-//                            Toast.makeText(this.context, "Login Successful", Toast.LENGTH_LONG).show();
-//                        }
+                        PreferenceEntry preferenceEntry = new PreferenceEntry(details.getString("name"), details.getString("username"), details.getString("email"), true);
+                        boolean userLogin = mPreferencesUtility.setUserInfo(preferenceEntry);
+                        if (userLogin) {
+                            Toast.makeText(this.context, "Login Successful", Toast.LENGTH_LONG).show();
+                        }
                         msg = "Login Successful";
                         Intent feedIntent = new Intent(context, FeedActivity.class);
                         feedIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -134,6 +134,8 @@ public class ServerManager extends AsyncTask<String, Void, JSONObject> {
                         context.startActivity(feedIntent);
                     } else if (data.get("purpose").equals("new post")) {
                         msg = "Post created";
+                    } else if (data.get("purpose").equals("get posts")) {
+
                     }
                 } else {
                     msg = data.get("reason").toString();
