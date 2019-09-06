@@ -127,10 +127,8 @@ public class ServerManager extends AsyncTask<String, Void, JSONObject> {
 
                         // TODO: Properly test shared prefs:
                         PreferenceEntry preferenceEntry = new PreferenceEntry(details.getString("name"), details.getString("username"), details.getString("email"), true);
-                        boolean userLogin = mPreferencesUtility.setUserInfo(preferenceEntry);
-                        if (userLogin) {
-                            Toast.makeText(this.context, "Login Successful", Toast.LENGTH_LONG).show();
-                        }
+                        mPreferencesUtility.setUserInfo(preferenceEntry);
+
                         msg = "Login Successful";
                         Intent feedIntent = new Intent(context, FeedActivity.class);
                         feedIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -147,13 +145,16 @@ public class ServerManager extends AsyncTask<String, Void, JSONObject> {
                     } else if (data.get("purpose").equals("get posts")) {
                         postList = new ArrayList<>();
                         JSONArray postsArray = (JSONArray) data.get("posts");
-                        Log.d("ARRAY", postsArray.toString());
+                        // Log.d("ARRAY", postsArray.toString());
                         for (int i = 0; i < postsArray.length(); i++) {
                             JSONObject temp = (JSONObject) postsArray.get(i);
                             String title = (String) temp.get("title");
                             String desc = (String) temp.get("description");
                             String username = (String) temp.get("username");
                             postList.add(new PostEntry(username, title, desc, null));
+                            Log.d("ARRAYLIST", postList.get(i).getPostTitle());
+                            Toast.makeText(this.context, postList.get(i).getPostTitle(), Toast.LENGTH_SHORT).show();
+                            //wait(2000);
                         }
                     }
                 } else {
