@@ -39,4 +39,5 @@
     <string name="prompt_email">Email</string>
     <string name="action_register">Register</string>
     <string name="action_register_short">Register</string>
+    <string name="email_incorrect">Incorrect Email</string>
 </resources>
