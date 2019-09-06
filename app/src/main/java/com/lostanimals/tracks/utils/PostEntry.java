@@ -8,8 +8,8 @@ public class PostEntry {
     public String mPostDesc;
     public Date mPostDate;
 
-    public PostEntry(String usernmame, String postTitle, String postDesc, Date postDate) {
-        setUsername(usernmame);
+    public PostEntry(String username, String postTitle, String postDesc, Date postDate) {
+        setUsername(username);
         setPostTitle(postTitle);
         setPostDesc(postDesc);
         setPostDate(postDate);
