@@ -154,9 +154,9 @@ public class NewLoginActivity extends AppCompatActivity {
 //        if (mAuthTask != null) {
 //            return;
 //        }
-        if (mServerTask != null) {
-            return;
-        }
+//        if (mServerTask != null) {
+//            return;
+//        }
 
         // Reset errors.
         mEmailView.setError(null);
@@ -194,10 +194,6 @@ public class NewLoginActivity extends AppCompatActivity {
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-//            showProgress(false);
-
-            //mAuthTask = new UserLoginTask(email, password);
-            //mAuthTask.execute((Void) null);
 
             mServerTask = new ServerManager(this);
             mServerTask.setPreferencesUtility(mPreferencesUtility);
