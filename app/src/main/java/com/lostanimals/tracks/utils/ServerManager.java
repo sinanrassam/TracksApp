@@ -63,14 +63,12 @@ public class ServerManager extends AsyncTask<String, Void, JSONObject> {
                 e.printStackTrace();
             }
         } else if (type.equalsIgnoreCase("register")) {
-            String name = params[1];
-            String username = params[2];
-            String password = params[3];
             try {
                 // Create a connection to the server/register.php file
-                postData += URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(name, "UTF-8") + "&";
-                postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8") + "&";
-                postData += URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
+                postData += URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(params[1], "UTF-8") + "&";
+                postData += URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(params[2], "UTF-8") + "&";
+                postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(params[3], "UTF-8") + "&";
+                postData += URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(params[4], "UTF-8");
 
                 json = processRequest(SCRIPT_URL + "user.php", postData);
             } catch (IOException | JSONException e) {
@@ -128,14 +126,13 @@ public class ServerManager extends AsyncTask<String, Void, JSONObject> {
                         // TODO: Properly test shared prefs:
                         PreferenceEntry preferenceEntry = new PreferenceEntry(details.getString("name"), details.getString("username"), details.getString("email"), true);
                         mPreferencesUtility.setUserInfo(preferenceEntry);
-
                         msg = "Login Successful";
                         Intent feedIntent = new Intent(context, FeedActivity.class);
                         feedIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         ActivityCompat.finishAffinity((Activity) context);
                         context.startActivity(feedIntent);
                     } else if (data.get("purpose").equals("register")) {
-                        msg = "Login Successful";
+                        msg = "Register Successful";
                         Intent feedIntent = new Intent(context, FeedActivity.class);
                         feedIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         ActivityCompat.finishAffinity((Activity) context);
@@ -145,16 +142,13 @@ public class ServerManager extends AsyncTask<String, Void, JSONObject> {
                     } else if (data.get("purpose").equals("get posts")) {
                         postList = new ArrayList<>();
                         JSONArray postsArray = (JSONArray) data.get("posts");
-                        // Log.d("ARRAY", postsArray.toString());
+                        Log.d("ARRAY", postsArray.toString());
                         for (int i = 0; i < postsArray.length(); i++) {
                             JSONObject temp = (JSONObject) postsArray.get(i);
                             String title = (String) temp.get("title");
                             String desc = (String) temp.get("description");
                             String username = (String) temp.get("username");
                             postList.add(new PostEntry(username, title, desc, null));
-                            Log.d("ARRAYLIST", postList.get(i).getPostTitle());
-                            Toast.makeText(this.context, postList.get(i).getPostTitle(), Toast.LENGTH_SHORT).show();
-                            //wait(2000);
                         }
                     }
                 } else {
