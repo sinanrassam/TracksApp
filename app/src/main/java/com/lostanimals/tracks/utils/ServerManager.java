@@ -63,14 +63,12 @@ public class ServerManager extends AsyncTask<String, Void, JSONObject> {
                 e.printStackTrace();
             }
         } else if (type.equalsIgnoreCase("register")) {
-            String name = params[1];
-            String username = params[2];
-            String password = params[3];
             try {
                 // Create a connection to the server/register.php file
-                postData += URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(name, "UTF-8") + "&";
-                postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8") + "&";
-                postData += URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
+                postData += URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(params[1], "UTF-8") + "&";
+                postData += URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(params[2], "UTF-8") + "&";
+                postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(params[3], "UTF-8") + "&";
+                postData += URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(params[4], "UTF-8");
 
                 json = processRequest(SCRIPT_URL + "user.php", postData);
             } catch (IOException | JSONException e) {
@@ -127,17 +125,14 @@ public class ServerManager extends AsyncTask<String, Void, JSONObject> {
 
                         // TODO: Properly test shared prefs:
                         PreferenceEntry preferenceEntry = new PreferenceEntry(details.getString("name"), details.getString("username"), details.getString("email"), true);
-                        boolean userLogin = mPreferencesUtility.setUserInfo(preferenceEntry);
-                        if (userLogin) {
-                            Toast.makeText(this.context, "Login Successful", Toast.LENGTH_LONG).show();
-                        }
+                        mPreferencesUtility.setUserInfo(preferenceEntry);
                         msg = "Login Successful";
                         Intent feedIntent = new Intent(context, FeedActivity.class);
                         feedIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         ActivityCompat.finishAffinity((Activity) context);
                         context.startActivity(feedIntent);
                     } else if (data.get("purpose").equals("register")) {
-                        msg = "Login Successful";
+                        msg = "Register Successful";
                         Intent feedIntent = new Intent(context, FeedActivity.class);
                         feedIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         ActivityCompat.finishAffinity((Activity) context);
