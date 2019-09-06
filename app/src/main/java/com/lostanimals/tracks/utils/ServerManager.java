@@ -10,6 +10,7 @@ import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.widget.Toast;
 import com.lostanimals.tracks.FeedActivity;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -135,7 +136,10 @@ public class ServerManager extends AsyncTask<String, Void, JSONObject> {
                     } else if (data.get("purpose").equals("new post")) {
                         msg = "Post created";
                     } else if (data.get("purpose").equals("get posts")) {
+                        JSONArray postsArray = (JSONArray) data.get("posts");
+                        for (int i = 0; i < postsArray.length(); i++) {
 
+                        }
                     }
                 } else {
                     msg = data.get("reason").toString();
