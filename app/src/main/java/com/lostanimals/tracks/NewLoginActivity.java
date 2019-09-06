@@ -35,7 +35,7 @@ public class NewLoginActivity extends AppCompatActivity {
 
     private ServerManager mServerTask = null;
     private PreferencesUtility mPreferencesUtility;
-    static final boolean DEV_MODE = false;
+    static final boolean DEV_MODE = true;
 
     // UI references.
     private AutoCompleteTextView mEmailView;
@@ -86,7 +86,7 @@ public class NewLoginActivity extends AppCompatActivity {
         mRegisterBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("Hello", "Hello");
+                startActivity(new Intent(getApplicationContext(), NewRegisterActivity.class));
             }
         });
     }
