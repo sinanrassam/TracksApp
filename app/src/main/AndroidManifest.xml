@@ -18,10 +18,6 @@
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
         <activity
-                android:name=".NewRegisterActivity"
-                android:label="@string/title_activity_new_register">
-        </activity>
-        <activity
                 android:name=".NewLoginActivity"
                 android:label="@string/title_activity_new_login">
             <intent-filter>

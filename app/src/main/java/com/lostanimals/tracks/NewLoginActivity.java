@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AutoCompleteTextView;
@@ -81,12 +82,11 @@ public class NewLoginActivity extends AppCompatActivity {
             }
         });
 
-        
         Button mRegisterBtn = findViewById(R.id.login_register_btn);
         mRegisterBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), NewRegisterActivity.class));
+                Log.d("Hello", "Hello");
             }
         });
     }
