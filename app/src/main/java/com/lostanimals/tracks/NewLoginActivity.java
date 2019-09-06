@@ -73,11 +73,20 @@ public class NewLoginActivity extends AppCompatActivity {
 //            }
 //        });
 
-        Button mEmailSignInButton = findViewById(R.id.login_btn);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
+        Button mSignInBtn = findViewById(R.id.login_btn);
+        mSignInBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 attemptLogin();
+            }
+        });
+
+        
+        Button mRegisterBtn = findViewById(R.id.login_register_btn);
+        mRegisterBtn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), NewRegisterActivity.class));
             }
         });
     }
