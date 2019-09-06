@@ -5,63 +5,99 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 import com.lostanimals.tracks.utils.PreferencesUtility;
 import com.lostanimals.tracks.utils.ServerManager;
 
+/**
+ * A login screen that offers login via email/password.
+ */
 public class LoginActivity extends AppCompatActivity {
-    /*
-    DEV_MODE: Change this to false to run in user mode.
-     */
-    static final boolean DEV_MODE = false;
-    private EditText etUser, etPassword;
+
+    static final boolean DEV_MODE = true;
+
+    private ServerManager mServerTask = null;
     private PreferencesUtility mPreferencesUtility;
+    private AutoCompleteTextView mEmailView;
+    private EditText mPasswordView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mPreferencesUtility = new PreferencesUtility(sharedPreferences);
 
-
-        setEtUser((EditText) findViewById(R.id.login_et_username));
-        setEtPassword((EditText) findViewById(R.id.login_et_password));
-
         if (!DEV_MODE) {
-            if (mPreferencesUtility.getUserInfo() == null) {
+            if (mPreferencesUtility.getUserInfo() != null) {
                 Intent feedIntent = new Intent(getApplicationContext(), FeedActivity.class);
                 startActivity(feedIntent);
+                finish();
             }
         }
+
+        setContentView(R.layout.activity_login);
+
+        // Set up the login form.
+        mEmailView = findViewById(R.id.login_username);
+        mPasswordView = findViewById(R.id.login_password);
+
+        Button mSignInBtn = findViewById(R.id.login_btn);
+        mSignInBtn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                attemptLogin();
+            }
+        });
+
+        Button mRegisterBtn = findViewById(R.id.login_register_btn);
+        mRegisterBtn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {startActivity(new Intent(getApplicationContext(), RegisterActivity.class));    }
+        });
     }
 
-    public void OnLogin(View view) {
-        String username = etUser.getText().toString();
-        String password = etPassword.getText().toString();
+    /**
+     * Attempts to sign in or register the account specified by the login form.
+     * If there are form errors (invalid email, missing fields, etc.), the
+     * errors are presented and no actual login attempt is made.
+     */
+    private void attemptLogin() {
+        // Reset errors.
+        mEmailView.setError(null);
+        mPasswordView.setError(null);
 
-        // TODO: These could be enums depending on how many scripts will be called
-        String type = "login";
+        // Store values at the time of the login attempt.
+        String email = mEmailView.getText().toString();
+        String password = mPasswordView.getText().toString();
 
-        // Run the login script
-        ServerManager serverManager = new ServerManager(this);
-        serverManager.setPreferencesUtility(mPreferencesUtility);
-        serverManager.execute(type, username, password);
+        boolean cancel = false;
+        View focusView = null;
+
+        // Check for a valid password, if the user entered one.
+        if (TextUtils.isEmpty(password)) {
+            mPasswordView.setError(getString(R.string.error_field_required));
+            focusView = mPasswordView;
+            cancel = true;
+        }
+
+        if (TextUtils.isEmpty(email)) {
+            mEmailView.setError(getString(R.string.error_field_required));
+            focusView = mEmailView;
+            cancel = true;
+        }
+
+        if (cancel) {
+            focusView.requestFocus();
+        } else {
+            mServerTask = new ServerManager(this);
+            mServerTask.setPreferencesUtility(mPreferencesUtility);
+            mServerTask.execute("login", email, password);
+        }
     }
-
-    private void setEtUser(EditText etUser) {
-        this.etUser = etUser;
-    }
-
-    private void setEtPassword(EditText etPassword) {
-        this.etPassword = etPassword;
-    }
-
-    public void openRegisterActivity(View view) {
-        startActivity(new Intent(this, RegisterActivity.class));
-    }
-
 }

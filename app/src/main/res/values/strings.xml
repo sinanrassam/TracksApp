@@ -21,7 +21,7 @@
     <string name="post_txt_post_desc">Enter a description</string>
     <string name="hint_desc">Description…</string>
     <string name="post_btn_post">Post</string>
-    <string name="title_activity_new_login">Login</string>
+    <string name="title_activity_login">Login</string>
     <!-- Strings related to login -->
     <string name="prompt_username">Username</string>
     <string name="prompt_password">Password</string>
@@ -32,7 +32,7 @@
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
-    <string name="title_activity_new_register">Register</string>
+    <string name="title_activity_register">Register</string>
     <!-- Strings related to register -->
     <string name="prompt_firstName">First Name</string>
     <string name="prompt_lastName">Last Name</string>
