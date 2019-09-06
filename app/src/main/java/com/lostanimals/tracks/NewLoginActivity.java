@@ -52,7 +52,7 @@ public class NewLoginActivity extends AppCompatActivity {
 
     private ServerManager mServerTask = null;
     private PreferencesUtility mPreferencesUtility;
-    static final boolean DEV_MODE = true;
+    static final boolean DEV_MODE = false;
 
     // UI references.
     private AutoCompleteTextView mEmailView;

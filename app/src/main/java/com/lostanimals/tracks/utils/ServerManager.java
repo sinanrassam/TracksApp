@@ -19,6 +19,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 
 public class ServerManager extends AsyncTask<String, Void, JSONObject> {
     private final String SCRIPT_URL = "http://bosh.live:7536/phpmyadmin/tracks_api/";
@@ -28,6 +29,7 @@ public class ServerManager extends AsyncTask<String, Void, JSONObject> {
     private AlertDialog alertDialog;
     private Toast toast;
     private PreferencesUtility mPreferencesUtility;
+    public ArrayList<PostEntry> postList;
 
     public ServerManager(Context context) {
         this.context = context;
@@ -76,7 +78,7 @@ public class ServerManager extends AsyncTask<String, Void, JSONObject> {
             }
         } else if (type.equals("reset password")) {
             // TODO: create code
-        } else if (type.equals("new post")) {
+        } else if (type.equals("new")) {
             String postTitle = params[1];
             String postDesc = params[2];
             String username = params[3];
@@ -91,8 +93,15 @@ public class ServerManager extends AsyncTask<String, Void, JSONObject> {
             } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
-        } else if (type.equals("get post")) {
-            // TODO: write this logic
+        } else if (type.equals("get")) {
+            // int postNumber = Integer.parseInt(params[1]);
+            try {
+                postData += URLEncoder.encode("number", "UTF-8") + "=" + URLEncoder.encode(params[1], "UTF-8");
+                Log.d("POST", postData);
+                json = processRequest(SCRIPT_URL + "post.php", postData);
+            } catch (JSONException | IOException e) {
+                e.printStackTrace();
+            }
         }
         return json;
     }
@@ -136,9 +145,15 @@ public class ServerManager extends AsyncTask<String, Void, JSONObject> {
                     } else if (data.get("purpose").equals("new post")) {
                         msg = "Post created";
                     } else if (data.get("purpose").equals("get posts")) {
+                        postList = new ArrayList<>();
                         JSONArray postsArray = (JSONArray) data.get("posts");
+                        Log.d("ARRAY", postsArray.toString());
                         for (int i = 0; i < postsArray.length(); i++) {
-
+                            JSONObject temp = (JSONObject) postsArray.get(i);
+                            String title = (String) temp.get("title");
+                            String desc = (String) temp.get("description");
+                            String username = (String) temp.get("username");
+                            postList.add(new PostEntry(username, title, desc, null));
                         }
                     }
                 } else {
