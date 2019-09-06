@@ -18,6 +18,14 @@
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
         <activity
+                android:name=".NewRegisterActivity"
+                android:label="@string/title_activity_new_register"
+                android:parentActivityName=".NewLoginActivity">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.lostanimals.tracks.NewLoginActivity"/>
+        </activity>
+        <activity
                 android:name=".NewLoginActivity"
                 android:label="@string/title_activity_new_login">
             <intent-filter>
@@ -34,7 +42,6 @@
         </activity>
         <activity android:name=".LoginActivity">
         </activity>
-
     </application>
 
 </manifest>
