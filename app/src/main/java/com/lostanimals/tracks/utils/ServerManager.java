@@ -23,13 +23,13 @@ import java.util.ArrayList;
 
 public class ServerManager extends AsyncTask<String, Void, JSONObject> {
     private final String SCRIPT_URL = "http://bosh.live:7536/phpmyadmin/tracks_api/";
+    public ArrayList<PostEntry> postList;
     @SuppressLint("StaticFieldLeak")
     private
     Context context;
     private AlertDialog alertDialog;
     private Toast toast;
     private PreferencesUtility mPreferencesUtility;
-    public ArrayList<PostEntry> postList;
 
     public ServerManager(Context context) {
         this.context = context;
