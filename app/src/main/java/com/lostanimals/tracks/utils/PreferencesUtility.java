@@ -30,5 +30,4 @@ public class PreferencesUtility {
         boolean login = mSharedPreferences.getBoolean(KEY_LOGIN, false);
         return new PreferenceEntry(name, username, email, login);
     }
-
 }

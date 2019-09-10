@@ -10,6 +10,7 @@ import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.widget.Toast;
 import com.lostanimals.tracks.FeedActivity;
+import com.lostanimals.tracks.LogoutActivity;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -127,16 +128,25 @@ public class ServerManager extends AsyncTask<String, Void, JSONObject> {
                         PreferenceEntry preferenceEntry = new PreferenceEntry(details.getString("name"), details.getString("username"), details.getString("email"), true);
                         mPreferencesUtility.setUserInfo(preferenceEntry);
                         msg = "Login Successful";
-                        Intent feedIntent = new Intent(context, FeedActivity.class);
-                        feedIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                        Intent feedIntent = new Intent(context, FeedActivity.class);
+//                        feedIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                        ActivityCompat.finishAffinity((Activity) context);
+//                        context.startActivity(feedIntent);
+
+                        Intent logoutIntent = new Intent(context, LogoutActivity.class);
+                        logoutIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         ActivityCompat.finishAffinity((Activity) context);
-                        context.startActivity(feedIntent);
+                        context.startActivity(logoutIntent);
                     } else if (data.get("purpose").equals("register")) {
                         msg = "Register Successful";
-                        Intent feedIntent = new Intent(context, FeedActivity.class);
-                        feedIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                        Intent feedIntent = new Intent(context, FeedActivity.class);
+//                        feedIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                        ActivityCompat.finishAffinity((Activity) context);
+//                        context.startActivity(feedIntent);
+                        Intent logoutIntent = new Intent(context, LogoutActivity.class);
+                        logoutIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         ActivityCompat.finishAffinity((Activity) context);
-                        context.startActivity(feedIntent);
+                        context.startActivity(logoutIntent);
                     } else if (data.get("purpose").equals("new post")) {
                         msg = "Post created";
                     } else if (data.get("purpose").equals("get posts")) {

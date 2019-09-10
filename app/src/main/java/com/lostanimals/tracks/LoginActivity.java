@@ -35,8 +35,10 @@ public class LoginActivity extends AppCompatActivity {
 
         if (!DEV_MODE) {
             if (mPreferencesUtility.getUserInfo() != null) {
-                Intent feedIntent = new Intent(getApplicationContext(), FeedActivity.class);
-                startActivity(feedIntent);
+//                Intent feedIntent = new Intent(getApplicationContext(), FeedActivity.class);
+//                startActivity(feedIntent);
+                Intent LogoutIntent = new Intent(getApplicationContext(), LogoutActivity.class);
+                startActivity(LogoutIntent);
                 finish();
             }
         }
