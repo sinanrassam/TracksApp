@@ -2,8 +2,11 @@ package com.lostanimals.tracks;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import com.lostanimals.tracks.utils.ServerManager;
 
 public class FeedActivity extends AppCompatActivity {
