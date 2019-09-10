@@ -110,11 +110,10 @@ public class RegisterActivity extends AppCompatActivity {
             cancel = true;
         }
 
-        String name = firstName + " " + lastName;
-
         if (cancel) {
             focusView.requestFocus();
         } else {
+            String name = firstName + " " + lastName;
             mServerTask = new ServerManager(this);
             mServerTask.setPreferencesUtility(mPreferencesUtility);
             mServerTask.execute("register", name, email, username, password);

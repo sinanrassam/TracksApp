@@ -82,7 +82,7 @@ public class ServerManager extends AsyncTask<String, Void, JSONObject> {
             String username = params[3];
 
             try {
-                // Create a connection to the server/register.php file
+                // Create a connection to the server/post.php file
                 postData += URLEncoder.encode("title", "UTF-8") + "=" + URLEncoder.encode(postTitle, "UTF-8") + "&";
                 postData += URLEncoder.encode("description", "UTF-8") + "=" + URLEncoder.encode(postDesc, "UTF-8") + "&";
                 postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8");
