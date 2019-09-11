@@ -22,13 +22,13 @@ public class LoginTest {
     private static String postData = null;
 
     @Mock
-    ServerManager mMockAttemptLogin;
+    ServerManager mServerManager;
     @Mock
     Context mMockContext;
 
     @Before
     public void initMocks() {
-        mMockAttemptLogin = new ServerManager(mMockContext);
+        mServerManager = new ServerManager(mMockContext);
     }
 
     @Test
@@ -36,7 +36,7 @@ public class LoginTest {
         postData = URLEncoder.encode("type", "UTF-8") + "=" + URLEncoder.encode("login", "UTF-8") + "&";
         postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(TEST_USER_USERNAME, "UTF-8") + "&";
         postData += URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(TEST_USER_PASSWORD, "UTF-8");
-        mMockAttemptLogin.processRequest(TEST_URL + "user.php", postData);
+        mServerManager.processRequest(TEST_URL + "user.php", postData);
     }
 
     @Test
@@ -44,6 +44,6 @@ public class LoginTest {
         postData = URLEncoder.encode("type", "UTF-8") + "=" + URLEncoder.encode("login", "UTF-8") + "&";
         postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(TEST_USER_EMAIL, "UTF-8") + "&";
         postData += URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(TEST_USER_PASSWORD, "UTF-8");
-        mMockAttemptLogin.processRequest(TEST_URL + "user.php", postData);
+        mServerManager.processRequest(TEST_URL + "user.php", postData);
     }
 }
