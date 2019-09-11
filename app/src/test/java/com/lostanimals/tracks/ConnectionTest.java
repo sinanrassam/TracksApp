@@ -15,17 +15,17 @@ public class ConnectionTest {
     private static final String TEST_URL = "http://bosh.live:7536/phpmyadmin/tracks_api/";
 
     @Mock
-    ServerManager mMockAttemptLogin;
+    ServerManager mockServerManager;
     @Mock
-    Context mMockContext;
+    Context mockContext;
 
     @Before
     public void initMocks() {
-        mMockAttemptLogin = new ServerManager(mMockContext);
+        mockServerManager = new ServerManager(mockContext);
     }
 
     @Test
     public void ServerManager_OpenConnectionTest() throws IOException {
-        mMockAttemptLogin.openConnection(TEST_URL);
+        mockServerManager.openConnection(TEST_URL);
     }
 }

@@ -21,13 +21,13 @@ public class RegisterTest {
     private static final String TEST_USER_NAME = "Test";
 
     @Mock
-    ServerManager mServerManager;
+    ServerManager mockServerManager;
     @Mock
-    Context mMockContext;
+    Context mockContext;
 
     @Before
     public void initMocks() {
-        mServerManager = new ServerManager(mMockContext);
+        mockServerManager = new ServerManager(mockContext);
     }
 
     @Test
@@ -37,6 +37,6 @@ public class RegisterTest {
         postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(TEST_USER_USERNAME, "UTF-8") + "&";
         postData += URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(TEST_USER_PASSWORD, "UTF-8");
 
-        mServerManager.processRequest(TEST_URL + "user.php", postData);
+        mockServerManager.processRequest(TEST_URL + "user.php", postData);
     }
 }
