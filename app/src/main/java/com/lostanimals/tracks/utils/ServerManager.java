@@ -9,7 +9,6 @@ import android.os.AsyncTask;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.widget.Toast;
-import com.lostanimals.tracks.FeedActivity;
 import com.lostanimals.tracks.LogoutActivity;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,8 +25,7 @@ public class ServerManager extends AsyncTask<String, Void, JSONObject> {
     private final String SCRIPT_URL = "http://bosh.live:7536/phpmyadmin/tracks_api/";
     public ArrayList<PostEntry> postList;
     @SuppressLint("StaticFieldLeak")
-    private
-    Context context;
+    private Context context;
     private AlertDialog alertDialog;
     private Toast toast;
     private PreferencesUtility mPreferencesUtility;
