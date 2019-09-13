@@ -15,14 +15,14 @@ import java.util.List;
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class TestPostRecyclerViewAdapter extends RecyclerView.Adapter<TestPostRecyclerViewAdapter.ViewHolder> {
+public class PostRecyclerViewAdapter extends RecyclerView.Adapter<PostRecyclerViewAdapter.ViewHolder> {
 
     // private final List<DummyItem> mValues;
     private final List<PostEntry> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    // public TestPostRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
-    public TestPostRecyclerViewAdapter(List<PostEntry> items, OnListFragmentInteractionListener listener) {
+    // public PostRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+    public PostRecyclerViewAdapter(List<PostEntry> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -30,7 +30,7 @@ public class TestPostRecyclerViewAdapter extends RecyclerView.Adapter<TestPostRe
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_post_test, parent, false);
+                .inflate(R.layout.fragment_post, parent, false);
         return new ViewHolder(view);
     }
 
