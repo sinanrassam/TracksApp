@@ -11,13 +11,13 @@ import android.view.View;
 import com.lostanimals.tracks.utils.PostEntry;
 import com.lostanimals.tracks.utils.ServerManager;
 
-public class FeedActivity extends AppCompatActivity implements ListTestFragment.OnListFragmentInteractionListener {
+public class FeedActivity extends AppCompatActivity implements PostListFragment.OnListFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
-        addFragment(new ListTestFragment(), false, "one");
+        addFragment(new PostListFragment(), false, "one");
     }
 
     public void onAdd(View view) {
