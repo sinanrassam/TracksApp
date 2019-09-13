@@ -3,10 +3,10 @@ package com.lostanimals.tracks.utils;
 import android.content.SharedPreferences;
 
 public class PreferencesUtility {
-    final static String KEY_NAME = "key_name";
-    final static String KEY_USERNAME = "key_username";
-    final static String KEY_EMAIL = "key_email";
-    final static String KEY_LOGIN = "key_login_bool";
+    private final static String KEY_NAME = "key_name";
+    private final static String KEY_USERNAME = "key_username";
+    private final static String KEY_EMAIL = "key_email";
+    private final static String KEY_LOGIN = "key_login_bool";
 
     private final SharedPreferences mSharedPreferences;
 

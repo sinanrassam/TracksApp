@@ -19,7 +19,7 @@ import com.lostanimals.tracks.utils.ServerManager;
  */
 public class LoginActivity extends AppCompatActivity {
 
-    static final boolean DEV_MODE = true;
+    public static final boolean DEV_MODE = true;
 
     private ServerManager mServerTask = null;
     private PreferencesUtility mPreferencesUtility;
@@ -33,12 +33,15 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mPreferencesUtility = new PreferencesUtility(sharedPreferences);
 
-        if (!DEV_MODE) {
+        if (DEV_MODE) {
             if (mPreferencesUtility.getUserInfo() != null) {
 //                Intent feedIntent = new Intent(getApplicationContext(), FeedActivity.class);
 //                startActivity(feedIntent);
-                Intent LogoutIntent = new Intent(getApplicationContext(), LogoutActivity.class);
-                startActivity(LogoutIntent);
+//                Intent LogoutIntent = new Intent(getApplicationContext(), LogoutActivity.class);
+//                startActivity(LogoutIntent);
+//                finish();
+                Intent intent = new Intent(getApplicationContext(), FeedActivity.class);
+                startActivity(intent);
                 finish();
             }
         }
@@ -60,7 +63,9 @@ public class LoginActivity extends AppCompatActivity {
         Button mRegisterBtn = findViewById(R.id.login_register_btn);
         mRegisterBtn.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View view) {startActivity(new Intent(getApplicationContext(), RegisterActivity.class));    }
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
+            }
         });
     }
 
@@ -75,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
         mPasswordView.setError(null);
 
         // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
+        String email = mEmailView.getText().toString().toLowerCase();
         String password = mPasswordView.getText().toString();
 
         boolean cancel = false;

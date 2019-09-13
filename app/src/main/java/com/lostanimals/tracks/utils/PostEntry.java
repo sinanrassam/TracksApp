@@ -1,18 +1,30 @@
 package com.lostanimals.tracks.utils;
 
-import java.util.Date;
-
 public class PostEntry {
     public String mUsername;
     public String mPostTitle;
     public String mPostDesc;
-    public Date mPostDate;
+    public String mPostDate;
+    public String mId;
+    public String mContent;
 
-    public PostEntry(String username, String postTitle, String postDesc, Date postDate) {
+    public PostEntry(String username, String postTitle, String postDesc, String postDate, String id, String content) {
         setUsername(username);
         setPostTitle(postTitle);
         setPostDesc(postDesc);
         setPostDate(postDate);
+        setId(id);
+        setContent(content);
+    }
+
+    // override for no date
+    public PostEntry(String username, String postTitle, String postDesc, String id, String content) {
+        setUsername(username);
+        setPostTitle(postTitle);
+        setPostDesc(postDesc);
+        setPostDate("1970");
+        setId(id);
+        setContent(content);
     }
 
     public String getUsername() {
@@ -27,7 +39,7 @@ public class PostEntry {
         return mPostTitle;
     }
 
-    public void setPostTitle(String postTitle) {
+    private void setPostTitle(String postTitle) {
         this.mPostTitle = postTitle;
     }
 
@@ -35,15 +47,39 @@ public class PostEntry {
         return mPostDesc;
     }
 
-    public void setPostDesc(String postDesc) {
+    private void setPostDesc(String postDesc) {
         this.mPostDesc = postDesc;
     }
 
-    public Date getPostDate() {
+    public String getPostDate() {
         return mPostDate;
     }
 
-    public void setPostDate(Date mPostDate) {
+    private void setPostDate(String mPostDate) {
         this.mPostDate = mPostDate;
+    }
+
+    public String getId() {
+        return mId;
+    }
+
+    public void setId(String id) {
+        this.mId = id;
+    }
+
+    public String getContent() {
+        return mContent;
+    }
+
+    public void setContent(String content) {
+        this.mContent = content;
+    }
+
+    @Override
+    public String toString() {
+        if (getContent() != null) {
+            return getContent();
+        }
+        return "Problem loading content";
     }
 }

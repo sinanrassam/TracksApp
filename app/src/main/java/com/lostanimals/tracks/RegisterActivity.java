@@ -1,8 +1,6 @@
 package com.lostanimals.tracks;
 
-import android.annotation.TargetApi;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -15,9 +13,10 @@ import com.lostanimals.tracks.utils.EmailValidator;
 import com.lostanimals.tracks.utils.PreferencesUtility;
 import com.lostanimals.tracks.utils.ServerManager;
 
+import java.util.Objects;
+
 public class RegisterActivity extends AppCompatActivity {
 
-    private ServerManager mServerTask = null;
     private PreferencesUtility mPreferencesUtility;
 
     // UI references.
@@ -31,7 +30,8 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        setupActionBar();
+        //setupActionBar();
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mPreferencesUtility = new PreferencesUtility(sharedPreferences);
@@ -51,14 +51,13 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    private void setupActionBar() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            // Show the Up button in the action bar.
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
-    }
+//    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+//    private void setupActionBar() {
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+//            // Show the Up button in the action bar.
+//            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        }
+//    }
 
     private void attemptRegister() {
 
@@ -72,8 +71,8 @@ public class RegisterActivity extends AppCompatActivity {
         // Store values at the time of the login attempt.
         String firstName = mFirstNameView.getText().toString();
         String lastName = mLastNameView.getText().toString();
-        String email = mEmailView.getText().toString();
-        String username = mUsernameView.getText().toString();
+        String email = mEmailView.getText().toString().toLowerCase();
+        String username = mUsernameView.getText().toString().toLowerCase();
         String password = mPasswordView.getText().toString();
 
         boolean cancel = false;
@@ -114,7 +113,7 @@ public class RegisterActivity extends AppCompatActivity {
             focusView.requestFocus();
         } else {
             String name = firstName + " " + lastName;
-            mServerTask = new ServerManager(this);
+            ServerManager mServerTask = new ServerManager(this);
             mServerTask.setPreferencesUtility(mPreferencesUtility);
             mServerTask.execute("register", name, email, username, password);
         }

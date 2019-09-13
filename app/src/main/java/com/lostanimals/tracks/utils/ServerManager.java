@@ -9,7 +9,7 @@ import android.os.AsyncTask;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.widget.Toast;
-import com.lostanimals.tracks.LogoutActivity;
+import com.lostanimals.tracks.FeedActivity;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,8 +22,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class ServerManager extends AsyncTask<String, Void, JSONObject> {
-    private final String SCRIPT_URL = "http://bosh.live:7536/phpmyadmin/tracks_api/";
-    public ArrayList<PostEntry> postList;
+    ArrayList<PostEntry> postList;
     @SuppressLint("StaticFieldLeak")
     private Context context;
     private AlertDialog alertDialog;
@@ -48,6 +47,7 @@ public class ServerManager extends AsyncTask<String, Void, JSONObject> {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+        String URL = "http://bosh.live:7536/phpmyadmin/tracks_api/";
         if (type.equalsIgnoreCase("login")) {
             String username = params[1];
             String password = params[2];
@@ -56,7 +56,7 @@ public class ServerManager extends AsyncTask<String, Void, JSONObject> {
                 postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8") + "&";
                 postData += URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
 
-                json = processRequest(SCRIPT_URL + "user.php", postData);
+                json = processRequest(URL + "user.php", postData);
             } catch (IOException | JSONException e) {
                 // TODO: Maybe Log these?
                 e.printStackTrace();
@@ -69,7 +69,7 @@ public class ServerManager extends AsyncTask<String, Void, JSONObject> {
                 postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(params[3], "UTF-8") + "&";
                 postData += URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(params[4], "UTF-8");
 
-                json = processRequest(SCRIPT_URL + "user.php", postData);
+                json = processRequest(URL + "user.php", postData);
             } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
@@ -86,7 +86,7 @@ public class ServerManager extends AsyncTask<String, Void, JSONObject> {
                 postData += URLEncoder.encode("description", "UTF-8") + "=" + URLEncoder.encode(postDesc, "UTF-8") + "&";
                 postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8");
 
-                json = processRequest(SCRIPT_URL + "post.php", postData);
+                json = processRequest(URL + "post.php", postData);
             } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
@@ -95,7 +95,7 @@ public class ServerManager extends AsyncTask<String, Void, JSONObject> {
             try {
                 postData += URLEncoder.encode("number", "UTF-8") + "=" + URLEncoder.encode(params[1], "UTF-8");
                 Log.d("POST", postData);
-                json = processRequest(SCRIPT_URL + "post.php", postData);
+                json = processRequest(URL + "post.php", postData);
             } catch (JSONException | IOException e) {
                 e.printStackTrace();
             }
@@ -105,6 +105,7 @@ public class ServerManager extends AsyncTask<String, Void, JSONObject> {
 
     @Override
     protected void onPreExecute() {
+        postList = new ArrayList<>();
         alertDialog = new AlertDialog.Builder(context).create();
         toast = Toast.makeText(context.getApplicationContext(), "", Toast.LENGTH_SHORT);
     }
@@ -124,31 +125,37 @@ public class ServerManager extends AsyncTask<String, Void, JSONObject> {
 
                         // TODO: Properly test shared prefs:
                         PreferenceEntry preferenceEntry = new PreferenceEntry(details.getString("name"), details.getString("username"), details.getString("email"), true);
-                        mPreferencesUtility.setUserInfo(preferenceEntry);
-                        msg = "Login Successful";
+                        if (mPreferencesUtility.setUserInfo(preferenceEntry)) {
+                            msg = "Login Successful";
+                            Intent intent = new Intent(context, FeedActivity.class);
+                            //Intent intent = new Intent(context, LogoutActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            ActivityCompat.finishAffinity((Activity) context);
+                            context.startActivity(intent);
+                        } else {
+                            msg = "Login Failed.";
+                        }
 //                        Intent feedIntent = new Intent(context, FeedActivity.class);
 //                        feedIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 //                        ActivityCompat.finishAffinity((Activity) context);
 //                        context.startActivity(feedIntent);
 
-                        Intent logoutIntent = new Intent(context, LogoutActivity.class);
-                        logoutIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        ActivityCompat.finishAffinity((Activity) context);
-                        context.startActivity(logoutIntent);
                     } else if (data.get("purpose").equals("register")) {
                         msg = "Register Successful";
 //                        Intent feedIntent = new Intent(context, FeedActivity.class);
 //                        feedIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 //                        ActivityCompat.finishAffinity((Activity) context);
 //                        context.startActivity(feedIntent);
-                        Intent logoutIntent = new Intent(context, LogoutActivity.class);
-                        logoutIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        // Intent intent = new Intent(context, LogoutActivity.class);
+                        Intent intent = new Intent(context, FeedActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         ActivityCompat.finishAffinity((Activity) context);
-                        context.startActivity(logoutIntent);
+                        context.startActivity(intent);
                     } else if (data.get("purpose").equals("new post")) {
+                        // TODO: Ryan, you are working here:
                         msg = "Post created";
                     } else if (data.get("purpose").equals("get posts")) {
-                        postList = new ArrayList<>();
+                        // TODO Ryan, you are working here:
                         JSONArray postsArray = (JSONArray) data.get("posts");
                         Log.d("ARRAY", postsArray.toString());
                         for (int i = 0; i < postsArray.length(); i++) {
@@ -156,7 +163,7 @@ public class ServerManager extends AsyncTask<String, Void, JSONObject> {
                             String title = (String) temp.get("title");
                             String desc = (String) temp.get("description");
                             String username = (String) temp.get("username");
-                            postList.add(new PostEntry(username, title, desc, null));
+                            postList.add(new PostEntry(username, title, desc, String.valueOf(i), desc));
                         }
                     }
                 } else {
