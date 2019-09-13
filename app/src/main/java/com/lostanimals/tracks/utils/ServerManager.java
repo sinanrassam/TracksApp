@@ -22,15 +22,15 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class ServerManager extends AsyncTask<String, Void, JSONObject> {
-    ArrayList<PostEntry> postList;
+    private ArrayList<PostEntry> mPostList;
     @SuppressLint("StaticFieldLeak")
-    private Context context;
-    private AlertDialog alertDialog;
-    private Toast toast;
+    private Context mContext;
+    private AlertDialog mAlertDialog;
+    private Toast mToast;
     private PreferencesUtility mPreferencesUtility;
 
     public ServerManager(Context context) {
-        this.context = context;
+        this.mContext = context;
     }
 
     public void setPreferencesUtility(PreferencesUtility preferencesUtility) {
@@ -105,16 +105,16 @@ public class ServerManager extends AsyncTask<String, Void, JSONObject> {
 
     @Override
     protected void onPreExecute() {
-        postList = new ArrayList<>();
-        alertDialog = new AlertDialog.Builder(context).create();
-        toast = Toast.makeText(context.getApplicationContext(), "", Toast.LENGTH_SHORT);
+        mPostList = new ArrayList<>();
+        mAlertDialog = new AlertDialog.Builder(mContext).create();
+        mToast = Toast.makeText(mContext.getApplicationContext(), "", Toast.LENGTH_SHORT);
     }
 
     @Override
     protected void onPostExecute(JSONObject data) {
         if (data == null) {
-            alertDialog.setMessage("Server Error");
-            alertDialog.show();
+            mAlertDialog.setMessage("Server Error");
+            mAlertDialog.show();
         } else {
             String msg = null;
             try {
@@ -127,11 +127,11 @@ public class ServerManager extends AsyncTask<String, Void, JSONObject> {
                         PreferenceEntry preferenceEntry = new PreferenceEntry(details.getString("name"), details.getString("username"), details.getString("email"), true);
                         if (mPreferencesUtility.setUserInfo(preferenceEntry)) {
                             msg = "Login Successful";
-                            Intent intent = new Intent(context, FeedActivity.class);
+                            Intent intent = new Intent(mContext, FeedActivity.class);
                             //Intent intent = new Intent(context, LogoutActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                            ActivityCompat.finishAffinity((Activity) context);
-                            context.startActivity(intent);
+                            ActivityCompat.finishAffinity((Activity) mContext);
+                            mContext.startActivity(intent);
                         } else {
                             msg = "Login Failed.";
                         }
@@ -147,10 +147,10 @@ public class ServerManager extends AsyncTask<String, Void, JSONObject> {
 //                        ActivityCompat.finishAffinity((Activity) context);
 //                        context.startActivity(feedIntent);
                         // Intent intent = new Intent(context, LogoutActivity.class);
-                        Intent intent = new Intent(context, FeedActivity.class);
+                        Intent intent = new Intent(mContext, FeedActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        ActivityCompat.finishAffinity((Activity) context);
-                        context.startActivity(intent);
+                        ActivityCompat.finishAffinity((Activity) mContext);
+                        mContext.startActivity(intent);
                     } else if (data.get("purpose").equals("new post")) {
                         // TODO: Ryan, you are working here:
                         msg = "Post created";
@@ -163,14 +163,14 @@ public class ServerManager extends AsyncTask<String, Void, JSONObject> {
                             String title = (String) temp.get("title");
                             String desc = (String) temp.get("description");
                             String username = (String) temp.get("username");
-                            postList.add(new PostEntry(username, title, desc, String.valueOf(i), desc));
+                            mPostList.add(new PostEntry(username, title, desc, String.valueOf(i), desc));
                         }
                     }
                 } else {
                     msg = data.get("reason").toString();
                 }
-                toast.setText(msg);
-                toast.show();
+                mToast.setText(msg);
+                mToast.show();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
