@@ -66,7 +66,6 @@ public class ListTestFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            // recyclerView.setAdapter(new TestPostRecyclerViewAdapter(DummyContent.ITEMS, mListener));
             recyclerView.setAdapter(new TestPostRecyclerViewAdapter(PostsContent.ITEMS, mListener));
         }
         return view;
