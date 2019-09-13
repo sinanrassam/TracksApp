@@ -6,11 +6,13 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.lostanimals.tracks.utils.PostEntry;
 import com.lostanimals.tracks.utils.PostsContent;
+import com.lostanimals.tracks.utils.ServerManager;
 
 /**
  * A fragment representing a list of Items.
@@ -22,6 +24,7 @@ public class PostListFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
+    private static final String TAG = "FRAGMENT";
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
@@ -31,12 +34,15 @@ public class PostListFragment extends Fragment {
      * fragment (e.g. upon screen orientation changes).
      */
     public PostListFragment() {
+
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
     public static PostListFragment newInstance(int columnCount) {
         PostListFragment fragment = new PostListFragment();
+
+
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -47,20 +53,33 @@ public class PostListFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         if (getArguments() != null) {
+            Log.d("ARGS", "Not null");
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
     }
 
     @Override
+    public void onActivityCreated(Bundle savedState) {
+        super.onActivityCreated(savedState);
+    }
+
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_post_list, container, false);
+        View mView = inflater.inflate(R.layout.fragment_post_list, container, false);
+
+        ServerManager serverManager = new ServerManager(this.getContext());
+        serverManager.execute("get", "5");
+        Log.w("FEEDACTONCREATE", "SERVER_MAN_CREATE_SERVER_MAN_CREATE_SERVER_MAN_CREATE");
+
 
         // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
+        if (mView instanceof RecyclerView) {
+            Context context = mView.getContext();
+            RecyclerView recyclerView = (RecyclerView) mView;
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
@@ -68,12 +87,15 @@ public class PostListFragment extends Fragment {
             }
             recyclerView.setAdapter(new PostRecyclerViewAdapter(PostsContent.ITEMS, mListener));
         }
-        return view;
+        return mView;
     }
 
 
     @Override
     public void onAttach(Context context) {
+        Log.w(TAG, "ATTACHATTACHATTACHATTACHATTACH");
+
+
         super.onAttach(context);
         if (context instanceof OnListFragmentInteractionListener) {
             mListener = (OnListFragmentInteractionListener) context;
@@ -85,8 +107,21 @@ public class PostListFragment extends Fragment {
 
     @Override
     public void onDetach() {
+        Log.w(TAG, "DETACHDETACHDETACHDETACHDETACHDETACH");
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onResume() {
+        Log.w(TAG, "RESUMERESUMERESUMERESUMERESUME");
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        Log.w(TAG, "PAUSEPAUSEPAUSEPAUSEPAUSE");
+        super.onPause();
     }
 
     /**

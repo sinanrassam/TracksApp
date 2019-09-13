@@ -156,14 +156,19 @@ public class ServerManager extends AsyncTask<String, Void, JSONObject> {
                         msg = "Post created";
                     } else if (data.get("purpose").equals("get posts")) {
                         // TODO Ryan, you are working here:
+
+
                         JSONArray postsArray = (JSONArray) data.get("posts");
-                        Log.d("ARRAY", postsArray.toString());
+                        // Log.d("ARRAY", postsArray.toString());
                         for (int i = 0; i < postsArray.length(); i++) {
                             JSONObject temp = (JSONObject) postsArray.get(i);
                             String title = (String) temp.get("title");
                             String desc = (String) temp.get("description");
                             String username = (String) temp.get("username");
-                            mPostList.add(new PostEntry(username, title, desc, String.valueOf(i), desc));
+                            PostsContent.addItem(new PostEntry(username, title, desc, String.valueOf(i), PostsContent.setDescription(i, desc)));
+                            Log.w("POST_CREATE_LOOP", username + " " + title + " " + desc);
+
+                            // mPostList.add(new PostEntry(username, title, desc, String.valueOf(i), desc));
                         }
                     }
                 } else {
@@ -177,7 +182,7 @@ public class ServerManager extends AsyncTask<String, Void, JSONObject> {
         }
     }
 
-    public HttpURLConnection openConnection(String link) throws IOException {
+    HttpURLConnection openConnection(String link) throws IOException {
         URL url = new URL(link);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("POST");
@@ -186,7 +191,7 @@ public class ServerManager extends AsyncTask<String, Void, JSONObject> {
         return connection;
     }
 
-    public JSONObject processRequest(String link, String data) throws IOException, JSONException {
+    JSONObject processRequest(String link, String data) throws IOException, JSONException {
         HttpURLConnection conn = openConnection(link);
         // Send a request
         OutputStream outputStream = conn.getOutputStream();

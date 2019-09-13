@@ -9,15 +9,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import com.lostanimals.tracks.utils.PostEntry;
+import com.lostanimals.tracks.utils.PostFragmentAdapter;
 import com.lostanimals.tracks.utils.ServerManager;
 
 public class FeedActivity extends AppCompatActivity implements PostListFragment.OnListFragmentInteractionListener {
+
+    PostFragmentAdapter mPostListFragmentAdapter;
+    // PostFragmentAdapter mPostFragmentAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
-        addFragment(new PostListFragment(), false, "one");
+
+        mPostListFragmentAdapter = new PostFragmentAdapter(getSupportFragmentManager());
+        mPostListFragmentAdapter.addFragment(Fragment.instantiate(this, PostListFragment.class.getName()));
+
+//        ViewPager pager = findViewById(R.id.viewpager);
+//        pager.setAdapter(mPostListFragmentAdapter);
+
+        // addFragment(new PostListFragment(), false, "one");
     }
 
     public void onAdd(View view) {
@@ -25,6 +36,11 @@ public class FeedActivity extends AppCompatActivity implements PostListFragment.
     }
 
     public void addFragment(Fragment fragment, boolean addToBackStack, String tag) {
+        Log.d("ADDFRAG", "In Method");
+
+//        ServerManager serverManager = new ServerManager(this);
+//        serverManager.execute("get", "5");
+
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction ft = manager.beginTransaction();
 

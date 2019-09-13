@@ -36,7 +36,7 @@ public class RegisterTest {
         postData += URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(TEST_USER_EMAIL, "UTF-8") + "&";
         postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(TEST_USER_USERNAME, "UTF-8") + "&";
         postData += URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(TEST_USER_PASSWORD, "UTF-8");
-
-        mockServerManager.processRequest(TEST_URL + "user.php", postData);
+        // TODO: What are you testing?
+        // ConnectionManager.processRequest(TEST_URL + "user.php", postData);
     }
 }
