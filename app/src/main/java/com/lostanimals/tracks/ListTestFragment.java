@@ -9,8 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.lostanimals.tracks.dummy.PostsContent;
 import com.lostanimals.tracks.utils.PostEntry;
+import com.lostanimals.tracks.utils.PostsContent;
 
 /**
  * A fragment representing a list of Items.

@@ -1,6 +1,4 @@
-package com.lostanimals.tracks.dummy;
-
-import com.lostanimals.tracks.utils.PostEntry;
+package com.lostanimals.tracks.utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,9 +39,9 @@ public class PostsContent {
 
     private static String makeDetails(int position) {
         StringBuilder builder = new StringBuilder();
-        builder.append("Details about Item: ").append(position);
+        builder.append("details blah blah: ").append(position);
         for (int i = 0; i < position; i++) {
-            builder.append("\nMore details information here.");
+            builder.append("\nMore blah yadda yadda.");
         }
         return builder.toString();
     }
