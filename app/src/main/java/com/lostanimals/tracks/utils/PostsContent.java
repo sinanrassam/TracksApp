@@ -6,15 +6,14 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Helper class for providing sample content for user interfaces created by
- * Android template wizards.
- * <p>
- * TODO: Replace all uses of this class before publishing your app.
+ * Class for holding the post list and map for the feed. Post entries are created here and added to the map.
  */
 public class PostsContent {
     public static final List<PostEntry> ITEMS = new ArrayList<>();
     public static final Map<String, PostEntry> ITEM_MAP = new HashMap<>();
-    private static final int COUNT = 25;
+
+    // COUNT = 5 as that's the amount of test posts were using.
+    private static final int COUNT = 5;
 
     static {
         // Add some sample items.
@@ -28,15 +27,12 @@ public class PostsContent {
         ITEM_MAP.put(item.getId(), item);
     }
 
-//    private static DummyItem createDummyItem(int position) {
-//        return new DummyItem(String.valueOf(position), "Item " + position, makeDetails(position));
-//    }
-
+    // TODO: This needs to pull info from server.
     private static PostEntry createPostEntry(int position) {
         return new PostEntry("ryan", "title", "desc", String.valueOf(position), makeDetails(position));
     }
 
-
+    // TODO: Rework this with pulling the description from the server. Wont need the position variable.
     private static String makeDetails(int position) {
         StringBuilder builder = new StringBuilder();
         builder.append("details blah blah: ").append(position);
@@ -45,23 +41,4 @@ public class PostsContent {
         }
         return builder.toString();
     }
-//    /**
-//     * A dummy item representing a piece of content.
-//     */
-//    public static class DummyItem {
-//        public final String id;
-//        public final String content;
-//        public final String details;
-//
-//        public DummyItem(String id, String content, String details) {
-//            this.id = id;
-//            this.content = content;
-//            this.details = details;
-//        }
-//
-//        @Override
-//        public String toString() {
-//            return content;
-//        }
-//    }
 }
