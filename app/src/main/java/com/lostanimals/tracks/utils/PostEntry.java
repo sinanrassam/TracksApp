@@ -8,6 +8,17 @@ public class PostEntry {
     public String mId;
     public String mContent;
 
+    // extra con for testing
+    public PostEntry(String username, String postTitle, int id) {
+        setUsername(username);
+        setPostTitle(postTitle);
+        setPostDesc(null);
+        setPostDate(null);
+        setId(String.valueOf(id));
+        setContent(null);
+    }
+
+    // default
     public PostEntry(String username, String postTitle, String postDesc, String postDate, String id, String content) {
         setUsername(username);
         setPostTitle(postTitle);
