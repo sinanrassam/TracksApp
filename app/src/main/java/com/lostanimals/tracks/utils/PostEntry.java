@@ -9,10 +9,20 @@ public class PostEntry {
     public String mContent;
 
     // extra con for testing
-    public PostEntry(String username, String postTitle, int id) {
+    public PostEntry(String username, String postTitle) {
         setUsername(username);
         setPostTitle(postTitle);
-        setPostDesc(null);
+        setPostDesc("TEST");
+        setPostDate(null);
+        setId(null);
+        setContent(null);
+    }
+
+    // extra con for testing
+    public PostEntry(String username, String postTitle, String desc, int id) {
+        setUsername(username);
+        setPostTitle(postTitle);
+        setPostDesc(desc);
         setPostDate(null);
         setId(String.valueOf(id));
         setContent(null);

@@ -21,7 +21,6 @@ public class LoginActivity extends AppCompatActivity {
 
     public static final boolean DEV_MODE = true;
 
-    private ServerManager mServerTask = null;
     private PreferencesUtility mPreferencesUtility;
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
@@ -35,11 +34,6 @@ public class LoginActivity extends AppCompatActivity {
 
         if (DEV_MODE) {
             if (mPreferencesUtility.getUserInfo() != null) {
-//                Intent feedIntent = new Intent(getApplicationContext(), FeedActivity.class);
-//                startActivity(feedIntent);
-//                Intent LogoutIntent = new Intent(getApplicationContext(), LogoutActivity.class);
-//                startActivity(LogoutIntent);
-//                finish();
                 Intent intent = new Intent(getApplicationContext(), FeedActivity.class);
                 startActivity(intent);
                 finish();
@@ -69,11 +63,6 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    /**
-     * Attempts to sign in or register the account specified by the login form.
-     * If there are form errors (invalid email, missing fields, etc.), the
-     * errors are presented and no actual login attempt is made.
-     */
     private void attemptLogin() {
         // Reset errors.
         mEmailView.setError(null);
@@ -102,9 +91,9 @@ public class LoginActivity extends AppCompatActivity {
         if (cancel) {
             focusView.requestFocus();
         } else {
-            mServerTask = new ServerManager(this);
-            mServerTask.setPreferencesUtility(mPreferencesUtility);
-            mServerTask.execute("login", email, password);
+            ServerManager serverManager = new ServerManager(this);
+            serverManager.setPreferencesUtility(mPreferencesUtility);
+            serverManager.execute("login", email, password);
         }
     }
 }

@@ -2,7 +2,6 @@ package com.lostanimals.tracks.utils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -22,6 +21,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class ServerManager extends AsyncTask<String, Void, JSONObject> {
+    static private ArrayList<PostEntry> mPosts;
     @SuppressLint("StaticFieldLeak")
     private Context mContext;
     //private AlertDialog mAlertDialog;
@@ -30,6 +30,10 @@ public class ServerManager extends AsyncTask<String, Void, JSONObject> {
 
     public ServerManager(Context context) {
         this.mContext = context;
+    }
+
+    static public ArrayList<PostEntry> getPosts() {
+        return mPosts;
     }
 
     public void setPreferencesUtility(PreferencesUtility preferencesUtility) {
@@ -90,7 +94,6 @@ public class ServerManager extends AsyncTask<String, Void, JSONObject> {
                 e.printStackTrace();
             }
         } else if (type.equals("get")) {
-            // int postNumber = Integer.parseInt(params[1]);
             try {
                 postData += URLEncoder.encode("number", "UTF-8") + "=" + URLEncoder.encode(params[1], "UTF-8");
                 Log.d("POST", postData);
@@ -99,6 +102,7 @@ public class ServerManager extends AsyncTask<String, Void, JSONObject> {
                 e.printStackTrace();
             }
         }
+
         return json;
     }
 
@@ -143,12 +147,14 @@ public class ServerManager extends AsyncTask<String, Void, JSONObject> {
                     } else if (data.get("purpose").equals("get posts")) {
                         // TODO Ryan, you are working here:
                         JSONArray postsArray = (JSONArray) data.get("posts");
+                        mPosts = new ArrayList<>();
                         for (int i = 0; i < postsArray.length(); i++) {
                             JSONObject temp = (JSONObject) postsArray.get(i);
                             String title = (String) temp.get("title");
                             String desc = (String) temp.get("description");
-                            String username = (String) temp.get("username");
-                            Log.w("POST_CREATE_LOOP", username + " " + title + " " + desc);
+                            //String username = (String) temp.get("username");
+                            mPosts.add(new PostEntry(title, desc));
+                            Log.w("POST_CREATE_LOOP", mPosts.get(i).getPostTitle() + " " + mPosts.get(i).getPostDesc());
                         }
                     }
                 } else {
@@ -160,6 +166,7 @@ public class ServerManager extends AsyncTask<String, Void, JSONObject> {
                 e.printStackTrace();
             }
         }
+
     }
 
     HttpURLConnection openConnection(String link) throws IOException {
@@ -192,7 +199,7 @@ public class ServerManager extends AsyncTask<String, Void, JSONObject> {
         }
         JSONObject json = new JSONObject(sb.toString());
 
-        Log.d("JSON Holds:", json.toString());
+        Log.d("JSON Holds", json.toString());
 
         bufferedReader.close();
         inputStream.close();
