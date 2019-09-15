@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 import com.lostanimals.tracks.FeedFragment;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,32 +20,27 @@ import java.util.Map;
 import static com.lostanimals.tracks.utils.ConnectionManager.processRequest;
 
 public class UpdateFeedTask extends AsyncTask<String, Void, Boolean> {
-    private static List<Map<String, String>> mPostList;
-    List<Map<String, String>> realPosts;
     @SuppressLint("StaticFieldLeak")
     private Context mContext;
-    // private ProgressDialog dialog;
     private FeedFragment mFragment;
-
+    private List<Map<String, String>> mPostList = new ArrayList<>();
 
     public UpdateFeedTask(FeedFragment activity) {
         this.mFragment = activity;
         this.mContext = mFragment.getContext();
-//        dialog = new ProgressDialog(mContext);
     }
 
     public List<Map<String, String>> getPostList() {
         return mPostList;
     }
 
-    private void setPostList(List<Map<String, String>> postList) {
-        mPostList = postList;
+    public void setPostList(List<Map<String, String>> postList) {
+        this.mPostList = postList;
     }
 
     @Override
     protected void onPreExecute() {
-//        this.dialog.setMessage("Progress start");
-//        this.dialog.show();
+        Toast.makeText(mContext, "Loading posts", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -67,7 +63,7 @@ public class UpdateFeedTask extends AsyncTask<String, Void, Boolean> {
         }
 
         if (json != null) {
-            realPosts = new ArrayList<>();
+            mPostList = new ArrayList<>();
             try {
                 JSONArray jsonArray = (JSONArray) json.get("posts");
                 for (int i = 0; i < jsonArray.length(); i++) {
@@ -77,32 +73,25 @@ public class UpdateFeedTask extends AsyncTask<String, Void, Boolean> {
                     Map<String, String> post = new HashMap<>(2);
                     post.put("Title", title);
                     post.put("Desc", desc);
-                    realPosts.add(post);
+                    mPostList.add(post);
                 }
-                mFragment.setRealPosts(realPosts);
+                mFragment.setRealPosts(mPostList);
             } catch (JSONException e) {
                 e.printStackTrace();
                 return false;
             }
-            // setPostList(postsData);
         }
         return true;
     }
 
     @Override
     protected void onPostExecute(final Boolean success) {
-//        if (dialog.isShowing()) {
-//            dialog.dismiss();
-//        }
-
-        SimpleAdapter adapter = new SimpleAdapter(mContext, realPosts,
+        SimpleAdapter adapter = new SimpleAdapter(mContext, mPostList,
                 android.R.layout.simple_list_item_2,
                 new String[]{"Title", "Desc"},
                 new int[]{android.R.id.text1, android.R.id.text2});
-
         mFragment.setListAdapter(adapter);
         adapter.notifyDataSetChanged();
-
-
+        Toast.makeText(mContext, "Posts refreshed", Toast.LENGTH_LONG).show();
     }
 }
