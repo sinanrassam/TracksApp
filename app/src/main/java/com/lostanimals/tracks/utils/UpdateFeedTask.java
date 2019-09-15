@@ -3,6 +3,9 @@ package com.lostanimals.tracks.utils;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.os.SystemClock;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 import com.lostanimals.tracks.FeedFragment;
@@ -19,15 +22,18 @@ import java.util.Map;
 
 import static com.lostanimals.tracks.utils.ConnectionManager.processRequest;
 
-public class UpdateFeedTask extends AsyncTask<String, Void, Boolean> {
+public class UpdateFeedTask extends AsyncTask<String, Integer, Boolean> {
     @SuppressLint("StaticFieldLeak")
     private Context mContext;
+    @SuppressLint("StaticFieldLeak")
+    private ProgressBar mProgressBar;
     private FeedFragment mFragment;
     private List<Map<String, String>> mPostList = new ArrayList<>();
 
-    public UpdateFeedTask(FeedFragment activity) {
+    public UpdateFeedTask(FeedFragment activity, ProgressBar progressBar) {
         this.mFragment = activity;
         this.mContext = mFragment.getContext();
+        this.mProgressBar = progressBar;
     }
 
     public List<Map<String, String>> getPostList() {
@@ -46,7 +52,6 @@ public class UpdateFeedTask extends AsyncTask<String, Void, Boolean> {
     @Override
     protected Boolean doInBackground(String... parameters) {
         JSONObject json = null;
-
         if (!this.isCancelled()) {
             String postData = null;
             try {
@@ -70,12 +75,13 @@ public class UpdateFeedTask extends AsyncTask<String, Void, Boolean> {
                     JSONObject jsonObject = (JSONObject) jsonArray.get(i);
                     String title = (String) jsonObject.get("title");
                     String desc = (String) jsonObject.get("description");
+
                     Map<String, String> post = new HashMap<>(2);
                     post.put("Title", title);
                     post.put("Desc", desc);
+
                     mPostList.add(post);
                 }
-                mFragment.setRealPosts(mPostList);
             } catch (JSONException e) {
                 e.printStackTrace();
                 return false;
@@ -85,7 +91,20 @@ public class UpdateFeedTask extends AsyncTask<String, Void, Boolean> {
     }
 
     @Override
+    protected void onProgressUpdate(Integer... values) {
+        super.onProgressUpdate(values);
+        if (this.mProgressBar != null) {
+            mProgressBar.setProgress(values[0]);
+        }
+    }
+
+    @Override
     protected void onPostExecute(final Boolean success) {
+        if (success) {
+            // TODO: Remove the sleep.
+            SystemClock.sleep(1000);
+            mProgressBar.setVisibility(View.GONE);
+        }
         SimpleAdapter adapter = new SimpleAdapter(mContext, mPostList,
                 android.R.layout.simple_list_item_2,
                 new String[]{"Title", "Desc"},
