@@ -11,17 +11,17 @@ import android.view.View.OnClickListener;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import com.lostanimals.tracks.utils.LoginTask;
 import com.lostanimals.tracks.utils.PreferencesUtility;
-import com.lostanimals.tracks.utils.ServerManager;
+
+import static com.lostanimals.tracks.utils.DEV_MODE.DEV_MODE;
 
 /**
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends AppCompatActivity {
 
-    public static final boolean DEV_MODE = true;
-
-    private PreferencesUtility mPreferencesUtility;
+    private static PreferencesUtility mPreferencesUtility;
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
 
@@ -32,7 +32,8 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mPreferencesUtility = new PreferencesUtility(sharedPreferences);
 
-        if (DEV_MODE) {
+        // If DEV_MODE is on, skip the login activity.
+        if (!DEV_MODE) {
             if (mPreferencesUtility.getUserInfo() != null) {
                 Intent intent = new Intent(getApplicationContext(), FeedActivity.class);
                 startActivity(intent);
@@ -91,9 +92,12 @@ public class LoginActivity extends AppCompatActivity {
         if (cancel) {
             focusView.requestFocus();
         } else {
-            ServerManager serverManager = new ServerManager(this);
-            serverManager.setPreferencesUtility(mPreferencesUtility);
-            serverManager.execute("login", email, password);
+//            ServerManager serverManager = new ServerManager(this);
+//            serverManager.setPreferencesUtility(mPreferencesUtility);
+//            serverManager.execute("login", email, password);
+
+            LoginTask loginTask = new LoginTask(this, mPreferencesUtility);
+            loginTask.execute(email, password);
         }
     }
 }

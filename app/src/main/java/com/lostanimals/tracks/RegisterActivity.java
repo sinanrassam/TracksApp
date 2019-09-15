@@ -11,13 +11,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import com.lostanimals.tracks.utils.EmailValidator;
 import com.lostanimals.tracks.utils.PreferencesUtility;
-import com.lostanimals.tracks.utils.ServerManager;
+import com.lostanimals.tracks.utils.RegisterTask;
 
 import java.util.Objects;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private PreferencesUtility mPreferencesUtility;
+    private static PreferencesUtility mPreferencesUtility;
 
     // UI references.
     private EditText mFirstNameView;
@@ -113,9 +113,14 @@ public class RegisterActivity extends AppCompatActivity {
             focusView.requestFocus();
         } else {
             String name = firstName + " " + lastName;
-            ServerManager mServerTask = new ServerManager(this);
-            mServerTask.setPreferencesUtility(mPreferencesUtility);
-            mServerTask.execute("register", name, email, username, password);
+//            ServerManager mServerTask = new ServerManager(this);
+//            mServerTask.setPreferencesUtility(mPreferencesUtility);
+//            mServerTask.execute("register", name, email, username, password);
+
+            RegisterTask registerTask = new RegisterTask(this, mPreferencesUtility);
+            registerTask.execute(name, email, username, password);
+
+
         }
     }
 

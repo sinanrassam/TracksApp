@@ -1,6 +1,7 @@
 package com.lostanimals.tracks.utils;
 
 import android.content.SharedPreferences;
+import android.util.Log;
 
 public class PreferencesUtility {
     private final static String KEY_NAME = "key_name";
@@ -20,6 +21,7 @@ public class PreferencesUtility {
         editor.putString(KEY_USERNAME, preferenceEntry.getUsername());
         editor.putString(KEY_EMAIL, preferenceEntry.getEmail());
         editor.putBoolean(KEY_LOGIN, preferenceEntry.getLogin());
+        Log.d("PREFS_UTIL", "ENTRY_SAVED_ENTRY_SAVED_ENTRY_SAVED | OBJECT: " + getUserInfo() + " | Username:" + preferenceEntry.getUsername());
         return editor.commit();
     }
 
