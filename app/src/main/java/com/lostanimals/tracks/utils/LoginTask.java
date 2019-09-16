@@ -11,7 +11,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 
 public class LoginTask extends AsyncTask<String, Void, JSONObject> {
     @SuppressLint("StaticFieldLeak")
@@ -25,22 +24,14 @@ public class LoginTask extends AsyncTask<String, Void, JSONObject> {
 
     @Override
     protected JSONObject doInBackground(String... parameters) {
-        // Try encode the LOGIN request and save the request in postData
-        String postData = null;
-        try {
-            postData = ConnectionManager.postEncoder("login", parameters);
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-
-        // Try get process the LOGIN request and save the result in json
+        // Try encode and send the LOGIN request.
         JSONObject json = null;
         try {
+            String postData = ConnectionManager.postEncoder("login", parameters);
             json = ConnectionManager.processRequest("user.php", postData);
-        } catch (IOException | JSONException e) {
+        } catch (JSONException | IOException e) {
             e.printStackTrace();
         }
-
         return json;
     }
 
@@ -48,19 +39,15 @@ public class LoginTask extends AsyncTask<String, Void, JSONObject> {
     protected void onPostExecute(JSONObject data) {
         try {
             if (data.get("response").equals("successful")) {
-                if (data.get("purpose").equals("login")) {
-                    JSONObject details = (JSONObject) data.get("details");
-
-                    // Save the user LOGIN in PreferenceEntry and start the FEED activity.
-                    PreferenceEntry preferenceEntry = new PreferenceEntry(details.getString("name"),
-                            details.getString("username"), details.getString("email"), true);
-                    if (mPreferencesUtility.setUserInfo(preferenceEntry)) {
-                        Intent intent = new Intent(mContext, FeedActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        ActivityCompat.finishAffinity((Activity) mContext);
-                        mContext.startActivity(intent);
-                    }
+                // If the response was successful, try to LOGIN. If LOGIN is successful, start FEED.
+                if (mPreferencesUtility.setUserInfo(ConnectionManager.login((JSONObject) data.get("details")))) {
+                    Intent intent = new Intent(mContext, FeedActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    ActivityCompat.finishAffinity((Activity) mContext);
+                    mContext.startActivity(intent);
                 }
+            } else {
+                // TODO: Print error
             }
         } catch (JSONException e) {
             e.printStackTrace();

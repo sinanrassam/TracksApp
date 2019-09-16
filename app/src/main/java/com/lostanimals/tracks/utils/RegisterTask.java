@@ -24,19 +24,12 @@ public class RegisterTask extends AsyncTask<String, Void, JSONObject> {
 
     @Override
     protected JSONObject doInBackground(String... parameters) {
-        // Try encode the REGISTER request and save the request in postData
-        String postData = null;
-        try {
-            postData = ConnectionManager.postEncoder("register", parameters);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        // Try get process the REGISTER request and save the result in json
+        // Try encode and send the REGISTER request.
         JSONObject json = null;
         try {
+            String postData = ConnectionManager.postEncoder("register", parameters);
             json = ConnectionManager.processRequest("user.php", postData);
-        } catch (IOException | JSONException e) {
+        } catch (JSONException | IOException e) {
             e.printStackTrace();
         }
 
@@ -47,17 +40,15 @@ public class RegisterTask extends AsyncTask<String, Void, JSONObject> {
     protected void onPostExecute(JSONObject data) {
         try {
             if (data.get("response").equals("successful")) {
-                JSONObject details = (JSONObject) data.get("details");
-
-                // Save the user LOGIN in PreferenceEntry and start the FEED activity.
-                PreferenceEntry preferenceEntry = new PreferenceEntry(details.getString("name"),
-                        details.getString("username"), details.getString("email"), true);
-                if (mPreferencesUtility.setUserInfo(preferenceEntry)) {
+                // If the response was successful, try to LOGIN. If LOGIN is successful, start FEED.
+                if (mPreferencesUtility.setUserInfo(ConnectionManager.login((JSONObject) data.get("details")))) {
                     Intent intent = new Intent(mContext, FeedActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     ActivityCompat.finishAffinity((Activity) mContext);
                     mContext.startActivity(intent);
                 }
+            } else {
+                // TODO: Print error
             }
         } catch (JSONException e) {
             e.printStackTrace();

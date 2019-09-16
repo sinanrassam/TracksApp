@@ -1,6 +1,7 @@
 //package com.lostanimals.tracks;
 //
 //import android.content.Context;
+//import com.lostanimals.tracks.utils.ConnectionManager;
 //import com.lostanimals.tracks.utils.ServerManager_Backup;
 //import org.junit.Before;
 //import org.junit.Test;
@@ -16,6 +17,7 @@
 //
 //    @Mock
 //    ServerManager_Backup mockServerManager;
+//    ConnectionManager mockConnectionManager;
 //    @Mock
 //    Context mockContext;
 //
@@ -27,6 +29,6 @@
 //    // TODO: Fix this
 //    @Test
 //    public void ServerManager_OpenConnectionTest() throws IOException {
-//        //ConnectionManager.openConnection(TEST_URL);
+//
 //    }
 //}

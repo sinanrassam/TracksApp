@@ -13,24 +13,41 @@ public class ConnectionManager {
     private static final String URL = "http://bosh.live:7536/phpmyadmin/tracks_api/";
 
     public static String postEncoder(String type, String[] parameters) throws UnsupportedEncodingException {
-        String postData = URLEncoder.encode("type", "UTF-8") + "=" + URLEncoder.encode(type, "UTF-8") + "&";
+        String postData = URLEncoder.encode("type", "UTF-8") + "=" + URLEncoder.encode(type,
+                "UTF-8") + "&";
 
-        if (type.equals("get")) {
-            postData += URLEncoder.encode("number", "UTF-8") + "=" + URLEncoder.encode(parameters[0], "UTF-8");
-        } else if (type.equals("login")) {
-            postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(parameters[0], "UTF-8") + "&";
-            postData += URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(parameters[1], "UTF-8");
-        } else if (type.equals("register")) {
-            postData += URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(parameters[0], "UTF-8") + "&";
-            postData += URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(parameters[1], "UTF-8") + "&";
-            postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(parameters[2], "UTF-8") + "&";
-            postData += URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(parameters[3], "UTF-8");
-        } else if (type.equals("reset")) {
-            // TODO: Implement reset password POST request
-        } else if (type.equals("new")) {
-            postData += URLEncoder.encode("title", "UTF-8") + "=" + URLEncoder.encode(parameters[0], "UTF-8") + "&";
-            postData += URLEncoder.encode("description", "UTF-8") + "=" + URLEncoder.encode(parameters[1], "UTF-8") + "&";
-            postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(parameters[2], "UTF-8");
+        switch (type) {
+            case "get":
+                postData += URLEncoder.encode("number", "UTF-8") + "=" + URLEncoder.encode(parameters[0],
+                        "UTF-8");
+                break;
+            case "login":
+                postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(parameters[0],
+                        "UTF-8") + "&";
+                postData += URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(parameters[1],
+                        "UTF-8");
+                break;
+            case "register":
+                postData += URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(parameters[0],
+                        "UTF-8") + "&";
+                postData += URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(parameters[1],
+                        "UTF-8") + "&";
+                postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(parameters[2],
+                        "UTF-8") + "&";
+                postData += URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(parameters[3],
+                        "UTF-8");
+                break;
+            case "reset":
+                // TODO: Implement reset password POST request
+                break;
+            case "new":
+                postData += URLEncoder.encode("title", "UTF-8") + "=" + URLEncoder.encode(parameters[0],
+                        "UTF-8") + "&";
+                postData += URLEncoder.encode("description", "UTF-8") + "=" + URLEncoder.encode(parameters[1],
+                        "UTF-8") + "&";
+                postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(parameters[2],
+                        "UTF-8");
+                break;
         }
         return postData;
     }
@@ -68,5 +85,10 @@ public class ConnectionManager {
         inputStream.close();
         conn.disconnect();
         return json;
+    }
+
+    public static PreferenceEntry login(JSONObject details) throws JSONException {
+        return new PreferenceEntry(details.getString("name"),
+                details.getString("username"), details.getString("email"), true);
     }
 }
