@@ -6,24 +6,24 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import com.lostanimals.tracks.utils.LoginTask;
+import com.lostanimals.tracks.utils.PreferenceEntry;
 import com.lostanimals.tracks.utils.PreferencesUtility;
 
-import static com.lostanimals.tracks.utils.DEV_MODE.DEV_MODE;
+import static com.lostanimals.tracks.utils.DEV_MODE.*;
 
-/**
- * A login screen that offers login via email/password.
- */
 public class LoginActivity extends AppCompatActivity {
-
     private static PreferencesUtility mPreferencesUtility;
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
+    // TODO: Remove test log
+    private final static String TAG = "LOGIN_ACTIVITY";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,13 +32,18 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mPreferencesUtility = new PreferencesUtility(sharedPreferences);
 
-        // If DEV_MODE is on, skip the login activity.
-        if (!DEV_MODE) {
-            if (mPreferencesUtility.getUserInfo() != null) {
-                Intent intent = new Intent(getApplicationContext(), FeedActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        // LOGIN with admin user
+        if(DEV_MODE) mPreferencesUtility.setUserInfo(ADMIN_USER);
+
+        // Force the LOGIN activity
+//        if(DEV_MODE) mPreferencesUtility.setUserInfo(NULL_USER);
+
+        // If user is logged in, start the feed.
+        if (!mPreferencesUtility.getUserInfo().getUsername().equals("")) {
+            Log.d(TAG, "onCreate: USER ACCOUNT_USER_ACCOUNT_USER_ACCOUNT: "+mPreferencesUtility.getUserInfo().getUsername());
+            Intent intent = new Intent(getApplicationContext(), FeedActivity.class);
+            startActivity(intent);
+            this.finish();
         }
 
         setContentView(R.layout.activity_login);
@@ -92,10 +97,6 @@ public class LoginActivity extends AppCompatActivity {
         if (cancel) {
             focusView.requestFocus();
         } else {
-//            ServerManager serverManager = new ServerManager(this);
-//            serverManager.setPreferencesUtility(mPreferencesUtility);
-//            serverManager.execute("login", email, password);
-
             LoginTask loginTask = new LoginTask(this, mPreferencesUtility);
             loginTask.execute(email, password);
         }

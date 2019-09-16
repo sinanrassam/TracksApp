@@ -30,6 +30,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        // TODO: Do we need the actionbar?
         //setupActionBar();
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
@@ -50,14 +51,6 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
-
-//    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-//    private void setupActionBar() {
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-//            // Show the Up button in the action bar.
-//            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        }
-//    }
 
     private void attemptRegister() {
 
@@ -113,16 +106,8 @@ public class RegisterActivity extends AppCompatActivity {
             focusView.requestFocus();
         } else {
             String name = firstName + " " + lastName;
-//            ServerManager mServerTask = new ServerManager(this);
-//            mServerTask.setPreferencesUtility(mPreferencesUtility);
-//            mServerTask.execute("register", name, email, username, password);
-
             RegisterTask registerTask = new RegisterTask(this, mPreferencesUtility);
             registerTask.execute(name, email, username, password);
-
-
         }
     }
-
 }
-

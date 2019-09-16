@@ -66,7 +66,8 @@ public class ConnectionManager {
 
         // Send the request to the server
         OutputStream outputStream = conn.getOutputStream();
-        BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
+        BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream,
+                StandardCharsets.UTF_8));
         bufferedWriter.write(data);
         bufferedWriter.flush();
         bufferedWriter.close();
@@ -74,7 +75,8 @@ public class ConnectionManager {
 
         // Read the server response and return it as JSON
         InputStream inputStream = conn.getInputStream();
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.ISO_8859_1));
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,
+                StandardCharsets.ISO_8859_1));
         String line;
         StringBuilder sb = new StringBuilder();
         while ((line = bufferedReader.readLine()) != null) {
@@ -89,6 +91,6 @@ public class ConnectionManager {
 
     public static PreferenceEntry login(JSONObject details) throws JSONException {
         return new PreferenceEntry(details.getString("name"),
-                details.getString("username"), details.getString("email"), true);
+                details.getString("username"), details.getString("email"));
     }
 }

@@ -18,6 +18,7 @@ public class NewPostActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_post);
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        // TODO: Do we need the action bar?
         // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         etTitle = findViewById(R.id.post_et_post_title);
