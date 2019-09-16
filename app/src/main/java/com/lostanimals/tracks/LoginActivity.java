@@ -13,17 +13,19 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import com.lostanimals.tracks.utils.LoginTask;
-import com.lostanimals.tracks.utils.PreferenceEntry;
 import com.lostanimals.tracks.utils.PreferencesUtility;
+
+// TEST DATA
+import java.util.Objects;
 
 import static com.lostanimals.tracks.utils.DEV_MODE.*;
 
 public class LoginActivity extends AppCompatActivity {
+    // TODO: Before submission, remove test log
+    private final static String TAG = "LOGIN_ACTIVITY";
     private static PreferencesUtility mPreferencesUtility;
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
-    // TODO: Remove test log
-    private final static String TAG = "LOGIN_ACTIVITY";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,15 +34,24 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mPreferencesUtility = new PreferencesUtility(sharedPreferences);
 
+        /*
+         *  START TESTING
+         */
+
         // LOGIN with admin user
-        if(DEV_MODE) mPreferencesUtility.setUserInfo(ADMIN_USER);
+//        if (DEV_MODE) mPreferencesUtility.setUserInfo(ADMIN_USER);
 
         // Force the LOGIN activity
-//        if(DEV_MODE) mPreferencesUtility.setUserInfo(NULL_USER);
+         if (DEV_MODE) mPreferencesUtility.setUserInfo(NULL_USER);
+
+        /*
+         *  END TESTING
+         */
 
         // If user is logged in, start the feed.
         if (!mPreferencesUtility.getUserInfo().getUsername().equals("")) {
-            Log.d(TAG, "onCreate: USER ACCOUNT_USER_ACCOUNT_USER_ACCOUNT: "+mPreferencesUtility.getUserInfo().getUsername());
+            Log.d(TAG, "onCreate: USER ACCOUNT_USER_ACCOUNT_USER_ACCOUNT: " +
+                    mPreferencesUtility.getUserInfo().getUsername());
             Intent intent = new Intent(getApplicationContext(), FeedActivity.class);
             startActivity(intent);
             this.finish();
