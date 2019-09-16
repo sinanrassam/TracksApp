@@ -15,9 +15,6 @@ import android.widget.EditText;
 import com.lostanimals.tracks.utils.LoginTask;
 import com.lostanimals.tracks.utils.PreferencesUtility;
 
-// TEST DATA
-import java.util.Objects;
-
 import static com.lostanimals.tracks.utils.DEV_MODE.*;
 
 public class LoginActivity extends AppCompatActivity {
@@ -39,10 +36,10 @@ public class LoginActivity extends AppCompatActivity {
          */
 
         // LOGIN with admin user
-//        if (DEV_MODE) mPreferencesUtility.setUserInfo(ADMIN_USER);
+        if (DEV_MODE) mPreferencesUtility.setUserInfo(ADMIN_USER);
 
         // Force the LOGIN activity
-         if (DEV_MODE) mPreferencesUtility.setUserInfo(NULL_USER);
+//         if (DEV_MODE) mPreferencesUtility.setUserInfo(NULL_USER);
 
         /*
          *  END TESTING
