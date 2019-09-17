@@ -40,4 +40,7 @@
     <string name="action_register">Register</string>
     <string name="action_register_short">Register</string>
     <string name="email_incorrect">Incorrect Email</string>
+    <!-- Strings related to myPosts -->
+    <string name="open_action_bar">Open</string>
+    <string name="close_action_bar">Close</string>
 </resources>
