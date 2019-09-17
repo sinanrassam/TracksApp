@@ -34,11 +34,11 @@ public class FeedFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        Log.d("onClick", "Clicky");
-        PostEntry blah = updateFeed.getPostEntry(0);
-        Log.d("Clicked Post: ", updateFeed.getPostEntry(0).toString());
+        PostEntryActivity postEntryActivity = new PostEntryActivity(updateFeed.getPostEntry(position));
 
-        Intent intent = new Intent(getContext(), PostEntryActivity.class);
+//        postEntryActivity.setPostEntry(updateFeed.getPostEntry(position));
+
+        Intent intent = new Intent(getContext(), postEntryActivity.getClass());
         startActivity(intent);
     }
 }

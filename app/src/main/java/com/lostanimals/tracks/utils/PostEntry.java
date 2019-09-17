@@ -57,7 +57,7 @@ public class PostEntry {
     }
 
     public String getPostTitle() {
-        return mPostTitle;
+        return "" + mPostTitle;
     }
 
     private void setPostTitle(String postTitle) {

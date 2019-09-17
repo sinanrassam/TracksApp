@@ -44,4 +44,5 @@
     <string name="email_incorrect">Incorrect Email</string>
     <!-- Strings related to the Feed -->
     <string name="loading_posts">Loading Posts</string>
+    <string name="posts_error">Post Not Found</string>
 </resources>
