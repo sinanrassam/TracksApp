@@ -1,6 +1,8 @@
 <resources>
     <!-- App wide Strings -->
     <string name="app_name">Tracks</string>
+    <string name="channel_name">Tracks</string>
+    <string name="channel_description">Tracks Channel</string>
     <!-- Login Activity Strings -->
     <string name="hint_username">Username</string>
     <string name="hint_password">Password</string>
