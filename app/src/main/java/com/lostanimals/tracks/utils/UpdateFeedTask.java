@@ -36,14 +36,6 @@ public class UpdateFeedTask extends AsyncTask<String, Integer, Boolean> {
         this.mProgressBar = progressBar;
     }
 
-    public List<Map<String, String>> getPostList() {
-        return mPostList;
-    }
-
-    public void setPostList(List<Map<String, String>> postList) {
-        this.mPostList = postList;
-    }
-
     @Override
     protected void onPreExecute() {
         Toast.makeText(mContext, "Loading posts", Toast.LENGTH_LONG).show();

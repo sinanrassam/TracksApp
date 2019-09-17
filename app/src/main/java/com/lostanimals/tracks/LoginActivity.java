@@ -13,6 +13,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import com.lostanimals.tracks.utils.LoginTask;
+import com.lostanimals.tracks.utils.PreferenceEntry;
 import com.lostanimals.tracks.utils.PreferencesUtility;
 
 import static com.lostanimals.tracks.utils.DEV_MODE.*;
@@ -20,7 +21,6 @@ import static com.lostanimals.tracks.utils.DEV_MODE.*;
 public class LoginActivity extends AppCompatActivity {
     // TODO: Before submission, remove test log
     private final static String TAG = "LOGIN_ACTIVITY";
-    private static PreferencesUtility mPreferencesUtility;
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
 
@@ -28,30 +28,34 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mPreferencesUtility = new PreferencesUtility(sharedPreferences);
+        //SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        PreferencesUtility.setSharedPreferences(this);
 
         /*
          *  START TESTING
          */
 
         // LOGIN with admin user
-        if (DEV_MODE) mPreferencesUtility.setUserInfo(ADMIN_USER);
+        //if (DEV_MODE) PreferencesUtility.setUserInfo(ADMIN_USER);
+        //if (DEV_MODE) PreferencesUtility.setUserInfo(new PreferenceEntry("admin", "admin", "admin@bosh.live"));
+
 
         // Force the LOGIN activity
-//         if (DEV_MODE) mPreferencesUtility.setUserInfo(NULL_USER);
+         // if (DEV_MODE) PreferencesUtility.setUserInfo(new PreferenceEntry(null, null, null));
 
         /*
          *  END TESTING
          */
 
         // If user is logged in, start the feed.
-        if (!mPreferencesUtility.getUserInfo().getUsername().equals("")) {
+        if (!PreferencesUtility.getUserInfo().getUsername().equals("")) {
             Log.d(TAG, "onCreate: USER ACCOUNT_USER_ACCOUNT_USER_ACCOUNT: " +
-                    mPreferencesUtility.getUserInfo().getUsername());
+                    PreferencesUtility.getUserInfo().getUsername());
             Intent intent = new Intent(getApplicationContext(), FeedActivity.class);
             startActivity(intent);
             this.finish();
+        } else {
+            Log.d(TAG, "onCreate: USERNAMEUSERNAME: "+PreferencesUtility.getUserInfo().getUsername());
         }
 
         setContentView(R.layout.activity_login);
@@ -105,7 +109,7 @@ public class LoginActivity extends AppCompatActivity {
         if (cancel) {
             focusView.requestFocus();
         } else {
-            LoginTask loginTask = new LoginTask(this, mPreferencesUtility);
+            LoginTask loginTask = new LoginTask(this);
             loginTask.execute(email, password);
         }
     }

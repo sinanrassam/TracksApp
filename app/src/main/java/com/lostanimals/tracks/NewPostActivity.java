@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import com.lostanimals.tracks.utils.NewPostTask;
+import com.lostanimals.tracks.utils.PreferencesUtility;
 
 import java.util.Objects;
 
@@ -28,7 +30,8 @@ public class NewPostActivity extends AppCompatActivity {
     public void onNewPost(View view) {
         String title = etTitle.getText().toString();
         String description = etDescription.getText().toString();
-        String username = "USER";
+        NewPostTask newPostTask = new NewPostTask(this);
+        newPostTask.execute(title, description, PreferencesUtility.getUserInfo().getUsername());
     }
 
     @Override

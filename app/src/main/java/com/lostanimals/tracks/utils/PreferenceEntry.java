@@ -1,9 +1,9 @@
 package com.lostanimals.tracks.utils;
 
 public class PreferenceEntry {
-    private final String mName;
-    private final String mUsername;
-    private final String mEmail;
+    private static String mName = null;
+    private static String mUsername = null;
+    private static String mEmail = null;
 
     public PreferenceEntry(String name, String username, String email) {
         mName = name;
