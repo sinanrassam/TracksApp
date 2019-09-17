@@ -65,8 +65,9 @@ public class UpdateFeedTask extends AsyncTask<String, Integer, Boolean> {
         }
 
         if (json != null) {
+            // Clear the array list and post list-map first
+            PostsUtility.getPostEntryArray().clear();
             mPostList = new ArrayList<>();
-            mPostArray = new ArrayList<>();
             try {
                 JSONArray jsonArray = (JSONArray) json.get("posts");
                 for (int i = 0; i < jsonArray.length(); i++) {
@@ -78,11 +79,12 @@ public class UpdateFeedTask extends AsyncTask<String, Integer, Boolean> {
                     String date = (String) jsonObject.get("date");
                     String time = (String) jsonObject.get("time");
 
-                    mPostArray.add(i, new PostEntry(id, title, desc, username, date, time));
+                    PostsUtility.addPostEntry(i, new PostEntry(id, title, desc, username, date, time));
 
                     Map<String, String> post = new HashMap<>(2);
-                    post.put("Title", mPostArray.get(i).getPostTitle());
-                    post.put("Desc", mPostArray.get(i).getPostDesc());
+
+                    post.put("Title", PostsUtility.getPostEntry(i).getPostTitle());
+                    post.put("Desc", PostsUtility.getPostEntry(i).getPostTitle());
 
                     mPostList.add(i, post);
                 }
