@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
@@ -36,6 +37,10 @@ public class UpdateFeedTask extends AsyncTask<String, Integer, Boolean> {
         this.mFragment = activity;
         this.mContext = mFragment.getContext();
         this.mProgressBar = progressBar;
+    }
+
+    public PostEntry getPostEntry(int index) {
+        return mPostArray.get(index);
     }
 
     @Override
