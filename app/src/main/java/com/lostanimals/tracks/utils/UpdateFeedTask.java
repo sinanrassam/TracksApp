@@ -15,6 +15,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,6 +30,7 @@ public class UpdateFeedTask extends AsyncTask<String, Integer, Boolean> {
     private ProgressBar mProgressBar;
     private FeedFragment mFragment;
     private List<Map<String, String>> mPostList = new ArrayList<>();
+    private ArrayList<PostEntry> mPostArray = new ArrayList<>();
 
     public UpdateFeedTask(FeedFragment activity, ProgressBar progressBar) {
         this.mFragment = activity;
@@ -61,18 +63,25 @@ public class UpdateFeedTask extends AsyncTask<String, Integer, Boolean> {
 
         if (json != null) {
             mPostList = new ArrayList<>();
+            mPostArray = new ArrayList<>();
             try {
                 JSONArray jsonArray = (JSONArray) json.get("posts");
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+                    String id = (String) jsonObject.get("id");
                     String title = (String) jsonObject.get("title");
                     String desc = (String) jsonObject.get("description");
+                    String username = (String) jsonObject.get("username");
+                    String date = (String) jsonObject.get("date");
+                    String time = (String) jsonObject.get("time");
+
+                    mPostArray.add(i, new PostEntry(id, title, desc, username, date, time));
 
                     Map<String, String> post = new HashMap<>(2);
-                    post.put("Title", title);
-                    post.put("Desc", desc);
+                    post.put("Title", mPostArray.get(i).getPostTitle());
+                    post.put("Desc", mPostArray.get(i).getPostDesc());
 
-                    mPostList.add(post);
+                    mPostList.add(i, post);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

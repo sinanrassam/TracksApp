@@ -11,7 +11,7 @@ import android.widget.ProgressBar;
 import com.lostanimals.tracks.utils.UpdateFeedTask;
 
 public class FeedFragment extends ListFragment {
-
+    private AsyncTask updateFeed;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -19,12 +19,19 @@ public class FeedFragment extends ListFragment {
         ProgressBar progressBar = view.findViewById(R.id.progress_bar);
         progressBar.setProgress(0);
 
-        AsyncTask updateFeed = new UpdateFeedTask(this, progressBar).execute("4");
+        updateFeed = new UpdateFeedTask(this, progressBar).execute("4");
 
         return view;
     }
 
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        updateFeed.execute("4");
+//    }
+
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
+
     }
 }

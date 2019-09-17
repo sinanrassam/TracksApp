@@ -6,7 +6,7 @@ public class PostEntry {
     public String mPostDesc;
     public String mPostDate;
     public String mId;
-    public String mContent;
+    public String mTime;
 
     // extra con for testing
     public PostEntry(String username, String postTitle) {
@@ -15,7 +15,7 @@ public class PostEntry {
         setPostDesc("TEST");
         setPostDate(null);
         setId(null);
-        setContent(null);
+        setTime(null);
     }
 
     // extra con for testing
@@ -25,17 +25,17 @@ public class PostEntry {
         setPostDesc(desc);
         setPostDate(null);
         setId(String.valueOf(id));
-        setContent(null);
+        setTime(null);
     }
 
     // default
-    public PostEntry(String username, String postTitle, String postDesc, String postDate, String id, String content) {
+    public PostEntry(String id, String postTitle, String postDesc, String username,  String postDate, String postTime) {
         setUsername(username);
         setPostTitle(postTitle);
         setPostDesc(postDesc);
         setPostDate(postDate);
         setId(id);
-        setContent(content);
+        setTime(postTime);
     }
 
     // override for no date
@@ -45,7 +45,7 @@ public class PostEntry {
         setPostDesc(postDesc);
         setPostDate("1970");
         setId(id);
-        setContent(content);
+        setTime(content);
     }
 
     public String getUsername() {
@@ -88,18 +88,18 @@ public class PostEntry {
         this.mId = id;
     }
 
-    public String getContent() {
-        return mContent;
+    public String getTime() {
+        return mTime;
     }
 
-    public void setContent(String content) {
-        this.mContent = content;
+    public void setTime(String time) {
+        this.mTime = time;
     }
 
     @Override
     public String toString() {
-        if (getContent() != null) {
-            return getContent();
+        if (getPostDesc() != null) {
+            return getPostDesc();
         }
         return "Problem loading content";
     }
