@@ -2,7 +2,7 @@ package com.lostanimals.tracks.utils;
 
 import java.util.ArrayList;
 
-public class PostsHandler {
+public class PostsUtility {
 
     public static ArrayList<PostEntry> postEntryArray = new ArrayList<>();
 
@@ -11,7 +11,7 @@ public class PostsHandler {
     }
 
     public static void setPostEntryArray(final ArrayList<PostEntry> postEntryArray) {
-        PostsHandler.postEntryArray = postEntryArray;
+        PostsUtility.postEntryArray = postEntryArray;
     }
 
 }
