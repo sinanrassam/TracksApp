@@ -7,6 +7,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class MyPostActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout mDrawerLayout;
@@ -26,8 +27,11 @@ public class MyPostActivity extends AppCompatActivity implements NavigationView.
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
+
         // TODO: Create navigation view XML
-        //NavigationView navigationView = (NavigationView)findViewById(R.id.navigation_view);
+        NavigationView navigationView = (NavigationView)findViewById(R.id.navigation_view);
+        navigationView.setNavigationItemSelectedListener(this);
     }
 
     @Override
@@ -44,7 +48,7 @@ public class MyPostActivity extends AppCompatActivity implements NavigationView.
         int id = menuItem.getItemId();
 
         if (id == R.id.home_nav) {
-
+            Toast.makeText(this, "Home",Toast.LENGTH_SHORT).show();
         }
 
         if (id == R.id.setting_nav) {
