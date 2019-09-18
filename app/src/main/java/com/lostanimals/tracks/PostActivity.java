@@ -3,22 +3,30 @@ package com.lostanimals.tracks;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import com.lostanimals.tracks.utils.NewCommentTask;
 import com.lostanimals.tracks.utils.PostEntry;
+import com.lostanimals.tracks.utils.PostsUtility;
 import com.lostanimals.tracks.utils.PreferencesUtility;
 
 public class PostActivity extends AppCompatActivity {
 
+    private int mPostPosition;
     private PostEntry mPostEntry;
     private TextView mPostTitleView, mPostDescView, mPostDateView, mPostAuthorView;
     private EditText mCommentView;
 
+    public void setPostPosition(int postPosition) {
+        mPostPosition = postPosition;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("Post Position - oncreate", mPostPosition + "");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
 
@@ -27,14 +35,14 @@ public class PostActivity extends AppCompatActivity {
         mPostDateView = findViewById(R.id.post_date);
         mPostAuthorView = findViewById(R.id.post_author);
 
-//        mPostEntry = new PostEntry("title", "title");
+        mPostEntry = PostsUtility.getPostEntry(mPostPosition);
+        if (mPostEntry != null) {
+            mPostTitleView.setText(mPostEntry.getPostTitle());
 
-//        mPostTitleView.setText(mPostEntry.getPostTitle());
-//
-//        mPostDescView.setText("mPostEntry.getPostDesc()");
-//        mPostDateView.setText("Posted on: " + "mPostEntry.getPostDesc()");
-//        mPostAuthorView.setText("By: " + "mPostEntry.getUsername()");
-
+            mPostDescView.setText(mPostEntry.getPostDesc());
+            mPostDateView.setText("Posted on: " + "DATE");
+            mPostAuthorView.setText("By: " + mPostEntry.getUsername());
+        }
         mCommentView = findViewById(R.id.comment_field);
 
         Button mSignInBtn = findViewById(R.id.comment_btn);

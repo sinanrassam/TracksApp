@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import com.lostanimals.tracks.utils.PostsUtility;
 import com.lostanimals.tracks.utils.PreferencesUtility;
 import com.lostanimals.tracks.utils.UpdateFeedTask;
 
@@ -36,11 +37,11 @@ public class FeedFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-//        PostEntryActivity postEntryActivity = new PostEntryActivity(updateFeed.getPostEntry(position));
+        PostActivity postEntryActivity = new PostActivity();
 
-//        postEntryActivity.setPostEntry(updateFeed.getPostEntry(position));
+        postEntryActivity.setPostPosition(position);
 
-        Intent intent = new Intent(getContext(), PostActivity.class);
+        Intent intent = new Intent(getContext(), postEntryActivity.getClass());
         startActivity(intent);
     }
 }
