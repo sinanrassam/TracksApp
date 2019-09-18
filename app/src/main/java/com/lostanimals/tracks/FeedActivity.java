@@ -25,13 +25,7 @@ public class FeedActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    startActivity(new Intent(FeedActivity.this, MyPostActivity.class));
-
-                }
-                catch (Exception e) {
-                    Toast.makeText(FeedActivity.this, e.getMessage(),Toast.LENGTH_SHORT).show();
-                }
+                startActivity(new Intent(FeedActivity.this, MyPostActivity.class));
             }
         });
     }

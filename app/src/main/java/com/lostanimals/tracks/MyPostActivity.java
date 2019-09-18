@@ -1,5 +1,6 @@
 package com.lostanimals.tracks;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -27,9 +28,6 @@ public class MyPostActivity extends AppCompatActivity implements NavigationView.
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
-
-        // TODO: Create navigation view XML
         NavigationView navigationView = (NavigationView)findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
@@ -47,16 +45,16 @@ public class MyPostActivity extends AppCompatActivity implements NavigationView.
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         int id = menuItem.getItemId();
 
-        if (id == R.id.home_nav) {
-            Toast.makeText(this, "Home",Toast.LENGTH_SHORT).show();
+        if (id == R.id.feed_nav) {
+            startActivity(new Intent(this, FeedActivity.class));
         }
 
-        if (id == R.id.setting_nav) {
-
+        if (id == R.id.myPosts_nav) {
+            startActivity(new Intent(this, MyPostActivity.class));
         }
 
         if (id == R.id.logOut_nav) {
-
+            startActivity(new Intent(this, LogoutActivity.class));
         }
 
         return false;
