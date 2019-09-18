@@ -18,10 +18,10 @@ public class CommentsFragment extends ListFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.comments_fragment, container, false);
-//        ProgressBar progressBar = view.findViewById(R.id.progress_bar);
-//        progressBar.setProgress(0);
+        ProgressBar progressBar = view.findViewById(R.id.progress_bar);
+        progressBar.setProgress(0);
 
-        getComments = (GetCommentsTask) new GetCommentsTask(this, null).execute();
+        getComments = (GetCommentsTask) new GetCommentsTask(this, progressBar).execute();
 
         return view;
     }
