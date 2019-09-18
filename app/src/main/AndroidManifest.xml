@@ -16,7 +16,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".PostEntryActivity">
+        <activity android:name=".PostActivity">
         </activity>
         <activity android:name=".LogoutActivity">
         </activity>
