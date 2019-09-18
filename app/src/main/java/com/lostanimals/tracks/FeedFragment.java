@@ -37,11 +37,8 @@ public class FeedFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        PostActivity postEntryActivity = new PostActivity();
-
-        postEntryActivity.setPostPosition(position);
-
-        Intent intent = new Intent(getContext(), postEntryActivity.getClass());
+        Intent intent = new Intent(getContext(), PostActivity.class);
+        intent.putExtra("position", position);
         startActivity(intent);
     }
 }

@@ -20,15 +20,13 @@ public class PostActivity extends AppCompatActivity {
     private TextView mPostTitleView, mPostDescView, mPostDateView, mPostAuthorView;
     private EditText mCommentView;
 
-    public void setPostPosition(int postPosition) {
-        mPostPosition = postPosition;
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("Post Position - oncreate", mPostPosition + "");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
+
+        mPostPosition = getIntent().getIntExtra("position", 0);
 
         mPostTitleView = findViewById(R.id.post_txt_title);
         mPostDescView = findViewById(R.id.post_et_desc);
