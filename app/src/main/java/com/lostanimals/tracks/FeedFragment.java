@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import com.lostanimals.tracks.utils.PostEntry;
+import com.lostanimals.tracks.utils.PreferencesUtility;
 import com.lostanimals.tracks.utils.UpdateFeedTask;
 
 public class FeedFragment extends ListFragment {
@@ -20,6 +21,9 @@ public class FeedFragment extends ListFragment {
         final View view = inflater.inflate(R.layout.feed_fragment, container, false);
         ProgressBar progressBar = view.findViewById(R.id.progress_bar);
         progressBar.setProgress(0);
+
+        // TODO: Nitesh:
+        String user = PreferencesUtility.getUserInfo().getUsername();
 
         updateFeed = (UpdateFeedTask) new UpdateFeedTask(this, progressBar).execute("4");
 

@@ -49,12 +49,20 @@ public class ConnectionManager {
                 // TODO: Implement reset password POST request
                 break;
             case "new":
+                // TODO: Can found be encoded as a bool?
                 postData += URLEncoder.encode("title", "UTF-8") + "=" + URLEncoder.encode(parameters[0],
                         "UTF-8") + "&";
                 postData += URLEncoder.encode("description", "UTF-8") + "=" + URLEncoder.encode(parameters[1],
                         "UTF-8") + "&";
                 postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(parameters[2],
                         "UTF-8");
+                postData += URLEncoder.encode("found", "UTF-8") + "=" + URLEncoder.encode("false",
+                        "UTF-8") + "&";
+                break;
+            case "edit":
+                // TODO: Can found be encoded as a bool?
+                postData += URLEncoder.encode("found", "UTF-8") + "=" + URLEncoder.encode(parameters[0],
+                        "UTF-8") + "&";
                 break;
         }
         return postData;
