@@ -1,26 +1,19 @@
 package com.lostanimals.tracks.utils;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
+
 import android.os.AsyncTask;
-import android.support.v4.app.ActivityCompat;
+
 import android.util.Log;
-import com.lostanimals.tracks.FeedActivity;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 
-import static android.support.constraint.Constraints.TAG;
 
 public class LoginTask extends AsyncTask<String, Integer, JSONObject> {
-    @SuppressLint("StaticFieldLeak")
-    private Context mContext;
 
-    public LoginTask(Context context) {
-        this.mContext = context;
+    public LoginTask() {
     }
 
     @Override
@@ -53,6 +46,6 @@ public class LoginTask extends AsyncTask<String, Integer, JSONObject> {
     @Override
     protected void onCancelled() {
         super.onCancelled();
-        Log.d(TAG, "onCancelled: LOGIN_TASK_LOGIN_TASK_LOGIN_TASK_LOGIN_TASK");
+        Log.d("LOGIN_TASK", "onCancelled: LOGIN_TASK_LOGIN_TASK_LOGIN_TASK_LOGIN_TASK");
     }
 }

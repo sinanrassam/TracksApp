@@ -150,7 +150,7 @@ public class LoginActivity extends AppCompatActivity {
         if (cancel) {
             focusView.requestFocus();
         } else {
-            LoginTask loginTask = new LoginTask(this);
+            LoginTask loginTask = new LoginTask();
             loginTask.execute(email, password);
 
             NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID);

@@ -15,11 +15,9 @@ import java.io.IOException;
 public class RegisterTask extends AsyncTask<String, Void, JSONObject> {
     @SuppressLint("StaticFieldLeak")
     private Context mContext;
-    private PreferencesUtility mPreferencesUtility;
 
-    public RegisterTask(Context context, PreferencesUtility preferencesUtility) {
+    public RegisterTask(Context context) {
         this.mContext = context;
-        this.mPreferencesUtility = preferencesUtility;
     }
 
     @Override
@@ -41,7 +39,7 @@ public class RegisterTask extends AsyncTask<String, Void, JSONObject> {
         try {
             if (data.get("response").equals("successful")) {
                 // If the response was successful, try to LOGIN. If LOGIN is successful, start FEED.
-                if (mPreferencesUtility.setUserInfo(ConnectionManager.login((JSONObject) data.get("details")))) {
+                if (PreferencesUtility.setUserInfo(ConnectionManager.login((JSONObject) data.get("details")))) {
                     Intent intent = new Intent(mContext, FeedActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     ActivityCompat.finishAffinity((Activity) mContext);

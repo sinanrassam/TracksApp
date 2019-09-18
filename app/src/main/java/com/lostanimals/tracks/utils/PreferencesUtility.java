@@ -1,6 +1,5 @@
 package com.lostanimals.tracks.utils;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -10,11 +9,9 @@ public class PreferencesUtility {
     private final static String KEY_NAME = "key_name";
     private final static String KEY_USERNAME = "key_username";
     private final static String KEY_EMAIL = "key_email";
-    @SuppressLint("StaticFieldLeak")
-    private static Context mContext;
-    //private static SharedPreferences mSharedPreferences = null;
-    //private static SharedPreferences mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+
     private static SharedPreferences mSharedPreferences;
+
     public PreferencesUtility(SharedPreferences sharedPreferences) {
         mSharedPreferences = sharedPreferences;
     }
@@ -22,10 +19,6 @@ public class PreferencesUtility {
     public static void setSharedPreferences(Context context) {
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
-
-//    public static void setContext(Context context) {
-//        mContext = context;
-//    }
 
     public static boolean setUserInfo(PreferenceEntry preferenceEntry) {
         SharedPreferences.Editor editor = mSharedPreferences.edit();

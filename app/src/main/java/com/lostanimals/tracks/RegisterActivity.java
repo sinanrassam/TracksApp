@@ -17,8 +17,6 @@ import java.util.Objects;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private static PreferencesUtility mPreferencesUtility;
-
     // UI references.
     private EditText mFirstNameView;
     private EditText mLastNameView;
@@ -33,9 +31,6 @@ public class RegisterActivity extends AppCompatActivity {
         // TODO: Do we need the actionbar?
         //setupActionBar();
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mPreferencesUtility = new PreferencesUtility(sharedPreferences);
 
         mFirstNameView = findViewById(R.id.firstName);
         mLastNameView = findViewById(R.id.lastName);
@@ -106,7 +101,7 @@ public class RegisterActivity extends AppCompatActivity {
             focusView.requestFocus();
         } else {
             String name = firstName + " " + lastName;
-            RegisterTask registerTask = new RegisterTask(this, mPreferencesUtility);
+            RegisterTask registerTask = new RegisterTask(this);
             registerTask.execute(name, email, username, password);
         }
     }
