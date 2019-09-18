@@ -1,12 +1,14 @@
 package com.lostanimals.tracks.utils;
 
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.os.SystemClock;
+import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
+import com.lostanimals.tracks.CommentsFragment;
 import com.lostanimals.tracks.FeedFragment;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,15 +23,15 @@ import java.util.Map;
 
 import static com.lostanimals.tracks.utils.ConnectionManager.processRequest;
 
-class GetCommentTask extends AsyncTask<String, Integer, Boolean> {
+public class GetCommentsTask extends AsyncTask<String, Integer, Boolean> {
     @SuppressLint("StaticFieldLeak")
     private Context mContext;
     @SuppressLint("StaticFieldLeak")
     private ProgressBar mProgressBar;
-    private FeedFragment mFragment;
-    private List<Map<String, String>> mCommentList = new ArrayList<>();
+    private CommentsFragment mFragment;
+    private List<Map<String, String>> mPostList = new ArrayList<>();
 
-    public GetCommentTask(FeedFragment activity, ProgressBar progressBar) {
+    public GetCommentsTask(CommentsFragment activity, ProgressBar progressBar) {
         this.mFragment = activity;
         this.mContext = mFragment.getContext();
         this.mProgressBar = progressBar;
@@ -60,7 +62,8 @@ class GetCommentTask extends AsyncTask<String, Integer, Boolean> {
 
         if (json != null) {
             // Clear the array list and post list-map first
-            mCommentList = new ArrayList<>();
+            PostsUtility.getPostEntryArray().clear();
+            mPostList = new ArrayList<>();
             try {
                 JSONArray jsonArray = (JSONArray) json.get("comments");
                 for (int i = 0; i < jsonArray.length(); i++) {
@@ -71,13 +74,14 @@ class GetCommentTask extends AsyncTask<String, Integer, Boolean> {
                     String desc = (String) jsonObject.get("description");
                     String date = (String) jsonObject.get("date");
 
-                    Comment comment = new Comment(id, post_id, username, desc, date);
+                    Comment c = new Comment(id, post_id, username, desc, date);
 
-                    Map<String, String> comments = new HashMap<>(2);
+                    Map<String, String> comment = new HashMap<>(2);
 
-                    comments.put("post_id", comment.getPostId());
-                    comments.put("Desc", comment.toString());
-                    mCommentList.add(i, comments);
+                    comment.put("Title", c.getPostId());
+                    comment.put("Desc", c.toString());
+
+                    mPostList.add(i, comment);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -88,13 +92,26 @@ class GetCommentTask extends AsyncTask<String, Integer, Boolean> {
     }
 
     @Override
+    protected void onProgressUpdate(Integer... values) {
+        super.onProgressUpdate(values);
+        if (this.mProgressBar != null) {
+            mProgressBar.setProgress(values[0]);
+        }
+    }
+
+    @Override
     protected void onPostExecute(final Boolean success) {
-        SimpleAdapter adapter = new SimpleAdapter(mContext, mCommentList,
+        if (success) {
+            // TODO: Remove the sleep.
+            SystemClock.sleep(1000);
+            mProgressBar.setVisibility(View.GONE);
+        }
+        SimpleAdapter adapter = new SimpleAdapter(mContext, mPostList,
                 android.R.layout.simple_list_item_2,
                 new String[]{"Title", "Desc"},
                 new int[]{android.R.id.text1, android.R.id.text2});
         mFragment.setListAdapter(adapter);
         adapter.notifyDataSetChanged();
-        Toast.makeText(mContext, "Comments loaded", Toast.LENGTH_LONG).show();
+        Toast.makeText(mContext, "Comments received", Toast.LENGTH_LONG).show();
     }
 }

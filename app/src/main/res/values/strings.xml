@@ -45,4 +45,7 @@
     <!-- Strings related to the Feed -->
     <string name="loading_posts">Loading Posts</string>
     <string name="posts_error">Post Not Found</string>
+    <!-- comments -->
+    <string name="loading_comments">Loading Comments</string>
+    <string name="comments_error">Post Not Found</string>
 </resources>
