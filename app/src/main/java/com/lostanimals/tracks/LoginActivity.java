@@ -21,6 +21,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import com.lostanimals.tracks.utils.LoginTask;
+import com.lostanimals.tracks.utils.NotificationUtility;
 import com.lostanimals.tracks.utils.PreferenceEntry;
 import com.lostanimals.tracks.utils.PreferencesUtility;
 import org.json.JSONException;
@@ -33,8 +34,8 @@ public class LoginActivity extends AppCompatActivity {
     // TODO: Before submission, remove test log
     private final static String TAG = "LOGIN_ACTIVITY";
 
-    private static String CHANNEL_ID = "channel_0";
-    private NotificationManager notificationManager;
+//    private static String CHANNEL_ID = "channel_0";
+//    private NotificationManager notificationManager;
 
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
@@ -51,8 +52,8 @@ public class LoginActivity extends AppCompatActivity {
         registerIntent = new Intent(this, RegisterActivity.class);
         registerIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 
-        createNotificationChannel();
-
+//        createNotificationChannel();
+        NotificationUtility.createNotification(this, "Tracks", "Test", true);
         PreferencesUtility.setSharedPreferences(this);
 
         /*
@@ -110,17 +111,17 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void createNotificationChannel() {
-        // https://developer.android.com/training/notify-user/build-notification
-
-        CharSequence name = getString(R.string.channel_name);
-        String description = getString(R.string.channel_description);
-        NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, NotificationManager.IMPORTANCE_DEFAULT);
-        channel.setDescription(description);
-
-        notificationManager = getSystemService(NotificationManager.class);
-        notificationManager.createNotificationChannel(channel);
-    }
+//    private void createNotificationChannel() {
+//        // https://developer.android.com/training/notify-user/build-notification
+//
+//        CharSequence name = getString(R.string.channel_name);
+//        String description = getString(R.string.channel_description);
+//        NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, NotificationManager.IMPORTANCE_DEFAULT);
+//        channel.setDescription(description);
+//
+//        notificationManager = getSystemService(NotificationManager.class);
+//        notificationManager.createNotificationChannel(channel);
+//    }
 
     private void attemptLogin() throws ExecutionException, InterruptedException, JSONException {
         // Reset errors.
@@ -153,24 +154,25 @@ public class LoginActivity extends AppCompatActivity {
             LoginTask loginTask = new LoginTask();
             loginTask.execute(email, password);
 
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID);
-            builder.setSmallIcon(R.drawable.ic_launcher_foreground);
-            builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
+//            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID);
+//            builder.setSmallIcon(R.drawable.ic_launcher_foreground);
+//            builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
             if (loginTask.get().get("response").equals("successful")) {
-                builder.setContentTitle("Tracks");
-                builder.setContentText("Logged in! :)");
-                builder.setAutoCancel(true);
-                notificationManager.notify(0, builder.build());
+//                builder.setContentTitle("Tracks");
+//                builder.setContentText("Logged in! :)");
+//                builder.setAutoCancel(true);
+                //notificationManager.notify(0, builder.build());
 
+                NotificationUtility.displayNotification(0);
                 startActivity(feedIntent);
                 loginTask.cancel(true);
                 finish();
             } else {
-                builder.setContentTitle("Tracks");
-                builder.setContentText("Failed to log in! :(");
-                builder.setAutoCancel(true);
-                notificationManager.notify(0, builder.build());
+//                builder.setContentTitle("Tracks");
+//                builder.setContentText("Failed to log in! :(");
+//                builder.setAutoCancel(true);
+//                notificationManager.notify(0, builder.build());
 
                 loginTask.cancel(true);
             }
