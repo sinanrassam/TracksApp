@@ -6,13 +6,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 import com.lostanimals.tracks.FeedActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 
-public class LoginTask extends AsyncTask<String, Void, JSONObject> {
+import static android.support.constraint.Constraints.TAG;
+
+public class LoginTask extends AsyncTask<String, Integer, JSONObject> {
     @SuppressLint("StaticFieldLeak")
     private Context mContext;
 
@@ -36,19 +39,20 @@ public class LoginTask extends AsyncTask<String, Void, JSONObject> {
     @Override
     protected void onPostExecute(JSONObject data) {
         try {
-            if (data.get("response").equals("successful")) {
-                // If the response was successful, try to LOGIN. If LOGIN is successful, start FEED.
-                if (PreferencesUtility.setUserInfo(ConnectionManager.login((JSONObject) data.get("details")))) {
-                    Intent intent = new Intent(mContext, FeedActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    ActivityCompat.finishAffinity((Activity) mContext);
-                    mContext.startActivity(intent);
-                }
-            } else {
-                // TODO: Print error
-            }
+            PreferencesUtility.setUserInfo(ConnectionManager.login((JSONObject) data.get("details")));
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    protected void onProgressUpdate(Integer... values) {
+        super.onProgressUpdate(values);
+    }
+
+    @Override
+    protected void onCancelled() {
+        super.onCancelled();
+        Log.d(TAG, "onCancelled: LOGIN_TASK_LOGIN_TASK_LOGIN_TASK_LOGIN_TASK");
     }
 }
