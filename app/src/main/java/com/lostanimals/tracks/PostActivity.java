@@ -68,12 +68,14 @@ public class PostActivity extends AppCompatActivity {
 
         String username = PreferencesUtility.getUserInfo().getUsername();
 
-
+        String post_id = mPostEntry.getId();
         if (cancel) {
             focusView.requestFocus();
         } else {
             NewCommentTask addCommentTask = new NewCommentTask(this);
-            addCommentTask.execute("-1", username, msg);
+            // TODO: Remove after fixing the unknown bug
+            addCommentTask.execute(post_id, username, msg);
         }
+        Log.d("Post ID", post_id);
     }
 }
