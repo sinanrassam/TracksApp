@@ -6,14 +6,11 @@
             android:layout_width="match_parent"
             android:layout_height="453dp"
             android:id="@android:id/list"/>
+
     <ProgressBar
             android:id="@+id/progress_bar"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/loading_comments"
             android:layout_marginTop="20dp"/>
-    <TextView
-            android:text="TextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/textView"/>
 </LinearLayout>

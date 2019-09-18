@@ -25,17 +25,17 @@ public class PostEntryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_entry);
 
-        mPostTitleView = findViewById(R.id.post_txt_title);
-        mPostDescView = findViewById(R.id.post_et_desc);
-        mPostDateView = findViewById(R.id.post_date);
-        mPostAuthorView = findViewById(R.id.post_author);
+//        mPostTitleView = findViewById(R.id.post_txt_title);
+//        mPostDescView = findViewById(R.id.post_et_desc);
+//        mPostDateView = findViewById(R.id.post_date);
+//        mPostAuthorView = findViewById(R.id.post_author);
 
 //        mPostEntry = new PostEntry("title", "title");
 
-        mPostTitleView.setText(mPostEntry.getPostTitle());
-
-        mPostDescView.setText("mPostEntry.getPostDesc()");
-        mPostDateView.setText("Posted on: " + "mPostEntry.getPostDesc()");
-        mPostAuthorView.setText("By: " + "mPostEntry.getUsername()");
+//        mPostTitleView.setText(mPostEntry.getPostTitle());
+//
+//        mPostDescView.setText("mPostEntry.getPostDesc()");
+//        mPostDateView.setText("Posted on: " + "mPostEntry.getPostDesc()");
+//        mPostAuthorView.setText("By: " + "mPostEntry.getUsername()");
     }
 }

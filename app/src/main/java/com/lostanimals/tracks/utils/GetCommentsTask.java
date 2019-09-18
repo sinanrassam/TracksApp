@@ -4,12 +4,12 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 import com.lostanimals.tracks.CommentsFragment;
-import com.lostanimals.tracks.FeedFragment;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,7 +29,7 @@ public class GetCommentsTask extends AsyncTask<String, Integer, Boolean> {
     @SuppressLint("StaticFieldLeak")
     private ProgressBar mProgressBar;
     private CommentsFragment mFragment;
-    private List<Map<String, String>> mPostList = new ArrayList<>();
+    private List<Map<String, String>> mCommentsList = new ArrayList<>();
 
     public GetCommentsTask(CommentsFragment activity, ProgressBar progressBar) {
         this.mFragment = activity;
@@ -60,10 +60,12 @@ public class GetCommentsTask extends AsyncTask<String, Integer, Boolean> {
             }
         }
 
+        Log.d("JSON", json.toString());
+
         if (json != null) {
             // Clear the array list and post list-map first
             PostsUtility.getPostEntryArray().clear();
-            mPostList = new ArrayList<>();
+            mCommentsList = new ArrayList<>();
             try {
                 JSONArray jsonArray = (JSONArray) json.get("comments");
                 for (int i = 0; i < jsonArray.length(); i++) {
@@ -72,16 +74,16 @@ public class GetCommentsTask extends AsyncTask<String, Integer, Boolean> {
                     String post_id = (String) jsonObject.get("post_id");
                     String username = (String) jsonObject.get("username");
                     String desc = (String) jsonObject.get("description");
-                    String date = (String) jsonObject.get("date");
+//                    String date = (String) jsonObject.get("date");
 
-                    Comment c = new Comment(id, post_id, username, desc, date);
+                    Comment c = new Comment(id, post_id, username, desc, null);
 
                     Map<String, String> comment = new HashMap<>(2);
 
                     comment.put("Title", c.getPostId());
                     comment.put("Desc", c.toString());
 
-                    mPostList.add(i, comment);
+                    mCommentsList.add(i, comment);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -106,7 +108,7 @@ public class GetCommentsTask extends AsyncTask<String, Integer, Boolean> {
             SystemClock.sleep(1000);
             mProgressBar.setVisibility(View.GONE);
         }
-        SimpleAdapter adapter = new SimpleAdapter(mContext, mPostList,
+        SimpleAdapter adapter = new SimpleAdapter(mContext, mCommentsList,
                 android.R.layout.simple_list_item_2,
                 new String[]{"Title", "Desc"},
                 new int[]{android.R.id.text1, android.R.id.text2});

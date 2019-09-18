@@ -17,13 +17,11 @@ public class CommentsFragment extends ListFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.feed_fragment, container, false);
-        ProgressBar progressBar = view.findViewById(R.id.progress_bar);
-        progressBar.setProgress(0);
+        final View view = inflater.inflate(R.layout.comments_fragment, container, false);
+//        ProgressBar progressBar = view.findViewById(R.id.progress_bar);
+//        progressBar.setProgress(0);
 
-        String name = PreferencesUtility.getUserInfo().getUsername();
-
-        getComments = (GetCommentsTask) new GetCommentsTask(this, progressBar).execute();
+        getComments = (GetCommentsTask) new GetCommentsTask(this, null).execute();
 
         return view;
     }
