@@ -85,7 +85,7 @@ public class UpdateFeedTask extends AsyncTask<String, Integer, Boolean> {
                     Map<String, String> post = new HashMap<>(2);
 
                     post.put("Title", PostsUtility.getPostEntry(i).getPostTitle());
-                    post.put("Desc", PostsUtility.getPostEntry(i).getPostTitle());
+                    post.put("Desc", PostsUtility.getPostEntry(i).getPostDesc());
 
                     mPostList.add(i, post);
                 }
