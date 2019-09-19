@@ -51,4 +51,8 @@
     <string name="comments_error">Post Not Found</string>
     <string name="prompt_comment">Write a comment...</string>
     <string name="action_comment">Comment</string>
+    <!-- Nav Drawer -->
+    <string name="open_action_bar">Open</string>
+    <string name="close_action_bar">Close</string>
+
 </resources>
