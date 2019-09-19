@@ -37,7 +37,7 @@ public class EditTask extends AsyncTask<String, Integer, JSONObject> {
         //TODO: Something with the returned JSONObject. Maybe check result is successful, if so make a toast / notify
         // the calling UI with an adapter. Maybe go back to the post and refresh it so the update is visible.
         try {
-            //TODO: Fix! Throwing NullPointerException
+            //TODO: See if we need to return the post
             if (data.get("response").equals("successful")) {
                 /* JSONObject jsonObject = (JSONObject)data.get("details");
                  String id = (String) jsonObject.get("id");
@@ -51,11 +51,11 @@ public class EditTask extends AsyncTask<String, Integer, JSONObject> {
                 if (found.equals("1")) {
                     Toast.makeText(mContext, "Post Marked Found Successfully", Toast.LENGTH_SHORT).show();
                 } */
-                Toast.makeText(mContext, "Post Marked Found Successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "Post Successfully Updated", Toast.LENGTH_SHORT).show();
             }
         }
         catch (JSONException e) {
-            Toast.makeText(mContext, "Error Marking Post Found", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "Error Updating Post", Toast.LENGTH_SHORT).show();
         }
     }
 

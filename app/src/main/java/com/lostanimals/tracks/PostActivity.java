@@ -1,6 +1,7 @@
 package com.lostanimals.tracks;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -148,13 +149,16 @@ public class PostActivity extends AppCompatActivity {
 
     private void markAsFound() {
         EditTask editTask = new EditTask(this);
-        editTask.execute(mPostEntry.getId(), mPostEntry.getUsername(), mPostEntry.getPostDate(),
-                mPostEntry.getTime(), mPostEntry.getPostTitle(), mPostEntry.getPostDesc(), "1");
+        editTask.execute(mPostEntry.getId(), mPostEntry.getPostTitle(), mPostEntry.getPostDesc(), "1");
     }
 
     // TODO: Complete onEditClicked
     private void onEditClicked() {
-
+        Intent myIntent = new Intent(this, NewPostActivity.class);
+        myIntent.putExtra("isEditTask", true); // to set trigger in NewPostActivity to call EditTask
+        myIntent.putExtra("postID", mPostEntry.getId());
+        myIntent.putExtra("isFound", mPostEntry.getFound());
+        startActivity(myIntent);
     }
 
     private void onDeleteClicked() {
