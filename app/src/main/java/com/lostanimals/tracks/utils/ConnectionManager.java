@@ -48,7 +48,7 @@ public class ConnectionManager {
             case "reset":
                 // TODO: Implement reset password POST request
                 break;
-            case "new":
+            case "new-post":
                 // TODO: Can found be encoded as a bool?
                 postData += URLEncoder.encode("title", "UTF-8") + "=" + URLEncoder.encode(parameters[0],
                         "UTF-8") + "&";
