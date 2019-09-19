@@ -69,6 +69,7 @@ public class ConnectionManager {
                 postData += URLEncoder.encode("found", "UTF-8") + "=" + URLEncoder.encode(parameters[0],
                         "UTF-8") + "&";
                 break;
+
         }
         return postData;
     }

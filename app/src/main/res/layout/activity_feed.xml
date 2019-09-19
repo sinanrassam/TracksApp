@@ -7,6 +7,7 @@
         android:layout_height="match_parent"
         android:id="@+id/drawer"
         tools:context=".FeedActivity">
+
     <fragment
             android:layout_height="match_parent"
             android:layout_width="match_parent"
@@ -14,28 +15,35 @@
             android:id="@+id/fragment_feed"/>
 
 
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        <TextView android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:textSize="24sp"
-        />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-    </LinearLayout>
-
-    <!--
-    <android.support.design.widget.FloatingActionButton
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:clickable="true" app:srcCompat="@android:drawable/ic_input_add"
-            android:onClick="onAdd"
-            android:id="@+id/feed_btn_add" app:elevation="5dp"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="16dp"
+            android:textSize="24sp" />
 
-            android:layout_marginBottom="17dp" app:layout_constraintBottom_toBottomOf="parent"
-    />
--->
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/feed_btn_add"
+
+            android:layout_width="61dp"
+
+            android:layout_height="106dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="328dp"
+            android:layout_marginTop="593dp"
+            android:layout_marginEnd="22dp"
+            android:layout_marginBottom="32dp"
+            android:clickable="true"
+            android:src="@android:drawable/ic_input_add" />
+
+    </RelativeLayout>
+
+
     <android.support.design.widget.NavigationView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
