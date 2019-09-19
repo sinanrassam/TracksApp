@@ -1,5 +1,6 @@
 package com.lostanimals.tracks.utils;
 
+import android.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -30,6 +31,10 @@ public class ConnectionManager {
                         "UTF-8") + "&";
                 postData += URLEncoder.encode("description", "UTF-8") + "=" + URLEncoder.encode(parameters[2],
                         "UTF-8") + "&";
+                break;
+            case "get-comments":
+                postData += URLEncoder.encode("post_id", "UTF-8") + "=" + URLEncoder.encode(parameters[0],
+                        "UTF-8");
                 break;
             case "login":
                 postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(parameters[0],
@@ -78,6 +83,7 @@ public class ConnectionManager {
     }
 
     public static JSONObject processRequest(String script, String data) throws IOException, JSONException {
+        Log.d("Common bro", data);
         HttpURLConnection conn = openConnection(URL + script);
 
         // Send the request to the server
