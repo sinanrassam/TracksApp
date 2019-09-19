@@ -24,7 +24,6 @@
     <string name="hint_desc">Description…</string>
     <string name="post_btn_post">Post</string>
     <string name="title_activity_login">Login</string>
-    <string name="descr_overflow_button">PopupMenu</string>
     <!-- Strings related to login -->
     <string name="prompt_username">Username</string>
     <string name="prompt_password">Password</string>
@@ -45,7 +44,10 @@
     <string name="email_incorrect">Incorrect Email</string>
     <!-- Strings related to the Feed -->
     <string name="loading_posts">Loading Posts</string>
-    <string name="posts_error">Post Not Found</string>
+    <string name="posts_title">TITLE</string>
+    <string name="posts_author">AUTHOR</string>
+    <string name="posts_date">DATE</string>
+    <string name="posts_description">DESCRIPTION</string>
     <!-- comments -->
     <string name="loading_comments">Loading Comments</string>
     <string name="comments_error">Post Not Found</string>
