@@ -37,13 +37,17 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
         <activity android:name=".FeedActivity">
         </activity>
+
         <activity android:name=".NewPostActivity">
         </activity>
-        <activity android:name=".MyPostActivity">
+
+        <activity android:name=".MyPostActivity" android:parentActivityName=".FeedActivity">
         </activity>
-        <activity android:name=".MyProfileActivity">
+
+        <activity android:name=".MyProfileActivity" android:parentActivityName=".FeedActivity">
         </activity>
     </application>
 
