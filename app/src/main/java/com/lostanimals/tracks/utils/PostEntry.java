@@ -1,18 +1,51 @@
 package com.lostanimals.tracks.utils;
 
-import java.util.Date;
-
 public class PostEntry {
     public String mUsername;
     public String mPostTitle;
     public String mPostDesc;
-    public Date mPostDate;
+    public String mPostDate;
+    public String mId;
+    public String mTime;
 
-    public PostEntry(String username, String postTitle, String postDesc, Date postDate) {
+    // extra con for testing
+    public PostEntry(String username, String postTitle) {
+        setUsername(username);
+        setPostTitle(postTitle);
+        setPostDesc("TEST");
+        setPostDate(null);
+        setId(null);
+        setTime(null);
+    }
+
+    // extra con for testing
+    public PostEntry(String username, String postTitle, String desc, int id) {
+        setUsername(username);
+        setPostTitle(postTitle);
+        setPostDesc(desc);
+        setPostDate(null);
+        setId(String.valueOf(id));
+        setTime(null);
+    }
+
+    // default
+    public PostEntry(String id, String postTitle, String postDesc, String username,  String postDate, String postTime) {
         setUsername(username);
         setPostTitle(postTitle);
         setPostDesc(postDesc);
         setPostDate(postDate);
+        setId(id);
+        setTime(postTime);
+    }
+
+    // override for no date
+    public PostEntry(String username, String postTitle, String postDesc, String id, String content) {
+        setUsername(username);
+        setPostTitle(postTitle);
+        setPostDesc(postDesc);
+        setPostDate("1970");
+        setId(id);
+        setTime(content);
     }
 
     public String getUsername() {
@@ -24,10 +57,10 @@ public class PostEntry {
     }
 
     public String getPostTitle() {
-        return mPostTitle;
+        return "" + mPostTitle;
     }
 
-    public void setPostTitle(String postTitle) {
+    private void setPostTitle(String postTitle) {
         this.mPostTitle = postTitle;
     }
 
@@ -35,15 +68,39 @@ public class PostEntry {
         return mPostDesc;
     }
 
-    public void setPostDesc(String postDesc) {
+    private void setPostDesc(String postDesc) {
         this.mPostDesc = postDesc;
     }
 
-    public Date getPostDate() {
+    public String getPostDate() {
         return mPostDate;
     }
 
-    public void setPostDate(Date mPostDate) {
+    private void setPostDate(String mPostDate) {
         this.mPostDate = mPostDate;
+    }
+
+    public String getId() {
+        return mId;
+    }
+
+    public void setId(String id) {
+        this.mId = id;
+    }
+
+    public String getTime() {
+        return mTime;
+    }
+
+    public void setTime(String time) {
+        this.mTime = time;
+    }
+
+    @Override
+    public String toString() {
+        if (getPostDesc() != null) {
+            return getPostDesc();
+        }
+        return "Problem loading content";
     }
 }

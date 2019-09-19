@@ -1,49 +1,29 @@
-package com.lostanimals.tracks;
-
-import android.content.Context;
-import com.lostanimals.tracks.utils.ServerManager;
-import org.json.JSONException;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
-
-import java.io.IOException;
-import java.net.URLEncoder;
-
-@RunWith(MockitoJUnitRunner.class)
-public class LoginTest {
-
-    private static final String TEST_URL = "http://bosh.live:7536/phpmyadmin/tracks_api/";
-    private static final String TEST_USER_EMAIL = "test@test.com";
-    private static final String TEST_USER_USERNAME = "test";
-    private static final String TEST_USER_PASSWORD = "test";
-    private static String postData = null;
-
-    @Mock
-    ServerManager mockServerManager;
-    @Mock
-    Context mockContext;
-
-    @Before
-    public void initMocks() {
-        mockServerManager = new ServerManager(mockContext);
-    }
-
-    @Test
-    public void ServerManagerLogin_UsernameLogin() throws IOException, JSONException {
-        postData = URLEncoder.encode("type", "UTF-8") + "=" + URLEncoder.encode("login", "UTF-8") + "&";
-        postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(TEST_USER_USERNAME, "UTF-8") + "&";
-        postData += URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(TEST_USER_PASSWORD, "UTF-8");
-        mockServerManager.processRequest(TEST_URL + "user.php", postData);
-    }
-
-    @Test
-    public void ServerManagerLogin_EmailLogin() throws IOException, JSONException {
-        postData = URLEncoder.encode("type", "UTF-8") + "=" + URLEncoder.encode("login", "UTF-8") + "&";
-        postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(TEST_USER_EMAIL, "UTF-8") + "&";
-        postData += URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(TEST_USER_PASSWORD, "UTF-8");
-        mockServerManager.processRequest(TEST_URL + "user.php", postData);
-    }
-}
+//package com.lostanimals.tracks;
+//
+//import com.lostanimals.tracks.utils.ConnectionManager;
+//import org.json.JSONException;
+//import org.junit.Test;
+//import org.junit.runner.RunWith;
+//import org.junit.runners.JUnit4;
+//import org.mockito.runners.MockitoJUnitRunner;
+//
+//import java.io.IOException;
+//
+//@RunWith(JUnit4.class)
+//public class LoginTest {
+//
+//    private static final String[] USERNAME_LOGIN = {"test", "test"};
+//    private static final String[] EMAIL_LOGIN = {"test@test.com", "test"};
+//
+//    @Test
+//    public void ServerManagerLogin_UsernameLogin() throws IOException, JSONException {
+//        String postData = ConnectionManager.postEncoder("login", USERNAME_LOGIN);
+//        ConnectionManager.processRequest("user.php", postData);
+//    }
+//
+//    @Test
+//    public void ServerManagerLogin_EmailLogin() throws IOException, JSONException {
+//        String postData = ConnectionManager.postEncoder("login", EMAIL_LOGIN);
+//        ConnectionManager.processRequest("user.php", postData);
+//    }
+//}
