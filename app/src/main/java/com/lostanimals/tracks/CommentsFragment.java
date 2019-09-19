@@ -21,7 +21,10 @@ public class CommentsFragment extends ListFragment {
         ProgressBar progressBar = view.findViewById(R.id.progress_bar);
         progressBar.setProgress(0);
 
-        getComments = (GetCommentsTask) new GetCommentsTask(this, progressBar).execute();
+//        String post_id = getArguments().
+
+
+//        getComments = (GetCommentsTask) new GetCommentsTask(this, progressBar).execute();
 
         return view;
     }
