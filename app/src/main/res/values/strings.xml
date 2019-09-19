@@ -24,6 +24,7 @@
     <string name="hint_desc">Description…</string>
     <string name="post_btn_post">Post</string>
     <string name="title_activity_login">Login</string>
+    <string name="descr_overflow_button">PopupMenu</string>
     <!-- Strings related to login -->
     <string name="prompt_username">Username</string>
     <string name="prompt_password">Password</string>

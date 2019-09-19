@@ -7,6 +7,15 @@
         android:layout_height="match_parent"
         tools:context=".PostActivity">
 
+    <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_more_horiz_black"
+            android:id="@+id/popup_menu_post"
+            android:contentDescription="@string/descr_overflow_button"
+            android:onClick="showPopup"
+            android:showAsAction="always"/>
+
     <TextView
             android:text="@string/posts_error"
             android:layout_width="wrap_content"

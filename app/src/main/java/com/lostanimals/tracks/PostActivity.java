@@ -4,10 +4,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.*;
 import com.lostanimals.tracks.utils.NewCommentTask;
 import com.lostanimals.tracks.utils.PostEntry;
 import com.lostanimals.tracks.utils.PostsUtility;
@@ -52,6 +53,32 @@ public class PostActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if (mPostEntry != null) {
+            if (mPostEntry.getUsername().equals(PreferencesUtility.getUserInfo().getUsername())) {
+                getMenuInflater().inflate(R.menu.nav_popup, menu);
+            }
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.popup_found:
+                Toast.makeText(this, "Found", Toast.LENGTH_SHORT);
+                return true;
+            case R.id.popup_edit:
+                return true;
+            case R.id.popup_delete:
+                return true;
+        }
+
+        return false;
+    }
+
     private void addComment() {
         mCommentView.setError(null);
         String msg = mCommentView.getText().toString();
@@ -59,7 +86,7 @@ public class PostActivity extends AppCompatActivity {
         boolean cancel = false;
         View focusView = null;
 
-        // Check for a valid password, if the user entered one.
+        // Check for a valid comment, if the user entered one.
         if (TextUtils.isEmpty(msg)) {
             mCommentView.setError(getString(R.string.error_field_required));
             focusView = mCommentView;
