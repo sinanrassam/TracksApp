@@ -3,6 +3,7 @@ package com.lostanimals.tracks;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,8 @@ import android.widget.ProgressBar;
 import com.lostanimals.tracks.utils.PostsUtility;
 import com.lostanimals.tracks.utils.PreferencesUtility;
 import com.lostanimals.tracks.utils.UpdateFeedTask;
+
+import static android.support.constraint.Constraints.TAG;
 
 public class FeedFragment extends ListFragment {
     private UpdateFeedTask updateFeed;
@@ -22,9 +25,7 @@ public class FeedFragment extends ListFragment {
         progressBar.setProgress(0);
 
         // TODO: Nitesh:
-        String user = PreferencesUtility.getUserInfo().getUsername();
-
-        updateFeed = (UpdateFeedTask) new UpdateFeedTask(this, progressBar).execute("4");
+        updateFeed = (UpdateFeedTask) new UpdateFeedTask(this, progressBar).execute("4", "");
 
         return view;
     }

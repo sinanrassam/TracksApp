@@ -76,6 +76,5 @@ public class PostActivity extends AppCompatActivity {
             // TODO: Remove after fixing the unknown bug
             addCommentTask.execute(post_id, username, msg);
         }
-        Log.d("Post ID", post_id);
     }
 }

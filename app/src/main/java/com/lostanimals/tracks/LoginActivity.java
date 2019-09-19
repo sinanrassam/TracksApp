@@ -64,8 +64,8 @@ public class LoginActivity extends AppCompatActivity {
         if (DEV_MODE) PreferencesUtility.setUserInfo(new PreferenceEntry("admin", "admin", "admin@bosh.live"));
 
 
-        // Force the LOGIN activity
-//          if (DEV_MODE) PreferencesUtility.setUserInfo(new PreferenceEntry(null, null, null));
+        //Force the LOGIN activity
+        //if (DEV_MODE) PreferencesUtility.setUserInfo(new PreferenceEntry(null, null, null));
 
         /*
          *  END TESTING

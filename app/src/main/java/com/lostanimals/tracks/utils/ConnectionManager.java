@@ -19,6 +19,8 @@ public class ConnectionManager {
         switch (type) {
             case "get-posts":
                 postData += URLEncoder.encode("number", "UTF-8") + "=" + URLEncoder.encode(parameters[0],
+                        "UTF-8") + "&";
+                postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(parameters[1],
                         "UTF-8");
                 break;
             case "new-comment":
