@@ -154,11 +154,31 @@ public class PostActivity extends AppCompatActivity {
 
     // TODO: Complete onEditClicked
     private void onEditClicked() {
-        Intent myIntent = new Intent(this, NewPostActivity.class);
-        myIntent.putExtra("isEditTask", true); // to set trigger in NewPostActivity to call EditTask
-        myIntent.putExtra("postID", mPostEntry.getId());
-        myIntent.putExtra("isFound", mPostEntry.getFound());
-        startActivity(myIntent);
+        if (mPostEntry.getFound().equals("0")) {
+            Intent myIntent = new Intent(this, NewPostActivity.class);
+            myIntent.putExtra("isEditTask", true); // to set trigger in NewPostActivity to call EditTask
+            myIntent.putExtra("postID", mPostEntry.getId());
+            myIntent.putExtra("isFound", mPostEntry.getFound());
+            startActivity(myIntent);
+        }
+        else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+            builder.setMessage("This post cannot be edited as it has been marked as found!");
+            builder.setTitle("Attention!");
+
+            builder.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+
+            builder.setCancelable(false);
+
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+        }
     }
 
     private void onDeleteClicked() {
