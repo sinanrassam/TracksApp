@@ -9,8 +9,8 @@
     <fragment
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        class="com.lostanimals.tracks.FeedFragment"
-        android:id="@+id/fragment_feed"/>
+        class="com.lostanimals.tracks.MyPostsFragment"
+        android:id="@+id/fragment_myposts"/>
 
 
 

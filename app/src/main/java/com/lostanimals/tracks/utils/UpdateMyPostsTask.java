@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
+
 import com.lostanimals.tracks.FeedFragment;
 import com.lostanimals.tracks.MyPostsFragment;
 
@@ -24,17 +25,17 @@ import java.util.Map;
 
 import static com.lostanimals.tracks.utils.ConnectionManager.processRequest;
 
-public class UpdateFeedTask extends AsyncTask<String, Integer, Boolean> {
+public class UpdateMyPostsTask extends AsyncTask<String, Integer, Boolean> {
     @SuppressLint("StaticFieldLeak")
     private Context mContext;
     @SuppressLint("StaticFieldLeak")
     private ProgressBar mProgressBar;
-    private FeedFragment mFragment;
-    private MyPostsFragment mMyPostsFragment;
+    private MyPostsFragment mFragment;
+
     private List<Map<String, String>> mPostList = new ArrayList<>();
     private ArrayList<PostEntry> mPostArray = new ArrayList<>();
 
-    public UpdateFeedTask(FeedFragment activity, ProgressBar progressBar) {
+    public UpdateMyPostsTask(MyPostsFragment activity, ProgressBar progressBar) {
         this.mFragment = activity;
         this.mContext = mFragment.getContext();
         this.mProgressBar = progressBar;

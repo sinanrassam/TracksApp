@@ -8,10 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import com.lostanimals.tracks.utils.UpdateFeedTask;
 
-public class FeedFragment extends ListFragment {
-    private UpdateFeedTask updateFeed;
+import com.lostanimals.tracks.utils.PreferencesUtility;
+import com.lostanimals.tracks.utils.UpdateFeedTask;
+import com.lostanimals.tracks.utils.UpdateMyPostsTask;
+
+public class MyPostsFragment extends ListFragment {
+    private UpdateMyPostsTask updateFeed;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -20,7 +23,8 @@ public class FeedFragment extends ListFragment {
         progressBar.setProgress(0);
 
         // TODO: Nitesh:
-        updateFeed = (UpdateFeedTask) new UpdateFeedTask(this, progressBar).execute("4","");
+        String username = PreferencesUtility.getUserInfo().getUsername();
+        updateFeed = (UpdateMyPostsTask) new UpdateMyPostsTask(this, progressBar).execute("4",username);
 
         return view;
     }
