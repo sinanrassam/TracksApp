@@ -24,7 +24,7 @@ public class FeedFragment extends ListFragment {
         // TODO: Nitesh:
         String user = PreferencesUtility.getUserInfo().getUsername();
 
-        updateFeed = (UpdateFeedTask) new UpdateFeedTask(this, progressBar).execute("4");
+        updateFeed = (UpdateFeedTask) new UpdateFeedTask(this, progressBar).execute("4", "");
 
         return view;
     }
