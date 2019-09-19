@@ -13,6 +13,9 @@ import com.lostanimals.tracks.utils.RegisterTask;
 
 import java.util.Objects;
 
+
+
+
 public class MyProfileActivity extends AppCompatActivity {
 
    private TextView mEmail;
