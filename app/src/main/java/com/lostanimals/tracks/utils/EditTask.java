@@ -20,7 +20,7 @@ public class EditTask extends AsyncTask<String, Integer, JSONObject> {
         JSONObject json = null;
         try {
             String postData = ConnectionManager.postEncoder("edit", parameters);
-            json = ConnectionManager.processRequest("post.php", postData);
+            json = ConnectionManager.processRequest("post2.php", postData);
         } catch (JSONException | IOException e) {
             e.printStackTrace();
         }
