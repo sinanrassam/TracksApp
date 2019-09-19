@@ -52,7 +52,7 @@ public class UpdateFeedTask extends AsyncTask<String, Integer, Boolean> {
         if (!this.isCancelled()) {
             String postData = null;
             try {
-                postData = ConnectionManager.postEncoder("get", parameters);
+                postData = ConnectionManager.postEncoder("get-posts", parameters);
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
