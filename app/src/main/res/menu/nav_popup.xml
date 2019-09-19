@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
         <item android:id="@+id/popup_found"
-              android:title="Mark as &quot;quoteFound&quot;quote"
+              android:title="Mark as &quot;Found&quot;"
         ></item>
 
         <item android:id="@+id/popup_edit"

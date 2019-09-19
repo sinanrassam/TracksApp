@@ -13,7 +13,6 @@
             android:src="@drawable/ic_more_horiz_black"
             android:id="@+id/popup_menu_post"
             android:contentDescription="@string/descr_overflow_button"
-            android:onClick="showPopup"
             android:showAsAction="always"/>
 
     <TextView

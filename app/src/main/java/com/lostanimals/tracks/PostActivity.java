@@ -68,7 +68,6 @@ public class PostActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.popup_found:
-                Toast.makeText(this, "Found", Toast.LENGTH_SHORT);
                 return true;
             case R.id.popup_edit:
                 return true;
