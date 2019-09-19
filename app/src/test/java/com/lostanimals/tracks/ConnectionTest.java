@@ -2,6 +2,7 @@ package com.lostanimals.tracks;
 
         import android.content.Context;
         import com.lostanimals.tracks.utils.ConnectionManager;
+        import com.lostanimals.tracks.utils.tests.ConnMan;
         import org.junit.Before;
         import org.junit.Test;
         import org.junit.runner.RunWith;
@@ -15,19 +16,21 @@ public class ConnectionTest {
     private static final String TEST_URL = "http://bosh.live:7536/phpmyadmin/tracks_api/";
 
     @Mock
-//    ServerManager_Backup mockServerManager;
-    ConnectionManager mockConnectionManager;
-    @Mock
-    Context mockContext;
+    ConnMan mockConnMan;
 
     @Before
     public void initMocks() {
-//        mockServerManager = new ServerManager_Backup(mockContext);
+        mockConnMan = new ConnMan();
     }
 
     // TODO: Fix this
     @Test
-    public void ServerManager_OpenConnectionTest() throws IOException {
+    public void ConnectionManager_OpenConnection() throws IOException {
+
+    }
+
+    @Test
+    public void ConnectionManager_ProcessRequest() throws IOException {
 
     }
 }
