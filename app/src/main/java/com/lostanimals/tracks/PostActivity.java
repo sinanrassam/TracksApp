@@ -42,9 +42,8 @@ public class PostActivity extends AppCompatActivity {
 
         if (mPostEntry != null) {
             mPostTitleView.setText(mPostEntry.getPostTitle());
-
             mPostDescView.setText(mPostEntry.getPostDesc());
-            mPostDateView.setText("Posted on: " + "DATE");
+            mPostDateView.setText("Posted on: " + mPostEntry.getPostDate());
             mPostAuthorView.setText("By: " + mPostEntry.getUsername());
         }
 
