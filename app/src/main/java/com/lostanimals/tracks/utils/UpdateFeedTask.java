@@ -66,7 +66,8 @@ public class UpdateFeedTask extends AsyncTask<String, Integer, Boolean> {
 
         if (json != null) {
             // Clear the array list and post list-map first
-            PostsUtility.getPostEntryArray().clear();
+//            PostsUtility.getPostEntryArray().clear();
+            PostsUtility.clear();
             mPostList = new ArrayList<>();
             try {
                 JSONArray jsonArray = (JSONArray) json.get("posts");
