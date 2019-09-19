@@ -25,10 +25,7 @@ public class FeedFragment extends ListFragment {
         progressBar.setProgress(0);
 
         // TODO: Nitesh:
-        Log.d(TAG, "login username: "+PreferencesUtility.getUserInfo().getUsername());
-        String name = PreferencesUtility.getUserInfo().getUsername();
-        Log.d(TAG, "filter username: "+name);
-        updateFeed = (UpdateFeedTask) new UpdateFeedTask(this, progressBar).execute("4",name);
+        updateFeed = (UpdateFeedTask) new UpdateFeedTask(this, progressBar).execute("4", "");
 
         return view;
     }
