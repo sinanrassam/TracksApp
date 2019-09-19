@@ -3,6 +3,7 @@ package com.lostanimals.tracks;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,10 @@ import com.lostanimals.tracks.utils.PreferencesUtility;
 import com.lostanimals.tracks.utils.UpdateFeedTask;
 
 public class CommentsFragment extends ListFragment {
-    private GetCommentsTask getComments;
+
+    public CommentsFragment() {
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -21,10 +25,11 @@ public class CommentsFragment extends ListFragment {
         ProgressBar progressBar = view.findViewById(R.id.progress_bar);
         progressBar.setProgress(0);
 
-//        String post_id = getArguments().
+        String post_id = getArguments().getString("post_id");
 
+        Log.d("Testing", post_id);
 
-//        getComments = (GetCommentsTask) new GetCommentsTask(this, progressBar).execute();
+        new GetCommentsTask(this, progressBar).execute(post_id);
 
         return view;
     }

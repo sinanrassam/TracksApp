@@ -1,5 +1,6 @@
 package com.lostanimals.tracks;
 
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -23,29 +24,33 @@ public class PostActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d("Post Position - oncreate", mPostPosition + "");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
 
         mPostPosition = getIntent().getIntExtra("position", 0);
+        mPostEntry = PostsUtility.getPostEntry(mPostPosition);
+
+        Fragment f = new CommentsFragment();
+        Bundle data = new Bundle();
+        data.putString("post_id", mPostEntry.getId());
+        f.setArguments(data);
 
         mPostTitleView = findViewById(R.id.post_txt_title);
         mPostDescView = findViewById(R.id.post_et_desc);
         mPostDateView = findViewById(R.id.post_date);
         mPostAuthorView = findViewById(R.id.post_author);
 
-        mPostEntry = PostsUtility.getPostEntry(mPostPosition);
         if (mPostEntry != null) {
             mPostTitleView.setText(mPostEntry.getPostTitle());
-
             mPostDescView.setText(mPostEntry.getPostDesc());
-            mPostDateView.setText("Posted on: " + "DATE");
+            mPostDateView.setText("Posted on: " + mPostEntry.getPostDate());
             mPostAuthorView.setText("By: " + mPostEntry.getUsername());
         }
-        mCommentView = findViewById(R.id.comment_field);
 
-        Button mSignInBtn = findViewById(R.id.comment_btn);
-        mSignInBtn.setOnClickListener(new View.OnClickListener() {
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, f).commit();
+
+        Button mCommentBtn = findViewById(R.id.comment_btn);
+        mCommentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 addComment();
@@ -79,6 +84,7 @@ public class PostActivity extends AppCompatActivity {
     }
 
     private void addComment() {
+        mCommentView = findViewById(R.id.comment_field);
         mCommentView.setError(null);
         String msg = mCommentView.getText().toString();
 

@@ -63,8 +63,6 @@ public class GetCommentsTask extends AsyncTask<String, Integer, Boolean> {
         Log.d("JSON", json.toString());
 
         if (json != null) {
-            // Clear the array list and post list-map first
-            PostsUtility.getPostEntryArray().clear();
             mCommentsList = new ArrayList<>();
             try {
                 JSONArray jsonArray = (JSONArray) json.get("comments");
