@@ -32,7 +32,6 @@ public class NewPostActivity extends AppCompatActivity {
         String title = etTitle.getText().toString();
         String description = etDescription.getText().toString();
         NewPostTask newPostTask = new NewPostTask(this);
-        Log.d("Username", PreferencesUtility.getUserInfo().getUsername());
         newPostTask.execute(title, description, PreferencesUtility.getUserInfo().getUsername());
     }
 

@@ -24,7 +24,7 @@ public class NewPostTask extends AsyncTask<String, Void, JSONObject> {
         // Try encode and send the NEW_POST request.
         JSONObject json = null;
         try {
-            String postData = ConnectionManager.postEncoder("new", parameters);
+            String postData = ConnectionManager.postEncoder("new-post", parameters);
             json = ConnectionManager.processRequest("post.php", postData);
             Log.d("JSON", json.toString());
         } catch (JSONException | IOException e) {
