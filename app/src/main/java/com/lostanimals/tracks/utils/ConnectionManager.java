@@ -56,8 +56,6 @@ public class ConnectionManager {
                         "UTF-8") + "&";
                 postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(parameters[2],
                         "UTF-8");
-                postData += URLEncoder.encode("found", "UTF-8") + "=" + URLEncoder.encode("false",
-                        "UTF-8") + "&";
                 break;
             case "edit":
                 // TODO: Can found be encoded as a bool?

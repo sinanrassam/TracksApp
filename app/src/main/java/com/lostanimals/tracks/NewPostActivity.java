@@ -3,6 +3,7 @@ package com.lostanimals.tracks;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -31,6 +32,7 @@ public class NewPostActivity extends AppCompatActivity {
         String title = etTitle.getText().toString();
         String description = etDescription.getText().toString();
         NewPostTask newPostTask = new NewPostTask(this);
+        Log.d("Username", PreferencesUtility.getUserInfo().getUsername());
         newPostTask.execute(title, description, PreferencesUtility.getUserInfo().getUsername());
     }
 
