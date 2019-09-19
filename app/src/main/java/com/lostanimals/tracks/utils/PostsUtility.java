@@ -10,6 +10,10 @@ public class PostsUtility {
         return postEntryArray;
     }
 
+    public static void setPostEntryArray(final ArrayList<PostEntry> postEntryArray) {
+        PostsUtility.postEntryArray = postEntryArray;
+    }
+
     public static void addPostEntry(int index, PostEntry newPost) {
         if (postEntryArray == null) {
             postEntryArray = new ArrayList<>();
@@ -19,10 +23,6 @@ public class PostsUtility {
 
     public static PostEntry getPostEntry(int index) {
         return PostsUtility.postEntryArray.get(index);
-    }
-
-    public static void setPostEntryArray(final ArrayList<PostEntry> postEntryArray) {
-        PostsUtility.postEntryArray = postEntryArray;
     }
 
     public static void clear() {

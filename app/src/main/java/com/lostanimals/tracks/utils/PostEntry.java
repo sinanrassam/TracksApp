@@ -31,7 +31,7 @@ public class PostEntry {
     }
 
     // default
-    public PostEntry(String id, String postTitle, String postDesc, String username,  String postDate, String postTime, String found) {
+    public PostEntry(String id, String postTitle, String postDesc, String username, String postDate, String postTime, String found) {
         setUsername(username);
         setPostTitle(postTitle);
         setPostDesc(postDesc);

@@ -1,17 +1,7 @@
 package com.lostanimals.tracks;
 
-import android.app.Activity;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -28,7 +18,7 @@ import org.json.JSONException;
 
 import java.util.concurrent.ExecutionException;
 
-import static com.lostanimals.tracks.utils.DEV_MODE.*;
+import static com.lostanimals.tracks.utils.DEV_MODE.DEV_MODE;
 
 public class LoginActivity extends AppCompatActivity {
     // TODO: Before submission, remove test log
@@ -79,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
 
             this.finish();
         } else {
-            Log.d(TAG, "onCreate: USERNAMEUSERNAME: "+PreferencesUtility.getUserInfo().getUsername());
+            Log.d(TAG, "onCreate: USERNAMEUSERNAME: " + PreferencesUtility.getUserInfo().getUsername());
         }
 
         setContentView(R.layout.activity_login);

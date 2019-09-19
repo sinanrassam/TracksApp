@@ -1,15 +1,17 @@
 package com.lostanimals.tracks;
 
+import android.util.Log;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.junit.Test;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
+
+import static android.content.ContentValues.TAG;
+import static org.junit.Assert.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ConnectionTest {
@@ -23,11 +25,11 @@ public class ConnectionTest {
         mockConnMan = new ConnectionManager();
     }
 
-    // TODO: Fix this
     @Test
     public void ConnectionManager_OpenConnection() throws IOException {
-        // assertTrue(mockConnMan.openConnection(URL+"Hi").getResponseMessage());
-        mockConnMan.openConnection(URL+"blaj");
+        // TODO: This means TRUE if script fails lmao
+        assertEquals(500, mockConnMan.openConnection(URL).getResponseCode());
+
     }
 
     @Test

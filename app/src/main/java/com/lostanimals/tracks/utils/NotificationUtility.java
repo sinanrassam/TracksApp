@@ -11,14 +11,13 @@ import static android.support.v4.content.ContextCompat.getSystemService;
 
 
 public class NotificationUtility {
-    private static NotificationManager notificationManager;
-    private static NotificationCompat.Builder builder;
-
     private static final CharSequence CHANNEL_NAME = "Tracks";
     private static final String CHANNEL_DESCRIPTION = "Tracks Channel";
     private static final String CHANNEL_ID = "channel_0";
+    private static NotificationManager notificationManager;
+    private static NotificationCompat.Builder builder;
 
-    public static void createNotification(Context context, String title, String text, Boolean autoCancel){
+    public static void createNotification(Context context, String title, String text, Boolean autoCancel) {
         NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT);
         notificationChannel.setDescription(CHANNEL_DESCRIPTION);
         notificationManager = getSystemService(context, NotificationManager.class);
@@ -36,7 +35,7 @@ public class NotificationUtility {
         }
     }
 
-    public static void createNotification(Context context, String title, String text, Boolean autoCancel, PendingIntent pendingIntent){
+    public static void createNotification(Context context, String title, String text, Boolean autoCancel, PendingIntent pendingIntent) {
         NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT);
         notificationChannel.setDescription(CHANNEL_DESCRIPTION);
         notificationManager = getSystemService(context, NotificationManager.class);

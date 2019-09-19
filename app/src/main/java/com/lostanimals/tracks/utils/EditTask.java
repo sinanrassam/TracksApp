@@ -29,11 +29,8 @@ public class EditTask extends AsyncTask<String, Integer, JSONObject> {
 
     @Override
     protected void onPostExecute(JSONObject data) {
-        try {
-            PreferencesUtility.setUserInfo(ConnectionManager.login((JSONObject) data.get("details")));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        //TODO: Something with the returned JSONObject. Maybe check result is successful, if so make a toast / notify
+        // the calling UI with an adapter. Maybe go back to the post and refresh it so the update is visible.
     }
 
     @Override
