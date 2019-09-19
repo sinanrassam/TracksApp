@@ -12,10 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import com.lostanimals.tracks.utils.NewCommentTask;
-import com.lostanimals.tracks.utils.PostEntry;
-import com.lostanimals.tracks.utils.PostsUtility;
-import com.lostanimals.tracks.utils.PreferencesUtility;
+import com.lostanimals.tracks.utils.*;
 
 public class PostActivity extends AppCompatActivity {
 
@@ -74,8 +71,10 @@ public class PostActivity extends AppCompatActivity {
                 onFoundClicked();
                 return true;
             case R.id.popup_edit:
+                onEditClicked();
                 return true;
             case R.id.popup_delete:
+                onDeleteClicked();
                 return true;
         }
 
@@ -111,14 +110,64 @@ public class PostActivity extends AppCompatActivity {
     private void onFoundClicked() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-        builder.setMessage("Are you sure you want to mark the post as found? It will no longer be " +
-                "accessible in the main feed but you can view it in my posts.");
-        builder.setTitle("Warning!");
+        if (mPostEntry.getFound().equals("0")) {
+            builder.setMessage("Are you sure you want to mark the post as found? It will no longer be " +
+                    "accessible in the main feed but you can view it in my posts.");
+            builder.setTitle("Warning!");
+
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    markAsFound();
+                }
+            });
+            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+        }
+        else {
+            builder.setMessage("This post has already been marked as found!");
+            builder.setTitle("Attention!");
+
+            builder.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+        }
+
         builder.setCancelable(false);
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    private void markAsFound() {
+        EditTask editTask = new EditTask(this);
+        editTask.execute(mPostEntry.getId(), mPostEntry.getUsername(), mPostEntry.getPostDate(),
+                mPostEntry.getTime(), mPostEntry.getPostTitle(), mPostEntry.getPostDesc(), "1");
+    }
+
+    // TODO: Complete onEditClicked
+    private void onEditClicked() {
+
+    }
+
+    private void onDeleteClicked() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setMessage("Are you sure you want to delete the post? Once deleted this cannot be " +
+                "reversed.");
+        builder.setTitle("Warning!");
+
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                markAsFound();
+                deletePost();
             }
         });
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -128,11 +177,14 @@ public class PostActivity extends AppCompatActivity {
             }
         });
 
+        builder.setCancelable(false);
+
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
 
-    private void markAsFound() {
+    // TODO: Complete delete post method
+    private void deletePost() {
 
     }
 }
