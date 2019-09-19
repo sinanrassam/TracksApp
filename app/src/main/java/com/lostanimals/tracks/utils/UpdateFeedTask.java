@@ -79,8 +79,9 @@ public class UpdateFeedTask extends AsyncTask<String, Integer, Boolean> {
                     String username = (String) jsonObject.get("username");
                     String date = (String) jsonObject.get("date");
                     String time = (String) jsonObject.get("time");
+                    String found = (String) jsonObject.get("found");
 
-                    PostsUtility.addPostEntry(i, new PostEntry(id, title, desc, username, date, time));
+                    PostsUtility.addPostEntry(i, new PostEntry(id, title, desc, username, date, time, found));
 
                     Map<String, String> post = new HashMap<>(2);
 

@@ -7,6 +7,7 @@ public class PostEntry {
     public String mPostDate;
     public String mId;
     public String mTime;
+    public String mFound;
 
     // extra con for testing
     public PostEntry(String username, String postTitle) {
@@ -16,6 +17,7 @@ public class PostEntry {
         setPostDate(null);
         setId(null);
         setTime(null);
+        setFound(null);
     }
 
     // extra con for testing
@@ -29,13 +31,14 @@ public class PostEntry {
     }
 
     // default
-    public PostEntry(String id, String postTitle, String postDesc, String username,  String postDate, String postTime) {
+    public PostEntry(String id, String postTitle, String postDesc, String username,  String postDate, String postTime, String found) {
         setUsername(username);
         setPostTitle(postTitle);
         setPostDesc(postDesc);
         setPostDate(postDate);
         setId(id);
         setTime(postTime);
+        setFound(found);
     }
 
     // override for no date
@@ -94,6 +97,14 @@ public class PostEntry {
 
     public void setTime(String time) {
         this.mTime = time;
+    }
+
+    public String getFound() {
+        return mFound;
+    }
+
+    public void setFound(String found) {
+        this.mFound = found;
     }
 
     @Override

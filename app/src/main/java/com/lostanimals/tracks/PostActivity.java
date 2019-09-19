@@ -1,6 +1,8 @@
 package com.lostanimals.tracks;
 
-import android.support.v4.app.Fragment;
+import android.content.DialogInterface;
+import android.graphics.Matrix;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -24,33 +26,29 @@ public class PostActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("Post Position - oncreate", mPostPosition + "");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
 
         mPostPosition = getIntent().getIntExtra("position", 0);
-        mPostEntry = PostsUtility.getPostEntry(mPostPosition);
-
-        Fragment f = new CommentsFragment();
-        Bundle data = new Bundle();
-        data.putString("post_id", mPostEntry.getId());
-        f.setArguments(data);
 
         mPostTitleView = findViewById(R.id.post_txt_title);
         mPostDescView = findViewById(R.id.post_et_desc);
         mPostDateView = findViewById(R.id.post_date);
         mPostAuthorView = findViewById(R.id.post_author);
 
+        mPostEntry = PostsUtility.getPostEntry(mPostPosition);
         if (mPostEntry != null) {
             mPostTitleView.setText(mPostEntry.getPostTitle());
+
             mPostDescView.setText(mPostEntry.getPostDesc());
-            mPostDateView.setText("Posted on: " + mPostEntry.getPostDate());
+            mPostDateView.setText("Posted on: " + "DATE");
             mPostAuthorView.setText("By: " + mPostEntry.getUsername());
         }
+        mCommentView = findViewById(R.id.comment_field);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, f).commit();
-
-        Button mCommentBtn = findViewById(R.id.comment_btn);
-        mCommentBtn.setOnClickListener(new View.OnClickListener() {
+        Button mSignInBtn = findViewById(R.id.comment_btn);
+        mSignInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 addComment();
@@ -73,6 +71,7 @@ public class PostActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.popup_found:
+                onFoundClicked();
                 return true;
             case R.id.popup_edit:
                 return true;
@@ -84,7 +83,6 @@ public class PostActivity extends AppCompatActivity {
     }
 
     private void addComment() {
-        mCommentView = findViewById(R.id.comment_field);
         mCommentView.setError(null);
         String msg = mCommentView.getText().toString();
 
@@ -110,7 +108,31 @@ public class PostActivity extends AppCompatActivity {
         }
     }
 
-    private void markAsFound() {
+    private void onFoundClicked() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
+        builder.setMessage("Are you sure you want to mark the post as found? It will no longer be " +
+                "accessible in the main feed but you can view it in my posts.");
+        builder.setTitle("Warning!");
+        builder.setCancelable(false);
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                markAsFound();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    private void markAsFound() {
+        Toast.makeText(this, "Working!", Toast.LENGTH_SHORT).show();
     }
 }
