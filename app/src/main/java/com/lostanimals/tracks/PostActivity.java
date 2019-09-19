@@ -103,4 +103,8 @@ public class PostActivity extends AppCompatActivity {
             addCommentTask.execute(post_id, username, msg);
         }
     }
+
+    private void markAsFound() {
+
+    }
 }
