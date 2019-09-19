@@ -1,8 +1,11 @@
 package com.lostanimals.tracks.utils;
 
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
+import com.lostanimals.tracks.PostActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -10,8 +13,10 @@ import java.io.IOException;
 
 // TODO: Create the edit activity and call this task with the correct parameters. Copy LoginActivity and FeedFrag
 public class EditTask extends AsyncTask<String, Integer, JSONObject> {
+    private Context mContext;
 
-    public EditTask() {
+    public EditTask(Context context) {
+        mContext = context;
     }
 
     @Override
@@ -19,7 +24,7 @@ public class EditTask extends AsyncTask<String, Integer, JSONObject> {
         // Try encode and send the LOGIN request.
         JSONObject json = null;
         try {
-            String postData = ConnectionManager.postEncoder("edit", parameters);
+            String postData = ConnectionManager.postEncoder("edit-post", parameters);
             json = ConnectionManager.processRequest("post.php", postData);
         } catch (JSONException | IOException e) {
             e.printStackTrace();
@@ -31,6 +36,27 @@ public class EditTask extends AsyncTask<String, Integer, JSONObject> {
     protected void onPostExecute(JSONObject data) {
         //TODO: Something with the returned JSONObject. Maybe check result is successful, if so make a toast / notify
         // the calling UI with an adapter. Maybe go back to the post and refresh it so the update is visible.
+        try {
+            //TODO: Fix! Throwing NullPointerException
+            if (data.get("response").equals("successful")) {
+                /* JSONObject jsonObject = (JSONObject)data.get("details");
+                 String id = (String) jsonObject.get("id");
+                String title = (String) jsonObject.get("title");
+                String desc = (String) jsonObject.get("description");
+                String username = (String) jsonObject.get("username");
+                String date = (String) jsonObject.get("date");
+                //String time = (String) jsonObject.get("time");
+                String found = (String) jsonObject.get("found");
+
+                if (found.equals("1")) {
+                    Toast.makeText(mContext, "Post Marked Found Successfully", Toast.LENGTH_SHORT).show();
+                } */
+                Toast.makeText(mContext, "Post Marked Found Successfully", Toast.LENGTH_SHORT).show();
+            }
+        }
+        catch (JSONException e) {
+            Toast.makeText(mContext, "Error Marking Post Found", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
