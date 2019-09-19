@@ -43,7 +43,7 @@
         </activity>
         <activity android:name=".MyPostActivity">
         </activity>
-        <activity android:name=".MyProfile">
+        <activity android:name=".MyProfileActivity">
         </activity>
     </application>
 

@@ -22,7 +22,7 @@ public class MyPostsFragment extends ListFragment {
         ProgressBar progressBar = view.findViewById(R.id.progress_bar);
         progressBar.setProgress(0);
 
-        // TODO: Nitesh:
+
         String username = PreferencesUtility.getUserInfo().getUsername();
         updateFeed = (UpdateMyPostsTask) new UpdateMyPostsTask(this, progressBar).execute("4",username);
 

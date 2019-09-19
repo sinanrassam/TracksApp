@@ -2,6 +2,7 @@ package com.lostanimals.tracks;
 
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -12,7 +13,7 @@ import com.lostanimals.tracks.utils.RegisterTask;
 
 import java.util.Objects;
 
-public class MyProfile extends AppCompatActivity {
+public class MyProfileActivity extends AppCompatActivity {
 
    private TextView mEmail;
    private Button mEmailEdit;
@@ -34,6 +35,8 @@ public class MyProfile extends AppCompatActivity {
                 attemptRegister();
             }
         });
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("My Profile");
     }
 
     private void attemptRegister() {

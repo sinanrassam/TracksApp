@@ -8,7 +8,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.view.View;
 
 public class FeedActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -32,6 +31,7 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = (NavigationView)findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
+
     }
 
 
@@ -60,7 +60,7 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
             startActivity(new Intent(this, LogoutActivity.class));
         }
         if (id == R.id.myProfile) {
-            startActivity(new Intent(this, MyProfile.class));
+            startActivity(new Intent(this, MyProfileActivity.class));
         }
 
         return false;
