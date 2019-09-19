@@ -52,7 +52,6 @@ public class LoginActivity extends AppCompatActivity {
         registerIntent = new Intent(this, RegisterActivity.class);
         registerIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 
-//        createNotificationChannel();
         NotificationUtility.createNotification(this, "Tracks", "Test", true);
         PreferencesUtility.setSharedPreferences(this);
 
@@ -111,18 +110,6 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-//    private void createNotificationChannel() {
-//        // https://developer.android.com/training/notify-user/build-notification
-//
-//        CharSequence name = getString(R.string.channel_name);
-//        String description = getString(R.string.channel_description);
-//        NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, NotificationManager.IMPORTANCE_DEFAULT);
-//        channel.setDescription(description);
-//
-//        notificationManager = getSystemService(NotificationManager.class);
-//        notificationManager.createNotificationChannel(channel);
-//    }
-
     private void attemptLogin() throws ExecutionException, InterruptedException, JSONException {
         // Reset errors.
         mEmailView.setError(null);
@@ -153,27 +140,14 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             LoginTask loginTask = new LoginTask();
             loginTask.execute(email, password);
-
-//            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID);
-//            builder.setSmallIcon(R.drawable.ic_launcher_foreground);
-//            builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
-
             if (loginTask.get().get("response").equals("successful")) {
-//                builder.setContentTitle("Tracks");
-//                builder.setContentText("Logged in! :)");
-//                builder.setAutoCancel(true);
-                //notificationManager.notify(0, builder.build());
-
                 NotificationUtility.displayNotification(0);
+
                 startActivity(feedIntent);
                 loginTask.cancel(true);
+
                 finish();
             } else {
-//                builder.setContentTitle("Tracks");
-//                builder.setContentText("Failed to log in! :(");
-//                builder.setAutoCancel(true);
-//                notificationManager.notify(0, builder.build());
-
                 loginTask.cancel(true);
             }
         }
