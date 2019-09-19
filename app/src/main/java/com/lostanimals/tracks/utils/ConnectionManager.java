@@ -17,7 +17,7 @@ public class ConnectionManager {
                 "UTF-8") + "&";
 
         switch (type) {
-            case "get":
+            case "get-posts":
                 postData += URLEncoder.encode("number", "UTF-8") + "=" + URLEncoder.encode(parameters[0],
                         "UTF-8");
                 break;
