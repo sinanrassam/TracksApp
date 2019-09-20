@@ -42,8 +42,7 @@ public class LogoutActivity extends AppCompatActivity {
 	}
 	
 	private void attemptLogout() {
-		PreferenceEntry preferenceEntry = new PreferenceEntry(null, null, null);
-		if (PreferencesUtility.setUserInfo(preferenceEntry)) {
+		if (PreferencesUtility.removeUserEntry()) {
 			Intent logoutIntent = new Intent(getApplicationContext(), LoginActivity.class);
 			logoutIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 			finish();

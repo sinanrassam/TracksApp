@@ -37,4 +37,8 @@ public class PreferencesUtility {
 		String email = mSharedPreferences.getString(KEY_EMAIL, "");
 		return new PreferenceEntry(name, username, email);
 	}
+	
+	public static boolean removeUserEntry() {
+		return setUserInfo(new PreferenceEntry("", "", ""));
+	}
 }

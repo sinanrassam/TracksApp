@@ -3,6 +3,7 @@ package com.lostanimals.tracks.tasks;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import com.lostanimals.tracks.entries.PreferenceEntry;
 import com.lostanimals.tracks.utils.ConnectionManager;
 import com.lostanimals.tracks.utils.PreferencesUtility;
 import org.json.JSONException;
@@ -32,7 +33,13 @@ public class LoginTask extends AsyncTask<String, Integer, JSONObject> {
 	@Override
 	protected void onPostExecute(JSONObject data) {
 		try {
-			PreferencesUtility.setUserInfo(ConnectionManager.login((JSONObject) data.get("details")));
+			// TODO: you were fixing this!!!
+			// PreferencesUtility.setUserInfo(ConnectionManager.login((JSONObject) data.get("details")));
+			String username = ((JSONObject) data.get("details")).getString("username");
+			String email = ((JSONObject) data.get("details")).getString("email");
+			String name = ((JSONObject) data.get("details")).getString("name");
+			// PreferencesUtility.setUserInfo(new PreferenceEntry(ConnectionManager.login((JSONObject) data).get));
+			PreferencesUtility.setUserInfo(new PreferenceEntry(name, username, email));
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
