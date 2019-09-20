@@ -136,11 +136,7 @@ public class LoginActivity extends AppCompatActivity {
 				NotificationUtility.displayNotification(0);
 				
 				startActivity(feedIntent);
-				loginTask.cancel(true);
-				
 				finish();
-			} else {
-				loginTask.cancel(true);
 			}
 		}
 	}
