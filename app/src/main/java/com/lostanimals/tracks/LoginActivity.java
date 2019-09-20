@@ -51,11 +51,11 @@ public class LoginActivity extends AppCompatActivity {
 		 */
 		
 		// LOGIN with admin user
-		// if (DEV_MODE) PreferencesUtility.setUserInfo(new PreferenceEntry("admin", "admin", "admin@bosh.live"));
+		 if (DEV_MODE) PreferencesUtility.setUserInfo(new PreferenceEntry("admin", "admin", "admin@bosh.live"));
 		
 		
 		//Force the LOGIN activity
-		if (DEV_MODE) PreferencesUtility.setUserInfo(new PreferenceEntry(null, null, null));
+		// if (DEV_MODE) PreferencesUtility.setUserInfo(new PreferenceEntry(null, null, null));
 		
 		/*
 		 *  END TESTING
