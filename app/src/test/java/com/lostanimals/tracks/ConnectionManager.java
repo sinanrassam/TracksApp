@@ -85,7 +85,7 @@ public class ConnectionManager {
     }
 
     public JSONObject processRequest(String script, String data) throws IOException, JSONException {
-        HttpURLConnection conn = openConnection(URL + script);
+        HttpURLConnection conn = openConnection(URL+script);
 
         // Send the request to the server
         OutputStream outputStream = conn.getOutputStream();
