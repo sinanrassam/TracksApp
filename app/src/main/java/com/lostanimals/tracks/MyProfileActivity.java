@@ -12,9 +12,6 @@ import java.util.Objects;
 
 public class MyProfileActivity extends AppCompatActivity {
 	
-	private TextView mUsername;
-	private TextView mFirstName;
-	private TextView mEmail;
 	private Button mEmailEdit;
 	
 	@Override
@@ -23,11 +20,15 @@ public class MyProfileActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_myprofile);
 		Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 		
-		mUsername = findViewById(R.id.usernameProfile);
-		mFirstName = findViewById(R.id.nameProfile);
-		mEmail = findViewById(R.id.emailProfile);
+		TextView mUsername = findViewById(R.id.usernameProfile);
+		TextView mName = findViewById(R.id.nameProfile);
+		TextView mEmail = findViewById(R.id.emailProfile);
 		
+		
+		mUsername.setText(PreferencesUtility.getUserInfo().getUsername());
+		mName.setText(PreferencesUtility.getUserInfo().getName());
 		mEmail.setText(PreferencesUtility.getUserInfo().getEmail());
+		
 		
 		Button mEmailEdit = findViewById(R.id.EmailEdit);
 		
