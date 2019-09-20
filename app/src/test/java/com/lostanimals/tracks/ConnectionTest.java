@@ -1,36 +1,35 @@
 package com.lostanimals.tracks;
 
-        import android.content.Context;
-        import com.lostanimals.tracks.utils.ConnectionManager;
-        import com.lostanimals.tracks.utils.tests.ConnMan;
-        import org.junit.Before;
-        import org.junit.Test;
-        import org.junit.runner.RunWith;
-        import org.mockito.Mock;
-        import org.mockito.runners.MockitoJUnitRunner;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
-        import java.io.IOException;
+import java.io.IOException;
 
-@RunWith(MockitoJUnitRunner.class)
+import static org.junit.Assert.assertEquals;
+
+@RunWith (MockitoJUnitRunner.class)
 public class ConnectionTest {
-    private static final String TEST_URL = "http://bosh.live:7536/phpmyadmin/tracks_api/";
+	private static final String URL = "http://bosh.live:7536/phpmyadmin/tracks_api/connTest.php";
 
-    @Mock
-    ConnMan mockConnMan;
+	@Mock
+	ConnectionManagerTestClass mockConnMan;
 
-    @Before
-    public void initMocks() {
-        mockConnMan = new ConnMan();
-    }
+	@Before
+	public void initMocks() {
+		mockConnMan = new ConnectionManagerTestClass();
+	}
 
-    // TODO: Fix this
-    @Test
-    public void ConnectionManager_OpenConnection() throws IOException {
+	@Test
+	public void ConnectionManager_OpenConnection() throws IOException {
+		assertEquals(500, mockConnMan.openConnection(URL).getResponseCode());
 
-    }
+	}
 
-    @Test
-    public void ConnectionManager_ProcessRequest() throws IOException {
+	@Test
+	public void ConnectionManager_ProcessRequest() throws IOException {
 
-    }
+	}
 }

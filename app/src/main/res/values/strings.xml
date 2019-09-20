@@ -23,8 +23,7 @@
     <string name="post_txt_post_desc">Enter a description</string>
     <string name="hint_desc">Description…</string>
     <string name="post_btn_post">Post</string>
-    <string name="title_activity_login">Login</string>
-    <string name="descr_overflow_button">PopupMenu</string>
+    <string name="title_activity_login">Tracks</string>
     <!-- Strings related to login -->
     <string name="prompt_username">Username</string>
     <string name="prompt_password">Password</string>
@@ -45,10 +44,20 @@
     <string name="email_incorrect">Incorrect Email</string>
     <!-- Strings related to the Feed -->
     <string name="loading_posts">Loading Posts</string>
-    <string name="posts_error">Post Not Found</string>
+    <string name="posts_title">TITLE</string>
+    <string name="posts_author">By: AUTHOR</string>
+    <string name="posts_date">Posted On: DATE</string>
+    <string name="posts_description">DESCRIPTION</string>
     <!-- comments -->
     <string name="loading_comments">Loading Comments</string>
     <string name="comments_error">Post Not Found</string>
+    <string name="comments_none_exists">No Comments exists, be the first to comment!</string>
     <string name="prompt_comment">Write a comment...</string>
     <string name="action_comment">Comment</string>
+    <!-- Nav Drawer -->
+    <string name="open_action_bar">Open</string>
+    <string name="close_action_bar">Close</string>
+    <string name="edit">Edit Details</string>
+    <string name="discard">Discard</string>
+
 </resources>
