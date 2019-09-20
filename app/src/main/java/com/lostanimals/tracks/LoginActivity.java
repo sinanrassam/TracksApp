@@ -42,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
         registerIntent = new Intent(this, RegisterActivity.class);
         registerIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 
-        NotificationUtility.createNotification(this, "Tracks", "Test", true);
+        NotificationUtility.createNotification(this, "Tracks", "Test", true, null);
         PreferencesUtility.setSharedPreferences(this);
 
         /*
