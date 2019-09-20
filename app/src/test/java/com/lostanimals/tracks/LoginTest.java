@@ -18,13 +18,13 @@
 //
 //    @Test
 //    public void ServerManagerLogin_UsernameLogin() throws IOException, JSONException {
-//        String postData = ConnectionManager.postEncoder("login", USERNAME_LOGIN);
-//        ConnectionManager.processRequest("user.php", postData);
+//        String postData = ConnectionManagerTestClass.postEncoder("login", USERNAME_LOGIN);
+//        ConnectionManagerTestClass.processRequest("user.php", postData);
 //    }
 //
 //    @Test
 //    public void ServerManagerLogin_EmailLogin() throws IOException, JSONException {
-//        String postData = ConnectionManager.postEncoder("login", EMAIL_LOGIN);
-//        ConnectionManager.processRequest("user.php", postData);
+//        String postData = ConnectionManagerTestClass.postEncoder("login", EMAIL_LOGIN);
+//        ConnectionManagerTestClass.processRequest("user.php", postData);
 //    }
 //}

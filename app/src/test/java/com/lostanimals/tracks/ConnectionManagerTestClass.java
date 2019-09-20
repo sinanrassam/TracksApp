@@ -11,13 +11,13 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
 /**
- * Class ConnectionManager
+ * Class ConnectionManagerTestClass
  * Duplicate of Connection Manager that is non static and can be instantiated. Used for Unit testing only.
  */
-public class ConnectionManager {
+public class ConnectionManagerTestClass {
     private static final String URL = "http://bosh.live:7536/phpmyadmin/tracks_api/";
 
-    public ConnectionManager() {
+    public ConnectionManagerTestClass() {
 
     }
 

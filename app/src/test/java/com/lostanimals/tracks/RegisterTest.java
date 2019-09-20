@@ -21,14 +21,14 @@ public class RegisterTest {
     private static final String TEST_USER_NAME = "Test";
     
     @Mock
-    ConnectionManager mockConnMan;
+    ConnectionManagerTestClass mockConnMan;
     
     @Mock
     JSONObject mockJSONObject;
     
     @Before
     public void initMocks() {
-        mockConnMan = new ConnectionManager();
+        mockConnMan = new ConnectionManagerTestClass();
     }
     
     @Test
