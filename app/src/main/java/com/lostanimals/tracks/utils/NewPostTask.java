@@ -44,6 +44,7 @@ public class NewPostTask extends AsyncTask<String, Void, JSONObject> {
         catch (JSONException e) {
             Toast.makeText(mContext, "Error Creating Post", Toast.LENGTH_LONG).show();
         }
+
         super.onPostExecute(jsonObject);
     }
 }
