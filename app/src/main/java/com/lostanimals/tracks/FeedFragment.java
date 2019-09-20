@@ -1,6 +1,7 @@
 package com.lostanimals.tracks;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
@@ -20,18 +21,17 @@ public class FeedFragment extends ListFragment {
         progressBar.setProgress(0);
 
         // TODO: Nitesh:
-        updateFeed = (UpdateFeedTask) new UpdateFeedTask(this, progressBar).execute("4","");
+        updateFeed = (UpdateFeedTask) new UpdateFeedTask(this, progressBar).execute("","");
 
         return view;
     }
 
 
 
-    /* @Override
+    @Override
     public void onResume() {
         super.onResume();
-        updateFeed.execute("4");
-    } */
+    }
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
