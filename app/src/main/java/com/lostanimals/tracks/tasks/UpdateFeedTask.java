@@ -35,6 +35,7 @@ public class UpdateFeedTask extends AsyncTask<String, Integer, Boolean> {
 	private MyPostsFragment mMyPostsFragment;
 	private List<Map<String, String>> mPostList = new ArrayList<>();
 	private ArrayList<PostEntry> mPostArray = new ArrayList<>();
+	public SimpleAdapter adapter;
 	
 	public UpdateFeedTask(FeedFragment activity, ProgressBar progressBar) {
 		this.mFragment = activity;
@@ -116,13 +117,14 @@ public class UpdateFeedTask extends AsyncTask<String, Integer, Boolean> {
 			SystemClock.sleep(1000);
 			mProgressBar.setVisibility(View.GONE);
 		}
-		SimpleAdapter adapter = new SimpleAdapter(mContext, mPostList,
+		adapter = new SimpleAdapter(mContext, mPostList,
 				android.R.layout.simple_list_item_2,
 				new String[] {"Title", "Desc"},
 				new int[] {android.R.id.text1, android.R.id.text2});
 		mFragment.setListAdapter(adapter);
 		adapter.notifyDataSetChanged();
 		Toast.makeText(mContext, "Posts refreshed", Toast.LENGTH_LONG).show();
+		// this.cancel(true);
 	}
 	
 	@Override
