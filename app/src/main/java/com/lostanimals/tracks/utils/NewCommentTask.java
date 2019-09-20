@@ -17,6 +17,10 @@ public class NewCommentTask extends AsyncTask<String, Void, JSONObject> {
     public NewCommentTask(Context context) {
         mContext = context;
     }
+    
+    public NewCommentTask() {
+        super();
+    }
 
     @Override
     protected JSONObject doInBackground(String... parameters) {
@@ -36,13 +40,13 @@ public class NewCommentTask extends AsyncTask<String, Void, JSONObject> {
         super.onPostExecute(jsonObject);
         try {
             if (jsonObject.get("response").equals("successful")) {
-                Toast.makeText(mContext, "Comment created", Toast.LENGTH_LONG).show();
+                // Toast.makeText(mContext, "Comment created", Toast.LENGTH_LONG).show();
             } else {
-                Toast.makeText(mContext, "Comment creation error", Toast.LENGTH_LONG).show();
+                // Toast.makeText(mContext, "Comment creation error", Toast.LENGTH_LONG).show();
             }
         } catch (JSONException e) {
             e.printStackTrace();
-            Toast.makeText(mContext, "Comment creation error", Toast.LENGTH_LONG).show();
+        // Toast.makeText(mContext, "Comment creation error", Toast.LENGTH_LONG).show();
         }
     }
 }
