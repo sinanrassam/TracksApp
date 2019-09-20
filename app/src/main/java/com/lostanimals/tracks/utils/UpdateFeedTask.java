@@ -76,6 +76,7 @@ public class UpdateFeedTask extends AsyncTask<String, Integer, Boolean> {
             mPostList = new ArrayList<>();
             try {
                 JSONArray jsonArray = (JSONArray) json.get("posts");
+                int index = 0;
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = (JSONObject) jsonArray.get(i);
                     String id = (String) jsonObject.get("id");
@@ -86,15 +87,17 @@ public class UpdateFeedTask extends AsyncTask<String, Integer, Boolean> {
                     String time = (String) jsonObject.get("time");
                     String found = (String) jsonObject.get("found");
                     
-                    if(username != PreferencesUtility.getUserInfo().getUsername()) {
-                            PostsUtility.addPostEntry(i, new PostEntry(id, title, desc, username, date, time, found));
+                    if(found.equals("0")) {
+
+                            PostsUtility.addPostEntry(index, new PostEntry(id, title, desc, username, date, time, found));
 
                             Map<String, String> post = new HashMap<>(2);
 
-                            post.put("Title", PostsUtility.getPostEntry(i).getPostTitle());
-                            post.put("Desc", PostsUtility.getPostEntry(i).getPostDesc());
+                            post.put("Title", PostsUtility.getPostEntry(index).getPostTitle());
+                            post.put("Desc", PostsUtility.getPostEntry(index).getPostDesc());
 
-                            mPostList.add(i, post);
+                            mPostList.add(index, post);
+                            ++index;
                     }
                 }
             } catch (JSONException e) {

@@ -12,7 +12,7 @@ import android.widget.ProgressBar;
 import com.lostanimals.tracks.utils.UpdateFeedTask;
 
 public class FeedFragment extends ListFragment {
-    private UpdateFeedTask updateFeed;
+    // private UpdateFeedTask updateFeed;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -21,7 +21,7 @@ public class FeedFragment extends ListFragment {
         progressBar.setProgress(0);
 
         // TODO: Nitesh:
-        updateFeed = (UpdateFeedTask) new UpdateFeedTask(this, progressBar).execute("","");
+        UpdateFeedTask updateFeed = (UpdateFeedTask) new UpdateFeedTask(this, progressBar).execute("","");
 
         return view;
     }

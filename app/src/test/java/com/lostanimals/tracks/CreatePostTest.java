@@ -37,6 +37,6 @@
 //        postData += URLEncoder.encode("description", "UTF-8") + "=" + URLEncoder.encode(TEST_POST_DESC, "UTF-8") + "&";
 //        postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(TEST_USER_USERNAME, "UTF-8");
 //        // TODO: What are you testing?
-//        // ConnectionManager.processRequest(TEST_URL + "post.php", postData);
+//        // ConnectionManagerTestClass.processRequest(TEST_URL + "post.php", postData);
 //    }
 //}
