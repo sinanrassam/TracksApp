@@ -22,10 +22,10 @@ public class PostActivity extends AppCompatActivity {
     private PostEntry mPostEntry;
     private TextView mPostTitleView, mPostDescView, mPostDateView, mPostAuthorView;
     private EditText mCommentView;
+    private CommentsFragment commentsFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d("Post Position - oncreate", mPostPosition + "");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
 
@@ -45,7 +45,7 @@ public class PostActivity extends AppCompatActivity {
 
         mCommentView = findViewById(R.id.comment_field);
 
-        Fragment commentsFragment = new CommentsFragment();
+        commentsFragment = new CommentsFragment();
         Bundle data = new Bundle();
         data.putString("post_id", mPostEntry.getId());
         commentsFragment.setArguments(data);
@@ -108,6 +108,9 @@ public class PostActivity extends AppCompatActivity {
         if (cancel) {
             focusView.requestFocus();
         } else {
+            commentsFragment.refresh();
+            mCommentView.setText("");
+            mCommentView.clearFocus();
             NewCommentTask addCommentTask = new NewCommentTask(this);
             // TODO: Remove after fixing the unknown bug
             addCommentTask.execute(post_id, username, msg);

@@ -7,7 +7,7 @@
 
     <item android:id="@+id/myPosts_nav"
           android:title="My Posts"
-          android:icon="@drawable/ic_profile"
+          android:icon="@drawable/ic_receipt_black"
     ></item>
     <item android:id="@+id/myProfile"
         android:title="My Profile"
