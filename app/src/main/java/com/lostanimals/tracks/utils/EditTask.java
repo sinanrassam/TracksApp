@@ -39,18 +39,6 @@ public class EditTask extends AsyncTask<String, Integer, JSONObject> {
         try {
             //TODO: See if we need to return the post
             if (data.get("response").equals("successful")) {
-                /* JSONObject jsonObject = (JSONObject)data.get("details");
-                 String id = (String) jsonObject.get("id");
-                String title = (String) jsonObject.get("title");
-                String desc = (String) jsonObject.get("description");
-                String username = (String) jsonObject.get("username");
-                String date = (String) jsonObject.get("date");
-                //String time = (String) jsonObject.get("time");
-                String found = (String) jsonObject.get("found");
-
-                if (found.equals("1")) {
-                    Toast.makeText(mContext, "Post Marked Found Successfully", Toast.LENGTH_SHORT).show();
-                } */
                 Toast.makeText(mContext, "Post Successfully Updated", Toast.LENGTH_SHORT).show();
             }
         }
