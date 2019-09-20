@@ -11,7 +11,6 @@ import android.view.View.OnClickListener;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import com.lostanimals.tracks.entries.PreferenceEntry;
 import com.lostanimals.tracks.tasks.LoginTask;
 import com.lostanimals.tracks.utils.NotificationUtility;
 import com.lostanimals.tracks.utils.PreferencesUtility;
