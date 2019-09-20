@@ -74,7 +74,7 @@ public class NotificationUtility {
 	 * @param pendingIntent The intent to start.
 	 */
 	private static void setPendingIntent(PendingIntent pendingIntent) {
-		//TODO: Add code here.
+		//TODO: Jason: add code here to add the PendingIntent stuff.
 	}
 	
 	/**

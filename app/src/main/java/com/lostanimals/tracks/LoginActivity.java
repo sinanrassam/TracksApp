@@ -42,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
         registerIntent = new Intent(this, RegisterActivity.class);
         registerIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 
+        // TODO: Jason edit this line to add the pending intent:
         NotificationUtility.createNotification(this, "Tracks", "Test", true, null);
         PreferencesUtility.setSharedPreferences(this);
 
