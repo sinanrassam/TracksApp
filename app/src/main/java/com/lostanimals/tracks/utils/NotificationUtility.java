@@ -53,7 +53,6 @@ public class NotificationUtility {
 		builder.setContentIntent(pendingIntent);
 		builder.setLargeIcon(largeIcon);
 		builder.setSmallIcon(R.drawable.ic_notifications);
-
 		builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
 		if (pendingIntent != null) {
