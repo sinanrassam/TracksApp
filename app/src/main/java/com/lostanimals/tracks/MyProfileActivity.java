@@ -11,9 +11,9 @@ import com.lostanimals.tracks.utils.PreferencesUtility;
 import java.util.Objects;
 
 public class MyProfileActivity extends AppCompatActivity {
-    
-    private TextView mUsername;
-    private TextView mFirstName;
+	
+	private TextView mUsername;
+	private TextView mFirstName;
 	private TextView mEmail;
 	private Button mEmailEdit;
 	

@@ -23,10 +23,11 @@ public class NotificationUtility {
 	
 	/**
 	 * Method for creating the notification, manager and channel.
-	 * @param context The context of the calling class / activity.
-	 * @param title The notification title.
-	 * @param text The body of the notification.
-	 * @param autoCancel Boolean value for setting the notification to close when tapped by the user.
+	 *
+	 * @param context       The context of the calling class / activity.
+	 * @param title         The notification title.
+	 * @param text          The body of the notification.
+	 * @param autoCancel    Boolean value for setting the notification to close when tapped by the user.
 	 * @param pendingIntent Non-required variable. Intent to be started if action is taken on the notification.
 	 */
 	public static void createNotification(Context context, String title, String text, Boolean autoCancel, PendingIntent pendingIntent) {
@@ -63,6 +64,7 @@ public class NotificationUtility {
 	
 	/**
 	 * Simple method to set the manager if not already.
+	 *
 	 * @param context The parent context.
 	 */
 	private static void setManager(Context context) {
@@ -71,6 +73,7 @@ public class NotificationUtility {
 	
 	/**
 	 * Simple method to set the PendingIntent of a notification if required.
+	 *
 	 * @param pendingIntent The intent to start.
 	 */
 	private static void setPendingIntent(PendingIntent pendingIntent) {
@@ -79,6 +82,7 @@ public class NotificationUtility {
 	
 	/**
 	 * Create and show the notification.
+	 *
 	 * @param notificationID passed in by the calling class, used to distinguish who created the notification.
 	 */
 	public static void displayNotification(int notificationID) {
