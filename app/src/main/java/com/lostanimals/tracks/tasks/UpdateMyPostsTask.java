@@ -106,8 +106,6 @@ public class UpdateMyPostsTask extends AsyncTask<String, Integer, Boolean> {
 	@Override
 	protected void onPostExecute(final Boolean success) {
 		if (success) {
-			// TODO: Remove the sleep.
-			SystemClock.sleep(1000);
 			mProgressBar.setVisibility(View.GONE);
 		}
 		SimpleAdapter adapter = new SimpleAdapter(mContext, mPostList,

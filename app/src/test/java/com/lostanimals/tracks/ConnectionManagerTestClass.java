@@ -59,11 +59,7 @@ public class ConnectionManagerTestClass {
 				postData += URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(parameters[3],
 						"UTF-8");
 				break;
-			case "reset":
-				// TODO: Implement reset password POST request
-				break;
 			case "new-post":
-				// TODO: Can found be encoded as a bool?
 				postData += URLEncoder.encode("title", "UTF-8") + "=" + URLEncoder.encode(parameters[0],
 						"UTF-8") + "&";
 				postData += URLEncoder.encode("description", "UTF-8") + "=" + URLEncoder.encode(parameters[1],
@@ -72,7 +68,6 @@ public class ConnectionManagerTestClass {
 						"UTF-8");
 				break;
 			case "edit":
-				// TODO: Can found be encoded as a bool?
 				postData += URLEncoder.encode("found", "UTF-8") + "=" + URLEncoder.encode(parameters[0],
 						"UTF-8") + "&";
 				break;

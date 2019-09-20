@@ -12,7 +12,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-// TODO: Create the edit activity and call this task with the correct parameters. Copy LoginActivity and FeedFrag
 public class EditTask extends AsyncTask<String, Integer, JSONObject> {
 	@SuppressLint ("StaticFieldLeak")
 	private Context mContext;

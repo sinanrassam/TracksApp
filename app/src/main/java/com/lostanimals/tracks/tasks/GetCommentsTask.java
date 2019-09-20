@@ -94,8 +94,6 @@ public class GetCommentsTask extends AsyncTask<String, Integer, Boolean> {
 	@Override
 	protected void onPostExecute(final Boolean success) {
 		if (success) {
-			// TODO: Remove the sleep.
-			SystemClock.sleep(1000);
 			mProgressBar.setVisibility(View.GONE);
 		} else {
 			mProgressBar.setVisibility(View.GONE);

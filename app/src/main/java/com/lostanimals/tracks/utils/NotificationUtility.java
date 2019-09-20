@@ -91,7 +91,6 @@ public class NotificationUtility {
 	 * @param pendingIntent The intent to start.
 	 */
 	private static void setPendingIntent(PendingIntent pendingIntent, String text, String title) {
-		//TODO: Jason: add code here to add the PendingIntent stuff.
 		builder.setContentTitle(title);
 		builder.setContentText(text);
 		builder.setAutoCancel(true);

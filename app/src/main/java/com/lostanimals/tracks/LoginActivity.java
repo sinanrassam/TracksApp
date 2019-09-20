@@ -18,10 +18,7 @@ import org.json.JSONException;
 
 import java.util.concurrent.ExecutionException;
 
-import static com.lostanimals.tracks.utils.DEV_MODE.DEV_MODE;
-
 public class LoginActivity extends AppCompatActivity {
-	// TODO: Before submission, remove test log
 	private final static String TAG = "LOGIN_ACTIVITY";
 	
 	private AutoCompleteTextView mEmailView;

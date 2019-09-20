@@ -47,8 +47,6 @@ public class RegisterTask extends AsyncTask<String, Void, JSONObject> {
 					ActivityCompat.finishAffinity((Activity) mContext);
 					mContext.startActivity(intent);
 				}
-			} else {
-				// TODO: Print error
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
