@@ -3,6 +3,7 @@ package com.lostanimals.tracks;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -29,24 +30,29 @@ public class PostActivity extends AppCompatActivity {
         setContentView(R.layout.activity_post);
 
         mPostPosition = getIntent().getIntExtra("position", 0);
+        mPostEntry = PostsUtility.getPostEntry(mPostPosition);
 
         mPostTitleView = findViewById(R.id.post_txt_title);
         mPostDescView = findViewById(R.id.post_et_desc);
         mPostDateView = findViewById(R.id.post_date);
         mPostAuthorView = findViewById(R.id.post_author);
 
-        mPostEntry = PostsUtility.getPostEntry(mPostPosition);
-        if (mPostEntry != null) {
-            mPostTitleView.setText(mPostEntry.getPostTitle());
+        mPostTitleView.setText(mPostEntry.getPostTitle());
 
-            mPostDescView.setText(mPostEntry.getPostDesc());
-            mPostDateView.setText("Posted on: " + "DATE");
-            mPostAuthorView.setText("By: " + mPostEntry.getUsername());
-        }
+        mPostDescView.setText(mPostEntry.getPostDesc());
+        mPostDateView.setText("Posted on: " + "DATE");
+        mPostAuthorView.setText("By: " + mPostEntry.getUsername());
+
         mCommentView = findViewById(R.id.comment_field);
 
-        Button mSignInBtn = findViewById(R.id.comment_btn);
-        mSignInBtn.setOnClickListener(new View.OnClickListener() {
+        Fragment commentsFragment = new CommentsFragment();
+        Bundle data = new Bundle();
+        data.putString("post_id", mPostEntry.getId());
+        commentsFragment.setArguments(data);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, commentsFragment).commit();
+
+        Button mCommentBtn = findViewById(R.id.comment_btn);
+        mCommentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 addComment();

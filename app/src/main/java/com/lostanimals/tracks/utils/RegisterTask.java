@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 import com.lostanimals.tracks.FeedActivity;
 import org.json.JSONException;
 import org.json.JSONObject;

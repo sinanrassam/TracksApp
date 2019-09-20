@@ -18,7 +18,6 @@ public class NewCommentTask extends AsyncTask<String, Void, JSONObject> {
         mContext = context;
     }
 
-
     @Override
     protected JSONObject doInBackground(String... parameters) {
         // Try encode and send the NEW_POST request.
@@ -29,15 +28,21 @@ public class NewCommentTask extends AsyncTask<String, Void, JSONObject> {
         } catch (JSONException | IOException e) {
             e.printStackTrace();
         }
-
-        Log.d("JSON", json.toString());
-
         return json;
     }
 
     @Override
     protected void onPostExecute(JSONObject jsonObject) {
-        Toast.makeText(mContext, "Comment created", Toast.LENGTH_LONG).show();
         super.onPostExecute(jsonObject);
+        try {
+            if (jsonObject.get("response").equals("successful")) {
+                Toast.makeText(mContext, "Comment created", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(mContext, "Comment creation error", Toast.LENGTH_LONG).show();
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(mContext, "Comment creation error", Toast.LENGTH_LONG).show();
+        }
     }
 }
