@@ -47,7 +47,7 @@ public class NotificationUtility {
 		builder = new NotificationCompat.Builder(context, CHANNEL_ID);
 		builder.setContentIntent(pendingIntent);
 
-		builder.setSmallIcon(R.drawable.ic_launcher_foreground);
+		builder.setSmallIcon(R.drawable.ic_notifications);
 		builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
 		if (pendingIntent != null) {
@@ -86,6 +86,7 @@ public class NotificationUtility {
 	 */
 	private static void setPendingIntent(PendingIntent pendingIntent, String text, String title) {
 		//TODO: Jason: add code here to add the PendingIntent stuff.
+		builder.setTicker("Ticker Title");
 		builder.setContentTitle(title);
 		builder.setContentText(text);
 		builder.setAutoCancel(true);
