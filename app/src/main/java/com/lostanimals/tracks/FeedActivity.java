@@ -64,7 +64,7 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 		if (id == R.id.logOut_nav) {
 			startActivity(new Intent(this, LogoutActivity.class));
 		}
-		if (id == R.id.myProfile) {
+		if (id == R.id.myProfile_nav) {
 			startActivity(new Intent(this, MyProfileActivity.class));
 		}
 		
