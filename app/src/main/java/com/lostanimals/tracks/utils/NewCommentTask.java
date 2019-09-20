@@ -38,15 +38,6 @@ public class NewCommentTask extends AsyncTask<String, Void, JSONObject> {
     @Override
     protected void onPostExecute(JSONObject jsonObject) {
         super.onPostExecute(jsonObject);
-        try {
-            if (jsonObject.get("response").equals("successful")) {
-                // Toast.makeText(mContext, "Comment created", Toast.LENGTH_LONG).show();
-            } else {
-                // Toast.makeText(mContext, "Comment creation error", Toast.LENGTH_LONG).show();
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        // Toast.makeText(mContext, "Comment creation error", Toast.LENGTH_LONG).show();
-        }
+        Toast.makeText(mContext, "Comment creation error", Toast.LENGTH_LONG).show();
     }
 }
