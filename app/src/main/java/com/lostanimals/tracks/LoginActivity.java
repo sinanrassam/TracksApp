@@ -42,26 +42,11 @@ public class LoginActivity extends AppCompatActivity {
 		feedIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 		registerIntent = new Intent(this, RegisterActivity.class);
 		registerIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-		
-		// TODO: Jason edit this line to add the pending intent:
+
 		PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, feedIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 		NotificationUtility.createNotification(this, "Tracks", "Test", true, pendingIntent);
 		PreferencesUtility.setSharedPreferences(this);
-		
-		/*
-		 *  START TESTING
-		 */
-		
-		// LOGIN with admin user
-		//  if (DEV_MODE) PreferencesUtility.setUserInfo(new PreferenceEntry("admin", "admin", "admin@bosh.live"));
-		
-		
-		//Force the LOGIN activity
-        // if (DEV_MODE) PreferencesUtility.setUserInfo(new PreferenceEntry(null, null, null));
-		
-		/*
-		 *  END TESTING
-		 */
+
 		
 		// If user is logged in, start the feed.
 		if (!PreferencesUtility.getUserInfo().getUsername().equals("")) {

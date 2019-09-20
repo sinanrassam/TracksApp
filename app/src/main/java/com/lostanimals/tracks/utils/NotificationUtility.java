@@ -47,7 +47,7 @@ public class NotificationUtility {
 			setManager(context);
 		}
 
-		Bitmap largeIcon = BitmapFactory.decodeResource(context.getResources(),R.drawable.t);
+		Bitmap largeIcon = BitmapFactory.decodeResource(context.getResources(),R.drawable.web_hi_res_512);
 
 		builder = new NotificationCompat.Builder(context, CHANNEL_ID);
 		builder.setContentIntent(pendingIntent);
@@ -97,8 +97,7 @@ public class NotificationUtility {
 		builder.addAction(R.drawable.ic_touch_app, "VIEW", pendingIntent);
 	}
 
-	private static PendingIntent getDismissedIntent(int notificationID, Context context)
-	{
+	private static PendingIntent getDismissedIntent(int notificationID, Context context){
 		String NOTIFICATION_ID = "NOTIFICATION ID";
 		Intent intent = new Intent (context,context.getClass());
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
