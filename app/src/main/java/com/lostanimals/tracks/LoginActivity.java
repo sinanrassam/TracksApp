@@ -57,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
 		
 		
 		//Force the LOGIN activity
-		// if (DEV_MODE) PreferencesUtility.setUserInfo(new PreferenceEntry(null, null, null));
+        // if (DEV_MODE) PreferencesUtility.setUserInfo(new PreferenceEntry(null, null, null));
 		
 		/*
 		 *  END TESTING
