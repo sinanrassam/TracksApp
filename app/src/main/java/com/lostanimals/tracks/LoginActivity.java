@@ -24,9 +24,6 @@ import static com.lostanimals.tracks.utils.DEV_MODE.DEV_MODE;
 public class LoginActivity extends AppCompatActivity {
 	// TODO: Before submission, remove test log
 	private final static String TAG = "LOGIN_ACTIVITY";
-
-//    private static String CHANNEL_ID = "channel_0";
-//    private NotificationManager notificationManager;
 	
 	private AutoCompleteTextView mEmailView;
 	private EditText mPasswordView;

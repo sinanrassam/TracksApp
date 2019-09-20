@@ -1,6 +1,7 @@
 package com.lostanimals.tracks.tasks;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -13,6 +14,7 @@ import java.io.IOException;
 
 // TODO: Create the edit activity and call this task with the correct parameters. Copy LoginActivity and FeedFrag
 public class EditTask extends AsyncTask<String, Integer, JSONObject> {
+	@SuppressLint ("StaticFieldLeak")
 	private Context mContext;
 	
 	public EditTask(Context context) {

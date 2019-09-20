@@ -44,7 +44,7 @@ public class CommentsFragment extends ListFragment {
 		return view;
 	}
 	
-	public void refresh() {
+	void refresh() {
 		new GetCommentsTask(this, mTextView, mProgressBar).execute(post_id);
 	}
 }

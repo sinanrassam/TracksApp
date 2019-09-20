@@ -12,7 +12,7 @@ import java.util.Objects;
 
 public class MyProfileActivity extends AppCompatActivity {
 	private TextView mUsername, mName, mEmail;
-	private Button mEmailEdit;
+	// private Button mEmailEdit;
 	
 	@SuppressLint ("SetTextI18n")
 	@Override

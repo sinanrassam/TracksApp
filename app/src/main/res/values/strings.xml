@@ -58,5 +58,6 @@
     <string name="open_action_bar">Open</string>
     <string name="close_action_bar">Close</string>
     <string name="edit">Edit Details</string>
+    <string name="discard">Discard</string>
 
 </resources>
