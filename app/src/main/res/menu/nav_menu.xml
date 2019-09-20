@@ -9,7 +9,7 @@
           android:title="My Posts"
           android:icon="@drawable/ic_receipt_black"
     ></item>
-    <item android:id="@+id/myProfile"
+    <item android:id="@+id/myProfile_nav"
           android:title="My Profile"
           android:icon="@drawable/ic_profile"
     ></item>

@@ -1,5 +1,6 @@
 package com.lostanimals.tracks;
 
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -43,7 +44,8 @@ public class LoginActivity extends AppCompatActivity {
 		registerIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 		
 		// TODO: Jason edit this line to add the pending intent:
-		NotificationUtility.createNotification(this, "Tracks", "Test", true, null);
+		PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, feedIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+		NotificationUtility.createNotification(this, "Tracks", "Test", true, pendingIntent);
 		PreferencesUtility.setSharedPreferences(this);
 		
 		/*

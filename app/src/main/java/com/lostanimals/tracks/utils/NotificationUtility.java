@@ -4,8 +4,11 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 import com.lostanimals.tracks.R;
+
+import java.util.Random;
 
 import static android.support.v4.content.ContextCompat.getSystemService;
 
@@ -20,7 +23,7 @@ public class NotificationUtility {
 	private static NotificationManager notificationManager;
 	private static NotificationCompat.Builder builder;
 	private static NotificationChannel notificationChannel;
-	
+	private static int notificationID;
 	/**
 	 * Method for creating the notification, manager and channel.
 	 *
@@ -31,6 +34,8 @@ public class NotificationUtility {
 	 * @param pendingIntent Non-required variable. Intent to be started if action is taken on the notification.
 	 */
 	public static void createNotification(Context context, String title, String text, Boolean autoCancel, PendingIntent pendingIntent) {
+		int notificationID =  new Random().nextInt();
+
 		if (notificationChannel == null) {
 			setChannel();
 		}
@@ -38,23 +43,25 @@ public class NotificationUtility {
 		if (notificationManager == null) {
 			setManager(context);
 		}
-		
+
 		builder = new NotificationCompat.Builder(context, CHANNEL_ID);
+		builder.setContentIntent(pendingIntent);
+
 		builder.setSmallIcon(R.drawable.ic_launcher_foreground);
 		builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
-		
+
 		if (pendingIntent != null) {
-			setPendingIntent(pendingIntent);
+			setPendingIntent(pendingIntent, text, title);
 		}
-		
-		builder.setContentTitle(title);
-		builder.setContentText(text);
-		builder.setAutoCancel(autoCancel);
+
+		builder.addAction(R.drawable.ic_touch_app, "DISMISS", getDismissedIntent(notificationID, context));
+
 	}
 	
 	/**
 	 * Simple method to set channel if not already.
 	 */
+
 	private static void setChannel() {
 		notificationChannel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME,
 				NotificationManager.IMPORTANCE_DEFAULT);
@@ -69,6 +76,7 @@ public class NotificationUtility {
 	 */
 	private static void setManager(Context context) {
 		notificationManager = getSystemService(context, NotificationManager.class);
+
 	}
 	
 	/**
@@ -76,10 +84,23 @@ public class NotificationUtility {
 	 *
 	 * @param pendingIntent The intent to start.
 	 */
-	private static void setPendingIntent(PendingIntent pendingIntent) {
+	private static void setPendingIntent(PendingIntent pendingIntent, String text, String title) {
 		//TODO: Jason: add code here to add the PendingIntent stuff.
+		builder.setContentTitle(title);
+		builder.setContentText(text);
+		builder.setAutoCancel(true);
+		builder.addAction(R.drawable.ic_touch_app, "VIEW", pendingIntent);
 	}
-	
+
+	private static PendingIntent getDismissedIntent(int notificationID, Context context)
+	{
+		String NOTIFICATION_ID = "NOTIFICATION ID";
+		Intent intent = new Intent (context,context.getClass());
+		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+		intent.putExtra(NOTIFICATION_ID, notificationID);
+		PendingIntent dismissIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+		return dismissIntent;
+	}
 	/**
 	 * Create and show the notification.
 	 *
