@@ -219,5 +219,6 @@ public class PostActivity extends AppCompatActivity {
 	private void deletePost() {
 		DeleteTask deleteTask = new DeleteTask(this);
 		deleteTask.execute(mPostEntry.getId());
+		finish();
 	}
 }
