@@ -152,7 +152,6 @@ public class PostActivity extends AppCompatActivity {
         editTask.execute(mPostEntry.getId(), mPostEntry.getPostTitle(), mPostEntry.getPostDesc(), "1");
     }
 
-    // TODO: Complete onEditClicked
     private void onEditClicked() {
         if (mPostEntry.getFound().equals("0")) {
             Intent myIntent = new Intent(this, NewPostActivity.class);
@@ -207,8 +206,8 @@ public class PostActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
-    // TODO: Complete delete post method
     private void deletePost() {
-
+        DeleteTask deleteTask = new DeleteTask(this);
+        deleteTask.execute(mPostEntry.getId());
     }
 }

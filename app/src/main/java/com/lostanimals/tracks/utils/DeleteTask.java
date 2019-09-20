@@ -2,6 +2,7 @@ package com.lostanimals.tracks.utils;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,5 +37,16 @@ public class DeleteTask extends AsyncTask<String, Integer, JSONObject> {
         } catch (JSONException e) {
             Toast.makeText(mContext, "Error Deleting Post", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    protected void onProgressUpdate(Integer... values) {
+        super.onProgressUpdate(values);
+    }
+
+    @Override
+    protected void onCancelled() {
+        super.onCancelled();
+        Log.d("DELETE_TASK", "onCancelled: DELETE_TASK_DELETE_TASK_DELETE_TASK_DELETE_TASK_DELETE_TASK");
     }
 }
