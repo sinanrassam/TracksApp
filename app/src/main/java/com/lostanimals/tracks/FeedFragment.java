@@ -25,11 +25,13 @@ public class FeedFragment extends ListFragment {
         return view;
     }
 
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        updateFeed.execute("4");
-//    }
+
+
+    /* @Override
+    public void onResume() {
+        super.onResume();
+        updateFeed.execute("4");
+    } */
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {

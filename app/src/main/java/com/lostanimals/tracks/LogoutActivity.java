@@ -22,6 +22,7 @@ public class LogoutActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mPreferencesUtility = new PreferencesUtility(sharedPreferences);
 
+        attemptLogout();
 
         Button mLogoutBtn = findViewById(R.id.logout_btn);
         mLogoutBtn.setOnClickListener(new View.OnClickListener() {

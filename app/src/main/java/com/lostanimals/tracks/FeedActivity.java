@@ -35,6 +35,10 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    public void openNewPostActivity(View view) {
+        startActivity(new Intent(this, NewPostActivity.class));
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
