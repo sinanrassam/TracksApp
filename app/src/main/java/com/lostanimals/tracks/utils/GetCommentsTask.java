@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.lostanimals.tracks.CommentsFragment;
 import org.json.JSONArray;
@@ -30,11 +31,14 @@ public class GetCommentsTask extends AsyncTask<String, Integer, Boolean> {
     private ProgressBar mProgressBar;
     private CommentsFragment mFragment;
     private List<Map<String, String>> mCommentsList = new ArrayList<>();
+    private TextView mTextView;
 
-    public GetCommentsTask(CommentsFragment activity, ProgressBar progressBar) {
+    public GetCommentsTask(CommentsFragment activity, TextView textView, ProgressBar progressBar) {
         this.mFragment = activity;
         this.mContext = mFragment.getContext();
         this.mProgressBar = progressBar;
+        this.mTextView = textView;
+        mTextView.setVisibility(View.GONE);
     }
 
     @Override
@@ -49,11 +53,6 @@ public class GetCommentsTask extends AsyncTask<String, Integer, Boolean> {
             String postData = null;
             try {
                 postData = ConnectionManager.postEncoder("get-comments", parameters);
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
-
-            try {
                 json = processRequest("comment.php", postData);
             } catch (JSONException | IOException e) {
                 e.printStackTrace();
@@ -105,6 +104,9 @@ public class GetCommentsTask extends AsyncTask<String, Integer, Boolean> {
             // TODO: Remove the sleep.
             SystemClock.sleep(1000);
             mProgressBar.setVisibility(View.GONE);
+        } else {
+            mProgressBar.setVisibility(View.GONE);
+            mTextView.setVisibility(View.VISIBLE);
         }
         SimpleAdapter adapter = new SimpleAdapter(mContext, mCommentsList,
                 android.R.layout.simple_list_item_2,
