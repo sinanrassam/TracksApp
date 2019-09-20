@@ -14,6 +14,15 @@ public class ConnectionManager {
     private static final String URL = "http://bosh.live:7536/phpmyadmin/tracks_api/";
 
     public static String postEncoder(String type, String[] parameters) throws UnsupportedEncodingException {
+        
+//        for (String parameter:parameters) {
+//            EmojiRemover.processString(parameter);
+//        }
+    
+        for (int i = 0; i < parameters.length; i++) {
+            parameters[i] = EmojiRemover.processString(parameters[i]);
+        }
+        
         String postData = URLEncoder.encode("type", "UTF-8") + "=" + URLEncoder.encode(type,
                 "UTF-8") + "&";
 
