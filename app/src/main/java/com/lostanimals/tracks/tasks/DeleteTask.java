@@ -1,5 +1,6 @@
 package com.lostanimals.tracks.tasks;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -11,6 +12,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 
 public class DeleteTask extends AsyncTask<String, Integer, JSONObject> {
+	@SuppressLint ("StaticFieldLeak")
 	private Context mContext;
 	
 	public DeleteTask(Context context) {

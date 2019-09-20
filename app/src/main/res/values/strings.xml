@@ -23,7 +23,7 @@
     <string name="post_txt_post_desc">Enter a description</string>
     <string name="hint_desc">Description…</string>
     <string name="post_btn_post">Post</string>
-    <string name="title_activity_login">Login</string>
+    <string name="title_activity_login">Tracks</string>
     <!-- Strings related to login -->
     <string name="prompt_username">Username</string>
     <string name="prompt_password">Password</string>
@@ -58,5 +58,6 @@
     <string name="open_action_bar">Open</string>
     <string name="close_action_bar">Close</string>
     <string name="edit">Edit Details</string>
+    <string name="discard">Discard</string>
 
 </resources>

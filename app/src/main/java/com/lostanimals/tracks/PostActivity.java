@@ -83,12 +83,11 @@ public class PostActivity extends AppCompatActivity {
 		if (cancel) {
 			focusView.requestFocus();
 		} else {
-			commentsFragment.refresh();
 			mCommentView.setText("");
 			mCommentView.clearFocus();
 			NewCommentTask addCommentTask = new NewCommentTask(this);
-			// TODO: Remove after fixing the unknown bug
 			addCommentTask.execute(post_id, username, msg);
+			commentsFragment.refresh();
 		}
 	}
 	

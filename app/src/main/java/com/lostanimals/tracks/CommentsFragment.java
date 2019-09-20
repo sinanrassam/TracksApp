@@ -2,6 +2,7 @@ package com.lostanimals.tracks;
 
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,15 +27,24 @@ public class CommentsFragment extends ListFragment {
 		mTextView = view.findViewById(R.id.textView);
 		mProgressBar = view.findViewById(R.id.progress_bar);
 		mProgressBar.setProgress(0);
+
+		final SwipeRefreshLayout refreshLayout = view.findViewById(R.id.pullToRefresh);
 		
 		post_id = getArguments().getString("post_id");
 		
 		refresh();
-		
+
+		refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+			@Override
+			public void onRefresh() {
+				refresh();
+				refreshLayout.setRefreshing(false);
+			}
+		});
 		return view;
 	}
 	
-	public void refresh() {
+	void refresh() {
 		new GetCommentsTask(this, mTextView, mProgressBar).execute(post_id);
 	}
 }

@@ -11,7 +11,6 @@ import android.view.View.OnClickListener;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import com.lostanimals.tracks.entries.PreferenceEntry;
 import com.lostanimals.tracks.tasks.LoginTask;
 import com.lostanimals.tracks.utils.NotificationUtility;
 import com.lostanimals.tracks.utils.PreferencesUtility;
@@ -24,9 +23,6 @@ import static com.lostanimals.tracks.utils.DEV_MODE.DEV_MODE;
 public class LoginActivity extends AppCompatActivity {
 	// TODO: Before submission, remove test log
 	private final static String TAG = "LOGIN_ACTIVITY";
-
-//    private static String CHANNEL_ID = "channel_0";
-//    private NotificationManager notificationManager;
 	
 	private AutoCompleteTextView mEmailView;
 	private EditText mPasswordView;

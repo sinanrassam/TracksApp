@@ -54,6 +54,7 @@ public class NotificationUtility {
 		builder.setLargeIcon(largeIcon);
 		builder.setSmallIcon(R.drawable.ic_notifications);
 		builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
+		builder.setAutoCancel(autoCancel);
 
 		if (pendingIntent != null) {
 			setPendingIntent(pendingIntent, text, title);
@@ -97,13 +98,19 @@ public class NotificationUtility {
 		builder.addAction(R.drawable.ic_touch_app, "VIEW", pendingIntent);
 	}
 
-	private static PendingIntent getDismissedIntent(int notificationID, Context context){
+	/**
+	 *
+	 * @param notificationID
+	 * @param context
+	 * @return
+	 */
+	private static PendingIntent getDismissedIntent(int notificationID, Context context)
+	{
 		String NOTIFICATION_ID = "NOTIFICATION ID";
 		Intent intent = new Intent (context,context.getClass());
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 		intent.putExtra(NOTIFICATION_ID, notificationID);
-		PendingIntent dismissIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-		return dismissIntent;
+		return PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 	}
 	/**
 	 * Create and show the notification.

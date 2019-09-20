@@ -32,6 +32,7 @@ public class GetCommentsTask extends AsyncTask<String, Integer, Boolean> {
 	private ProgressBar mProgressBar;
 	private CommentsFragment mFragment;
 	private List<Map<String, String>> mCommentsList = new ArrayList<>();
+	@SuppressLint ("StaticFieldLeak")
 	private TextView mTextView;
 	
 	public GetCommentsTask(CommentsFragment activity, TextView textView, ProgressBar progressBar) {
@@ -67,7 +68,6 @@ public class GetCommentsTask extends AsyncTask<String, Integer, Boolean> {
 					String post_id = (String) jsonObject.get("post_id");
 					String username = (String) jsonObject.get("username");
 					String desc = (String) jsonObject.get("description");
-//                    String date = (String) jsonObject.get("date");
 					
 					CommentEntry c = new CommentEntry(id, post_id, username, desc, null);
 					
