@@ -27,13 +27,12 @@ public class ConnectionTest {
 
     @Test
     public void ConnectionManager_OpenConnection() throws IOException {
-        // TODO: This means TRUE if script fails lmao
         assertEquals(500, mockConnMan.openConnection(URL).getResponseCode());
 
     }
 
     @Test
     public void ConnectionManager_ProcessRequest() throws IOException {
-
+    
     }
 }
