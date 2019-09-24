@@ -23,17 +23,8 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_feed);
 		
-		// Check is the user is logged in, if not, go back to the login activity.
-		if (PreferencesUtility.getUserInfo().getUsername().equals("")) {
-			Intent loginIntent = new Intent(this, FeedActivity.class);
-			loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-			startActivity(loginIntent);
-			Toast.makeText(this, "Please login", Toast.LENGTH_LONG).show();
-			finish();
-		}
-		
 		// Setup DrawerLayout and ActionBar
-		DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
+		DrawerLayout mDrawerLayout = findViewById(R.id.drawer);
 		
 		mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open_action_bar,
 				R.string.close_action_bar);
@@ -42,7 +33,7 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 		
 		Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 		
-		NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
+		NavigationView navigationView = findViewById(R.id.navigation_view);
 		navigationView.setNavigationItemSelectedListener(this);
 		
 	}
@@ -75,6 +66,7 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 		
 		if (id == R.id.logOut_nav) {
 			startActivity(new Intent(this, LogoutActivity.class));
+			finish();
 		}
 		if (id == R.id.myProfile_nav) {
 			startActivity(new Intent(this, MyProfileActivity.class));
