@@ -108,7 +108,7 @@ public class LoginActivity extends AppCompatActivity {
 		if (cancel) {
 			focusView.requestFocus();
 		} else {
-			LoginTask loginTask = new LoginTask();
+			LoginTask loginTask = new LoginTask(this);
 			loginTask.execute(email, password);
 			if (loginTask.get().get("response").equals("successful")) {
 				NotificationUtility.displayNotification(0);
