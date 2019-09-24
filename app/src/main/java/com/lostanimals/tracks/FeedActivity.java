@@ -9,6 +9,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
+import com.lostanimals.tracks.utils.PreferencesUtility;
 
 public class FeedActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 	
@@ -19,6 +21,15 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_feed);
+		
+		// Check is the user is logged in, if not, go back to the login activity.
+		if (PreferencesUtility.getUserInfo().getUsername().equals("")) {
+			Intent loginIntent = new Intent(this, FeedActivity.class);
+			loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+			startActivity(loginIntent);
+			Toast.makeText(this, "Please login", Toast.LENGTH_LONG).show();
+			finish();
+		}
 		
 		// Setup DrawerLayout and ActionBar
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
