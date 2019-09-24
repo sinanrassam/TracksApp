@@ -12,9 +12,10 @@ import android.view.View;
 import android.widget.Toast;
 import com.lostanimals.tracks.utils.PreferencesUtility;
 
+import java.util.Objects;
+
 public class FeedActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 	
-	private DrawerLayout mDrawerLayout;
 	private ActionBarDrawerToggle mToggle;
 	
 	@Override
@@ -32,14 +33,14 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 		}
 		
 		// Setup DrawerLayout and ActionBar
-		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
+		DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
 		
 		mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open_action_bar,
 				R.string.close_action_bar);
 		mDrawerLayout.addDrawerListener(mToggle);
 		mToggle.syncState();
 		
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 		
 		NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
 		navigationView.setNavigationItemSelectedListener(this);
