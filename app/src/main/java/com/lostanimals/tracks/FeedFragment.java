@@ -24,9 +24,6 @@ public class FeedFragment extends ListFragment {
 		progressBar.setProgress(0);
 		
 		refreshLayout = view.findViewById(R.id.pullToRefresh);
-		refresh();
-		// UpdateFeedTask updateFeed = (UpdateFeedTask) new UpdateFeedTask(this, progressBar).execute("", "");
-		
 		refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 			@Override
 			public void onRefresh() {
@@ -34,6 +31,9 @@ public class FeedFragment extends ListFragment {
 				refreshLayout.setRefreshing(false);
 			}
 		});
+		
+		refresh();
+		
 		return view;
 	}
 	
