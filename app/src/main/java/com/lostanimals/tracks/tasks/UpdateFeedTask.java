@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
@@ -32,10 +33,7 @@ public class UpdateFeedTask extends AsyncTask<String, Integer, Boolean> {
 	@SuppressLint ("StaticFieldLeak")
 	private ProgressBar mProgressBar;
 	private FeedFragment mFragment;
-	private MyPostsFragment mMyPostsFragment;
 	private List<Map<String, String>> mPostList = new ArrayList<>();
-	private ArrayList<PostEntry> mPostArray = new ArrayList<>();
-	public SimpleAdapter adapter;
 	
 	public UpdateFeedTask(FeedFragment activity, ProgressBar progressBar) {
 		this.mFragment = activity;
@@ -43,37 +41,33 @@ public class UpdateFeedTask extends AsyncTask<String, Integer, Boolean> {
 		this.mProgressBar = progressBar;
 	}
 	
-	
-	public PostEntry getPostEntry(int index) {
-		return mPostArray.get(index);
-	}
-	
 	@Override
 	protected Boolean doInBackground(String... parameters) {
 		JSONObject json = null;
 		if (!this.isCancelled()) {
-			String postData = null;
+			String postData;
 			try {
 				postData = ConnectionManager.postEncoder("get-posts", parameters);
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
+				return false;
 			}
 			
 			try {
 				json = processRequest("post.php", postData);
 			} catch (JSONException | IOException e) {
 				e.printStackTrace();
+				return false;
 			}
 		}
 		
 		if (json != null) {
-			// Clear the array list and post list-map first
-//            PostsUtility.getPostEntryArray().clear();
 			PostsUtility.clear();
 			mPostList = new ArrayList<>();
 			try {
 				JSONArray jsonArray = (JSONArray) json.get("posts");
 				int index = 0;
+				
 				for (int i = 0; i < jsonArray.length(); i++) {
 					JSONObject jsonObject = (JSONObject) jsonArray.get(i);
 					String id = (String) jsonObject.get("id");
@@ -107,22 +101,24 @@ public class UpdateFeedTask extends AsyncTask<String, Integer, Boolean> {
 	
 	@Override
 	protected void onPreExecute() {
-		Toast.makeText(mContext, "Loading posts", Toast.LENGTH_LONG).show();
+		Toast.makeText(mContext, "Fetching posts", Toast.LENGTH_SHORT).show();
 	}
 	
 	@Override
 	protected void onPostExecute(final Boolean success) {
 		if (success) {
-			mProgressBar.setVisibility(View.GONE);
+			Toast.makeText(mContext, "Posts refreshed.", Toast.LENGTH_LONG).show();
+		} else {
+			Toast.makeText(mContext, "Error. Please check network.", Toast.LENGTH_LONG).show();
 		}
-		adapter = new SimpleAdapter(mContext, mPostList,
+		
+		mProgressBar.setVisibility(View.GONE);
+		SimpleAdapter adapter = new SimpleAdapter(mContext, mPostList,
 				android.R.layout.simple_list_item_2,
 				new String[] {"Title", "Desc"},
 				new int[] {android.R.id.text1, android.R.id.text2});
 		mFragment.setListAdapter(adapter);
 		adapter.notifyDataSetChanged();
-		Toast.makeText(mContext, "Posts refreshed", Toast.LENGTH_LONG).show();
-		// this.cancel(true);
 	}
 	
 	@Override

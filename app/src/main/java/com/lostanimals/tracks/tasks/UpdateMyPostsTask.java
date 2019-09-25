@@ -100,7 +100,7 @@ public class UpdateMyPostsTask extends AsyncTask<String, Integer, Boolean> {
 	
 	@Override
 	protected void onPreExecute() {
-		Toast.makeText(mContext, "Loading posts", Toast.LENGTH_LONG).show();
+		Toast.makeText(mContext, "Loading posts", Toast.LENGTH_SHORT).show();
 	}
 	
 	@Override
