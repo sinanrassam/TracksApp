@@ -12,7 +12,7 @@
             android:text="@string/loading_comments"
             android:layout_marginTop="20dp"/>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="20dp" tools:layout_editor_absoluteY="68dp">
 
@@ -25,16 +25,16 @@
                 android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"/>
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.ConstraintLayout>
 
-    <android.support.v4.widget.SwipeRefreshLayout
+    <androidx.core.widget.SwipeRefreshLayout
             android:id="@+id/pullToRefresh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-    <ListView
-            android:layout_width="match_parent"
-            android:layout_height="453dp"
-            android:id="@android:id/list"/>
+        <ListView
+                android:layout_width="match_parent"
+                android:layout_height="453dp"
+                android:id="@android:id/list"/>
 
-    </android.support.v4.widget.SwipeRefreshLayout>
+    </androidx.core.widget.SwipeRefreshLayout>
 </LinearLayout>

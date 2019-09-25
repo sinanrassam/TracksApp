@@ -13,14 +13,14 @@
             android:layout_marginTop="300dp"
             android:layout_gravity="center"/>
 
-    <android.support.v4.widget.SwipeRefreshLayout
-                android:id="@+id/pullToRefresh"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+    <androidx.core.widget.SwipeRefreshLayout
+            android:id="@+id/pullToRefresh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <ListView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@android:id/list"/>
 
-    </android.support.v4.widget.SwipeRefreshLayout>
+    </androidx.core.widget.SwipeRefreshLayout>
 </LinearLayout>

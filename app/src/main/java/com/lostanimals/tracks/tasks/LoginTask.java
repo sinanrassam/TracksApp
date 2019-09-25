@@ -2,10 +2,8 @@ package com.lostanimals.tracks.tasks;
 
 import android.os.AsyncTask;
 import android.util.Log;
-import com.lostanimals.tracks.entries.PreferenceEntry;
 import com.lostanimals.tracks.utils.ConnectionManager;
 import com.lostanimals.tracks.utils.PreferencesUtility;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 

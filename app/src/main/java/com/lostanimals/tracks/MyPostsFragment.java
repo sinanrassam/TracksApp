@@ -2,17 +2,16 @@ package com.lostanimals.tracks;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import androidx.fragment.app.ListFragment;
 import com.lostanimals.tracks.tasks.UpdateMyPostsTask;
 import com.lostanimals.tracks.utils.PreferencesUtility;
 
 public class MyPostsFragment extends ListFragment {
-	private UpdateMyPostsTask updateFeed;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -22,16 +21,10 @@ public class MyPostsFragment extends ListFragment {
 		
 		
 		String username = PreferencesUtility.getUserInfo().getUsername();
-		updateFeed = (UpdateMyPostsTask) new UpdateMyPostsTask(this, progressBar).execute("4", username);
+		new UpdateMyPostsTask(this, progressBar).execute("4", username);
 		
 		return view;
 	}
-
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        updateFeed.execute("4");
-//    }
 	
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
