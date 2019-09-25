@@ -61,5 +61,8 @@
     <string name="edit">Edit Details</string>
     <!-- Maps -->
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_login2">deleteme</string>
+    <string name="logout">Logout</string>
+    <string name="open_feed">Open Feed</string>
 
 </resources>
