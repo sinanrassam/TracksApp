@@ -1,7 +1,10 @@
 package com.lostanimals.tracks;
 
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -16,6 +19,7 @@ import com.lostanimals.tracks.utils.NotificationUtility;
 import com.lostanimals.tracks.utils.PreferencesUtility;
 import org.json.JSONException;
 
+import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
 public class LoginActivity extends AppCompatActivity {
@@ -63,7 +67,14 @@ public class LoginActivity extends AppCompatActivity {
 			@Override
 			public void onClick(View view) {
 				try {
-					attemptLogin();
+					if(isOnline()==false) {
+						Log.d("LOGIN_TASK", "internet avaliable");
+						attemptLogin();
+					}
+					else{
+
+						Log.d("LOGIN_TASK", "no internet");
+					}
 				} catch (ExecutionException | InterruptedException | JSONException e) {
 					e.printStackTrace();
 				}
@@ -79,7 +90,20 @@ public class LoginActivity extends AppCompatActivity {
 			}
 		});
 	}
-	
+
+	public boolean isOnline() {
+		Runtime runtime = Runtime.getRuntime();
+		try {
+			Process ipProcess = runtime.exec("/system/bin/ping -c 1 8.8.8.8");
+			int     exitValue = ipProcess.waitFor();
+			return (exitValue == 0);
+		}
+		catch (IOException e)          { e.printStackTrace(); }
+		catch (InterruptedException e) { e.printStackTrace(); }
+
+		return false;
+	}
+
 	private void attemptLogin() throws ExecutionException, InterruptedException, JSONException {
 		// Reset errors.
 		mEmailView.setError(null);
