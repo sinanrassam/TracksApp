@@ -16,20 +16,20 @@ import java.nio.charset.StandardCharsets;
  */
 public class ConnectionManagerTestClass {
 	private static final String URL = "http://bosh.live:7536/phpmyadmin/tracks_api/";
-
+	
 	public ConnectionManagerTestClass() {
-
+	
 	}
-
+	
 	public static PreferenceEntry login(JSONObject details) throws JSONException {
 		return new PreferenceEntry(details.getString("name"),
 				details.getString("username"), details.getString("email"));
 	}
-
+	
 	public String postEncoder(String type, String[] parameters) throws UnsupportedEncodingException {
 		String postData = URLEncoder.encode("type", "UTF-8") + "=" + URLEncoder.encode(type,
 				"UTF-8") + "&";
-
+		
 		switch (type) {
 			case "get":
 				postData += URLEncoder.encode("number", "UTF-8") + "=" + URLEncoder.encode(parameters[0],
@@ -74,10 +74,10 @@ public class ConnectionManagerTestClass {
 		}
 		return postData;
 	}
-
+	
 	public JSONObject processRequest(String script, String data) throws IOException, JSONException {
 		HttpURLConnection conn = openConnection(URL + script);
-
+		
 		// Send the request to the server
 		OutputStream outputStream = conn.getOutputStream();
 		BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream,
@@ -86,7 +86,7 @@ public class ConnectionManagerTestClass {
 		bufferedWriter.flush();
 		bufferedWriter.close();
 		outputStream.close();
-
+		
 		// Read the server response and return it as JSON
 		InputStream inputStream = conn.getInputStream();
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,
@@ -102,7 +102,7 @@ public class ConnectionManagerTestClass {
 		conn.disconnect();
 		return json;
 	}
-
+	
 	public HttpURLConnection openConnection(String fullURL) throws IOException {
 		URL url = new URL(fullURL);
 		HttpURLConnection connection = (HttpURLConnection) url.openConnection();

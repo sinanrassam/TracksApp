@@ -1,12 +1,12 @@
 package com.lostanimals.tracks;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import androidx.appcompat.app.AppCompatActivity;
 import com.lostanimals.tracks.tasks.RegisterTask;
 import com.lostanimals.tracks.utils.EmailValidator;
 
@@ -25,7 +25,7 @@ public class RegisterActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register);
-		//setupActionBar();
+		
 		Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 		
 		mFirstNameView = findViewById(R.id.firstName);
@@ -35,6 +35,7 @@ public class RegisterActivity extends AppCompatActivity {
 		mPasswordView = findViewById(R.id.password);
 		
 		Button mRegisterBtn = findViewById(R.id.register_btn);
+		
 		mRegisterBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -45,14 +46,12 @@ public class RegisterActivity extends AppCompatActivity {
 	
 	private void attemptRegister() {
 		
-		// Reset errors.
 		mFirstNameView.setError(null);
 		mLastNameView.setError(null);
 		mEmailView.setError(null);
 		mUsernameView.setError(null);
 		mPasswordView.setError(null);
 		
-		// Store values at the time of the login attempt.
 		String firstName = mFirstNameView.getText().toString();
 		String lastName = mLastNameView.getText().toString();
 		String email = mEmailView.getText().toString().toLowerCase();

@@ -1,16 +1,14 @@
 package com.lostanimals.tracks;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import com.lostanimals.tracks.tasks.GetCommentsTask;
+import androidx.fragment.app.ListFragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.lostanimals.tracks.tasks.UpdateFeedTask;
 
 public class FeedFragment extends ListFragment {
@@ -24,9 +22,6 @@ public class FeedFragment extends ListFragment {
 		progressBar.setProgress(0);
 		
 		refreshLayout = view.findViewById(R.id.pullToRefresh);
-		refresh();
-		// UpdateFeedTask updateFeed = (UpdateFeedTask) new UpdateFeedTask(this, progressBar).execute("", "");
-		
 		refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 			@Override
 			public void onRefresh() {
@@ -34,6 +29,9 @@ public class FeedFragment extends ListFragment {
 				refreshLayout.setRefreshing(false);
 			}
 		});
+		
+		refresh();
+		
 		return view;
 	}
 	
@@ -44,12 +42,12 @@ public class FeedFragment extends ListFragment {
 		startActivity(intent);
 	}
 	
+	private void refresh() {
+		new UpdateFeedTask(this, progressBar).execute("", "");
+	}
+	
 	@Override
 	public void onResume() {
 		super.onResume();
-	}
-	
-	private void refresh() {
-		new UpdateFeedTask(this, progressBar).execute("", "");
 	}
 }

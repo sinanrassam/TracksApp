@@ -3,7 +3,6 @@ package com.lostanimals.tracks.tasks;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;

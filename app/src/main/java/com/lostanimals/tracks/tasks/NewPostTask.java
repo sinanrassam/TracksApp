@@ -20,7 +20,7 @@ public class NewPostTask extends AsyncTask<String, Void, JSONObject> {
 	private Context mContext;
 	private Intent feedIntent;
 	private PendingIntent pendingIntent;
-
+	
 	public NewPostTask(Context context) {
 		mContext = context;
 	}
@@ -47,9 +47,9 @@ public class NewPostTask extends AsyncTask<String, Void, JSONObject> {
 			if (jsonObject.get("response").equals("successful")) {
 				feedIntent = new Intent(mContext, FeedActivity.class);
 				feedIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-
-				PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 0 ,feedIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
+				
+				PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 0, feedIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+				
 				NotificationUtility.createNotification(mContext, "Post Created Successfully", "", true, pendingIntent);
 				NotificationUtility.displayNotification(0);
 				mContext.startActivity(feedIntent);
