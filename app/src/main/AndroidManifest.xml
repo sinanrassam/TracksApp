@@ -16,6 +16,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
+
         <activity android:name=".PostActivity"
             android:parentActivityName=".FeedActivity">
         </activity>
@@ -39,7 +40,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".FeedActivity">
+        <activity android:name=".FeedActivity"
+            android:launchMode="singleTop">
         </activity>
 
         <activity android:name=".NewPostActivity">
