@@ -72,7 +72,7 @@ public class GetCommentsTask extends AsyncTask<String, Integer, Boolean> {
 					
 					CommentEntry c = new CommentEntry(id, post_id, username, desc, date, time);
 					
-					Map<String, String> comment = new HashMap<>(2);
+					Map<String, String> comment = new HashMap<>();
 					
 					comment.put("Username", c.getUsername());
 					comment.put("Desc", c.toString());
