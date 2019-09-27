@@ -67,12 +67,14 @@ public class GetCommentsTask extends AsyncTask<String, Integer, Boolean> {
 					String post_id = (String) jsonObject.get("post_id");
 					String username = (String) jsonObject.get("username");
 					String desc = (String) jsonObject.get("description");
+					String date = (String) jsonObject.get("date");
+					String time = (String) jsonObject.get("time");
 					
-					CommentEntry c = new CommentEntry(id, post_id, username, desc, null);
+					CommentEntry c = new CommentEntry(id, post_id, username, desc, date, time);
 					
 					Map<String, String> comment = new HashMap<>(2);
 					
-					comment.put("Title", c.getPostId());
+					comment.put("Username", c.getUsername());
 					comment.put("Desc", c.toString());
 					
 					mCommentsList.add(i, comment);
@@ -100,7 +102,7 @@ public class GetCommentsTask extends AsyncTask<String, Integer, Boolean> {
 		}
 		SimpleAdapter adapter = new SimpleAdapter(mContext, mCommentsList,
 				android.R.layout.simple_list_item_2,
-				new String[] {"Title", "Desc"},
+				new String[] {"Username", "Desc"},
 				new int[] {android.R.id.text1, android.R.id.text2});
 		mFragment.setListAdapter(adapter);
 		adapter.notifyDataSetChanged();
