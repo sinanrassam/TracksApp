@@ -55,8 +55,6 @@ public class GetCommentsTask extends AsyncTask<String, Integer, Boolean> {
 			}
 		}
 		
-		Log.d("JSON", json.toString());
-		
 		if (json != null) {
 			mCommentsList = new ArrayList<>();
 			try {
@@ -94,10 +92,8 @@ public class GetCommentsTask extends AsyncTask<String, Integer, Boolean> {
 	
 	@Override
 	protected void onPostExecute(final Boolean success) {
-		if (success) {
-			mProgressBar.setVisibility(View.GONE);
-		} else {
-			mProgressBar.setVisibility(View.GONE);
+        mProgressBar.setVisibility(View.GONE);
+		if (!success) {
 			mTextView.setVisibility(View.VISIBLE);
 		}
 		SimpleAdapter adapter = new SimpleAdapter(mContext, mCommentsList,
