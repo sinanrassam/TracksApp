@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +13,7 @@ import android.view.View.OnClickListener;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import androidx.appcompat.app.AppCompatActivity;
 import com.lostanimals.tracks.tasks.LoginTask;
 import com.lostanimals.tracks.utils.NotificationUtility;
 import com.lostanimals.tracks.utils.PreferencesUtility;
@@ -39,11 +39,11 @@ public class LoginActivity extends AppCompatActivity {
 		feedIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 		registerIntent = new Intent(this, RegisterActivity.class);
 		registerIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-
+		
 		PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, feedIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 		NotificationUtility.createNotification(this, "Tracks", "Test", true, pendingIntent);
 		PreferencesUtility.setSharedPreferences(this);
-
+		
 		
 		// If user is logged in, start the feed.
 		if (!PreferencesUtility.getUserInfo().getUsername().equals("")) {

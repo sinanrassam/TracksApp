@@ -17,15 +17,15 @@ public class PostTest {
 	private static final String TEST_USER_USERNAME = "automatedTester";
 	private static final String TEST_POST_ID = "4";
 	private static final String TEST_POST_MESSAGE = "Automated Test CommentEntry for post" + TEST_POST_ID;
-
+	
 	@Mock
 	Context mockContext;
-
+	
 	@Before
 	public void initMocks() {
 		mockContext = null;
 	}
-
+	
 	@Test
 	public void NewComment_test() throws ExecutionException, InterruptedException, JSONException {
 		NewCommentTask newCommentTask = new NewCommentTask(null);

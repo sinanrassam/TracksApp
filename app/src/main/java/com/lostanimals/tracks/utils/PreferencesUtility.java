@@ -23,8 +23,12 @@ public class PreferencesUtility {
 		mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 	}
 	
+	public static boolean removeUserEntry() {
+		return setUserInfo(new PreferenceEntry("", "", ""));
+	}
+	
 	public static boolean setUserInfo(PreferenceEntry preferenceEntry) {
-		Log.d(TAG, "setUserInfo: "+preferenceEntry.getName());
+		Log.d(TAG, "setUserInfo: " + preferenceEntry.getName());
 		SharedPreferences.Editor editor = mSharedPreferences.edit();
 		editor.putString(KEY_NAME, preferenceEntry.getName());
 		editor.putString(KEY_USERNAME, preferenceEntry.getUsername());
@@ -40,9 +44,5 @@ public class PreferencesUtility {
 		String username = mSharedPreferences.getString(KEY_USERNAME, "");
 		String email = mSharedPreferences.getString(KEY_EMAIL, "");
 		return new PreferenceEntry(name, username, email);
-	}
-	
-	public static boolean removeUserEntry() {
-		return setUserInfo(new PreferenceEntry("", "", ""));
 	}
 }

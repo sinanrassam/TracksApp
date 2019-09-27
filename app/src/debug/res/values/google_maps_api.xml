@@ -1,0 +1,15 @@
+<resources>
+    <!--
+    Package name:
+    68:9E:BC:8B:4F:C6:6A:F0:E7:37:A6:50:4A:A2:E0:13:6E:49:31:CE
+
+    SHA-1 certificate fingerprint:
+    68:9E:BC:8B:4F:C6:6A:F0:E7:37:A6:50:4A:A2:E0:13:6E:49:31:CE
+
+    Info:
+    Key is currently restricted.
+    -->
+    <string name="google_maps_key" translatable="false" templateMergeStrategy="preserve">
+        AIzaSyDccZLVxohOBcXgLkMjxwIGIRtTAVtXOPA
+    </string>
+</resources>

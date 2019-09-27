@@ -11,7 +11,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-import static android.support.constraint.Constraints.TAG;
 
 public class NewCommentTask extends AsyncTask<String, Void, JSONObject> {
 	@SuppressLint ("StaticFieldLeak")
@@ -32,7 +31,6 @@ public class NewCommentTask extends AsyncTask<String, Void, JSONObject> {
 		try {
 			String postData = ConnectionManager.postEncoder("new-comment", parameters);
 			json = ConnectionManager.processRequest("comment.php", postData);
-			Log.d(TAG + TAG + TAG + TAG + TAG, "doInBackground() returned: " + json);
 		} catch (JSONException | IOException e) {
 			e.printStackTrace();
 		}

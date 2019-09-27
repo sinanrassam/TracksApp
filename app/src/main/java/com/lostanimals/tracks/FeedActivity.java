@@ -2,15 +2,15 @@ package com.lostanimals.tracks;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
-import com.lostanimals.tracks.utils.PreferencesUtility;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
+import com.google.android.material.navigation.NavigationView;
+
 
 import java.util.Objects;
 
@@ -23,8 +23,8 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_feed);
 		
-		// Setup DrawerLayout and ActionBar
 		DrawerLayout mDrawerLayout = findViewById(R.id.drawer);
+
 		
 		mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open_action_bar,
 				R.string.close_action_bar);

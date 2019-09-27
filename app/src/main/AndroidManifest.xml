@@ -2,10 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
           package="com.lostanimals.tracks">
+
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
     <uses-permission android:name="android.permission.READ_PROFILE"/>
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <application
@@ -16,9 +18,15 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
+        <meta-data
+                android:name="com.google.android.geo.API_KEY"
+                android:value="@string/google_maps_key"/>
 
-        <activity android:name=".PostActivity"
-            android:parentActivityName=".FeedActivity">
+        <activity
+                android:name=".MapsActivity"
+                android:label="@string/title_activity_maps">
+        </activity>
+        <activity android:name=".PostActivity">
         </activity>
         <activity android:name=".LogoutActivity">
         </activity>
@@ -35,22 +43,23 @@
                 android:label="@string/title_activity_login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.DEFAULT" />
+
+                <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
         <activity android:name=".FeedActivity"
             android:launchMode="singleTop">
         </activity>
-
         <activity android:name=".NewPostActivity">
         </activity>
-
-        <activity android:name=".MyPostActivity" android:parentActivityName=".FeedActivity">
+        <activity
+                android:name=".MyPostActivity"
+                android:parentActivityName=".FeedActivity">
         </activity>
-
-        <activity android:name=".MyProfileActivity" android:parentActivityName=".FeedActivity">
+        <activity
+                android:name=".MyProfileActivity"
+                android:parentActivityName=".FeedActivity">
         </activity>
     </application>
 

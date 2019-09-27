@@ -1,10 +1,9 @@
 package com.lostanimals.tracks;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,6 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import com.lostanimals.tracks.entries.PostEntry;
 import com.lostanimals.tracks.tasks.DeleteTask;
 import com.lostanimals.tracks.tasks.EditTask;
@@ -21,24 +22,23 @@ import com.lostanimals.tracks.utils.PreferencesUtility;
 
 public class PostActivity extends AppCompatActivity {
 	
-	private int mPostPosition;
 	private PostEntry mPostEntry;
-	private TextView mPostTitleView, mPostDescView, mPostDateView, mPostAuthorView;
 	private EditText mCommentView;
 	private CommentsFragment commentsFragment;
 	
+	@SuppressLint ("SetTextI18n")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_post);
 		
-		mPostPosition = getIntent().getIntExtra("position", 0);
+		int mPostPosition = getIntent().getIntExtra("position", 0);
 		mPostEntry = PostsUtility.getPostEntry(mPostPosition);
 		
-		mPostTitleView = findViewById(R.id.post_txt_title);
-		mPostDescView = findViewById(R.id.post_et_desc);
-		mPostDateView = findViewById(R.id.post_date);
-		mPostAuthorView = findViewById(R.id.post_author);
+		TextView mPostTitleView = findViewById(R.id.post_txt_title);
+		TextView mPostDescView = findViewById(R.id.post_et_desc);
+		TextView mPostDateView = findViewById(R.id.post_date);
+		TextView mPostAuthorView = findViewById(R.id.post_author);
 		
 		mPostTitleView.setText(mPostEntry.getPostTitle());
 		

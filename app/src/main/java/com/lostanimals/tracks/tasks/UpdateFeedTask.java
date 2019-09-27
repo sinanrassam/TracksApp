@@ -3,8 +3,6 @@ package com.lostanimals.tracks.tasks;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.os.SystemClock;
-import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
@@ -28,6 +26,7 @@ import java.util.Map;
 import static com.lostanimals.tracks.utils.ConnectionManager.processRequest;
 
 public class UpdateFeedTask extends AsyncTask<String, Integer, Boolean> {
+	public SimpleAdapter adapter;
 	@SuppressLint ("StaticFieldLeak")
 	private Context mContext;
 	@SuppressLint ("StaticFieldLeak")
