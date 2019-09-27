@@ -32,7 +32,10 @@
                 android:layout_margin="16dp"
                 android:clickable="true"
                 android:onClick="openNewPostActivity"
-                android:src="@android:drawable/ic_input_add"/>
+                app:rippleColor="@color/secondaryDarkColor"
+                app:backgroundTint="@color/secondaryColor"
+                android:src="@drawable/plus_button_white"
+                />
 
     </FrameLayout>
 

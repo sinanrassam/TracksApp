@@ -1,5 +1,6 @@
 package com.lostanimals.tracks.tasks;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 import com.lostanimals.tracks.utils.ConnectionManager;
@@ -10,8 +11,10 @@ import org.json.JSONObject;
 import java.io.IOException;
 
 public class LoginTask extends AsyncTask<String, Integer, JSONObject> {
-	
-	public LoginTask() {
+	private Context mContext;
+
+	public LoginTask(Context context) {
+		this.mContext = context;
 	}
 	
 	@Override
@@ -30,7 +33,11 @@ public class LoginTask extends AsyncTask<String, Integer, JSONObject> {
 	@Override
 	protected void onPostExecute(JSONObject data) {
 		try {
-			PreferencesUtility.setUserInfo(ConnectionManager.login((JSONObject) data.get("details")));
+			if (data.get("response").equals("successful")) {
+				PreferencesUtility.setUserInfo(ConnectionManager.login((JSONObject) data.get("details")));
+			} else {
+				Toast.makeText(mContext, (String) data.get("reason"), Toast.LENGTH_SHORT).show();
+			}
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
