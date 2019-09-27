@@ -17,13 +17,14 @@ import java.util.Objects;
 public class FeedActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 	
 	private ActionBarDrawerToggle mToggle;
+	private DrawerLayout mDrawerLayout;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_feed);
 		
-		DrawerLayout mDrawerLayout = findViewById(R.id.drawer);
+		mDrawerLayout = findViewById(R.id.drawer);
 
 		
 		mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open_action_bar,
@@ -56,22 +57,31 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 	public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 		int id = menuItem.getItemId();
 		
-		switch (id) {
-			case R.id.feed_nav:
-				startActivity(new Intent(this, FeedActivity.class));
-				break;
-			case R.id.myPosts_nav:
-				startActivity(new Intent(this, MyPostActivity.class));
-				break;
-			case R.id.logOut_nav:
-				startActivity(new Intent(this, LogoutActivity.class));
-				finish();
-				break;
-			case R.id.myProfile_nav:
-				startActivity(new Intent(this, MyProfileActivity.class));
-				break;
+		if (id == R.id.feed_nav) {
+			startActivity(new Intent(this, FeedActivity.class));
+		}
+		
+		if (id == R.id.myPosts_nav) {
+			startActivity(new Intent(this, MyPostActivity.class));
+		}
+		
+		if (id == R.id.logOut_nav) {
+			startActivity(new Intent(this, LogoutActivity.class));
+			finish();
+		}
+		if (id == R.id.myProfile_nav) {
+			startActivity(new Intent(this, MyProfileActivity.class));
+			
 		}
 		
 		return false;
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		// TODO: Testing
+		//mDrawerLayout.closeDrawers();
+		mDrawerLayout.setVisibility(View.INVISIBLE);
 	}
 }
