@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.widget.Toast;
 import androidx.core.app.ActivityCompat;
 import com.lostanimals.tracks.FeedActivity;
 import com.lostanimals.tracks.utils.ConnectionManager;

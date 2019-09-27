@@ -17,13 +17,14 @@ import java.util.Objects;
 public class FeedActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 	
 	private ActionBarDrawerToggle mToggle;
+	private DrawerLayout mDrawerLayout;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_feed);
 		
-		DrawerLayout mDrawerLayout = findViewById(R.id.drawer);
+		mDrawerLayout = findViewById(R.id.drawer);
 
 		
 		mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open_action_bar,
@@ -70,8 +71,17 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 		}
 		if (id == R.id.myProfile_nav) {
 			startActivity(new Intent(this, MyProfileActivity.class));
+			
 		}
 		
 		return false;
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		// TODO: Testing
+		//mDrawerLayout.closeDrawers();
+		mDrawerLayout.setVisibility(View.INVISIBLE);
 	}
 }
