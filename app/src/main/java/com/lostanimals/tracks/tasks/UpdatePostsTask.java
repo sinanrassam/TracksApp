@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.ListActivity;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
@@ -65,14 +66,15 @@ public class UpdatePostsTask extends AsyncTask<String, Integer, Boolean> {
 			mPostList = new ArrayList<>();
 			try {
 				JSONArray jsonArray = (JSONArray) json.get("posts");
+				Log.d("test", jsonArray.toString());
 				for (int i = 0; i < jsonArray.length(); i++) {
 					JSONObject jsonObject = (JSONObject) jsonArray.get(i);
 					String id = (String) jsonObject.get("id");
 					String title = (String) jsonObject.get("title");
 					String desc = (String) jsonObject.get("description");
 					String username = (String) jsonObject.get("username");
-					String date = (String) jsonObject.get("date");
-					String time = (String) jsonObject.get("time");
+					String date = (String) jsonObject.get("post_date");
+					String time = (String) jsonObject.get("post_time");
 					String found = (String) jsonObject.get("found");
 					
 					PostsUtility.addPostEntry(i, new PostEntry(id, title, desc, username, date, time, found));
