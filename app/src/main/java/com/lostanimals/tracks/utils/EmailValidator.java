@@ -6,7 +6,7 @@ import android.text.TextWatcher;
 import java.util.regex.Pattern;
 
 /**
- * An Email format validator for {@link android.widget.EditText}.
+ * An Email format validator for EditText fields.
  */
 public class EmailValidator implements TextWatcher {
 	/**

@@ -23,6 +23,9 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
+/**
+ *
+ */
 public class LoginActivity extends AppCompatActivity {
 	private final static String TAG = "LOGIN_ACTIVITY";
 
@@ -31,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
 
 	private Intent feedIntent;
 	private Intent registerIntent;
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -63,6 +66,10 @@ public class LoginActivity extends AppCompatActivity {
 
 		Button mSignInBtn = findViewById(R.id.login_btn);
 		mSignInBtn.setOnClickListener(new OnClickListener() {
+			/**
+			 *
+			 * @param view
+			 */
 			@Override
 			public void onClick(View view) {
 				// TODO: Fix this
@@ -92,6 +99,10 @@ public class LoginActivity extends AppCompatActivity {
 	}
 
 	// TODO: Fix this
+	/**
+	 *
+	 * @return
+	 */
 	public boolean isOnline() {
 		Runtime runtime = Runtime.getRuntime();
 		try {
@@ -103,7 +114,13 @@ public class LoginActivity extends AppCompatActivity {
 		
 		return false;
 	}
-
+	
+	/**
+	 *
+	 * @throws ExecutionException
+	 * @throws InterruptedException
+	 * @throws JSONException
+	 */
 	private void attemptLogin() throws ExecutionException, InterruptedException, JSONException {
 		mEmailView.setError(null);
 		mPasswordView.setError(null);
