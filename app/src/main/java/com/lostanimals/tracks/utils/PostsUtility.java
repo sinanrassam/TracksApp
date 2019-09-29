@@ -8,14 +8,6 @@ public class PostsUtility {
 	
 	private static ArrayList<PostEntry> postEntryArray;
 	
-	public static ArrayList<PostEntry> getPostEntryArray() {
-		return postEntryArray;
-	}
-	
-	public static void setPostEntryArray(final ArrayList<PostEntry> postEntryArray) {
-		PostsUtility.postEntryArray = postEntryArray;
-	}
-	
 	public static void addPostEntry(int index, PostEntry newPost) {
 		if (postEntryArray == null) {
 			postEntryArray = new ArrayList<>();

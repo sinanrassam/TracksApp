@@ -66,13 +66,14 @@ public class LoginActivity extends AppCompatActivity {
 		mSignInBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
+				// TODO: Fix this
 				try {
-					if(isOnline()==false) {
+					if(isOnline() == false) {
 						Log.d("LOGIN_TASK", "internet avaliable");
 						attemptLogin();
 					}
 					else{
-
+						attemptLogin();
 						Log.d("LOGIN_TASK", "no internet");
 					}
 				} catch (ExecutionException | InterruptedException | JSONException e) {
@@ -94,7 +95,7 @@ public class LoginActivity extends AppCompatActivity {
 	public boolean isOnline() {
 		Runtime runtime = Runtime.getRuntime();
 		try {
-			Process ipProcess = runtime.exec("/system/bin/ping -c 1 8.8.8.8");
+			Process ipProcess = runtime.exec("/system/bin/ping -c 1 bosh.live");
 			int     exitValue = ipProcess.waitFor();
 			return (exitValue == 0);
 		}

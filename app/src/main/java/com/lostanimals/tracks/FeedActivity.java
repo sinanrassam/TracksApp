@@ -55,33 +55,41 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 	
 	@Override
 	public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-		int id = menuItem.getItemId();
+		Intent navigationIntent = null;
 		
-		if (id == R.id.feed_nav) {
-			startActivity(new Intent(this, FeedActivity.class));
+		switch (menuItem.getItemId()) {
+			case R.id.feed_nav:
+				navigationIntent = new Intent(this, FeedActivity.class);
+//				startActivity(new Intent(this, FeedActivity.class));
+				break;
+			case R.id.myPosts_nav:
+				navigationIntent = new Intent(this, MyPostActivity.class);
+//				startActivity(new Intent(this, MyPostActivity.class));
+				break;
+			case R.id.logOut_nav:
+				navigationIntent = new Intent(this, LogoutActivity.class);
+//				startActivity(new Intent(this, LogoutActivity.class));
+//				finish();
+				break;
+			case R.id.myProfile_nav:
+				navigationIntent = new Intent(this, MyProfileActivity.class);
+//				startActivity(new Intent(this, MyProfileActivity.class));
+				break;
 		}
 		
-		if (id == R.id.myPosts_nav) {
-			startActivity(new Intent(this, MyPostActivity.class));
-		}
+		startActivity(navigationIntent);
 		
-		if (id == R.id.logOut_nav) {
-			startActivity(new Intent(this, LogoutActivity.class));
+		if (navigationIntent.getComponent().getClassName().equals("LogoutActivity")) {
 			finish();
 		}
-		if (id == R.id.myProfile_nav) {
-			startActivity(new Intent(this, MyProfileActivity.class));
-			
-		}
 		
+		// TODO: Why hardcode a false return?
 		return false;
 	}
 	
 	@Override
 	protected void onResume() {
 		super.onResume();
-		// TODO: Testing
-		//mDrawerLayout.closeDrawers();
-		mDrawerLayout.setVisibility(View.INVISIBLE);
+		mDrawerLayout.closeDrawers();
 	}
 }
