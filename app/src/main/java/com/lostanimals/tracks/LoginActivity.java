@@ -47,13 +47,8 @@ public class LoginActivity extends AppCompatActivity {
 		
 		// If user is logged in, start the feed.
 		if (!PreferencesUtility.getUserInfo().getUsername().equals("")) {
-			Log.d(TAG, "onCreate: USER ACCOUNT_USER_ACCOUNT_USER_ACCOUNT: " +
-					PreferencesUtility.getUserInfo().getUsername());
 			startActivity(feedIntent);
-			
 			this.finish();
-		} else {
-			Log.d(TAG, "onCreate: USERNAMEUSERNAME: " + PreferencesUtility.getUserInfo().getUsername());
 		}
 		
 		setContentView(R.layout.activity_login);
@@ -92,32 +87,29 @@ public class LoginActivity extends AppCompatActivity {
 		});
 	}
 
+	// TODO: Fix this
 	public boolean isOnline() {
 		Runtime runtime = Runtime.getRuntime();
 		try {
-			Process ipProcess = runtime.exec("/system/bin/ping -c 1 bosh.live");
+			Process ipProcess = runtime.exec("/system/bin/ping -c 1 8.8.8.8");
 			int     exitValue = ipProcess.waitFor();
 			return (exitValue == 0);
 		}
-		catch (IOException e)          { e.printStackTrace(); }
-		catch (InterruptedException e) { e.printStackTrace(); }
-
+		catch (IOException | InterruptedException e)          { e.printStackTrace(); }
+		
 		return false;
 	}
 
 	private void attemptLogin() throws ExecutionException, InterruptedException, JSONException {
-		// Reset errors.
 		mEmailView.setError(null);
 		mPasswordView.setError(null);
 		
-		// Store values at the time of the login attempt.
 		String email = mEmailView.getText().toString().toLowerCase();
 		String password = mPasswordView.getText().toString();
 		
 		boolean cancel = false;
 		View focusView = null;
 		
-		// Check for a valid password, if the user entered one.
 		if (TextUtils.isEmpty(password)) {
 			mPasswordView.setError(getString(R.string.error_field_required));
 			focusView = mPasswordView;
