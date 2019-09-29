@@ -49,5 +49,6 @@ public class FeedFragment extends ListFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
+		refresh();
 	}
 }

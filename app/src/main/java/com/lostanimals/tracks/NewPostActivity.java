@@ -64,6 +64,7 @@ public class NewPostActivity extends AppCompatActivity {
 			EditTask editTask = new EditTask(this);
 			editTask.execute(postID, title, description, postIsFound);
 		}
+		finish();
 	}
 	
 	@Override
