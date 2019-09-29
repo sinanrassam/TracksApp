@@ -162,6 +162,8 @@ public class PostActivity extends AppCompatActivity {
 			Intent myIntent = new Intent(this, NewPostActivity.class);
 			myIntent.putExtra("isEditTask", true); // to set trigger in NewPostActivity to call EditTask
 			myIntent.putExtra("postID", mPostEntry.getId());
+			myIntent.putExtra("postTitle", mPostEntry.getPostTitle());
+			myIntent.putExtra("postDesc", mPostEntry.getPostDesc());
 			myIntent.putExtra("isFound", mPostEntry.getFound());
 			startActivity(myIntent);
 		} else {
