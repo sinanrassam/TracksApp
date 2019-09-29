@@ -45,7 +45,7 @@ public class UpdatePostsTask extends AsyncTask<String, Integer, Boolean> {
 
 	@Override
 	protected Boolean doInBackground(String... parameters) {
-		Boolean success = true;
+		boolean success = true;
 		JSONObject json = null;
 		if (!this.isCancelled()) {
 			String postData = null;
