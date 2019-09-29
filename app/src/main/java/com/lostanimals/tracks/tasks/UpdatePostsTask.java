@@ -45,6 +45,7 @@ public class UpdatePostsTask extends AsyncTask<String, Integer, Boolean> {
 
 	@Override
 	protected Boolean doInBackground(String... parameters) {
+		Boolean success = true;
 		JSONObject json = null;
 		if (!this.isCancelled()) {
 			String postData = null;
@@ -52,12 +53,14 @@ public class UpdatePostsTask extends AsyncTask<String, Integer, Boolean> {
 				postData = ConnectionManager.postEncoder("get-posts", parameters);
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
+				success = false;
 			}
 			
 			try {
 				json = processRequest("post.php", postData);
 			} catch (JSONException | IOException e) {
 				e.printStackTrace();
+				success = false;
 			}
 		}
 		
@@ -88,10 +91,10 @@ public class UpdatePostsTask extends AsyncTask<String, Integer, Boolean> {
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();
-				return false;
+				success = false;
 			}
 		}
-		return true;
+		return success;
 	}
 	
 	@Override
@@ -101,16 +104,20 @@ public class UpdatePostsTask extends AsyncTask<String, Integer, Boolean> {
 	
 	@Override
 	protected void onPostExecute(final Boolean success) {
-		if (success) {
-			mProgressBar.setVisibility(View.GONE);
-		}
+		mProgressBar.setVisibility(View.GONE);
+		
 		SimpleAdapter adapter = new SimpleAdapter(mContext, mPostList,
 				android.R.layout.simple_list_item_2,
 				new String[] {"Title", "Desc"},
 				new int[] {android.R.id.text1, android.R.id.text2});
 		mFragment.setListAdapter(adapter);
 		adapter.notifyDataSetChanged();
-		Toast.makeText(mContext, "Posts refreshed", Toast.LENGTH_LONG).show();
+		
+		if (success) {
+			Toast.makeText(mContext, "Posts refreshed", Toast.LENGTH_LONG).show();
+		} else {
+			Toast.makeText(mContext, "Error loading posts", Toast.LENGTH_LONG).show();
+		}
 	}
 	
 	@Override
