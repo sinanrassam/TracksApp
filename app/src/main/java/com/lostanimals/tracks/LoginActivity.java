@@ -13,6 +13,7 @@ import android.view.View.OnClickListener;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import com.lostanimals.tracks.tasks.LoginTask;
 import com.lostanimals.tracks.utils.NotificationUtility;
@@ -34,6 +35,9 @@ public class LoginActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		ActionBar actionBar = getSupportActionBar();
+		actionBar.setTitle("Login");
 
 		feedIntent = new Intent(this, FeedActivity.class);
 		feedIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
