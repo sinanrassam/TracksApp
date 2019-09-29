@@ -18,8 +18,6 @@ import java.io.IOException;
 public class NewPostTask extends AsyncTask<String, Void, JSONObject> {
 	@SuppressLint ("StaticFieldLeak")
 	private Context mContext;
-	private Intent feedIntent;
-	private PendingIntent pendingIntent;
 	
 	public NewPostTask(Context context) {
 		mContext = context;
@@ -45,7 +43,7 @@ public class NewPostTask extends AsyncTask<String, Void, JSONObject> {
 	protected void onPostExecute(JSONObject jsonObject) {
 		try {
 			if (jsonObject.get("response").equals("successful")) {
-				feedIntent = new Intent(mContext, FeedActivity.class);
+				Intent feedIntent = new Intent(mContext, FeedActivity.class);
 				feedIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 				
 				PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 0, feedIntent, PendingIntent.FLAG_UPDATE_CURRENT);

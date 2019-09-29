@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import androidx.fragment.app.ListFragment;
-import com.lostanimals.tracks.tasks.UpdateMyPostsTask;
+import com.lostanimals.tracks.tasks.UpdatePostsTask;
 import com.lostanimals.tracks.utils.PreferencesUtility;
 
 public class MyPostsFragment extends ListFragment {
@@ -21,7 +21,7 @@ public class MyPostsFragment extends ListFragment {
 		
 		
 		String username = PreferencesUtility.getUserInfo().getUsername();
-		new UpdateMyPostsTask(this, progressBar).execute("4", username);
+		new UpdatePostsTask(this, progressBar).execute("4", username);
 		
 		return view;
 	}

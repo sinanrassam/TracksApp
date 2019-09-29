@@ -9,7 +9,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import androidx.fragment.app.ListFragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import com.lostanimals.tracks.tasks.UpdateFeedTask;
+import com.lostanimals.tracks.tasks.UpdatePostsTask;
 
 public class FeedFragment extends ListFragment {
 	private SwipeRefreshLayout refreshLayout;
@@ -43,11 +43,12 @@ public class FeedFragment extends ListFragment {
 	}
 	
 	private void refresh() {
-		new UpdateFeedTask(this, progressBar).execute("", "");
+		new UpdatePostsTask(this, progressBar).execute("", "");
 	}
 	
 	@Override
 	public void onResume() {
 		super.onResume();
+		refresh();
 	}
 }

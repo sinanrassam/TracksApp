@@ -1,12 +1,15 @@
 package com.lostanimals.tracks.tasks;
 
 import android.annotation.SuppressLint;
+import android.app.ListActivity;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
+import androidx.fragment.app.ListFragment;
 import com.lostanimals.tracks.MyPostsFragment;
 import com.lostanimals.tracks.entries.PostEntry;
 import com.lostanimals.tracks.utils.ConnectionManager;
@@ -24,29 +27,25 @@ import java.util.Map;
 
 import static com.lostanimals.tracks.utils.ConnectionManager.processRequest;
 
-public class UpdateMyPostsTask extends AsyncTask<String, Integer, Boolean> {
+public class UpdatePostsTask extends AsyncTask<String, Integer, Boolean> {
 	@SuppressLint ("StaticFieldLeak")
 	private Context mContext;
 	@SuppressLint ("StaticFieldLeak")
 	private ProgressBar mProgressBar;
-	private MyPostsFragment mFragment;
+	
+	private ListFragment mFragment;
 	
 	private List<Map<String, String>> mPostList = new ArrayList<>();
-	private ArrayList<PostEntry> mPostArray = new ArrayList<>();
 	
-	public UpdateMyPostsTask(MyPostsFragment activity, ProgressBar progressBar) {
+	public UpdatePostsTask(ListFragment activity, ProgressBar progressBar) {
 		this.mFragment = activity;
 		this.mContext = mFragment.getContext();
 		this.mProgressBar = progressBar;
 	}
-	
-	
-	public PostEntry getPostEntry(int index) {
-		return mPostArray.get(index);
-	}
-	
+
 	@Override
 	protected Boolean doInBackground(String... parameters) {
+		boolean success = true;
 		JSONObject json = null;
 		if (!this.isCancelled()) {
 			String postData = null;
@@ -54,30 +53,31 @@ public class UpdateMyPostsTask extends AsyncTask<String, Integer, Boolean> {
 				postData = ConnectionManager.postEncoder("get-posts", parameters);
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
+				success = false;
 			}
 			
 			try {
 				json = processRequest("post.php", postData);
 			} catch (JSONException | IOException e) {
 				e.printStackTrace();
+				success = false;
 			}
 		}
 		
 		if (json != null) {
-			// Clear the array list and post list-map first
-//            PostsUtility.getPostEntryArray().clear();
 			PostsUtility.clear();
 			mPostList = new ArrayList<>();
 			try {
 				JSONArray jsonArray = (JSONArray) json.get("posts");
+				Log.d("test", jsonArray.toString());
 				for (int i = 0; i < jsonArray.length(); i++) {
 					JSONObject jsonObject = (JSONObject) jsonArray.get(i);
 					String id = (String) jsonObject.get("id");
 					String title = (String) jsonObject.get("title");
 					String desc = (String) jsonObject.get("description");
 					String username = (String) jsonObject.get("username");
-					String date = (String) jsonObject.get("date");
-					String time = (String) jsonObject.get("time");
+					String date = (String) jsonObject.get("post_date");
+					String time = (String) jsonObject.get("post_time");
 					String found = (String) jsonObject.get("found");
 					
 					PostsUtility.addPostEntry(i, new PostEntry(id, title, desc, username, date, time, found));
@@ -91,29 +91,33 @@ public class UpdateMyPostsTask extends AsyncTask<String, Integer, Boolean> {
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();
-				return false;
+				success = false;
 			}
 		}
-		return true;
+		return success;
 	}
 	
 	@Override
 	protected void onPreExecute() {
-		Toast.makeText(mContext, "Loading posts", Toast.LENGTH_LONG).show();
+		Toast.makeText(mContext, "Loading posts", Toast.LENGTH_SHORT).show();
 	}
 	
 	@Override
 	protected void onPostExecute(final Boolean success) {
-		if (success) {
-			mProgressBar.setVisibility(View.GONE);
-		}
+		mProgressBar.setVisibility(View.GONE);
+		
 		SimpleAdapter adapter = new SimpleAdapter(mContext, mPostList,
 				android.R.layout.simple_list_item_2,
 				new String[] {"Title", "Desc"},
 				new int[] {android.R.id.text1, android.R.id.text2});
 		mFragment.setListAdapter(adapter);
 		adapter.notifyDataSetChanged();
-		Toast.makeText(mContext, "Posts refreshed", Toast.LENGTH_LONG).show();
+		
+		if (success) {
+			Toast.makeText(mContext, "Posts refreshed", Toast.LENGTH_LONG).show();
+		} else {
+			Toast.makeText(mContext, "Error loading posts", Toast.LENGTH_LONG).show();
+		}
 	}
 	
 	@Override

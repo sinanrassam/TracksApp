@@ -43,7 +43,7 @@ public class PostActivity extends AppCompatActivity {
 		mPostTitleView.setText(mPostEntry.getPostTitle());
 		
 		mPostDescView.setText(mPostEntry.getPostDesc());
-		mPostDateView.setText("Posted on: " + "DATE");
+		mPostDateView.setText("Posted on: " + mPostEntry.getPostDate() + ", at: " + mPostEntry.getPostTime());
 		mPostAuthorView.setText("By: " + mPostEntry.getUsername());
 		
 		mCommentView = findViewById(R.id.comment_field);
@@ -162,6 +162,8 @@ public class PostActivity extends AppCompatActivity {
 			Intent myIntent = new Intent(this, NewPostActivity.class);
 			myIntent.putExtra("isEditTask", true); // to set trigger in NewPostActivity to call EditTask
 			myIntent.putExtra("postID", mPostEntry.getId());
+			myIntent.putExtra("postTitle", mPostEntry.getPostTitle());
+			myIntent.putExtra("postDesc", mPostEntry.getPostDesc());
 			myIntent.putExtra("isFound", mPostEntry.getFound());
 			startActivity(myIntent);
 		} else {

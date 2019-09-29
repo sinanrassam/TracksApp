@@ -4,26 +4,30 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
+
 
 import java.util.Objects;
 
 public class FeedActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 	
 	private ActionBarDrawerToggle mToggle;
+	private DrawerLayout mDrawerLayout;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_feed);
 		
-		// Setup DrawerLayout and ActionBar
-		DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
-		
+		mDrawerLayout = findViewById(R.id.drawer);
+
+
 		mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open_action_bar,
 				R.string.close_action_bar);
 		mDrawerLayout.addDrawerListener(mToggle);
@@ -31,9 +35,11 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 		
 		Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 		
-		NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
+		NavigationView navigationView = findViewById(R.id.navigation_view);
 		navigationView.setNavigationItemSelectedListener(this);
-		
+
+		ActionBar actionBar = getSupportActionBar();
+		actionBar.setTitle("Feed");
 	}
 	
 	public void openNewPostActivity(View view) {
@@ -52,23 +58,38 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 	
 	@Override
 	public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-		int id = menuItem.getItemId();
+		Intent navigationIntent = null;
 		
-		if (id == R.id.feed_nav) {
-			startActivity(new Intent(this, FeedActivity.class));
+		switch (menuItem.getItemId()) {
+			case R.id.feed_nav:
+				navigationIntent = new Intent(this, FeedActivity.class);
+				break;
+			case R.id.myPosts_nav:
+				navigationIntent = new Intent(this, MyPostActivity.class);
+				break;
+			case R.id.logOut_nav:
+				navigationIntent = new Intent(this, LogoutActivity.class);
+				break;
+			case R.id.myProfile_nav:
+				navigationIntent = new Intent(this, MyProfileActivity.class);
+				break;
 		}
 		
-		if (id == R.id.myPosts_nav) {
-			startActivity(new Intent(this, MyPostActivity.class));
+		if (navigationIntent != null) {
+			startActivity(navigationIntent);
+			if (navigationIntent.getComponent().getClassName().equals("LogoutActivity")) {
+				finish();
+			}
 		}
 		
-		if (id == R.id.logOut_nav) {
-			startActivity(new Intent(this, LogoutActivity.class));
-		}
-		if (id == R.id.myProfile_nav) {
-			startActivity(new Intent(this, MyProfileActivity.class));
-		}
+		mDrawerLayout.closeDrawers();
 		
+		// TODO: Why hardcode a false return?
 		return false;
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
 	}
 }
