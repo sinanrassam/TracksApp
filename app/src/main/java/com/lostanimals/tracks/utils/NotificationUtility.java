@@ -25,7 +25,6 @@ public class NotificationUtility {
 	private static NotificationManager notificationManager;
 	private static NotificationCompat.Builder builder;
 	private static NotificationChannel notificationChannel;
-	private static int notificationID;
 	
 	/**
 	 * Method for creating the notification, manager and channel.

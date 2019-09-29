@@ -63,28 +63,26 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 		switch (menuItem.getItemId()) {
 			case R.id.feed_nav:
 				navigationIntent = new Intent(this, FeedActivity.class);
-//				startActivity(new Intent(this, FeedActivity.class));
 				break;
 			case R.id.myPosts_nav:
 				navigationIntent = new Intent(this, MyPostActivity.class);
-//				startActivity(new Intent(this, MyPostActivity.class));
 				break;
 			case R.id.logOut_nav:
 				navigationIntent = new Intent(this, LogoutActivity.class);
-//				startActivity(new Intent(this, LogoutActivity.class));
-//				finish();
 				break;
 			case R.id.myProfile_nav:
 				navigationIntent = new Intent(this, MyProfileActivity.class);
-//				startActivity(new Intent(this, MyProfileActivity.class));
 				break;
 		}
 		
-		startActivity(navigationIntent);
-		
-		if (navigationIntent.getComponent().getClassName().equals("LogoutActivity")) {
-			finish();
+		if (navigationIntent != null) {
+			startActivity(navigationIntent);
+			if (navigationIntent.getComponent().getClassName().equals("LogoutActivity")) {
+				finish();
+			}
 		}
+		
+		mDrawerLayout.closeDrawers();
 		
 		// TODO: Why hardcode a false return?
 		return false;
@@ -93,6 +91,5 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 	@Override
 	protected void onResume() {
 		super.onResume();
-		mDrawerLayout.closeDrawers();
 	}
 }
