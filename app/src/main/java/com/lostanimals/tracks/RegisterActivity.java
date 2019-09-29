@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import com.lostanimals.tracks.tasks.RegisterTask;
 import com.lostanimals.tracks.utils.EmailValidator;
@@ -25,8 +26,10 @@ public class RegisterActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register);
-		
-		Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+
+		ActionBar actionBar = getSupportActionBar();
+		actionBar.setDisplayHomeAsUpEnabled(true);
+		actionBar.setTitle("Register");
 		
 		mFirstNameView = findViewById(R.id.firstName);
 		mLastNameView = findViewById(R.id.lastName);

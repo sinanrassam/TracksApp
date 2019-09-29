@@ -6,6 +6,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -26,7 +27,7 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 		
 		mDrawerLayout = findViewById(R.id.drawer);
 
-		
+
 		mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open_action_bar,
 				R.string.close_action_bar);
 		mDrawerLayout.addDrawerListener(mToggle);
@@ -36,7 +37,9 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 		
 		NavigationView navigationView = findViewById(R.id.navigation_view);
 		navigationView.setNavigationItemSelectedListener(this);
-		
+
+		ActionBar actionBar = getSupportActionBar();
+		actionBar.setTitle("Feed");
 	}
 	
 	public void openNewPostActivity(View view) {

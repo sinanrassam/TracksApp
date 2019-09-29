@@ -17,7 +17,7 @@ import java.util.Objects;
 public class NewPostActivity extends AppCompatActivity {
 	private EditText etTitle, etDescription;
 	private boolean isEditTask;
-	private String postID, postIsFound;
+	private String postID, postTitle, postDescription, postIsFound;
 	
 	@SuppressLint ("SetTextI18n")
 	@Override
@@ -29,6 +29,8 @@ public class NewPostActivity extends AppCompatActivity {
 		if (b != null) {
 			isEditTask = b.getBoolean("isEditTask");
 			postID = b.getString("postID");
+			postTitle = b.getString("postTitle");
+			postDescription = b.getString("postDesc");
 			postIsFound = b.getString("isFound");
 		}
 		
@@ -38,7 +40,8 @@ public class NewPostActivity extends AppCompatActivity {
 		etDescription = findViewById(R.id.post_et_desc);
 		
 		if (isEditTask) {
-			etTitle.setText("Edit your post");
+			etTitle.setText(postTitle);
+			etDescription.setText(postDescription);
 		}
 		
 		Button backButton = this.findViewById(R.id.back);
@@ -61,6 +64,7 @@ public class NewPostActivity extends AppCompatActivity {
 			EditTask editTask = new EditTask(this);
 			editTask.execute(postID, title, description, postIsFound);
 		}
+		finish();
 	}
 	
 	@Override
