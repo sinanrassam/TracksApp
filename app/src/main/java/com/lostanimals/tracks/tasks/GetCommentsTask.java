@@ -59,6 +59,7 @@ public class GetCommentsTask extends AsyncTask<String, Integer, Boolean> {
 			mCommentsList = new ArrayList<>();
 			try {
 				JSONArray jsonArray = (JSONArray) json.get("comments");
+				Log.d("Comments", jsonArray.toString());
 				for (int i = 0; i < jsonArray.length(); i++) {
 					JSONObject jsonObject = (JSONObject) jsonArray.get(i);
 					String id = (String) jsonObject.get("id");

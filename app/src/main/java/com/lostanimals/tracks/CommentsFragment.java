@@ -26,19 +26,19 @@ public class CommentsFragment extends ListFragment {
 		mProgressBar = view.findViewById(R.id.progress_bar);
 		mProgressBar.setProgress(0);
 		
-		final SwipeRefreshLayout refreshLayout = view.findViewById(R.id.pullToRefresh);
+//		final SwipeRefreshLayout refreshLayout = view.findViewById(R.id.pullToRefresh);
 		
 		post_id = getArguments().getString("post_id");
 		
 		refresh();
 		
-		refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-			@Override
-			public void onRefresh() {
-				refresh();
-				refreshLayout.setRefreshing(false);
-			}
-		});
+//		refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//			@Override
+//			public void onRefresh() {
+//				refresh();
+//				refreshLayout.setRefreshing(false);
+//			}
+//		});
 		return view;
 	}
 	
