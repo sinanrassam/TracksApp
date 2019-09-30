@@ -43,7 +43,7 @@ public class PostActivity extends AppCompatActivity {
 		mPostTitleView.setText(mPostEntry.getPostTitle());
 		
 		mPostDescView.setText(mPostEntry.getPostDesc());
-		mPostDateView.setText("Posted on: " + mPostEntry.getPostDate() + ", at: " + mPostEntry.getPostTime());
+		mPostDateView.setText( mPostEntry.getPostDate() + ", at: " + mPostEntry.getPostTime());
 		mPostAuthorView.setText("By: " + mPostEntry.getUsername());
 		
 		mCommentView = findViewById(R.id.comment_field);

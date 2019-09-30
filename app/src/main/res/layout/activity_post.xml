@@ -25,7 +25,7 @@
             android:id="@+id/post_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
+            android:layout_marginStart="45dp"
             android:layout_marginTop="12dp"
             android:text="@string/posts_date"
             android:textColor="@android:color/tertiary_text_light"
@@ -45,6 +45,16 @@
             app:layout_constraintHorizontal_bias="0.069"
             app:layout_constraintStart_toEndOf="@+id/post_date"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/clock"
+            android:layout_width="13dp"
+            android:layout_height="13dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@android:drawable/ic_lock_idle_alarm" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

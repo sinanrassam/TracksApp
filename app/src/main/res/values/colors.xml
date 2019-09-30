@@ -10,9 +10,9 @@
   <color name="primaryTextColor">#FFFFFF</color>
   <color name="secondaryTextColor">#ffffff</color>
 
-  <color name="primaryGreen">#5cdb95</color>
+  <color name="primaryGreen">#5CDB95</color>
   <color name="primaryDarkGreen">#379683</color>
-  <color name="primaryLightGreen">#8ee4af</color>
+  <color name="primaryLightGreen">#B7FED2</color>
   <color name="primaryBackground">#f9f9fb </color>
   <color name="primaryTextBlue">#05386B</color>
 
