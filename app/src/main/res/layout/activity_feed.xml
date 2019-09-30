@@ -14,7 +14,6 @@
             class="com.lostanimals.tracks.FeedFragment"
             android:id="@+id/fragment_feed"/>
 
-
     <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
@@ -35,8 +34,7 @@
                 app:rippleColor="@color/primaryLightGreen"
                 app:backgroundTint="@color/primaryDarkGreen"
                 android:src="@drawable/plus_button_white"
-                />
-
+        />
     </FrameLayout>
 
     <com.google.android.material.navigation.NavigationView

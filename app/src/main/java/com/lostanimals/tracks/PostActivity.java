@@ -43,7 +43,7 @@ public class PostActivity extends AppCompatActivity {
 		mPostTitleView.setText(mPostEntry.getPostTitle());
 		
 		mPostDescView.setText(mPostEntry.getPostDesc());
-		mPostDateView.setText( mPostEntry.getPostDate() + ", at: " + mPostEntry.getPostTime());
+		mPostDateView.setText(mPostEntry.getPostDate() + ", at: " + mPostEntry.getPostTime());
 		mPostAuthorView.setText("By: " + mPostEntry.getUsername());
 		
 		mCommentView = findViewById(R.id.comment_field);
@@ -123,8 +123,7 @@ public class PostActivity extends AppCompatActivity {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		
 		if (mPostEntry.getFound().equals("0")) {
-			builder.setMessage("Are you sure you want to mark the post as found? It will no longer be " +
-					"accessible in the main feed but you can view it in my posts.");
+			builder.setMessage("Are you sure you want to mark the post as found? It will no longer be " + "accessible in the main feed but you can view it in my posts.");
 			builder.setTitle("Warning!");
 			
 			builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -189,8 +188,7 @@ public class PostActivity extends AppCompatActivity {
 	private void onDeleteClicked() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		
-		builder.setMessage("Are you sure you want to delete the post? Once deleted this cannot be " +
-				"reversed.");
+		builder.setMessage("Are you sure you want to delete the post? Once deleted this cannot be " + "reversed.");
 		builder.setTitle("Warning!");
 		
 		builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {

@@ -3,7 +3,6 @@ package com.lostanimals.tracks.tasks;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
@@ -92,14 +91,11 @@ public class GetCommentsTask extends AsyncTask<String, Integer, Boolean> {
 	
 	@Override
 	protected void onPostExecute(final Boolean success) {
-        mProgressBar.setVisibility(View.GONE);
+		mProgressBar.setVisibility(View.GONE);
 		if (!success) {
 			mTextView.setVisibility(View.VISIBLE);
 		}
-		SimpleAdapter adapter = new SimpleAdapter(mContext, mCommentsList,
-				android.R.layout.simple_list_item_2,
-				new String[] {"Username", "Desc"},
-				new int[] {android.R.id.text1, android.R.id.text2});
+		SimpleAdapter adapter = new SimpleAdapter(mContext, mCommentsList, android.R.layout.simple_list_item_2, new String[] {"Username", "Desc"}, new int[] {android.R.id.text1, android.R.id.text2});
 		mFragment.setListAdapter(adapter);
 		adapter.notifyDataSetChanged();
 		Toast.makeText(mContext, "Comments received", Toast.LENGTH_LONG).show();
