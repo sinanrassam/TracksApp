@@ -6,7 +6,11 @@
         <item name="colorPrimaryDark">@color/primaryDarkGreen</item>
         <item name="colorAccent">@color/secondaryColor</item>
         <item name="android:windowBackground">@color/primaryBackground</item>
+        <item name="android:fontFamily">@font/montserrat_regular</item>
+    </style>
 
+    <style name="MyActionBarTitle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/primaryTextBlue</item>
     </style>
 
 </resources>

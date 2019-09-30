@@ -11,9 +11,9 @@
   <color name="secondaryTextColor">#ffffff</color>
 
   <color name="primaryGreen">#5cdb95</color>
-  <color name="primaryDarkGreen">#49bf7e</color>
-  <color name="primaryLightGreen">#2b6643</color>
-  <color name="primaryBackground">#f6f6f2 </color>
+  <color name="primaryDarkGreen">#379683</color>
+  <color name="primaryLightGreen">#8ee4af</color>
+  <color name="primaryBackground">#f9f9fb </color>
   <color name="primaryTextBlue">#05386B</color>
 
 </resources>
