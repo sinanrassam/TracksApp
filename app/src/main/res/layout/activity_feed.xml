@@ -32,8 +32,8 @@
                 android:layout_margin="16dp"
                 android:clickable="true"
                 android:onClick="openNewPostActivity"
-                app:rippleColor="@color/secondaryDarkColor"
-                app:backgroundTint="@color/secondaryColor"
+                app:rippleColor="@color/primaryLightGreen"
+                app:backgroundTint="@color/primaryDarkGreen"
                 android:src="@drawable/plus_button_white"
                 />
 
