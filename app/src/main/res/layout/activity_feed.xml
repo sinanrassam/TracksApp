@@ -32,8 +32,8 @@
                 android:layout_margin="16dp"
                 android:clickable="true"
                 android:onClick="openNewPostActivity"
-                app:rippleColor="@color/secondaryDarkColor"
-                app:backgroundTint="@color/secondaryColor"
+                app:rippleColor="@color/primaryLightGreen"
+                app:backgroundTint="@color/primaryDarkGreen"
                 android:src="@drawable/plus_button_white"
                 />
 
@@ -44,6 +44,8 @@
             android:layout_height="match_parent"
             app:menu="@menu/nav_menu"
             android:id="@+id/navigation_view"
+            app:headerLayout="@layout/header_layout"
+            android:fitsSystemWindows="true"
             android:layout_gravity="start"
     />
 </androidx.drawerlayout.widget.DrawerLayout>

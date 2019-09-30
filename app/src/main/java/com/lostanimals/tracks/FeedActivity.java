@@ -4,13 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
+import com.lostanimals.tracks.utils.PreferencesUtility;
 
 
 import java.util.Objects;
@@ -24,10 +27,10 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_feed);
-		
+
+
+
 		mDrawerLayout = findViewById(R.id.drawer);
-
-
 		mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open_action_bar,
 				R.string.close_action_bar);
 		mDrawerLayout.addDrawerListener(mToggle);
@@ -37,6 +40,12 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 		
 		NavigationView navigationView = findViewById(R.id.navigation_view);
 		navigationView.setNavigationItemSelectedListener(this);
+
+		View header = navigationView.getHeaderView(0);
+		AppCompatTextView mUsername = header.findViewById(R.id.usernameHeader);
+		AppCompatTextView mEmail = header.findViewById(R.id.emailHeader);
+		mUsername.setText(PreferencesUtility.getUserInfo().getUsername());
+		mEmail.setText(PreferencesUtility.getUserInfo().getEmail());
 
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setTitle("Feed");
