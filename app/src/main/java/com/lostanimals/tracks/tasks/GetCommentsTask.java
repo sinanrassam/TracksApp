@@ -95,9 +95,11 @@ public class GetCommentsTask extends AsyncTask<String, Integer, Boolean> {
 		if (!success) {
 			mTextView.setVisibility(View.VISIBLE);
 		}
+		
 		SimpleAdapter adapter = new SimpleAdapter(mContext, mCommentsList, android.R.layout.simple_list_item_2, new String[] {"Username", "Desc"}, new int[] {android.R.id.text1, android.R.id.text2});
 		mFragment.setListAdapter(adapter);
 		adapter.notifyDataSetChanged();
+		
 		Toast.makeText(mContext, "Comments received", Toast.LENGTH_LONG).show();
 	}
 	

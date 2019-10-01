@@ -1,15 +1,15 @@
 <resources>
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/primaryGreen</item>
-        <item name="colorPrimaryDark">@color/primaryDarkGreen</item>
-        <item name="colorAccent">@color/secondaryColor</item>
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+        <item name="colorAccent">@color/primaryAccent</item>
         <item name="android:windowBackground">@color/primaryBackground</item>
-        <item name="android:fontFamily">@font/montserrat_regular</item>
+        <item name="android:fontFamily">@font/product_sans_regular</item>
     </style>
 
     <style name="MyActionBarTitle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
-        <item name="android:textColor">@color/primaryTextBlue</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
     </style>
 
 </resources>
