@@ -12,5 +12,4 @@
     <style name="MyActionBarTitle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
         <item name="android:textColor">@color/primaryTextColor</item>
     </style>
-
 </resources>
