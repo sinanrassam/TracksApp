@@ -52,17 +52,24 @@
     <string name="loading_comments">Loading Comments</string>
     <string name="comments_error">Post Not Found</string>
     <string name="comments_none_exists">No Comments exists, be the first to comment!</string>
-    <string name="prompt_comment">Write a comment...</string>
+    <string name="prompt_comment">Write a comment…</string>
     <string name="action_comment">Comment</string>
     <string name="discard">Discard</string>
     <!-- Nav Drawer -->
     <string name="open_action_bar">Open</string>
     <string name="close_action_bar">Close</string>
     <string name="edit">Edit Details</string>
+    <string name="logout">Logout</string>
+    <string name="open_feed">Open Feed</string>
+    <string name="nav_feed">Feed</string>
+    <string name="nav_my_posts">My Posts</string>
+    <string name="nav_my_profile">My Profile</string>
+    <string name="nav_log_out">Log Out</string>
     <!-- Maps -->
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_login2">deleteme</string>
-    <string name="logout">Logout</string>
-    <string name="open_feed">Open Feed</string>
-
+    <!-- Popup -->
+    <string name="pop_found">Mark as \"Found\"</string>
+    <string name="pop_edit">Edit Post</string>
+    <string name="pop_delete">Delete Post</string>
 </resources>

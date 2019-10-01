@@ -14,7 +14,6 @@
             class="com.lostanimals.tracks.FeedFragment"
             android:id="@+id/fragment_feed"/>
 
-
     <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
@@ -29,14 +28,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|end"
-                android:layout_margin="16dp"
+                android:layout_margin="32dp"
                 android:clickable="true"
                 android:onClick="openNewPostActivity"
-                app:rippleColor="@color/secondaryDarkColor"
-                app:backgroundTint="@color/secondaryColor"
-                android:src="@drawable/plus_button_white"
-                />
-
+                app:rippleColor="@color/primaryAccentLight"
+                app:backgroundTint="@color/primaryAccent"
+                android:src="@drawable/plus_button_thin"
+        />
     </FrameLayout>
 
     <com.google.android.material.navigation.NavigationView

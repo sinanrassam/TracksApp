@@ -33,8 +33,7 @@ public class PreferencesUtility {
 		editor.putString(KEY_NAME, preferenceEntry.getName());
 		editor.putString(KEY_USERNAME, preferenceEntry.getUsername());
 		editor.putString(KEY_EMAIL, preferenceEntry.getEmail());
-		Log.d("PREFS_UTIL", "ENTRY_SAVED_ENTRY_SAVED_ENTRY_SAVED | OBJECT: " + getUserInfo() +
-				" | Username:" + preferenceEntry.getUsername());
+		Log.d("PREFS_UTIL", "ENTRY_SAVED_ENTRY_SAVED_ENTRY_SAVED | OBJECT: " + getUserInfo() + " | Username:" + preferenceEntry.getUsername());
 		return editor.commit();
 	}
 	
