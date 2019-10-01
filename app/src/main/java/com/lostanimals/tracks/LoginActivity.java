@@ -11,6 +11,8 @@ import android.view.View.OnClickListener;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import com.lostanimals.tracks.tasks.LoginTask;
@@ -129,11 +131,14 @@ public class LoginActivity extends AppCompatActivity {
 
 		if (ConnectionManager.isNetworkAvailable(context)) {
 			// Show the connected screen
-			Log.d("LOGIN_TASK", "internet avaliable");
+			Log.d("LOGIN_TASK", "connection avaliable");
 		} else {
 			// Show disconnected screen
-			Log.d("LOGIN_TASK", "internet unavaliable");
-			//cancel = true;
+			focusView = mEmailView;
+			Log.d("LOGIN_TASK", "connection not avaliable");
+			//Toast.makeText(LoginActivity.this,"Hi I am Toast", Toast.LENGTH_LONG).show();
+			Toast.makeText(getApplicationContext(),"No Connection",Toast.LENGTH_LONG).show();
+			cancel = true;
 		}
 
 		if (cancel) {
