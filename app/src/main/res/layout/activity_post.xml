@@ -13,7 +13,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:text="@string/posts_title"
-            android:textColor="@color/primaryTextBlue"
+            android:textColor="@color/secondaryTextColor"
             android:textSize="24sp"
             android:textStyle="bold"/>
 
@@ -28,7 +28,7 @@
                 android:layout_marginStart="45dp"
                 android:layout_marginTop="12dp"
                 android:text="@string/posts_date"
-                android:textColor="@android:color/tertiary_text_light"
+                android:textColor="@color/primaryTextLight"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
@@ -40,7 +40,7 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="8dp"
                 android:text="@string/posts_author"
-                android:textColor="@android:color/tertiary_text_light"
+                android:textColor="@color/primaryTextLight"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.069"
                 app:layout_constraintStart_toEndOf="@+id/post_date"
@@ -67,7 +67,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
             android:text="@string/posts_description"
-            android:textColor="@color/design_default_color_on_secondary"
+            android:textColor="@color/secondaryTextColor"
             app:layout_constraintEnd_toEndOf="parent"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -91,7 +91,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/fragmentContainer" android:layout_marginEnd="36dp"
                 app:layout_constraintHorizontal_bias="0.023" android:layout_marginBottom="64dp"
                 app:layout_constraintBottom_toBottomOf="@+id/fragmentContainer" android:autofillHints=""
-                android:textColor="@android:color/black"/>
+                android:textColor="@color/secondaryTextColor"/>
 
         <Button
                 android:text="@string/action_comment"

@@ -4,7 +4,7 @@
                                                    android:orientation="vertical"
                                                    android:layout_width="match_parent"
                                                    android:layout_height="176dp"
-                                                   android:background="@color/primaryGreen">
+                                                   android:background="@color/primaryColor">
 
     <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/appCompatImageView"
@@ -27,7 +27,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:text="Username"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/primaryTextColor"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -42,7 +42,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginTop="8dp"
             android:text="username@gmail.com"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/primaryTextColor"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
