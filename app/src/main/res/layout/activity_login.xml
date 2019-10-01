@@ -52,7 +52,9 @@
                         android:imeOptions="actionUnspecified"
                         android:inputType="textPassword"
                         android:maxLines="1"
-                        android:singleLine="true" android:autofillHints="Password"/>
+                        android:singleLine="true"
+                        android:autofillHints="Password"
+                        android:backgroundTint="@color/primaryColor"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -63,7 +65,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="@string/action_sign_in"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:textColor="@color/secondaryTextColor"/>
+
             <Button
                     android:id="@+id/login_register_btn"
                     style="?android:textAppearanceSmall"
@@ -71,7 +75,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="@string/action_register"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:textColor="@color/secondaryTextColor"/>
 
         </LinearLayout>
     </ScrollView>
