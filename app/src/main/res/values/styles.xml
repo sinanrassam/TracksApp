@@ -1,9 +1,10 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="TracksTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
-        <item name="colorAccent">@color/primaryAccent</item>
+        <item name="colorAccent">@color/primaryLightColor2</item>
+        <item name="android:textColorHint">@color/secondaryTextColor</item>
         <item name="android:windowBackground">@color/primaryBackground</item>
         <item name="android:fontFamily">@font/product_sans_regular</item>
     </style>
