@@ -1,5 +1,8 @@
 package com.lostanimals.tracks.utils;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Log;
 import com.lostanimals.tracks.entries.PreferenceEntry;
 import org.json.JSONException;
@@ -10,6 +13,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+
+import static androidx.core.content.ContextCompat.getSystemService;
 
 public class ConnectionManager {
 	private static final String URL = "http://bosh.live:7536/phpmyadmin/tracks_api/";
@@ -125,4 +130,19 @@ public class ConnectionManager {
 		return new PreferenceEntry(details.getString("name"),
 				details.getString("username"), details.getString("email"));
 	}
+	public static boolean isNetworkAvailable(Context context) {
+
+			ConnectivityManager connectivityManager =
+					(ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+			boolean isConnected = false;
+			if (connectivityManager != null) {
+				NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
+				isConnected = (activeNetwork != null) && (activeNetwork.isConnected());
+			}
+
+			return isConnected;
+
+	}
+
 }
