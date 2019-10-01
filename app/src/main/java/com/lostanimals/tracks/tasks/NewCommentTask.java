@@ -3,7 +3,6 @@ package com.lostanimals.tracks.tasks;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.Toast;
 import com.lostanimals.tracks.utils.ConnectionManager;
 import org.json.JSONException;

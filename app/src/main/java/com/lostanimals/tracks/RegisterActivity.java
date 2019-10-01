@@ -11,8 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.lostanimals.tracks.tasks.RegisterTask;
 import com.lostanimals.tracks.utils.EmailValidator;
 
-import java.util.Objects;
-
 public class RegisterActivity extends AppCompatActivity {
 	
 	// UI references.
@@ -26,7 +24,7 @@ public class RegisterActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register);
-
+		
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		actionBar.setTitle("Register");

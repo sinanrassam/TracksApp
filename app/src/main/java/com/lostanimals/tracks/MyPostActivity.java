@@ -14,7 +14,7 @@ public class MyPostActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_my_posts);
 		Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-
+		
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setTitle("My Posts");
 	}

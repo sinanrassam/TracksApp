@@ -23,25 +23,25 @@ public class PostEntry {
 	public String getUsername() {
 		return mUsername;
 	}
-
-	public void setPostTime(String postTime) {
-		mPostTime = postTime;
-	}
 	
 	public void setUsername(String username) {
 		this.mUsername = username;
 	}
-
+	
 	public String getPostTitle() {
 		return "" + mPostTitle;
-	}
-
-	public String getPostTime() {
-		return "" + mPostTime;
 	}
 	
 	private void setPostTitle(String postTitle) {
 		this.mPostTitle = postTitle;
+	}
+	
+	public String getPostTime() {
+		return "" + mPostTime;
+	}
+	
+	public void setPostTime(String postTime) {
+		mPostTime = postTime;
 	}
 	
 	public String getPostDate() {

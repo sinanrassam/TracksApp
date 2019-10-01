@@ -1,7 +1,6 @@
 package com.lostanimals.tracks.tasks;
 
 import android.annotation.SuppressLint;
-import android.app.ListActivity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -10,7 +9,6 @@ import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 import androidx.fragment.app.ListFragment;
-import com.lostanimals.tracks.MyPostsFragment;
 import com.lostanimals.tracks.entries.PostEntry;
 import com.lostanimals.tracks.utils.ConnectionManager;
 import com.lostanimals.tracks.utils.PostsUtility;
@@ -42,7 +40,7 @@ public class UpdatePostsTask extends AsyncTask<String, Integer, Boolean> {
 		this.mContext = mFragment.getContext();
 		this.mProgressBar = progressBar;
 	}
-
+	
 	@Override
 	protected Boolean doInBackground(String... parameters) {
 		boolean success = true;
@@ -106,10 +104,7 @@ public class UpdatePostsTask extends AsyncTask<String, Integer, Boolean> {
 	protected void onPostExecute(final Boolean success) {
 		mProgressBar.setVisibility(View.GONE);
 		
-		SimpleAdapter adapter = new SimpleAdapter(mContext, mPostList,
-				android.R.layout.simple_list_item_2,
-				new String[] {"Title", "Desc"},
-				new int[] {android.R.id.text1, android.R.id.text2});
+		SimpleAdapter adapter = new SimpleAdapter(mContext, mPostList, android.R.layout.simple_list_item_2, new String[] {"Title", "Desc"}, new int[] {android.R.id.text1, android.R.id.text2});
 		mFragment.setListAdapter(adapter);
 		adapter.notifyDataSetChanged();
 		
