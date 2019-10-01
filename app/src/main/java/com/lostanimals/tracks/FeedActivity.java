@@ -92,9 +92,4 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 		// TODO: Why hardcode a false return?
 		return false;
 	}
-	
-	@Override
-	protected void onResume() {
-		super.onResume();
-	}
 }

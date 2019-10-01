@@ -28,10 +28,11 @@ public class GetCommentsTask extends AsyncTask<String, Integer, Boolean> {
 	private Context mContext;
 	@SuppressLint ("StaticFieldLeak")
 	private ProgressBar mProgressBar;
-	private CommentsFragment mFragment;
-	private List<Map<String, String>> mCommentsList = new ArrayList<>();
 	@SuppressLint ("StaticFieldLeak")
 	private TextView mTextView;
+	
+	private CommentsFragment mFragment;
+	private List<Map<String, String>> mCommentsList = new ArrayList<>();
 	
 	public GetCommentsTask(CommentsFragment activity, TextView textView, ProgressBar progressBar) {
 		this.mFragment = activity;
