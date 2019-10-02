@@ -17,6 +17,8 @@ import com.google.android.material.navigation.NavigationView;
 import com.lostanimals.tracks.utils.PreferencesUtility;
 import java.util.Objects;
 
+import static android.app.PendingIntent.getActivity;
+
 
 public class FeedActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -74,15 +76,17 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 	@Override
 	public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 		Intent navigationIntent = null;
-		
+		ActionBar actionBar = getSupportActionBar();
 		switch (menuItem.getItemId()) {
 			case R.id.feed_nav:
 				//navigationIntent = new Intent(this, FeedActivity.class);
 				loadFragment(new FeedFragment());
+				actionBar.setTitle("Feed");
 				break;
 			case R.id.myPosts_nav:
 				//navigationIntent = new Intent(this, MyPostActivity.class);
 				loadFragment(new MyPostActivity());
+				actionBar.setTitle("My Posts");
 				break;
 			case R.id.logOut_nav:
 				navigationIntent = new Intent(this, LogoutActivity.class);

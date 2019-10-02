@@ -1,13 +1,12 @@
 package com.lostanimals.tracks;
 
 
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import java.util.Objects;
@@ -27,7 +26,16 @@ public class MyPostActivity extends Fragment {
 	@Override
 	public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.activity_my_posts, container, false);
+
+
 		return view;
+
+	}
+
+	public void onActivityCreated (Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+
+		//  Intent intent = new Intent(getActivity().getIntent());
 	}
 
 }
