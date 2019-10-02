@@ -9,13 +9,18 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.navigation.NavigationView;
-
+import com.lostanimals.tracks.utils.PreferencesUtility;
 import java.util.Objects;
 
+
 public class FeedActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-	
+
+
 	private ActionBarDrawerToggle mToggle;
 	private DrawerLayout mDrawerLayout;
 	
@@ -23,7 +28,9 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_feed);
-		
+
+
+
 		mDrawerLayout = findViewById(R.id.drawer);
 
 		mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open_action_bar,
@@ -47,6 +54,8 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 		actionBar.setTitle("Feed");
 		
 	}
+
+
 	
 	public void openNewPostActivity(View view) {
 		startActivity(new Intent(this, NewPostActivity.class));
@@ -68,16 +77,19 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 		
 		switch (menuItem.getItemId()) {
 			case R.id.feed_nav:
-				navigationIntent = new Intent(this, FeedActivity.class);
+				//navigationIntent = new Intent(this, FeedActivity.class);
+				loadFragment(new FeedFragment());
 				break;
 			case R.id.myPosts_nav:
-				navigationIntent = new Intent(this, MyPostActivity.class);
+				//navigationIntent = new Intent(this, MyPostActivity.class);
+				loadFragment(new MyPostActivity());
 				break;
 			case R.id.logOut_nav:
 				navigationIntent = new Intent(this, LogoutActivity.class);
 				break;
 			case R.id.myProfile_nav:
 				navigationIntent = new Intent(this, MyProfileActivity.class);
+				//loadFragment(new MyProfileActivity());
 				break;
 		}
 		
@@ -93,7 +105,11 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 		// TODO: Why hardcode a false return?
 		return false;
 	}
-	
+	public void loadFragment(Fragment fragment) {
+		FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+		transaction.replace(R.id.frame, fragment);
+		transaction.commit();
+	}
 	@Override
 	protected void onResume() {
 		super.onResume();
