@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.lostanimals.tracks.entries.PostEntry;
 import com.lostanimals.tracks.tasks.DeleteTask;
 import com.lostanimals.tracks.tasks.EditTask;
+import com.lostanimals.tracks.tasks.FollowPostTask;
 import com.lostanimals.tracks.tasks.NewCommentTask;
 import com.lostanimals.tracks.utils.PostsUtility;
 import com.lostanimals.tracks.utils.PreferencesUtility;
@@ -53,7 +55,7 @@ public class PostActivity extends AppCompatActivity {
 		data.putString("post_id", mPostEntry.getId());
 		commentsFragment.setArguments(data);
 		getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, commentsFragment).commit();
-		
+
 		Button mCommentBtn = findViewById(R.id.comment_btn);
 		mCommentBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -61,6 +63,19 @@ public class PostActivity extends AppCompatActivity {
 				addComment();
 			}
 		});
+
+		Button mFollowPostBtn = findViewById(R.id.followPost_btn);
+		mFollowPostBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				followPost();
+			}
+		});
+	}
+
+	private void followPost() {
+		Log.d("Follow Post", "Clicked");
+		new FollowPostTask(this).execute(PreferencesUtility.getUserInfo().getUsername(), mPostEntry.getId());
 	}
 	
 	private void addComment() {

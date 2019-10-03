@@ -3,6 +3,7 @@ package com.lostanimals.tracks.tasks;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 import com.lostanimals.tracks.utils.ConnectionManager;
 import org.json.JSONException;
@@ -12,7 +13,7 @@ import java.io.IOException;
 
 import static com.lostanimals.tracks.utils.ConnectionManager.processRequest;
 
-public class FollowPostTask extends AsyncTask<String, Integer, Boolean> {
+public class FollowPostTask extends AsyncTask<String, Integer, JSONObject> {
 	@SuppressLint ("StaticFieldLeak")
 	private Context mContext;
 
@@ -21,7 +22,7 @@ public class FollowPostTask extends AsyncTask<String, Integer, Boolean> {
 	}
 	
 	@Override
-	protected Boolean doInBackground(String... parameters) {
+	protected JSONObject doInBackground(String... parameters) {
 		boolean success = true;
 		JSONObject json = null;
 		if (!this.isCancelled()) {
@@ -34,7 +35,7 @@ public class FollowPostTask extends AsyncTask<String, Integer, Boolean> {
 				success = false;
 			}
 		}
-		return success;
+		return json;
 	}
 	
 	@Override
@@ -43,10 +44,16 @@ public class FollowPostTask extends AsyncTask<String, Integer, Boolean> {
 	}
 	
 	@Override
-	protected void onPostExecute(final Boolean success) {
-		if (success) {
-			Toast.makeText(mContext, "Post Followed", Toast.LENGTH_LONG).show();
-		} else {
+	protected void onPostExecute(JSONObject data) {
+		Log.d("Data", data.toString());
+		try {
+			if (data.get("response").equals("successful")) {
+				Toast.makeText(mContext, "Post Followed", Toast.LENGTH_LONG).show();
+			} else {
+				Toast.makeText(mContext, data.get("reason").toString(), Toast.LENGTH_LONG).show();
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
 			Toast.makeText(mContext, "Error following post", Toast.LENGTH_LONG).show();
 		}
 	}

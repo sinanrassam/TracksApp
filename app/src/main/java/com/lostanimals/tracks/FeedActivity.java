@@ -47,7 +47,7 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setTitle("Feed");
-		
+
 	}
 	
 	public void openNewPostActivity(View view) {
