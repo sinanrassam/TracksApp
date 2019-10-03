@@ -36,11 +36,14 @@ public class UpdatePostsTask extends AsyncTask<String, Integer, Boolean> {
 	private ListFragment mFragment;
 	
 	private List<Map<String, String>> mPostList = new ArrayList<>();
-	
+
 	public UpdatePostsTask(ListFragment activity, ProgressBar progressBar) {
 		this.mFragment = activity;
 		this.mContext = mFragment.getContext();
 		this.mProgressBar = progressBar;
+	}
+
+	public UpdatePostsTask() {
 	}
 
 	@Override
@@ -99,24 +102,31 @@ public class UpdatePostsTask extends AsyncTask<String, Integer, Boolean> {
 	
 	@Override
 	protected void onPreExecute() {
-		Toast.makeText(mContext, "Loading posts", Toast.LENGTH_SHORT).show();
+		if (mContext != null) {
+			Toast.makeText(mContext, "Loading posts", Toast.LENGTH_SHORT).show();
+		}
 	}
 	
 	@Override
 	protected void onPostExecute(final Boolean success) {
-		mProgressBar.setVisibility(View.GONE);
-		
-		SimpleAdapter adapter = new SimpleAdapter(mContext, mPostList,
-				android.R.layout.simple_list_item_2,
-				new String[] {"Title", "Desc"},
-				new int[] {android.R.id.text1, android.R.id.text2});
-		mFragment.setListAdapter(adapter);
-		adapter.notifyDataSetChanged();
-		
-		if (success) {
-			Toast.makeText(mContext, "Posts refreshed", Toast.LENGTH_LONG).show();
-		} else {
-			Toast.makeText(mContext, "Error loading posts", Toast.LENGTH_LONG).show();
+		if (mProgressBar != null) {
+			mProgressBar.setVisibility(View.GONE);
+		}
+		if (mContext != null) {
+			SimpleAdapter adapter = new SimpleAdapter(mContext, mPostList,
+					android.R.layout.simple_list_item_2,
+					new String[]{"Title", "Desc"},
+					new int[]{android.R.id.text1, android.R.id.text2});
+			mFragment.setListAdapter(adapter);
+			adapter.notifyDataSetChanged();
+		}
+
+		if (mContext != null) {
+			if (success) {
+				Toast.makeText(mContext, "Posts refreshed", Toast.LENGTH_LONG).show();
+			} else {
+				Toast.makeText(mContext, "Error loading posts", Toast.LENGTH_LONG).show();
+			}
 		}
 	}
 	

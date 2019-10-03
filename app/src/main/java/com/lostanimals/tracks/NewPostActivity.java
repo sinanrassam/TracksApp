@@ -10,6 +10,7 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 import com.lostanimals.tracks.tasks.EditTask;
 import com.lostanimals.tracks.tasks.NewPostTask;
+import com.lostanimals.tracks.tasks.UpdatePostsTask;
 import com.lostanimals.tracks.utils.PreferencesUtility;
 
 import java.util.Objects;
@@ -63,6 +64,7 @@ public class NewPostActivity extends AppCompatActivity {
 		} else {
 			EditTask editTask = new EditTask(this);
 			editTask.execute(postID, title, description, postIsFound);
+			new UpdatePostsTask().execute("get-posts", "", "", "");
 		}
 		finish();
 	}

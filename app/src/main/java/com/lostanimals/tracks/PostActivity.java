@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,6 +26,8 @@ public class PostActivity extends AppCompatActivity {
 	private PostEntry mPostEntry;
 	private EditText mCommentView;
 	private CommentsFragment commentsFragment;
+	private int mPostPosition;
+	private TextView mPostTitleView, mPostDescView, mPostDateView, mPostAuthorView;
 	
 	@SuppressLint ("SetTextI18n")
 	@Override
@@ -32,19 +35,14 @@ public class PostActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_post);
 		
-		int mPostPosition = getIntent().getIntExtra("position", 0);
-		mPostEntry = PostsUtility.getPostEntry(mPostPosition);
-		
-		TextView mPostTitleView = findViewById(R.id.post_txt_title);
-		TextView mPostDescView = findViewById(R.id.post_et_desc);
-		TextView mPostDateView = findViewById(R.id.post_date);
-		TextView mPostAuthorView = findViewById(R.id.post_author);
-		
-		mPostTitleView.setText(mPostEntry.getPostTitle());
-		
-		mPostDescView.setText(mPostEntry.getPostDesc());
-		mPostDateView.setText("Posted on: " + mPostEntry.getPostDate() + ", at: " + mPostEntry.getPostTime());
-		mPostAuthorView.setText("By: " + mPostEntry.getUsername());
+		mPostPosition = getIntent().getIntExtra("position", 0);
+
+		mPostTitleView = findViewById(R.id.post_txt_title);
+		mPostDescView = findViewById(R.id.post_et_desc);
+		mPostDateView = findViewById(R.id.post_date);
+		mPostAuthorView = findViewById(R.id.post_author);
+
+		refresh();
 		
 		mCommentView = findViewById(R.id.comment_field);
 		
@@ -61,6 +59,14 @@ public class PostActivity extends AppCompatActivity {
 				addComment();
 			}
 		});
+	}
+
+	public void refresh() {
+		mPostEntry = PostsUtility.getPostEntry(mPostPosition);
+		mPostTitleView.setText(mPostEntry.getPostTitle());
+		mPostDescView.setText(mPostEntry.getPostDesc());
+		mPostDateView.setText("Posted on: " + mPostEntry.getPostDate() + ", at: " + mPostEntry.getPostTime());
+		mPostAuthorView.setText("By: " + mPostEntry.getUsername());
 	}
 	
 	private void addComment() {
@@ -155,6 +161,12 @@ public class PostActivity extends AppCompatActivity {
 		
 		AlertDialog alertDialog = builder.create();
 		alertDialog.show();
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		refresh();
 	}
 	
 	private void onEditClicked() {
