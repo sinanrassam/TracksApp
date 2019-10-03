@@ -55,6 +55,8 @@ public class ConnectionManager {
 				postData += URLEncoder.encode("description", "UTF-8") + "=" + URLEncoder.encode(parameters[2], "UTF-8") + "&";
 				postData += URLEncoder.encode("found", "UTF-8") + "=" + URLEncoder.encode(parameters[3], "UTF-8");
 				break;
+			case "history":
+				postData += URLEncoder.encode("id", "UTF-8") + "=" + URLEncoder.encode(parameters[0], "UTF-8") + "&";
 			case "delete-post":
 				postData += URLEncoder.encode("id", "UTF-8") + "=" + URLEncoder.encode(parameters[0], "UTF-8");
 			
