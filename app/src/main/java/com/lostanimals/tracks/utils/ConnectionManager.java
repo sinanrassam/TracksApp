@@ -57,7 +57,11 @@ public class ConnectionManager {
 				break;
 			case "delete-post":
 				postData += URLEncoder.encode("id", "UTF-8") + "=" + URLEncoder.encode(parameters[0], "UTF-8");
-			
+				break;
+			case "follow-post":
+				postData += URLEncoder.encode("user_id", "UTF-8") + "=" + URLEncoder.encode(parameters[0], "UTF-8") + "&";
+				postData += URLEncoder.encode("post_id", "UTF-8") + "=" + URLEncoder.encode(parameters[1], "UTF-8");
+				break;
 		}
 		return postData;
 	}
