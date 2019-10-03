@@ -49,12 +49,6 @@ public class UpdatePostsTask extends AsyncTask<String, Integer, Boolean> {
 			String postData = null;
 			try {
 				postData = ConnectionManager.postEncoder("get-posts", parameters);
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-				success = false;
-			}
-			
-			try {
 				json = processRequest("post.php", postData);
 			} catch (JSONException | IOException e) {
 				e.printStackTrace();
