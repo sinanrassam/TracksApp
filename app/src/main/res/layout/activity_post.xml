@@ -16,6 +16,7 @@
             android:textColor="@color/secondaryTextColor"
             android:textSize="24sp"
             android:textStyle="bold"/>
+
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="50dp" tools:layout_editor_absoluteY="35dp">
@@ -69,6 +70,20 @@
             android:textColor="@color/secondaryTextColor"
             app:layout_constraintEnd_toEndOf="parent"/>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp" tools:layout_editor_absoluteY="35dp">
+
+        <Button
+                android:text="@string/action_follow_post"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/button" android:layout_marginTop="8dp"
+                app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp" android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintHorizontal_bias="0.028"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent" tools:layout_editor_absoluteY="35dp">

@@ -9,8 +9,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
+import com.lostanimals.tracks.utils.PreferencesUtility;
 
 import java.util.Objects;
 
@@ -37,11 +39,11 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 		navigationView.setNavigationItemSelectedListener(this);
 
 		View header = navigationView.getHeaderView(0);
-		AppCompatTextView mUsername = header.findViewById(R.id.usernameHeader);
-		AppCompatTextView mEmail = header.findViewById(R.id.emailHeader);
-		
-		mUsername.setText(PreferencesUtility.getUserInfo().getUsername());
-		mEmail.setText(PreferencesUtility.getUserInfo().getEmail());
+//		AppCompatTextView mUsername = header.findViewById(R.id.usernameHeader);
+//		AppCompatTextView mEmail = header.findViewById(R.id.emailHeader);
+//
+//		mUsername.setText(PreferencesUtility.getUserInfo().getUsername());
+//		mEmail.setText(PreferencesUtility.getUserInfo().getEmail());
 
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setTitle("Feed");
