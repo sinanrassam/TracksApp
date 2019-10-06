@@ -12,7 +12,6 @@
         android:background="?android:attr/detailsElementBackground"
         android:clickable="true">
 
-
     </FrameLayout>
     <TextView
             android:id="@+id/emailProfile"

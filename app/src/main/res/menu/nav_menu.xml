@@ -1,19 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/feed_nav"
-          android:title="@string/nav_feed"
-          android:icon="@drawable/ic_feed"
-    />
-    <item android:id="@+id/myPosts_nav"
-          android:title="@string/nav_my_posts"
-          android:icon="@drawable/ic_receipt_black"
-    />
-    <item android:id="@+id/myProfile_nav"
-          android:title="@string/nav_my_profile"
-          android:icon="@drawable/ic_profile"
-    />
-    <item android:id="@+id/logOut_nav"
-          android:title="@string/nav_log_out"
-          android:icon="@drawable/ic_exit_to_app"
-    />
+    <group>
+        <item android:id="@+id/feed_nav"
+              android:title="@string/nav_feed"
+              android:icon="@drawable/ic_feed"/>
+
+        <item android:id="@+id/myPosts_nav"
+              android:title="@string/nav_my_posts"
+              android:icon="@drawable/ic_receipt_black"/>
+
+        <item android:id="@+id/myProfile_nav"
+              android:title="@string/nav_my_profile"
+              android:icon="@drawable/ic_profile"/>
+
+        <item android:id="@+id/logOut_nav"
+              android:title="@string/nav_log_out"
+              android:icon="@drawable/ic_exit_to_app"/>
+
+        <item android:id="@+id/spacer1"
+              android:checkable="false"
+              android:enabled="false"
+              android:title=""/>
+
+        <item android:id="@+id/spacer2"
+              android:checkable="false"
+              android:enabled="false"
+              android:title=""/>
+
+        <item android:id="@+id/spacer23"
+              android:checkable="false"
+              android:enabled="false"
+              android:title=""/>
+
+        <item android:id="@+id/spacer4"
+              android:checkable="false"
+              android:enabled="false"
+              android:title=""/>
+
+        <item android:id="@+id/spacer5"
+              android:checkable="false"
+              android:enabled="false"
+              android:title=""/>
+
+        <item android:id="@+id/spacer6"
+              android:checkable="false"
+              android:enabled="false"
+              android:title=""/>
+
+        <item android:id="@+id/settings_nav"
+              android:icon="@drawable/ic_settings_black"
+              android:title="Settings"/>
+    </group>
 </menu>
