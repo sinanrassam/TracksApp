@@ -8,7 +8,8 @@ public class PostEntry {
 	private String mPostTime;
 	private String mId;
 	private String mFound;
-	
+
+
 	// default
 	public PostEntry(String id, String postTitle, String postDesc, String username, String postDate, String postTime, String found) {
 		setId(id);

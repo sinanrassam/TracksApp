@@ -12,6 +12,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
 import com.lostanimals.tracks.tasks.LoginTask;
 import com.lostanimals.tracks.utils.NotificationUtility;
 import com.lostanimals.tracks.utils.PreferencesUtility;
@@ -28,10 +33,11 @@ public class LoginActivity extends AppCompatActivity {
 	
 	private AutoCompleteTextView mEmailView;
 	private EditText mPasswordView;
-	
+	private SignInButton googleSignInButton;
 	private Intent feedIntent;
 	private Intent registerIntent;
-	
+	private GoogleSignInClient googleSignInClient;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -58,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
 		// Set up the login form.
 		mEmailView = findViewById(R.id.login_username);
 		mPasswordView = findViewById(R.id.login_password);
-		
+		googleSignInButton = findViewById(R.id.sign_in_button);
 		Button mSignInBtn = findViewById(R.id.login_btn);
 		mSignInBtn.setOnClickListener(new OnClickListener() {
 			/**
@@ -81,7 +87,21 @@ public class LoginActivity extends AppCompatActivity {
 				}
 			}
 		});
-		
+
+		googleSignInButton = findViewById(R.id.sign_in_button);
+		GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+				.requestEmail()
+				.build();
+
+		googleSignInClient = GoogleSignIn.getClient(this, gso);
+		googleSignInButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent signInIntent = googleSignInClient.getSignInIntent();
+				startActivityForResult(signInIntent, 101);
+			}
+		});
+
 		Button mRegisterBtn = findViewById(R.id.login_register_btn);
 		mRegisterBtn.setOnClickListener(new OnClickListener() {
 			@Override
@@ -93,7 +113,7 @@ public class LoginActivity extends AppCompatActivity {
 	}
 	
 	// TODO: Fix this
-	
+
 	/**
 	 * @return
 	 */
