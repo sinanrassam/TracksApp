@@ -30,7 +30,7 @@ public class CommentTest {
 	
 	@Before
 	public void initMocks() {
-//        mockContext = null;
+		//        mockContext = null;
 		newCommentTask = new NewCommentTask();
 		
 	}
