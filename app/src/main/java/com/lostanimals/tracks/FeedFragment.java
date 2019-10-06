@@ -43,7 +43,7 @@ public class FeedFragment extends ListFragment {
 	}
 	
 	private void refresh() {
-		new UpdatePostsTask(this, progressBar).execute("", "");
+		new UpdatePostsTask(this, progressBar).execute("","","");
 	}
 	
 	@Override
