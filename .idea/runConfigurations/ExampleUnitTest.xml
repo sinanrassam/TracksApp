@@ -1,5 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="ExampleUnitTest" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+  <configuration default="false" name="ExampleUnitTest" type="AndroidJUnit" factoryName="Android JUnit" nameIsGenerated="true">
     <module name="app" />
     <extension name="coverage">
       <pattern>
@@ -17,3 +18,4 @@
     </method>
   </configuration>
 </component>
+
