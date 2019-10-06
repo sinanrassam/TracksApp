@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
+import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -20,7 +21,7 @@ import java.util.Objects;
 import static android.app.PendingIntent.getActivity;
 
 
-public class FeedActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class FeedActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
 
 	private ActionBarDrawerToggle mToggle;
@@ -31,7 +32,16 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_feed);
 
+        /*View settingButton = findViewById(R.id.settings_button_nav);
+        settingButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(this, SettingsActivity.class);
+				startActivity(intent);
+			}
+			, View.OnClickListener
 
+		});*/
 
 		mDrawerLayout = findViewById(R.id.drawer);
 
@@ -77,6 +87,9 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 	public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 		Intent navigationIntent = null;
 		ActionBar actionBar = getSupportActionBar();
+
+
+
 		switch (menuItem.getItemId()) {
 			case R.id.feed_nav:
 				//navigationIntent = new Intent(this, FeedActivity.class);
@@ -114,6 +127,7 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 		// TODO: Why hardcode a false return?
 		return false;
 	}
+
 	public void loadFragment(Fragment fragment) {
 		FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 		transaction.replace(R.id.frame, fragment);
@@ -122,5 +136,10 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 	@Override
 	protected void onResume() {
 		super.onResume();
+	}
+
+	public void openSettingsActivity(){
+		Intent intent = new Intent(this, SettingsActivity.class);
+		startActivity(intent);
 	}
 }
