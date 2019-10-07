@@ -36,6 +36,7 @@
                 app:backgroundTint="@color/primaryAccent"
                 android:src="@drawable/plus_button_thin"
         />
+
     </FrameLayout>
 
     <com.google.android.material.navigation.NavigationView
@@ -46,7 +47,12 @@
             app:headerLayout="@layout/header_layout"
             android:fitsSystemWindows="true"
             android:layout_gravity="start">
-
+        <Switch
+            android:id="@+id/switch_toggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="80dp"/>
     </com.google.android.material.navigation.NavigationView>
 
 </androidx.drawerlayout.widget.DrawerLayout>
