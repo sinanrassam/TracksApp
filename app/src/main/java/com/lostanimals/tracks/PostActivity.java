@@ -64,13 +64,18 @@ public class PostActivity extends AppCompatActivity {
 			}
 		});
 
-		Button mFollowPostBtn = findViewById(R.id.followPost_btn);
-		mFollowPostBtn.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				followPost();
-			}
-		});
+		if (PreferencesUtility.getUserInfo().getUsername().equals(mPostEntry.getUsername())) {
+			findViewById(R.id.unowned_options).setVisibility(View.GONE);
+		} else {
+			findViewById(R.id.unowned_options).setVisibility(View.VISIBLE);
+			Button mFollowPostBtn = findViewById(R.id.followPost_btn);
+			mFollowPostBtn.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					followPost();
+				}
+			});
+		}
 	}
 
 	private void followPost() {

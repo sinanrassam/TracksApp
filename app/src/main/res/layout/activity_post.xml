@@ -71,7 +71,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp" tools:layout_editor_absoluteY="35dp">
+            android:layout_height="50dp" tools:layout_editor_absoluteY="35dp"
+            android:id="@+id/unowned_options">
 
         <Button
                 android:text="@string/action_follow_post"
