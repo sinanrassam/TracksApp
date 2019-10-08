@@ -7,6 +7,7 @@ import android.view.View;
 
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.FrameLayout;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -122,7 +123,7 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 				break;
 			case R.id.myPosts_nav:
 				//navigationIntent = new Intent(this, MyPostActivity.class);
-				loadFragment(new MyPostsActivity());
+				loadFragment(new MyPostsFragment());
 				actionBar.setTitle("My Posts");
 				break;
 			case R.id.logOut_nav:
@@ -134,7 +135,7 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 				actionBar.setTitle("My Profile");
 				break;
 			case R.id.history_nav:
-				loadFragment(new HistoryActivity());
+				loadFragment(new HistoryFragment());
 				actionBar.setTitle("Recently Viewed");
 				break;
 		}
@@ -154,9 +155,7 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 
 	public void loadFragment(Fragment fragment) {
 		FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
 		transaction.replace(R.id.frame, fragment);
-		transaction.addToBackStack(null);
 		transaction.commit();
 	}
 	@Override
