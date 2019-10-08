@@ -117,12 +117,12 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 			case R.id.feed_nav:
 				//navigationIntent = new Intent(this, FeedActivity.class);
 				loadFragment(new FeedFragment());
-				actionBar.setTitle("@string/nav_feed");
+				actionBar.setTitle("Feed");
 				break;
 			case R.id.myPosts_nav:
 				//navigationIntent = new Intent(this, MyPostActivity.class);
-				loadFragment(new MyPostActivity());
-				actionBar.setTitle("@string/nav_mypost_posts");
+				loadFragment(new MyPostsActivity());
+				actionBar.setTitle("My Posts");
 				break;
 			case R.id.logOut_nav:
 				navigationIntent = new Intent(this, LogoutActivity.class);
@@ -130,11 +130,11 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 			case R.id.myProfile_nav:
 				//navigationIntent = new Intent(this, MyProfileActivity.class);
 				loadFragment(new MyProfileActivity());
-				actionBar.setTitle("@string/nav_my_profile");
+				actionBar.setTitle("My Profile");
 				break;
 			case R.id.history_nav:
 				loadFragment(new HistoryActivity());
-				actionBar.setTitle("@string/nav_history");
+				actionBar.setTitle("Recently Viewed");
 				break;
 		}
 		
