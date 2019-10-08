@@ -46,7 +46,7 @@ public class UpdatePostsTask extends AsyncTask<String, Integer, Boolean> {
 		boolean success = true;
 		JSONObject json = null;
 		if (!this.isCancelled()) {
-			String postData = null;
+			String postData;
 			try {
 				postData = ConnectionManager.postEncoder("get-posts", parameters);
 				json = processRequest("post.php", postData);

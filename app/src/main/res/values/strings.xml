@@ -66,6 +66,8 @@
     <string name="nav_my_profile">My Profile</string>
     <string name="nav_log_out">Log Out</string>
     <string name="nav_history">Recently Viewed</string>
+
+    <string name="settings">Settings</string>
     <!-- Maps -->
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_login2">deleteme</string>
@@ -73,6 +75,8 @@
     <string name="pop_found">Mark as \"Found\"</string>
     <string name="pop_edit">Edit Post</string>
     <string name="pop_delete">Delete Post</string>
+    <!-- History -->
+    <string name="no_posts">No Posts</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -54,7 +54,7 @@
         <activity android:name=".NewPostActivity">
         </activity>
         <activity
-                android:name=".MyPostActivity"
+                android:name=".MyPostsActivity"
                 android:parentActivityName=".FeedActivity">
         </activity>
         <activity

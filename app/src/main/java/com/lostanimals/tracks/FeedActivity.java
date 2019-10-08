@@ -36,7 +36,6 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		setContentView(R.layout.activity_feed);
 
         /*View settingButton = findViewById(R.id.settings_button_nav);
