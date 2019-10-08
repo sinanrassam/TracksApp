@@ -20,7 +20,7 @@ import java.util.Queue;
 
 public class FeedFragment extends ListFragment {
 	private SwipeRefreshLayout refreshLayout;
-	private ProgressBar progressBar;
+	public ProgressBar progressBar;
 	private static Queue<String> historyQ = new LinkedList<>();
 	private PostEntry mPostEntry;
 	@Override
