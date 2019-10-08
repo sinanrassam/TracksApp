@@ -6,36 +6,38 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/drawer"
-        tools:context=".FeedActivity">
-
-    <fragment
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            class="com.lostanimals.tracks.FeedFragment"
-            android:id="@+id/fragment_feed"/>
+        tools:context=".FeedActivity"
+        android:background="@color/primaryBackground">
 
     <FrameLayout
-            android:id="@+id/frame"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+        android:id="@+id/frame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/primaryBackground"
+        android:clickable="true">
+
+        <fragment
+            android:id="@+id/fragment_feed"
+            class="com.lostanimals.tracks.FeedFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
         <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="24sp"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/feed_btn_add"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|end"
-                android:layout_margin="32dp"
-                android:clickable="true"
-                android:onClick="openNewPostActivity"
-                app:rippleColor="@color/primaryAccentLight"
-                app:backgroundTint="@color/primaryAccent"
-                android:src="@drawable/plus_button_thin"
-        />
+            android:id="@+id/feed_btn_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="32dp"
+            android:clickable="true"
+            android:onClick="openNewPostActivity"
+            android:src="@drawable/plus_button_thin"
+            app:backgroundTint="@color/primaryAccent"
+            app:rippleColor="@color/primaryAccentLight" />
 
     </FrameLayout>
 

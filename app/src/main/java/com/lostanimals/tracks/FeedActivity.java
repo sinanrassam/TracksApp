@@ -32,6 +32,7 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 	private ActionBarDrawerToggle mToggle;
 	private DrawerLayout mDrawerLayout;
 	private Switch aSwitch;
+	public static final String GOOGLE_ACCOUNT = "google_account";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -117,12 +118,12 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 			case R.id.feed_nav:
 				//navigationIntent = new Intent(this, FeedActivity.class);
 				loadFragment(new FeedFragment());
-				actionBar.setTitle("Feed");
+				actionBar.setTitle("@string/nav_feed");
 				break;
 			case R.id.myPosts_nav:
 				//navigationIntent = new Intent(this, MyPostActivity.class);
 				loadFragment(new MyPostActivity());
-				actionBar.setTitle("My Posts");
+				actionBar.setTitle("@string/nav_mypost_posts");
 				break;
 			case R.id.logOut_nav:
 				navigationIntent = new Intent(this, LogoutActivity.class);
@@ -130,11 +131,11 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 			case R.id.myProfile_nav:
 				//navigationIntent = new Intent(this, MyProfileActivity.class);
 				loadFragment(new MyProfileActivity());
-				actionBar.setTitle("My Profile");
+				actionBar.setTitle("@string/nav_my_profile");
 				break;
 			case R.id.history_nav:
 				loadFragment(new HistoryActivity());
-				actionBar.setTitle("History");
+				actionBar.setTitle("@string/nav_history");
 				break;
 		}
 		

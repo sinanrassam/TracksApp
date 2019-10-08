@@ -8,8 +8,6 @@
 
 >
 
-
-
     <FrameLayout
         android:id="@+id/historyContainer"
         android:layout_width="match_parent"

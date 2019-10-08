@@ -8,18 +8,25 @@ import android.widget.Button;
 import android.widget.EditText;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.lostanimals.tracks.tasks.RegisterTask;
 import com.lostanimals.tracks.utils.EmailValidator;
 
 public class RegisterActivity extends AppCompatActivity {
 	
 	// UI references.
+
 	private EditText mFirstNameView;
 	private EditText mLastNameView;
 	private EditText mEmailView;
 	private EditText mUsernameView;
 	private EditText mPasswordView;
-	
+	public static final String GOOGLE_ACCOUNT = "google_account";
+	private GoogleSignInClient googleSignInClient;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -34,9 +41,22 @@ public class RegisterActivity extends AppCompatActivity {
 		mEmailView = findViewById(R.id.email);
 		mUsernameView = findViewById(R.id.username);
 		mPasswordView = findViewById(R.id.password);
-		
+
+		//TODO:stinky af but cant figure it out
+		if(GoogleSignIn.getLastSignedInAccount(this)!=null)
+		{
+			try {
+				setDataOnView();
+			}
+			catch (NullPointerException e)
+			{
+				}
+
+		}
+
+
 		Button mRegisterBtn = findViewById(R.id.register_btn);
-		
+
 		mRegisterBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -44,7 +64,7 @@ public class RegisterActivity extends AppCompatActivity {
 			}
 		});
 	}
-	
+
 	private void attemptRegister() {
 		
 		mFirstNameView.setError(null);
@@ -100,5 +120,11 @@ public class RegisterActivity extends AppCompatActivity {
 			RegisterTask registerTask = new RegisterTask(this);
 			registerTask.execute(name, email, username, password);
 		}
+	}
+	private void setDataOnView() {
+		GoogleSignInAccount googleSignInAccount = getIntent().getParcelableExtra(GOOGLE_ACCOUNT);
+		mFirstNameView.setText(googleSignInAccount.getGivenName());
+		mLastNameView.setText(googleSignInAccount.getFamilyName());
+		mEmailView.setText(googleSignInAccount.getEmail());
 	}
 }

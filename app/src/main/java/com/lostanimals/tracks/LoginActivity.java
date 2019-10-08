@@ -1,5 +1,6 @@
 package com.lostanimals.tracks;
 
+import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,9 +15,12 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
 import com.lostanimals.tracks.tasks.LoginTask;
 import com.lostanimals.tracks.utils.NotificationUtility;
 import com.lostanimals.tracks.utils.PreferencesUtility;
@@ -98,7 +102,10 @@ public class LoginActivity extends AppCompatActivity {
 			@Override
 			public void onClick(View v) {
 				Intent signInIntent = googleSignInClient.getSignInIntent();
-				startActivityForResult(signInIntent, 101);
+
+			startActivityForResult(signInIntent, 101);
+
+
 			}
 		});
 
@@ -111,7 +118,34 @@ public class LoginActivity extends AppCompatActivity {
 			}
 		});
 	}
-	
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (resultCode == Activity.RESULT_OK)
+			switch (requestCode) {
+				case 101:
+					try {
+						// The Task returned from this call is always completed, no need to attach
+						// a listener.
+						Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+						GoogleSignInAccount account = task.getResult(ApiException.class);
+						onLoggedIn(account);
+					} catch (ApiException e) {
+						// The ApiException status code indicates the detailed failure reason.
+						Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
+					}
+					break;
+			}
+	}
+
+	private void onLoggedIn(GoogleSignInAccount googleSignInAccount) {
+		Intent intent = new Intent(this, RegisterActivity.class);
+
+		intent.putExtra(FeedActivity.GOOGLE_ACCOUNT, googleSignInAccount);
+		startActivity(intent);
+
+
+		finish();
+	}
 	// TODO: Fix this
 
 	/**
