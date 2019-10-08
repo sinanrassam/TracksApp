@@ -7,14 +7,13 @@
         android:layout_height="match_parent"
         android:id="@+id/drawer"
         tools:context=".FeedActivity"
-        android:background="@color/primaryBackground">
+        >
 
     <FrameLayout
         android:id="@+id/frame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/primaryBackground"
-        android:clickable="true">
+        >
 
         <fragment
             android:id="@+id/fragment_feed"
