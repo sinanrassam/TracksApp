@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
-import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -86,9 +85,8 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 	@Override
 	public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 		Intent navigationIntent = null;
+
 		ActionBar actionBar = getSupportActionBar();
-
-
 
 		switch (menuItem.getItemId()) {
 			case R.id.feed_nav:
@@ -98,7 +96,7 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 				break;
 			case R.id.myPosts_nav:
 				//navigationIntent = new Intent(this, MyPostActivity.class);
-				loadFragment(new MyPostActivity());
+				loadFragment(new MyPostsActivity());
 				actionBar.setTitle("My Posts");
 				break;
 			case R.id.logOut_nav:
@@ -109,6 +107,9 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 				loadFragment(new MyProfileActivity());
 				actionBar.setTitle("My Profile");
 				break;
+            case R.id.settings_nav:
+                loadFragment(new SettingsActivity());
+                actionBar.setTitle("Settings");
 			case R.id.history_nav:
 				loadFragment(new HistoryActivity());
 				actionBar.setTitle("History");
