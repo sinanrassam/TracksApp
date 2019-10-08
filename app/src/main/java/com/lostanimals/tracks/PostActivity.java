@@ -53,7 +53,7 @@ public class PostActivity extends AppCompatActivity {
 		data.putString("post_id", mPostEntry.getId());
 		commentsFragment.setArguments(data);
 		getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, commentsFragment).commit();
-		
+
 		Button mCommentBtn = findViewById(R.id.comment_btn);
 		mCommentBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -61,15 +61,38 @@ public class PostActivity extends AppCompatActivity {
 				addComment();
 			}
 		});
+
+		Button mMapButton = findViewById(R.id.mapButton);
+		mMapButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				viewMap();
+			}
+		});
+
+
 	}
-	
+
+	private void viewMap() {
+		MapsActivity mapActivity = new MapsActivity();
+		//mapActivity.setPostLocation(mPostEntry.getLocation());
+
+		ApplicationClass.mMyAppsBundle.putString("id", mPostEntry.getId());
+		ApplicationClass.mMyAppsBundle.putString("lat", "69");
+		ApplicationClass.mMyAppsBundle.putString("lng", "69");
+
+		//mapActivity.setPostLocation(new LatLng(69, 69));
+		startActivity(new Intent(this, MapsActivity.class));
+
+	}
+
 	private void addComment() {
 		mCommentView.setError(null);
 		String msg = mCommentView.getText().toString();
-		
+
 		boolean cancel = false;
 		View focusView = null;
-		
+
 		// Check for a valid comment, if the user entered one.
 		if (TextUtils.isEmpty(msg)) {
 			mCommentView.setError(getString(R.string.error_field_required));

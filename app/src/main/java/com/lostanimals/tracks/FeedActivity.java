@@ -83,8 +83,6 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 		}
 		
 		mDrawerLayout.closeDrawers();
-		
-		// TODO: Why hardcode a false return?
 		return false;
 	}
 	

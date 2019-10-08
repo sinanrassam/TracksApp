@@ -1,5 +1,7 @@
 package com.lostanimals.tracks.entries;
 
+import com.google.android.gms.maps.model.LatLng;
+
 public class PostEntry {
 	private String mUsername;
 	private String mPostTitle;
@@ -8,7 +10,8 @@ public class PostEntry {
 	private String mPostTime;
 	private String mId;
 	private String mFound;
-	
+	private LatLng mLocation;
+
 	// default
 	public PostEntry(String id, String postTitle, String postDesc, String username, String postDate, String postTime, String found) {
 		setId(id);
@@ -19,15 +22,23 @@ public class PostEntry {
 		setPostTime(postTime);
 		setFound(found);
 	}
-	
+
+	public LatLng getLocation() {
+		return mLocation;
+	}
+
+	public void setLocation(LatLng location) {
+		this.mLocation = location;
+	}
+
 	public String getUsername() {
 		return mUsername;
 	}
-	
+
 	public void setUsername(String username) {
 		this.mUsername = username;
 	}
-	
+
 	public String getPostTitle() {
 		return "" + mPostTitle;
 	}
