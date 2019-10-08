@@ -10,6 +10,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
+import com.lostanimals.tracks.utils.PreferencesUtility;
 
 import java.util.Objects;
 
@@ -22,7 +23,7 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_feed);
-		
+
 		mDrawerLayout = findViewById(R.id.drawer);
 
 		mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open_action_bar,
@@ -89,5 +90,9 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 	@Override
 	protected void onResume() {
 		super.onResume();
+		if (PreferencesUtility.getUserInfo().getUsername().equals("")) {
+			startActivity(new Intent(this, LoginActivity.class));
+			finish();
+		}
 	}
 }
