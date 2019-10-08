@@ -153,7 +153,9 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 
 	public void loadFragment(Fragment fragment) {
 		FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
 		transaction.replace(R.id.frame, fragment);
+		transaction.addToBackStack(null);
 		transaction.commit();
 	}
 	@Override
