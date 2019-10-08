@@ -8,6 +8,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.lostanimals.tracks.utils.BundleManager;
 
 import java.util.Objects;
 
@@ -45,7 +46,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 		
 		// Add a marker in Sydney and move the camera
 		//postLocation = new LatLng(-34, 151);
-		LatLng postLocation = new LatLng(Double.parseDouble(Objects.requireNonNull(ApplicationClass.mMyAppsBundle.getString("lat"))), Double.parseDouble(Objects.requireNonNull(ApplicationClass.mMyAppsBundle.getString("lng"))));
+		LatLng postLocation = new LatLng(Double.parseDouble(Objects.requireNonNull(BundleManager.mPostBundle.getString("lat"))), Double.parseDouble(Objects.requireNonNull(BundleManager.mPostBundle.getString("lng"))));
 		googleMap.addMarker(new MarkerOptions().position(postLocation).title("Location of missing animal."));
 		googleMap.moveCamera(CameraUpdateFactory.newLatLng(postLocation));
 	}

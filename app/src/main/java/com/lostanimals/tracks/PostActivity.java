@@ -17,6 +17,7 @@ import com.lostanimals.tracks.entries.PostEntry;
 import com.lostanimals.tracks.tasks.DeleteTask;
 import com.lostanimals.tracks.tasks.EditTask;
 import com.lostanimals.tracks.tasks.NewCommentTask;
+import com.lostanimals.tracks.utils.BundleManager;
 import com.lostanimals.tracks.utils.PostsUtility;
 import com.lostanimals.tracks.utils.PreferencesUtility;
 
@@ -74,12 +75,12 @@ public class PostActivity extends AppCompatActivity {
 	}
 
 	private void viewMap() {
-		MapsActivity mapActivity = new MapsActivity();
-		//mapActivity.setPostLocation(mPostEntry.getLocation());
+		// Clear the bundle before adding the details of the post.
+		BundleManager.mPostBundle.clear();
 
-		ApplicationClass.mMyAppsBundle.putString("id", mPostEntry.getId());
-		ApplicationClass.mMyAppsBundle.putString("lat", "69");
-		ApplicationClass.mMyAppsBundle.putString("lng", "69");
+		BundleManager.mPostBundle.putString("id", mPostEntry.getId());
+		BundleManager.mPostBundle.putString("lat", "69");
+		BundleManager.mPostBundle.putString("lng", "69");
 
 		//mapActivity.setPostLocation(new LatLng(69, 69));
 		startActivity(new Intent(this, MapsActivity.class));
