@@ -62,7 +62,7 @@ public class ConnectionManager {
 				postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(parameters[0], "UTF-8") + "&";
 				postData += URLEncoder.encode("post_id", "UTF-8") + "=" + URLEncoder.encode(parameters[1], "UTF-8");
 				break;
-			case "get-followed-post":
+			case "get-followed-posts":
 				postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(parameters[0], "UTF-8");
 				break;
 		}

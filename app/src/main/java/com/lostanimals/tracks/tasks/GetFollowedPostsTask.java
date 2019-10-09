@@ -31,6 +31,8 @@ public class GetFollowedPostsTask extends AsyncTask<String, Integer, Boolean> {
                 success = false;
             }
 
+            Log.d("postData", postData);
+
             try {
                 json = processRequest("follow.php", postData);
             } catch (JSONException | IOException e) {
@@ -48,11 +50,8 @@ public class GetFollowedPostsTask extends AsyncTask<String, Integer, Boolean> {
                 JSONArray jsonArray = (JSONArray) json.get("posts");
                 Log.d("test", jsonArray.toString());
                 for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject jsonObject = (JSONObject) jsonArray.get(i);
-
-                    Log.d("jsonObject", jsonObject.toString());
-
-                    mFollowedPostsList.add(jsonObject.toString());
+                    String id = (String) jsonArray.get(i);
+                    mFollowedPostsList.add(id);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
