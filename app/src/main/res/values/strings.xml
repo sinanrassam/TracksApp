@@ -65,6 +65,7 @@
     <string name="nav_my_posts">My Posts</string>
     <string name="nav_my_profile">My Profile</string>
     <string name="nav_log_out">Log Out</string>
+    <string name="nav_followed_posts">Followed Posts</string>
     <!-- Maps -->
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_login2">deleteme</string>
