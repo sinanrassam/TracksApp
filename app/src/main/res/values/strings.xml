@@ -74,6 +74,7 @@
     <string name="pop_edit">Edit Post</string>
     <string name="pop_delete">Delete Post</string>
     <string name="action_follow_post">Follow Post</string>
+    <string name="action_unfollow_post">Unfollow Post</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

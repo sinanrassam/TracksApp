@@ -67,8 +67,11 @@ public class PostActivity extends AppCompatActivity {
 		if (PreferencesUtility.getUserInfo().getUsername().equals(mPostEntry.getUsername())) {
 			findViewById(R.id.unowned_options).setVisibility(View.GONE);
 		} else {
-			findViewById(R.id.unowned_options).setVisibility(View.VISIBLE);
 			Button mFollowPostBtn = findViewById(R.id.followPost_btn);
+			if (mPostEntry.getFollowing()) {
+				mFollowPostBtn.setText(R.string.action_unfollow_post);
+			}
+			findViewById(R.id.unowned_options).setVisibility(View.VISIBLE);
 			mFollowPostBtn.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
