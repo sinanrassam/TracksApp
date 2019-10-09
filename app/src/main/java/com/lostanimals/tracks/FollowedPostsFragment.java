@@ -11,6 +11,7 @@ import android.widget.ProgressBar;
 import androidx.fragment.app.ListFragment;
 import com.lostanimals.tracks.tasks.GetFollowedPostsTask;
 import com.lostanimals.tracks.tasks.UpdatePostsTask;
+import com.lostanimals.tracks.utils.PreferencesUtility;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class FollowedPostsFragment extends ListFragment {
 
 		GetFollowedPostsTask followedPosts = new GetFollowedPostsTask();
 
-		followedPosts.execute();
+		followedPosts.execute(PreferencesUtility.getUserInfo().getUsername());
 
 		List<String> postIds = followedPosts.getFollowedPosts();
 

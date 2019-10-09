@@ -37,6 +37,8 @@ public class GetFollowedPostsTask extends AsyncTask<String, Integer, Boolean> {
                 e.printStackTrace();
                 success = false;
             }
+
+            Log.d("JSON", json.toString());
         }
 
         if (json != null) {
