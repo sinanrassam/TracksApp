@@ -48,6 +48,8 @@ public class GetFollowedPostsTask extends AsyncTask<String, Integer, Boolean> {
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = (JSONObject) jsonArray.get(i);
 
+                    Log.d("jsonObject", jsonObject.toString());
+
                     mFollowedPostsList.add(jsonObject.toString());
                 }
             } catch (JSONException e) {

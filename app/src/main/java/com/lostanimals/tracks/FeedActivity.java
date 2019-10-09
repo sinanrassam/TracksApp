@@ -25,7 +25,7 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_feed);
-		
+
 		mDrawerLayout = findViewById(R.id.drawer);
 
 		mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open_action_bar,
@@ -80,6 +80,9 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 				break;
 			case R.id.myProfile_nav:
 				navigationIntent = new Intent(this, MyProfileActivity.class);
+				break;
+			case R.id.followedPosts_nav:
+				navigationIntent = new Intent(this, FollowedPostsActivity.class);
 				break;
 		}
 		

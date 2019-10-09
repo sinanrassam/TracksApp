@@ -2,6 +2,7 @@ package com.lostanimals.tracks;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,11 +28,13 @@ public class FollowedPostsFragment extends ListFragment {
 
 		List<String> postIds = followedPosts.getFollowedPosts();
 
-		if (!postIds.isEmpty()) {
-			for (String string : postIds) {
-				new UpdatePostsTask(this, mProgressBar).execute("", string, "");
-			}
-		}
+//		Log.d("Post Ids", postIds.toString());
+
+//		if (!postIds.isEmpty()) {
+//			for (String string : postIds) {
+//				new UpdatePostsTask(this, mProgressBar).execute("", string, "");
+//			}
+//		}
 
 		return view;
 	}
