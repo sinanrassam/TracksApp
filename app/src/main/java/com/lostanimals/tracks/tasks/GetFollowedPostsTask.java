@@ -20,10 +20,10 @@ import static com.lostanimals.tracks.utils.ConnectionManager.processRequest;
 
 public class GetFollowedPostsTask extends AsyncTask<String, Integer, Boolean> {
     private List<String> mFollowedPostsList;
-    private Fragment mFragment;
+    private ListFragment mFragment;
     private ProgressBar mProgressBar;
 
-    public GetFollowedPostsTask(Fragment fragment, ProgressBar progressBar) {
+    public GetFollowedPostsTask(ListFragment fragment, ProgressBar progressBar) {
         mFragment = fragment;
         mProgressBar = progressBar;
     }
@@ -61,7 +61,7 @@ public class GetFollowedPostsTask extends AsyncTask<String, Integer, Boolean> {
                 Log.d("test", jsonArray.toString());
                 for (int i = 0; i < jsonArray.length(); i++) {
                     String id = (String) jsonArray.get(i);
-                    new UpdatePostsTask((ListFragment) mFragment, mProgressBar).execute("", id, "");
+                    mFollowedPostsList.add(id);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -69,6 +69,13 @@ public class GetFollowedPostsTask extends AsyncTask<String, Integer, Boolean> {
             }
         }
         return success;
+    }
+
+    @Override
+    protected void onPostExecute(final Boolean success) {
+        for (String id : mFollowedPostsList) {
+            new UpdatePostsTask(mFragment, mProgressBar).execute("", id, "");
+        }
     }
 
     public List<String> getFollowedPosts() {
