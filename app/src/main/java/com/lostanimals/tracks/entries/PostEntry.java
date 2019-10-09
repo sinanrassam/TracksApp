@@ -8,9 +8,10 @@ public class PostEntry {
 	private String mPostTime;
 	private String mId;
 	private String mFound;
+	private boolean mfollowing;
 	
 	// default
-	public PostEntry(String id, String postTitle, String postDesc, String username, String postDate, String postTime, String found) {
+	public PostEntry(String id, String postTitle, String postDesc, String username, String postDate, String postTime, String found, String following) {
 		setId(id);
 		setUsername(username);
 		setPostTitle(postTitle);
@@ -18,6 +19,7 @@ public class PostEntry {
 		setPostDate(postDate);
 		setPostTime(postTime);
 		setFound(found);
+		setFollowing(following);
 	}
 	
 	public String getUsername() {
@@ -82,5 +84,13 @@ public class PostEntry {
 	
 	private void setPostDesc(String postDesc) {
 		this.mPostDesc = postDesc;
+	}
+
+	public void setFollowing(String following) {
+		mfollowing = Boolean.valueOf(following);
+	}
+
+	public boolean getFollowing() {
+		return mfollowing;
 	}
 }

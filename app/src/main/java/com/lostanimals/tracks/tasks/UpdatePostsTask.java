@@ -57,7 +57,7 @@ public class UpdatePostsTask extends AsyncTask<String, Integer, Boolean> {
 			}
 			
 			try {
-				json = processRequest("post.php", postData);
+				json = processRequest("test/post.php", postData);
 			} catch (JSONException | IOException e) {
 				e.printStackTrace();
 				success = false;
@@ -77,8 +77,9 @@ public class UpdatePostsTask extends AsyncTask<String, Integer, Boolean> {
 					String date = (String) jsonObject.get("post_date");
 					String time = (String) jsonObject.get("post_time");
 					String found = (String) jsonObject.get("found");
+					String following = (String) jsonObject.get("following");
 					
-					PostsUtility.addPostEntry(i, new PostEntry(id, title, desc, username, date, time, found));
+					PostsUtility.addPostEntry(i, new PostEntry(id, title, desc, username, date, time, found, following));
 					
 					Map<String, String> post = new HashMap<>(2);
 					
