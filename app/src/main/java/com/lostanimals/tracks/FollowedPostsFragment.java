@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import androidx.fragment.app.ListFragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.lostanimals.tracks.tasks.GetFollowedPostsTask;
 import com.lostanimals.tracks.tasks.UpdatePostsTask;
 import com.lostanimals.tracks.utils.PreferencesUtility;
@@ -16,6 +17,7 @@ import com.lostanimals.tracks.utils.PreferencesUtility;
 import java.util.List;
 
 public class FollowedPostsFragment extends ListFragment {
+	private SwipeRefreshLayout refreshLayout;
 	private ProgressBar mProgressBar;
 	
 	@Override
@@ -23,9 +25,28 @@ public class FollowedPostsFragment extends ListFragment {
 		final View view = inflater.inflate(R.layout.followed_posts_fragment, container, false);
 		mProgressBar = view.findViewById(R.id.progress_bar);
 
-		new GetFollowedPostsTask(this, mProgressBar).execute(PreferencesUtility.getUserInfo().getUsername());
+		refreshLayout = view.findViewById(R.id.pullToRefresh);
+		refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+			@Override
+			public void onRefresh() {
+				refresh();
+				refreshLayout.setRefreshing(false);
+			}
+		});
+
+		refresh();
 
 		return view;
+	}
+
+	private void refresh() {
+		new GetFollowedPostsTask(this, mProgressBar).execute(PreferencesUtility.getUserInfo().getUsername());
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		refresh();
 	}
 
 	@Override

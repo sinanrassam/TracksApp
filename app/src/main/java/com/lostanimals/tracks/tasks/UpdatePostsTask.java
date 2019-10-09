@@ -34,10 +34,19 @@ public class UpdatePostsTask extends AsyncTask<String, Integer, Boolean> {
 	private ListFragment mFragment;
 	
 	private List<Map<String, String>> mPostList = new ArrayList<>();
-	
+
 	public UpdatePostsTask(ListFragment activity, ProgressBar progressBar) {
 		this.mFragment = activity;
 		this.mContext = mFragment.getContext();
+		this.mProgressBar = progressBar;
+		PostsUtility.clear();
+		mPostList = new ArrayList<>();
+	}
+
+
+	public UpdatePostsTask(ListFragment activity, Context context, ProgressBar progressBar) {
+		this.mFragment = activity;
+		this.mContext = context;
 		this.mProgressBar = progressBar;
 		PostsUtility.clear();
 		mPostList = new ArrayList<>();
