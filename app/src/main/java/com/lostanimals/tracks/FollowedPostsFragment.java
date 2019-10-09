@@ -27,4 +27,11 @@ public class FollowedPostsFragment extends ListFragment {
 
 		return view;
 	}
+
+	@Override
+	public void onListItemClick(ListView l, View v, int position, long id) {
+		Intent intent = new Intent(getContext(), PostActivity.class);
+		intent.putExtra("position", position);
+		startActivity(intent);
+	}
 }
