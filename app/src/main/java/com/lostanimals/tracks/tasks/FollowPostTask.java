@@ -16,6 +16,7 @@ import static com.lostanimals.tracks.utils.ConnectionManager.processRequest;
 public class FollowPostTask extends AsyncTask<String, Integer, JSONObject> {
 	@SuppressLint ("StaticFieldLeak")
 	private Context mContext;
+	private String mMsg;
 
 	public FollowPostTask(Context context) {
 		mContext = context;
@@ -25,10 +26,11 @@ public class FollowPostTask extends AsyncTask<String, Integer, JSONObject> {
 	protected JSONObject doInBackground(String... parameters) {
 		boolean success = true;
 		JSONObject json = null;
+		mMsg = parameters[2];
 		if (!this.isCancelled()) {
 			String postData = null;
 			try {
-				postData = ConnectionManager.postEncoder(parameters[2] + "follow-post", parameters);
+				postData = ConnectionManager.postEncoder(mMsg + "follow-post", parameters);
 				json = processRequest("follow.php", postData);
 			} catch (JSONException | IOException e) {
 				e.printStackTrace();
@@ -39,16 +41,11 @@ public class FollowPostTask extends AsyncTask<String, Integer, JSONObject> {
 	}
 	
 	@Override
-	protected void onPreExecute() {
-		Toast.makeText(mContext, "Loading posts", Toast.LENGTH_SHORT).show();
-	}
-	
-	@Override
 	protected void onPostExecute(JSONObject data) {
 		Log.d("Data", data.toString());
 		try {
 			if (data.get("response").equals("successful")) {
-				Toast.makeText(mContext, "Post Followed", Toast.LENGTH_LONG).show();
+				Toast.makeText(mContext, "Post " + mMsg + "followed", Toast.LENGTH_LONG).show();
 			} else {
 				Toast.makeText(mContext, data.get("reason").toString(), Toast.LENGTH_LONG).show();
 			}
