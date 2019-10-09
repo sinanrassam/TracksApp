@@ -51,7 +51,7 @@ public class FollowPostTask extends AsyncTask<String, Integer, JSONObject> {
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
-			Toast.makeText(mContext, "Error following post", Toast.LENGTH_LONG).show();
+			Toast.makeText(mContext, "Error " + mMsg + "following post", Toast.LENGTH_LONG).show();
 		}
 	}
 }
