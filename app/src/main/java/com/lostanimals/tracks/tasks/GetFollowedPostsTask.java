@@ -2,8 +2,8 @@ package com.lostanimals.tracks.tasks;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
 import android.widget.ProgressBar;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.ListFragment;
 import com.lostanimals.tracks.utils.ConnectionManager;
 import com.lostanimals.tracks.utils.PostsUtility;
@@ -41,6 +41,7 @@ public class GetFollowedPostsTask extends AsyncTask<String, Integer, Boolean> {
                 success = false;
             }
 
+            // todo: remove Log
             Log.d("postData", postData);
 
             try {
@@ -50,6 +51,7 @@ public class GetFollowedPostsTask extends AsyncTask<String, Integer, Boolean> {
                 success = false;
             }
 
+            // todo: remove Log
             Log.d("JSON", json.toString());
         }
 
@@ -58,6 +60,7 @@ public class GetFollowedPostsTask extends AsyncTask<String, Integer, Boolean> {
             mFollowedPostsList = new ArrayList<>();
             try {
                 JSONArray jsonArray = (JSONArray) json.get("posts");
+                // todo: remove Log
                 Log.d("test", jsonArray.toString());
                 for (int i = 0; i < jsonArray.length(); i++) {
                     String id = (String) jsonArray.get(i);
@@ -73,8 +76,13 @@ public class GetFollowedPostsTask extends AsyncTask<String, Integer, Boolean> {
 
     @Override
     protected void onPostExecute(final Boolean success) {
-        for (String id : mFollowedPostsList) {
-            new UpdatePostsTask(mFragment, mProgressBar).execute("", id, "");
+        mProgressBar.setVisibility(View.GONE);
+        final UpdatePostsTask updatePostsTask = new UpdatePostsTask(mFragment, null);
+
+        for (final String id : mFollowedPostsList) {
+            Log.d("Yalla", id);
+            updatePostsTask.execute("", id, "");
+
         }
     }
 

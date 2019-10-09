@@ -39,6 +39,8 @@ public class UpdatePostsTask extends AsyncTask<String, Integer, Boolean> {
 		this.mFragment = activity;
 		this.mContext = mFragment.getContext();
 		this.mProgressBar = progressBar;
+		PostsUtility.clear();
+		mPostList = new ArrayList<>();
 	}
 	
 	@Override
@@ -63,8 +65,6 @@ public class UpdatePostsTask extends AsyncTask<String, Integer, Boolean> {
 		}
 		
 		if (json != null) {
-			PostsUtility.clear();
-			mPostList = new ArrayList<>();
 			try {
 				JSONArray jsonArray = (JSONArray) json.get("posts");
 				Log.d("test", jsonArray.toString());
@@ -102,7 +102,9 @@ public class UpdatePostsTask extends AsyncTask<String, Integer, Boolean> {
 	
 	@Override
 	protected void onPostExecute(final Boolean success) {
-		mProgressBar.setVisibility(View.GONE);
+		if (mProgressBar != null) {
+			mProgressBar.setVisibility(View.GONE);
+		}
 		
 		SimpleAdapter adapter = new SimpleAdapter(mContext, mPostList, android.R.layout.simple_list_item_2, new String[] {"Title", "Desc"}, new int[] {android.R.id.text1, android.R.id.text2});
 		mFragment.setListAdapter(adapter);
