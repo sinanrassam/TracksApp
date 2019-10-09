@@ -87,7 +87,7 @@ public class PostEntry {
 	}
 
 	public void setFollowing(String following) {
-		mfollowing = following.equals("1");
+		mfollowing = !following.equals("0");
 	}
 
 	public boolean getFollowing() {

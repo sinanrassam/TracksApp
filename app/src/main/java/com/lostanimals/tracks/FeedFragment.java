@@ -10,6 +10,7 @@ import android.widget.ProgressBar;
 import androidx.fragment.app.ListFragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.lostanimals.tracks.tasks.UpdatePostsTask;
+import com.lostanimals.tracks.utils.PreferencesUtility;
 
 public class FeedFragment extends ListFragment {
 	private SwipeRefreshLayout refreshLayout;
@@ -43,7 +44,7 @@ public class FeedFragment extends ListFragment {
 	}
 	
 	private void refresh() {
-		new UpdatePostsTask(this, progressBar).execute("", "", "");
+		new UpdatePostsTask(this, progressBar).execute("", PreferencesUtility.getUserInfo().getUsername(), "", "");
 	}
 	
 	@Override
