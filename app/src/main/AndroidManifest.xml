@@ -61,6 +61,7 @@
                 android:name=".MyProfileActivity"
                 android:parentActivityName=".FeedActivity">
         </activity>
+        <activity android:name=".MapsActivityGetCurrentLocation"/>
     </application>
 
 </manifest>

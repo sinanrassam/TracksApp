@@ -6,11 +6,9 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.lostanimals.tracks.utils.BundleManager;
-
-import java.util.Objects;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 	LatLng postLocation;
@@ -43,11 +41,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 	 */
 	@Override
 	public void onMapReady(GoogleMap googleMap) {
-		
+
 		// Add a marker in Sydney and move the camera
 		//postLocation = new LatLng(-34, 151);
-		LatLng postLocation = new LatLng(Double.parseDouble(Objects.requireNonNull(BundleManager.mPostBundle.getString("lat"))), Double.parseDouble(Objects.requireNonNull(BundleManager.mPostBundle.getString("lng"))));
-		googleMap.addMarker(new MarkerOptions().position(postLocation).title("Location of missing animal."));
-		googleMap.moveCamera(CameraUpdateFactory.newLatLng(postLocation));
+		BundleManager.setPostLocation(new LatLng(-36.848461, 174.763336));
+		CircleOptions testCircle = new CircleOptions();
+		testCircle.center(BundleManager.getPostLocation());
+		testCircle.radius(50000);
+		testCircle.fillColor(2);
+		testCircle.clickable(true);
+		testCircle.visible(true);
+		googleMap.addCircle(testCircle);
+
+		//googleMap.addMarker(new MarkerOptions().position(postLocation).title("Location of missing animal."));
+		googleMap.moveCamera(CameraUpdateFactory.newLatLng(BundleManager.getPostLocation()));
 	}
 }
