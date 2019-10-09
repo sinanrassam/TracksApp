@@ -90,7 +90,7 @@ public class PostEntry {
 		mfollowing = !following.equals("0");
 	}
 
-	public boolean getFollowing() {
+	public boolean isFollowed() {
 		return mfollowing;
 	}
 }

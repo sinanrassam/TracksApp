@@ -68,7 +68,7 @@ public class PostActivity extends AppCompatActivity {
 			findViewById(R.id.unowned_options).setVisibility(View.GONE);
 		} else {
 			Button mFollowPostBtn = findViewById(R.id.followPost_btn);
-			final boolean following = mPostEntry.getFollowing();
+			final boolean following = mPostEntry.isFollowed();
 			if (following) {
 				mFollowPostBtn.setText(R.string.action_unfollow_post);
 			}

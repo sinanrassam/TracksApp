@@ -8,20 +8,12 @@ import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
 import androidx.fragment.app.ListFragment;
 import com.lostanimals.tracks.entries.PostEntry;
-import com.lostanimals.tracks.utils.ConnectionManager;
 import com.lostanimals.tracks.utils.PostsUtility;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static com.lostanimals.tracks.utils.ConnectionManager.processRequest;
 
 public class GetFollowedPostsTask extends AsyncTask<String, Integer, Boolean> {
     private Context mContext;
@@ -43,10 +35,12 @@ public class GetFollowedPostsTask extends AsyncTask<String, Integer, Boolean> {
         List<PostEntry> postList = PostsUtility.getPostEntries();
 
         for (PostEntry entry : postList) {
-            if (entry.getFollowing()) {
+            if (entry.isFollowed()) {
                 Map<String, String> post = new HashMap<>(2);
                 post.put("Title", entry.getPostTitle());
                 post.put("Desc", entry.getPostDesc());
+                // todo: What? Shouldn't remove?
+                Log.d("Post", String.valueOf(post));
                 mFollowedPostsList.add(post);
             }
         }
