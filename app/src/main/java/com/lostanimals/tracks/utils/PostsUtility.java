@@ -18,6 +18,10 @@ public class PostsUtility {
 	public static PostEntry getPostEntry(int index) {
 		return PostsUtility.postEntryArray.get(index);
 	}
+
+	public static ArrayList<PostEntry> getPostEntries() {
+		return postEntryArray;
+	}
 	
 	public static void clear() {
 		if (postEntryArray != null) {

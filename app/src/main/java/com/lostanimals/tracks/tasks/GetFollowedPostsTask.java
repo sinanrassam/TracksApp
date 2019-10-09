@@ -1,10 +1,13 @@
 package com.lostanimals.tracks.tasks;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.SimpleAdapter;
 import androidx.fragment.app.ListFragment;
+import com.lostanimals.tracks.entries.PostEntry;
 import com.lostanimals.tracks.utils.ConnectionManager;
 import com.lostanimals.tracks.utils.PostsUtility;
 import org.json.JSONArray;
@@ -14,79 +17,48 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.lostanimals.tracks.utils.ConnectionManager.processRequest;
 
 public class GetFollowedPostsTask extends AsyncTask<String, Integer, Boolean> {
-    private List<String> mFollowedPostsList;
+    private Context mContext;
     private ListFragment mFragment;
     private ProgressBar mProgressBar;
+    ArrayList<Map<String, String>> mFollowedPostsList;
 
     public GetFollowedPostsTask(ListFragment fragment, ProgressBar progressBar) {
         mFragment = fragment;
+        mContext = mFragment.getContext();
         mProgressBar = progressBar;
+        mFollowedPostsList = new ArrayList<>();
     }
 
     @Override
     protected Boolean doInBackground(String... parameters) {
         boolean success = true;
-        JSONObject json = null;
-        if (!this.isCancelled()) {
-            String postData = null;
-            try {
-                postData = ConnectionManager.postEncoder("get-followed-posts", parameters);
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-                success = false;
-            }
 
-            // todo: remove Log
-            Log.d("postData", postData);
+        List<PostEntry> postList = PostsUtility.getPostEntries();
 
-            try {
-                json = processRequest("follow.php", postData);
-            } catch (JSONException | IOException e) {
-                e.printStackTrace();
-                success = false;
-            }
-
-            // todo: remove Log
-            Log.d("JSON", json.toString());
-        }
-
-        if (json != null) {
-            PostsUtility.clear();
-            mFollowedPostsList = new ArrayList<>();
-            try {
-                JSONArray jsonArray = (JSONArray) json.get("posts");
-                // todo: remove Log
-                Log.d("test", jsonArray.toString());
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    String id = (String) jsonArray.get(i);
-                    mFollowedPostsList.add(id);
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-                success = false;
+        for (PostEntry entry : postList) {
+            if (entry.getFollowing()) {
+                Map<String, String> post = new HashMap<>(2);
+                post.put("Title", entry.getPostTitle());
+                post.put("Desc", entry.getPostDesc());
+                mFollowedPostsList.add(post);
             }
         }
+
         return success;
     }
 
     @Override
     protected void onPostExecute(final Boolean success) {
+        SimpleAdapter adapter = new SimpleAdapter(mContext, mFollowedPostsList, android.R.layout.simple_list_item_2, new String[] {"Title", "Desc"}, new int[] {android.R.id.text1, android.R.id.text2});
+        mFragment.setListAdapter(adapter);
+        adapter.notifyDataSetChanged();
         mProgressBar.setVisibility(View.GONE);
-        final UpdatePostsTask updatePostsTask = new UpdatePostsTask(mFragment, null);
-
-        for (final String id : mFollowedPostsList) {
-            Log.d("Yalla", id);
-            updatePostsTask.execute("", id, "");
-
-        }
-    }
-
-    public List<String> getFollowedPosts() {
-        return mFollowedPostsList;
     }
 }
