@@ -2,7 +2,9 @@ package com.lostanimals.tracks.tasks;
 
 import android.os.AsyncTask;
 import android.util.Log;
-import com.lostanimals.tracks.entries.PostEntry;
+import android.widget.ProgressBar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.ListFragment;
 import com.lostanimals.tracks.utils.ConnectionManager;
 import com.lostanimals.tracks.utils.PostsUtility;
 import org.json.JSONArray;
@@ -18,6 +20,14 @@ import static com.lostanimals.tracks.utils.ConnectionManager.processRequest;
 
 public class GetFollowedPostsTask extends AsyncTask<String, Integer, Boolean> {
     private List<String> mFollowedPostsList;
+    private Fragment mFragment;
+    private ProgressBar mProgressBar;
+
+    public GetFollowedPostsTask(Fragment fragment, ProgressBar progressBar) {
+        mFragment = fragment;
+        mProgressBar = progressBar;
+    }
+
     @Override
     protected Boolean doInBackground(String... parameters) {
         boolean success = true;
@@ -51,7 +61,7 @@ public class GetFollowedPostsTask extends AsyncTask<String, Integer, Boolean> {
                 Log.d("test", jsonArray.toString());
                 for (int i = 0; i < jsonArray.length(); i++) {
                     String id = (String) jsonArray.get(i);
-                    mFollowedPostsList.add(id);
+                    new UpdatePostsTask((ListFragment) mFragment, mProgressBar).execute("", id, "");
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

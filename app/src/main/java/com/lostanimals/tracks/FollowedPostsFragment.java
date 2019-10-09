@@ -23,19 +23,9 @@ public class FollowedPostsFragment extends ListFragment {
 		final View view = inflater.inflate(R.layout.followed_posts_fragment, container, false);
 		mProgressBar = view.findViewById(R.id.progress_bar);
 
-		GetFollowedPostsTask followedPosts = new GetFollowedPostsTask();
+		GetFollowedPostsTask followedPosts = new GetFollowedPostsTask(this, mProgressBar);
 
 		followedPosts.execute(PreferencesUtility.getUserInfo().getUsername());
-
-		List<String> postIds = followedPosts.getFollowedPosts();
-
-//		Log.d("Post Ids", postIds.toString());
-
-//		if (!postIds.isEmpty()) {
-//			for (String string : postIds) {
-//				new UpdatePostsTask(this, mProgressBar).execute("", string, "");
-//			}
-//		}
 
 		return view;
 	}
