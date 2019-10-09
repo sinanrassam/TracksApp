@@ -28,7 +28,7 @@ public class FollowPostTask extends AsyncTask<String, Integer, JSONObject> {
 		if (!this.isCancelled()) {
 			String postData = null;
 			try {
-				postData = ConnectionManager.postEncoder("follow-post", parameters);
+				postData = ConnectionManager.postEncoder(parameters[2] + "follow-post", parameters);
 				json = processRequest("follow.php", postData);
 			} catch (JSONException | IOException e) {
 				e.printStackTrace();

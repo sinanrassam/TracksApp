@@ -68,22 +68,24 @@ public class PostActivity extends AppCompatActivity {
 			findViewById(R.id.unowned_options).setVisibility(View.GONE);
 		} else {
 			Button mFollowPostBtn = findViewById(R.id.followPost_btn);
-			if (mPostEntry.getFollowing()) {
+			final boolean following = mPostEntry.getFollowing();
+			if (following) {
 				mFollowPostBtn.setText(R.string.action_unfollow_post);
 			}
 			findViewById(R.id.unowned_options).setVisibility(View.VISIBLE);
 			mFollowPostBtn.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					followPost();
+					followPost(following);
 				}
 			});
 		}
 	}
 
-	private void followPost() {
+	private void followPost(boolean following) {
 		Log.d("Follow Post", "Clicked");
-		new FollowPostTask(this).execute(PreferencesUtility.getUserInfo().getUsername(), mPostEntry.getId());
+		String followOrToUnfollow = (following)? "un" : "";
+		new FollowPostTask(this).execute(PreferencesUtility.getUserInfo().getUsername(), mPostEntry.getId(), followOrToUnfollow);
 	}
 	
 	private void addComment() {

@@ -60,6 +60,7 @@ public class ConnectionManager {
 			case "delete-post":
 				postData += URLEncoder.encode("id", "UTF-8") + "=" + URLEncoder.encode(parameters[0], "UTF-8");
 				break;
+			case "unfollow-post": //fall through
 			case "follow-post":
 				postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(parameters[0], "UTF-8") + "&";
 				postData += URLEncoder.encode("post_id", "UTF-8") + "=" + URLEncoder.encode(parameters[1], "UTF-8");
