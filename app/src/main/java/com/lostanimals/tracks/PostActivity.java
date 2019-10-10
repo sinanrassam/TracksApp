@@ -22,226 +22,226 @@ import com.lostanimals.tracks.utils.PostsUtility;
 import com.lostanimals.tracks.utils.PreferencesUtility;
 
 public class PostActivity extends AppCompatActivity {
-	
-	private PostEntry mPostEntry;
-	private EditText mCommentView;
-	private CommentsFragment commentsFragment;
-	
-	@SuppressLint ("SetTextI18n")
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_post);
-		
-		int mPostPosition = getIntent().getIntExtra("position", 0);
-		mPostEntry = PostsUtility.getPostEntry(mPostPosition);
-		
-		TextView mPostTitleView = findViewById(R.id.post_txt_title);
-		TextView mPostDescView = findViewById(R.id.post_et_desc);
-		TextView mPostDateView = findViewById(R.id.post_date);
-		TextView mPostAuthorView = findViewById(R.id.post_author);
-		
-		mPostTitleView.setText(mPostEntry.getPostTitle());
-		
-		mPostDescView.setText(mPostEntry.getPostDesc());
-		mPostDateView.setText(mPostEntry.getPostDate() + ", at: " + mPostEntry.getPostTime());
-		mPostAuthorView.setText("By: " + mPostEntry.getUsername());
-		
-		mCommentView = findViewById(R.id.comment_field);
-		
-		commentsFragment = new CommentsFragment();
-		Bundle data = new Bundle();
-		data.putString("post_id", mPostEntry.getId());
-		commentsFragment.setArguments(data);
-		getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, commentsFragment).commit();
 
-		Button mCommentBtn = findViewById(R.id.comment_btn);
-		mCommentBtn.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				addComment();
-			}
-		});
+    private PostEntry mPostEntry;
+    private EditText mCommentView;
+    private CommentsFragment commentsFragment;
 
-		Button mMapButton = findViewById(R.id.mapButton);
-		mMapButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				viewMap();
-			}
-		});
+    @SuppressLint("SetTextI18n")
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_post);
+
+        int mPostPosition = getIntent().getIntExtra("position", 0);
+        mPostEntry = PostsUtility.getPostEntry(mPostPosition);
+
+        TextView mPostTitleView = findViewById(R.id.post_txt_title);
+        TextView mPostDescView = findViewById(R.id.post_et_desc);
+        TextView mPostDateView = findViewById(R.id.post_date);
+        TextView mPostAuthorView = findViewById(R.id.post_author);
+
+        mPostTitleView.setText(mPostEntry.getPostTitle());
+
+        mPostDescView.setText(mPostEntry.getPostDesc());
+        mPostDateView.setText(mPostEntry.getPostDate() + ", at: " + mPostEntry.getPostTime());
+        mPostAuthorView.setText("By: " + mPostEntry.getUsername());
+
+        mCommentView = findViewById(R.id.comment_field);
+
+        commentsFragment = new CommentsFragment();
+        Bundle data = new Bundle();
+        data.putString("post_id", mPostEntry.getId());
+        commentsFragment.setArguments(data);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, commentsFragment).commit();
+
+        Button mCommentBtn = findViewById(R.id.comment_btn);
+        mCommentBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addComment();
+            }
+        });
+
+        Button mMapButton = findViewById(R.id.mapButton);
+        mMapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewMap();
+            }
+        });
 
 
-	}
+    }
 
-	private void viewMap() {
-		// Clear the bundle before adding the details of the post.
-		BundleManager.mPostBundle.clear();
+    private void viewMap() {
+        // Clear the bundle before adding the details of the post.
+        BundleManager.mPostBundle.clear();
 
-		BundleManager.mPostBundle.putString("id", mPostEntry.getId());
-		BundleManager.mPostBundle.putString("lat", "69");
-		BundleManager.mPostBundle.putString("lng", "69");
+        BundleManager.mPostBundle.putString("id", mPostEntry.getId());
+        BundleManager.mPostBundle.putString("lat", "69");
+        BundleManager.mPostBundle.putString("lng", "69");
 
-		//mapActivity.setPostLocation(new LatLng(69, 69));
-		startActivity(new Intent(this, MapsActivity.class));
+        //mapActivity.setPostLocation(new LatLng(69, 69));
+        startActivity(new Intent(this, MapsActivity.class));
 
-	}
+    }
 
-	private void addComment() {
-		mCommentView.setError(null);
-		String msg = mCommentView.getText().toString();
+    private void addComment() {
+        mCommentView.setError(null);
+        String msg = mCommentView.getText().toString();
 
-		boolean cancel = false;
-		View focusView = null;
+        boolean cancel = false;
+        View focusView = null;
 
-		// Check for a valid comment, if the user entered one.
-		if (TextUtils.isEmpty(msg)) {
-			mCommentView.setError(getString(R.string.error_field_required));
-			focusView = mCommentView;
-			cancel = true;
-		}
-		
-		String username = PreferencesUtility.getUserInfo().getUsername();
-		
-		String post_id = mPostEntry.getId();
-		if (cancel) {
-			focusView.requestFocus();
-		} else {
-			mCommentView.setText("");
-			mCommentView.clearFocus();
-			NewCommentTask addCommentTask = new NewCommentTask(this);
-			addCommentTask.execute(post_id, username, msg);
-			commentsFragment.refresh();
-		}
-	}
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		if (mPostEntry != null) {
-			if (mPostEntry.getUsername().equals(PreferencesUtility.getUserInfo().getUsername())) {
-				getMenuInflater().inflate(R.menu.nav_popup, menu);
-			}
-		}
-		
-		return true;
-	}
-	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-			case R.id.popup_found:
-				onFoundClicked();
-				return true;
-			case R.id.popup_edit:
-				onEditClicked();
-				return true;
-			case R.id.popup_delete:
-				onDeleteClicked();
-				return true;
-		}
-		
-		return false;
-	}
-	
-	private void onFoundClicked() {
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		
-		if (mPostEntry.getFound().equals("0")) {
-			builder.setMessage("Are you sure you want to mark the post as found? It will no longer be " + "accessible in the main feed but you can view it in my posts.");
-			builder.setTitle("Warning!");
-			
-			builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					markAsFound();
-				}
-			});
-			builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					dialog.cancel();
-				}
-			});
-		} else {
-			builder.setMessage("This post has already been marked as found!");
-			builder.setTitle("Attention!");
-			
-			builder.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					dialog.cancel();
-				}
-			});
-		}
-		
-		builder.setCancelable(false);
-		
-		AlertDialog alertDialog = builder.create();
-		alertDialog.show();
-	}
-	
-	private void onEditClicked() {
-		if (mPostEntry.getFound().equals("0")) {
-			Intent myIntent = new Intent(this, NewPostActivity.class);
-			myIntent.putExtra("isEditTask", true); // to set trigger in NewPostActivity to call EditTask
-			myIntent.putExtra("postID", mPostEntry.getId());
-			myIntent.putExtra("postTitle", mPostEntry.getPostTitle());
-			myIntent.putExtra("postDesc", mPostEntry.getPostDesc());
-			myIntent.putExtra("isFound", mPostEntry.getFound());
-			startActivity(myIntent);
-		} else {
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			
-			builder.setMessage("This post cannot be edited as it has been marked as found!");
-			builder.setTitle("Attention!");
-			
-			builder.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					dialog.cancel();
-				}
-			});
-			
-			builder.setCancelable(false);
-			
-			AlertDialog alertDialog = builder.create();
-			alertDialog.show();
-		}
-	}
-	
-	private void onDeleteClicked() {
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		
-		builder.setMessage("Are you sure you want to delete the post? Once deleted this cannot be " + "reversed.");
-		builder.setTitle("Warning!");
-		
-		builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				deletePost();
-			}
-		});
-		builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				dialog.cancel();
-			}
-		});
-		
-		builder.setCancelable(false);
-		
-		AlertDialog alertDialog = builder.create();
-		alertDialog.show();
-	}
-	
-	private void markAsFound() {
-		EditTask editTask = new EditTask(this);
-		editTask.execute(mPostEntry.getId(), mPostEntry.getPostTitle(), mPostEntry.getPostDesc(), "1");
-	}
-	
-	private void deletePost() {
-		DeleteTask deleteTask = new DeleteTask(this);
-		deleteTask.execute(mPostEntry.getId());
-		finish();
-	}
+        // Check for a valid comment, if the user entered one.
+        if (TextUtils.isEmpty(msg)) {
+            mCommentView.setError(getString(R.string.error_field_required));
+            focusView = mCommentView;
+            cancel = true;
+        }
+
+        String username = PreferencesUtility.getUserInfo().getUsername();
+
+        String post_id = mPostEntry.getId();
+        if (cancel) {
+            focusView.requestFocus();
+        } else {
+            mCommentView.setText("");
+            mCommentView.clearFocus();
+            NewCommentTask addCommentTask = new NewCommentTask(this);
+            addCommentTask.execute(post_id, username, msg);
+            commentsFragment.refresh();
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if (mPostEntry != null) {
+            if (mPostEntry.getUsername().equals(PreferencesUtility.getUserInfo().getUsername())) {
+                getMenuInflater().inflate(R.menu.nav_popup, menu);
+            }
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.popup_found:
+                onFoundClicked();
+                return true;
+            case R.id.popup_edit:
+                onEditClicked();
+                return true;
+            case R.id.popup_delete:
+                onDeleteClicked();
+                return true;
+        }
+
+        return false;
+    }
+
+    private void onFoundClicked() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        if (mPostEntry.getFound().equals("0")) {
+            builder.setMessage("Are you sure you want to mark the post as found? It will no longer be " + "accessible in the main feed but you can view it in my posts.");
+            builder.setTitle("Warning!");
+
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    markAsFound();
+                }
+            });
+            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+        } else {
+            builder.setMessage("This post has already been marked as found!");
+            builder.setTitle("Attention!");
+
+            builder.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+        }
+
+        builder.setCancelable(false);
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    private void onEditClicked() {
+        if (mPostEntry.getFound().equals("0")) {
+            Intent myIntent = new Intent(this, NewPostActivity.class);
+            myIntent.putExtra("isEditTask", true); // to set trigger in NewPostActivity to call EditTask
+            myIntent.putExtra("postID", mPostEntry.getId());
+            myIntent.putExtra("postTitle", mPostEntry.getPostTitle());
+            myIntent.putExtra("postDesc", mPostEntry.getPostDesc());
+            myIntent.putExtra("isFound", mPostEntry.getFound());
+            startActivity(myIntent);
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+            builder.setMessage("This post cannot be edited as it has been marked as found!");
+            builder.setTitle("Attention!");
+
+            builder.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+
+            builder.setCancelable(false);
+
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+        }
+    }
+
+    private void onDeleteClicked() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setMessage("Are you sure you want to delete the post? Once deleted this cannot be " + "reversed.");
+        builder.setTitle("Warning!");
+
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                deletePost();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.setCancelable(false);
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    private void markAsFound() {
+        EditTask editTask = new EditTask(this);
+        editTask.execute(mPostEntry.getId(), mPostEntry.getPostTitle(), mPostEntry.getPostDesc(), "1");
+    }
+
+    private void deletePost() {
+        DeleteTask deleteTask = new DeleteTask(this);
+        deleteTask.execute(mPostEntry.getId());
+        finish();
+    }
 }
