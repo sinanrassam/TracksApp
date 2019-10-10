@@ -97,7 +97,7 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 				actionBar.setTitle("My Profile");
 				break;
             case R.id.settings_nav:
-				startActivity(new Intent(this, SettingsActivity.class));
+				navigationIntent = new Intent(this, SettingsActivity.class);
 				break;
 			case R.id.history_nav:
 				loadFragment(new HistoryActivity());
