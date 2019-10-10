@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <item android:id="@+id/feed_nav"
           android:title="@string/nav_feed"
-          android:icon="@drawable/ic_feed" />
-
+          android:icon="@drawable/ic_feed"
+    />
     <item android:id="@+id/myPosts_nav"
           android:title="@string/nav_my_posts"
-          android:icon="@drawable/ic_receipt_black"/>
-
+          android:icon="@drawable/ic_receipt_black"
+    />
     <item android:id="@+id/myProfile_nav"
           android:title="@string/nav_my_profile"
-          android:icon="@drawable/ic_profile"/>
-
+          android:icon="@drawable/ic_profile"
+    />
     <item
         android:id="@+id/history_nav"
         android:icon="@drawable/ic_history_black_24dp"
@@ -52,5 +51,7 @@
             android:icon="@drawable/ic_settings_black_24dp"
             android:title="Settings"
     />
+
+
 
 </menu>

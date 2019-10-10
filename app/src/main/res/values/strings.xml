@@ -65,7 +65,8 @@
     <string name="nav_my_posts">My Posts</string>
     <string name="nav_my_profile">My Profile</string>
     <string name="nav_log_out">Log Out</string>
-    <string name="nav_history">History</string>
+    <string name="nav_history">Recently Viewed</string>
+
     <string name="settings">Settings</string>
     <!-- Maps -->
     <string name="title_activity_maps">Map</string>
