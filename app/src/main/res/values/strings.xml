@@ -64,6 +64,8 @@
     <string name="logout">Logout</string>
     <string name="open_feed">Open Feed</string>
     <!-- Filters -->
+    <string name="filters_confirm">Confirm</string>
+    <string name="filters_cancel">Cancel</string>
     <string name="sort_newest_first">Newest First</string>
     <string name="sort_oldest_first">Oldest First</string>
     <string name="sort_closest_first">Closest First</string>
