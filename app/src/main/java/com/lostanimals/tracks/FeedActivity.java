@@ -50,7 +50,9 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 			, View.OnClickListener
 
 		});*/
-		aSwitch=findViewById(R.id.switch_toggle);
+
+
+        /*aSwitch=findViewById(R.id.switch_toggle);
 		aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -66,7 +68,7 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 					getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 				}
 			}
-		});
+		});*/
 
 		mDrawerLayout = findViewById(R.id.drawer);
 
