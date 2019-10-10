@@ -31,17 +31,6 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_feed);
 
-        /*View settingButton = findViewById(R.id.settings_button_nav);
-        settingButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(this, SettingsActivity.class);
-				startActivity(intent);
-			}
-			, View.OnClickListener
-
-		});*/
-
 		mDrawerLayout = findViewById(R.id.drawer);
 
 		mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open_action_bar,
@@ -108,8 +97,8 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 				actionBar.setTitle("My Profile");
 				break;
             case R.id.settings_nav:
-                loadFragment(new SettingsActivity());
-                actionBar.setTitle("Settings");
+				startActivity(new Intent(this, SettingsActivity.class));
+				break;
 			case R.id.history_nav:
 				loadFragment(new HistoryActivity());
 				actionBar.setTitle("History");
