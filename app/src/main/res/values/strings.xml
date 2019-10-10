@@ -61,8 +61,39 @@
     <string name="edit">Edit Details</string>
     <!-- Maps -->
     <string name="title_activity_maps">Map</string>
-    <string name="title_activity_login2">deleteme</string>
     <string name="logout">Logout</string>
     <string name="open_feed">Open Feed</string>
-
+    <!-- Filters -->
+    <string name="sort_newest_first">Newest First</string>
+    <string name="sort_oldest_first">Oldest First</string>
+    <string name="sort_closest_first">Closest First</string>
+    <string name="species_title">Species: </string>
+    <string name="species_dog">Dog</string>
+    <string name="species_cat">Cat</string>
+    <string name="species_bird">Bird</string>
+    <string name="species_rabbit">Rabbit</string>
+    <string name="species_horse">Horse</string>
+    <string name="species_cow">Cow</string>
+    <string name="species_sheep">Sheep</string>
+    <string name="species_goat">Goat</string>
+    <string name="species_guinea_pig">Guinea Pig</string>
+    <string name="species_turtle">Turtle</string>
+    <string name="species_other">Other</string>
+    <string name="gender_title">Gender: </string>
+    <string name="gender_male">Male</string>
+    <string name="gender_female">Female</string>
+    <string name="colour_title">Colour: </string>
+    <string name="colour_black">Black</string>
+    <string name="colour_white">White</string>
+    <string name="colour_grey">Grey</string>
+    <string name="colour_brown">Brown</string>
+    <string name="colour_red">Red</string>
+    <string name="colour_gold">Gold</string>
+    <string name="colour_other">Other</string>
+    <string name="chipped_title">Microchipped: </string>
+    <string name="chipped_yes">Microchipped</string>
+    <string name="chipped_no">Not Microchipped</string>
+    <string name="neutered_title">Neutered: </string>
+    <string name="neutered_yes">Neutered</string>
+    <string name="neutered_no">Not Neutered</string>
 </resources>
