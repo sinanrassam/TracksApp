@@ -42,4 +42,5 @@ dependencies {
     implementation 'org.jetbrains:annotations-java5:15.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.navigation:navigation-runtime:2.1.0'
+    implementation 'androidx.preference:preference:1.1.0'
 }

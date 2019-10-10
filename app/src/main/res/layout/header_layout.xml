@@ -7,6 +7,17 @@
         android:layout_height="150dp"
         android:background="@color/primaryColor">
 
+    <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/editProfile"
+            android:layout_width="72dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/primaryColor"
+            android:clickable="true"
+            android:src="@drawable/ic_edit_black" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
     <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/firstName"
             android:layout_width="wrap_content"
