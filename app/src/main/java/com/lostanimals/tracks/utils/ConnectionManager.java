@@ -1,5 +1,6 @@
 package com.lostanimals.tracks.utils;
 
+import android.content.Context;
 import android.util.Log;
 import com.lostanimals.tracks.entries.PreferenceEntry;
 import org.json.JSONException;
@@ -97,8 +98,12 @@ public class ConnectionManager {
 		connection.setDoInput(true);
 		return connection;
 	}
-	
+
 	public static PreferenceEntry login(JSONObject details) throws JSONException {
 		return new PreferenceEntry(details.getString("name"), details.getString("username"), details.getString("email"));
+	}
+
+	public static boolean isNetworkAvailable(Context context) {
+		return true;
 	}
 }
