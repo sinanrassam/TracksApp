@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AutoCompleteTextView;
@@ -26,8 +25,6 @@ import java.util.concurrent.ExecutionException;
  *
  */
 public class LoginActivity extends AppCompatActivity {
-    private final static String TAG = "LOGIN_ACTIVITY";
-
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
 
@@ -71,7 +68,6 @@ public class LoginActivity extends AppCompatActivity {
              */
             @Override
             public void onClick(View view) {
-                // TODO: Fix this
                 try {
 
                     attemptLogin();
@@ -107,6 +103,7 @@ public class LoginActivity extends AppCompatActivity {
         boolean cancel = false;
         View focusView = null;
         Context context = LoginActivity.this;
+
         // Check for a valid password, if the user entered one.
         if (TextUtils.isEmpty(password)) {
             mPasswordView.setError(getString(R.string.error_field_required));
@@ -120,14 +117,9 @@ public class LoginActivity extends AppCompatActivity {
             cancel = true;
         }
 
-        if (ConnectionManager.isNetworkAvailable(context)) {
-            // Show the connected screen
-            Log.d("LOGIN_TASK", "connection avaliable");
-        } else {
-            // Show disconnected screen
+        // Check for network, if none, alert user.
+        if (!ConnectionManager.isNetworkAvailable(context)) {
             focusView = mEmailView;
-            Log.d("LOGIN_TASK", "connection not avaliable");
-            //Toast.makeText(LoginActivity.this,"Hi I am Toast", Toast.LENGTH_LONG).show();
             Toast.makeText(getApplicationContext(), "No Connection", Toast.LENGTH_LONG).show();
             cancel = true;
         }
@@ -139,7 +131,6 @@ public class LoginActivity extends AppCompatActivity {
             loginTask.execute(email, password);
             if (loginTask.get().get("response").equals("successful")) {
                 NotificationUtility.displayNotification(0);
-
                 startActivity(feedIntent);
                 finish();
             }
