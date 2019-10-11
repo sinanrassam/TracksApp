@@ -136,10 +136,7 @@ public class LoginActivity extends AppCompatActivity {
             cancel = true;
         }
 
-        /*
-         Checking if loginTask was executed successfully,
-         if it was then display notification and start feed activity
-        */
+        // Checking if loginTask was executed successfully,
         if (cancel) {
             focusView.requestFocus();
         } else {
