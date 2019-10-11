@@ -67,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
 			 */
 			@Override
 			public void onClick(View view) {
-				// TODO: Fix this
+				// TODO: Fix this?
 				try {
 					if (isOnline() == false) {
 						Log.d("LOGIN_TASK", "internet avaliable");
