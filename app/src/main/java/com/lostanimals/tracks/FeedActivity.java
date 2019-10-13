@@ -2,6 +2,8 @@ package com.lostanimals.tracks;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -10,6 +12,8 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.navigation.NavigationView;
 
 
@@ -41,7 +45,14 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setTitle("Feed");
 	}
-	
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.action_filter, menu);
+		return true;
+	}
+
 	public void openNewPostActivity(View view) {
 		startActivity(new Intent(this, NewPostActivity.class));
 	}
@@ -49,13 +60,24 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		int id = item.getItemId();
+
 		if (mToggle.onOptionsItemSelected(item)) {
 			return true;
 		}
-		
+
+		if (id == R.id.filters_button) {
+			showFiltersDialog();
+		}
+
 		return super.onOptionsItemSelected(item);
 	}
-	
+
+	private void showFiltersDialog() {
+		FiltersFragment filtersFragment = new FiltersFragment();
+		//filtersFragment.show(filterHandlerFragment, "Filters Dialog");
+	}
+
 	@Override
 	public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 		Intent navigationIntent = null;
