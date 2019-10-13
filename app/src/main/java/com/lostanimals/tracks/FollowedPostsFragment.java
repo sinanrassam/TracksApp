@@ -15,6 +15,7 @@ import com.lostanimals.tracks.tasks.GetFollowedPostsTask;
 import com.lostanimals.tracks.tasks.UpdatePostsTask;
 import com.lostanimals.tracks.utils.PreferencesUtility;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class FollowedPostsFragment extends ListFragment {
@@ -51,8 +52,8 @@ public class FollowedPostsFragment extends ListFragment {
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		Intent intent = new Intent(getContext(), PostActivity.class);
-		PostEntry post = (PostEntry) l.getAdapter().getItem(position);
-//		intent.putExtra("desc", post.getPostDesc());
+		HashMap.Entry<> postEntry = (HashMap) l.getAdapter().getItem(position);
+		intent.putExtra("desc", post.getId());
 		startActivity(intent);
 	}
 }
