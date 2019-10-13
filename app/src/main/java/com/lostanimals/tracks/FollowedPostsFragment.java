@@ -34,8 +34,6 @@ public class FollowedPostsFragment extends ListFragment {
 			}
 		});
 
-		refresh();
-
 		return view;
 	}
 

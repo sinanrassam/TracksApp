@@ -53,6 +53,7 @@ public class GetFollowedPostsTask extends AsyncTask<String, Integer, Boolean> {
 
     @Override
     protected void onPostExecute(final Boolean success) {
+        mFollowedPostsList.clear();
         List<PostEntry> postList = PostsUtility.getPostEntries();
 
         for (PostEntry entry : postList) {
