@@ -22,6 +22,9 @@ import com.lostanimals.tracks.tasks.NewCommentTask;
 import com.lostanimals.tracks.utils.PostsUtility;
 import com.lostanimals.tracks.utils.PreferencesUtility;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PostActivity extends AppCompatActivity {
 	
 	private PostEntry mPostEntry;
@@ -34,8 +37,20 @@ public class PostActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_post);
 
-		int mPostPosition = getIntent().getIntExtra("position", 0);
-		mPostEntry = PostsUtility.getPostEntry(mPostPosition);
+		int mPostPosition = getIntent().getIntExtra("position", -1);
+		if (mPostPosition > -1) {
+			mPostEntry = PostsUtility.getPostEntry(mPostPosition);
+		} else {
+			String postTitle = getIntent().getStringExtra("title");
+			String postDesc = getIntent().getStringExtra("title");
+			ArrayList<PostEntry> posts = PostsUtility.getPostEntries();
+			for (PostEntry entry : posts) {
+				if (entry.getPostTitle().equals(postTitle) && entry.getPostTitle().equals(postDesc)) {
+					mPostEntry = entry;
+					break;
+				}
+			}
+		}
 		
 		TextView mPostTitleView = findViewById(R.id.post_txt_title);
 		TextView mPostDescView = findViewById(R.id.post_et_desc);

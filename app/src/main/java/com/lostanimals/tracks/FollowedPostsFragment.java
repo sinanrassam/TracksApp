@@ -52,7 +52,7 @@ public class FollowedPostsFragment extends ListFragment {
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		Intent intent = new Intent(getContext(), PostActivity.class);
-		HashMap.Entry<String, String> postEntry = (HashMap.Entry<String, String>) l.getAdapter().getItem(position);
+		HashMap postEntry = (HashMap) l.getAdapter().getItem(position);
         intent.putExtra("title", postEntry.getKey().toString());
         intent.putExtra("desc", postEntry.getValue().toString());
 		startActivity(intent);
