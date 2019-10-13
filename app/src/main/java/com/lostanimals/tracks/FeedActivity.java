@@ -12,6 +12,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.navigation.NavigationView;
@@ -19,7 +20,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.Objects;
 
-public class FeedActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class FeedActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, FilterHandlerFragment.NoticeDialogListener{
 	
 	private ActionBarDrawerToggle mToggle;
 	private DrawerLayout mDrawerLayout;
@@ -73,11 +74,6 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 		return super.onOptionsItemSelected(item);
 	}
 
-	private void showFiltersDialog() {
-		FiltersFragment filtersFragment = new FiltersFragment();
-		//filtersFragment.show(filterHandlerFragment, "Filters Dialog");
-	}
-
 	@Override
 	public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 		Intent navigationIntent = null;
@@ -113,5 +109,21 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 	@Override
 	protected void onResume() {
 		super.onResume();
+	}
+
+	private void showFiltersDialog() {
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		FiltersFragment filtersFragment = new FiltersFragment();
+		filtersFragment.show(fragmentManager, "Filters Dialog");
+	}
+
+	@Override
+	public void onDialogPositiveClick(DialogFragment dialogFragment) {
+
+	}
+
+	@Override
+	public void onDialogNegativeClick(DialogFragment dialogFragment) {
+
 	}
 }
