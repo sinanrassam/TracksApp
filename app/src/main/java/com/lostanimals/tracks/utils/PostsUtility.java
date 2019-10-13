@@ -14,7 +14,7 @@ public class PostsUtility {
 		}
 		PostsUtility.postEntryArray.add(index, newPost);
 	}
-	
+
 	public static PostEntry getPostEntry(int index) {
 		return PostsUtility.postEntryArray.get(index);
 	}

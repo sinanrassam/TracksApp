@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import androidx.fragment.app.ListFragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import com.lostanimals.tracks.entries.PostEntry;
 import com.lostanimals.tracks.tasks.GetFollowedPostsTask;
 import com.lostanimals.tracks.tasks.UpdatePostsTask;
 import com.lostanimals.tracks.utils.PreferencesUtility;
@@ -50,7 +51,8 @@ public class FollowedPostsFragment extends ListFragment {
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		Intent intent = new Intent(getContext(), PostActivity.class);
-		intent.putExtra("position", position);
+		PostEntry post = (PostEntry) l.getAdapter().getItem(position);
+//		intent.putExtra("desc", post.getPostDesc());
 		startActivity(intent);
 	}
 }
