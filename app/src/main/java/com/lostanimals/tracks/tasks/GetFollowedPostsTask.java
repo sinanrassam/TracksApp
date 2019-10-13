@@ -76,4 +76,8 @@ public class GetFollowedPostsTask extends AsyncTask<String, Integer, Boolean> {
         adapter.notifyDataSetChanged();
         mProgressBar.setVisibility(View.GONE);
     }
+
+    public int getActualId(int index) {
+        return idMap.get(index);
+    }
 }
