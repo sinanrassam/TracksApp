@@ -22,8 +22,6 @@ public class FollowedPostsFragment extends ListFragment {
 		final View view = inflater.inflate(R.layout.followed_posts_fragment, container, false);
 		mProgressBar = view.findViewById(R.id.progress_bar);
 
-		task = new GetFollowedPostsTask(this, mProgressBar);
-
 		refreshLayout = view.findViewById(R.id.pullToRefresh);
 		refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 			@Override
@@ -37,6 +35,7 @@ public class FollowedPostsFragment extends ListFragment {
 	}
 
 	private void refresh() {
+		task = new GetFollowedPostsTask(this, mProgressBar);
 		task.execute(PreferencesUtility.getUserInfo().getUsername());
 	}
 
