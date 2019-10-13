@@ -15,4 +15,8 @@
                 android:title="Information"
                 android:summary="Information regarding the application"/>
 
+        <Preference
+                android:key="logout_Key"
+                android:title="Logout"/>
+
 </PreferenceScreen>
