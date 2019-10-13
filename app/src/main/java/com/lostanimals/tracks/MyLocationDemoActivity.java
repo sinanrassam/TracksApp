@@ -109,5 +109,4 @@ public class MyLocationDemoActivity extends AppCompatActivity implements OnMyLoc
     private void showMissingPermissionError() {
         PermissionUtils.PermissionDeniedDialog.newInstance(true).show(getSupportFragmentManager(), "dialog");
     }
-
 }
