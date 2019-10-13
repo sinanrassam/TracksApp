@@ -22,14 +22,16 @@ public class GetFollowedPostsTask extends AsyncTask<String, Integer, Boolean> {
     private Context mContext;
     private ListFragment mFragment;
     private ProgressBar mProgressBar;
-    ArrayList<Map<String, String>> mFollowedPostsList;
-    UpdatePostsTask mUpdatePostsTask;
+    private ArrayList<Map<String, String>> mFollowedPostsList;
+    private UpdatePostsTask mUpdatePostsTask;
+    private HashMap<Integer, Integer> idMap;
 
     public GetFollowedPostsTask(ListFragment fragment, ProgressBar progressBar) {
         mFragment = fragment;
         mContext = mFragment.getContext();
         mProgressBar = progressBar;
         mFollowedPostsList = new ArrayList<>();
+        idMap = new HashMap<>();
     }
 
     @Override
@@ -56,14 +58,16 @@ public class GetFollowedPostsTask extends AsyncTask<String, Integer, Boolean> {
         mFollowedPostsList.clear();
         List<PostEntry> postList = PostsUtility.getPostEntries();
 
-        for (PostEntry entry : postList) {
+        int index = 0;
+        for (int i = 0; i < postList.size(); i++) {
+            PostEntry entry = postList.get(i);
             if (entry.isFollowed()) {
                 Map<String, String> post = new HashMap<>(2);
                 post.put("Title", entry.getPostTitle());
                 post.put("Desc", entry.getPostDesc());
-                // todo: Remove Log
-                Log.d("Post", String.valueOf(post));
                 mFollowedPostsList.add(post);
+                idMap.put(index, i);
+                index++;
             }
         }
 

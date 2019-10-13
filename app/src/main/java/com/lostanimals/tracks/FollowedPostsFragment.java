@@ -21,9 +21,11 @@ import java.util.List;
 public class FollowedPostsFragment extends ListFragment {
 	private SwipeRefreshLayout refreshLayout;
 	private ProgressBar mProgressBar;
+	private static HashMap<Integer, Integer> idMap;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		idMap = new HashMap<>();
 		final View view = inflater.inflate(R.layout.followed_posts_fragment, container, false);
 		mProgressBar = view.findViewById(R.id.progress_bar);
 
@@ -51,10 +53,8 @@ public class FollowedPostsFragment extends ListFragment {
 
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		Intent intent = new Intent(getContext(), PostActivity.class);
-		HashMap postEntry = (HashMap) l.getAdapter().getItem(position);
-        intent.putExtra("title", postEntry.getKey().toString());
-        intent.putExtra("desc", postEntry.getValue().toString());
-		startActivity(intent);
+        Intent intent = new Intent(getContext(), PostActivity.class);
+        intent.putExtra("position", position);
+        startActivity(intent);
 	}
 }
