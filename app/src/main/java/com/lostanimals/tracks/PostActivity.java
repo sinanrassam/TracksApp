@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -46,7 +47,7 @@ public class PostActivity extends AppCompatActivity {
 		mPostDateView.setText(mPostEntry.getPostDate() + ", at: " + mPostEntry.getPostTime());
 		mPostAuthorView.setText("By: " + mPostEntry.getUsername());
 		
-//		mCommentView = findViewById(R.id.comment_field);
+		mCommentView = findViewById(R.id.comment_field);
 		
 		commentsFragment = new CommentsFragment();
 		Bundle data = new Bundle();
@@ -54,13 +55,16 @@ public class PostActivity extends AppCompatActivity {
 		commentsFragment.setArguments(data);
 		getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, commentsFragment).commit();
 
-//		Button mCommentBtn = findViewById(R.id.comment_btn);
-//		mCommentBtn.setOnClickListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View view) {
-//				addComment();
-//			}
-//		});
+		Button mCommentBtn = findViewById(R.id.comment_btn);
+		mCommentBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				addComment();
+			}
+		});
+
+		ImageView img = findViewById(R.id.imageView);
+		img.setImageResource(R.drawable.place_holder);
 	}
 	
 	private void addComment() {

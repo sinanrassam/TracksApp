@@ -79,7 +79,7 @@
 
         <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="match_parent" android:layout_height="223dp" app:srcCompat="@drawable/pic1"
+                android:layout_width="match_parent" android:layout_height="223dp" app:srcCompat="@drawable/place_holder"
                 android:contentDescription="@string/image_description"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
