@@ -44,13 +44,13 @@ public class NewPostActivity extends AppCompatActivity {
 			etDescription.setText(postDescription);
 		}
 		
-		Button backButton = this.findViewById(R.id.back);
-		backButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				finish();
-			}
-		});
+//		Button backButton = this.findViewById(R.id.back);
+//		backButton.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				finish();
+//			}
+//		});
 	}
 	
 	public void onNewPost(View view) {

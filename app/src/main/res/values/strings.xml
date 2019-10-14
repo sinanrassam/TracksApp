@@ -17,11 +17,11 @@
     <string name="txt_username">Your username:</string>
     <string name="txt_password">Your password:</string>
     <!-- New Post Activity Strings -->
-    <string name="post_txt_title">Create new post</string>
     <string name="post_txt_post_title">Post title</string>
     <string name="hint_post_title">Missing Dog in Kingsland…</string>
     <string name="post_txt_post_desc">Enter a description</string>
     <string name="hint_desc">Description…</string>
+    <string name="post_txt_upload_picture">Upload Picture</string>
     <string name="post_btn_post">Post</string>
     <string name="title_activity_login">Tracks</string>
     <!-- Strings related to login -->
