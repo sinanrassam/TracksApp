@@ -17,6 +17,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.lostanimals.tracks.entries.PostEntry;
 import com.lostanimals.tracks.tasks.DeleteTask;
+import com.lostanimals.tracks.tasks.DownloadImageTask;
 import com.lostanimals.tracks.tasks.EditTask;
 import com.lostanimals.tracks.tasks.NewCommentTask;
 import com.lostanimals.tracks.utils.PostsUtility;
@@ -67,7 +68,7 @@ public class PostActivity extends AppCompatActivity {
 		String imageLocation = mPostEntry.getImageLocation();
 		if (imageLocation != null) {
             ImageView img = findViewById(R.id.imageView);
-
+            new DownloadImageTask(img).execute(imageLocation);
         }
 
 	}
