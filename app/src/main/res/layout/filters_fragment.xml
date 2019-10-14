@@ -182,7 +182,7 @@
         <CheckBox android:id="@+id/neutered_checkbox_no"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="@string/neutered_yes"
+                  android:text="@string/neutered_no"
                   android:onClick="onNeuteredCheckboxClicked"/>
     </LinearLayout>
 </ScrollView>
