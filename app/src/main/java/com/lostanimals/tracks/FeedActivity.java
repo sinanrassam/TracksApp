@@ -6,7 +6,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-
 import android.widget.CheckBox;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -15,9 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.navigation.NavigationView;
-
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
@@ -129,7 +127,7 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 
 	}
 
-	public void onSpeciesCheckboxClicked(View v) {
+	public void onSpeciesCheckboxClicked(@NotNull View v) {
 		// Get references of the CheckBoxes
 		CheckBox cb_dog = (CheckBox) findViewById(R.id.species_checkbox_dog);
 		CheckBox cb_cat = (CheckBox) findViewById(R.id.species_checkbox_cat);
@@ -235,6 +233,101 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 
 				}
 				break;
+		}
+	}
+
+	public void onColourCheckboxClicked(@NotNull View v) {
+		CheckBox cb_black = (CheckBox) findViewById(R.id.colour_checkbox_black);
+		CheckBox cb_white = (CheckBox) findViewById(R.id.colour_checkbox_white);
+		CheckBox cb_grey = (CheckBox) findViewById(R.id.colour_checkbox_grey);
+		CheckBox cb_brown = (CheckBox) findViewById(R.id.colour_checkbox_brown);
+		CheckBox cb_gold = (CheckBox) findViewById(R.id.colour_checkbox_gold);
+		CheckBox cb_red = (CheckBox) findViewById(R.id.colour_checkbox_red);
+		CheckBox cb_other = (CheckBox) findViewById(R.id.colour_checkbox_other);
+
+		boolean checked = ((CheckBox) v).isChecked();
+
+		switch (v.getId()) {
+			case R.id.colour_checkbox_black:
+				if (checked) {
+
+				}
+				else {
+
+				}
+				break;
+			case R.id.colour_checkbox_white:
+				if (checked) {
+
+				}
+				else {
+
+				}
+				break;
+			case R.id.colour_checkbox_grey:
+				if (checked) {
+
+				}
+				else {
+
+				}
+				break;
+			case R.id.colour_checkbox_brown:
+				if (checked) {
+
+				}
+				else {
+
+				}
+				break;
+			case R.id.colour_checkbox_gold:
+				if (checked) {
+
+				}
+				else {
+
+				}
+				break;
+			case R.id.colour_checkbox_red:
+				if (checked) {
+
+				}
+				else {
+
+				}
+				break;
+			case R.id.colour_checkbox_other:
+				if (checked) {
+
+				}
+				else {
+
+				}
+				break;
+		}
+	}
+
+	public void onChippedCheckboxClicked(@NotNull View v) {
+		CheckBox cb_chipped = (CheckBox) findViewById(R.id.chipped_checkbox_yes);
+		CheckBox cb_not_chipped = (CheckBox) findViewById(R.id.chipped_checkbox_no);
+
+		boolean checked = ((CheckBox) v).isChecked();
+
+		if (v.getId() == R.id.chipped_checkbox_yes) {
+			if (checked) {
+
+			}
+			else {
+
+			}
+		}
+		else {
+			if (checked) {
+
+			}
+			else {
+
+			}
 		}
 	}
 }
