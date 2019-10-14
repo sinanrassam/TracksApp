@@ -74,6 +74,11 @@
                 android:textColor="@color/secondaryTextColor"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
+        <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent" android:layout_height="223dp" app:srcCompat="@drawable/pic1"
+                android:contentDescription="@string/image_description"/>
+
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" tools:layout_editor_absoluteY="35dp"
@@ -116,6 +121,5 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
-
 
 </ScrollView>
