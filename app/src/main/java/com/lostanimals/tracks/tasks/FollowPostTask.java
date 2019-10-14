@@ -24,17 +24,15 @@ public class FollowPostTask extends AsyncTask<String, Integer, JSONObject> {
 	
 	@Override
 	protected JSONObject doInBackground(String... parameters) {
-		boolean success = true;
 		JSONObject json = null;
 		mMsg = parameters[2];
 		if (!this.isCancelled()) {
-			String postData = null;
+			String postData;
 			try {
 				postData = ConnectionManager.postEncoder(mMsg + "follow-post", parameters);
 				json = processRequest("follow.php", postData);
 			} catch (JSONException | IOException e) {
 				e.printStackTrace();
-				success = false;
 			}
 		}
 		return json;

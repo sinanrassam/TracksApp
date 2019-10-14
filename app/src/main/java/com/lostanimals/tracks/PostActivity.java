@@ -23,7 +23,6 @@ import com.lostanimals.tracks.utils.PostsUtility;
 import com.lostanimals.tracks.utils.PreferencesUtility;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class PostActivity extends AppCompatActivity {
 	
@@ -82,7 +81,7 @@ public class PostActivity extends AppCompatActivity {
 		if (PreferencesUtility.getUserInfo().getUsername().equals(mPostEntry.getUsername())) {
 			findViewById(R.id.unowned_options).setVisibility(View.GONE);
 		} else {
-			Button mFollowPostBtn = findViewById(R.id.followPost_btn);
+			final Button mFollowPostBtn = findViewById(R.id.followPost_btn);
 			final boolean following = mPostEntry.isFollowed();
 			if (following) {
 				mFollowPostBtn.setText(R.string.action_unfollow_post);
@@ -92,6 +91,7 @@ public class PostActivity extends AppCompatActivity {
 				@Override
 				public void onClick(View view) {
 					followPost(following);
+					mFollowPostBtn.setEnabled(false);
 				}
 			});
 		}
@@ -100,7 +100,9 @@ public class PostActivity extends AppCompatActivity {
 	private void followPost(boolean following) {
 		Log.d("Follow Post", "Clicked");
 		String followOrToUnfollow = (following)? "un" : "";
-		new FollowPostTask(this).execute(PreferencesUtility.getUserInfo().getUsername(), mPostEntry.getId(), followOrToUnfollow);
+
+		new FollowPostTask(this).execute(PreferencesUtility.getUserInfo().getUsername(), mPostEntry.getId(),
+				followOrToUnfollow);
 	}
 	
 	private void addComment() {
@@ -163,7 +165,8 @@ public class PostActivity extends AppCompatActivity {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		
 		if (mPostEntry.getFound().equals("0")) {
-			builder.setMessage("Are you sure you want to mark the post as found? It will no longer be " + "accessible in the main feed but you can view it in my posts.");
+			builder.setMessage("Are you sure you want to mark the post as found? It will no longer be "
+					+ "accessible in the main feed but you can view it in my posts.");
 			builder.setTitle("Warning!");
 			
 			builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
