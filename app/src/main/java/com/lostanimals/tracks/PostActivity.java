@@ -46,21 +46,21 @@ public class PostActivity extends AppCompatActivity {
 		mPostDateView.setText(mPostEntry.getPostDate() + ", at: " + mPostEntry.getPostTime());
 		mPostAuthorView.setText("By: " + mPostEntry.getUsername());
 		
-		mCommentView = findViewById(R.id.comment_field);
+//		mCommentView = findViewById(R.id.comment_field);
 		
 		commentsFragment = new CommentsFragment();
 		Bundle data = new Bundle();
 		data.putString("post_id", mPostEntry.getId());
 		commentsFragment.setArguments(data);
 		getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, commentsFragment).commit();
-		
-		Button mCommentBtn = findViewById(R.id.comment_btn);
-		mCommentBtn.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				addComment();
-			}
-		});
+
+//		Button mCommentBtn = findViewById(R.id.comment_btn);
+//		mCommentBtn.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View view) {
+//				addComment();
+//			}
+//		});
 	}
 	
 	private void addComment() {
