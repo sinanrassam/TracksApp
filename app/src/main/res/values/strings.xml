@@ -72,5 +72,5 @@
     <string name="pop_found">Mark as \"Found\"</string>
     <string name="pop_edit">Edit Post</string>
     <string name="pop_delete">Delete Post</string>
-    <string name="image_description">Image</string>
+    <string name="image_description">Post image</string>
 </resources>

@@ -8,9 +8,10 @@ public class PostEntry {
 	private String mPostTime;
 	private String mId;
 	private String mFound;
+	private String mImageLocation;
 	
 	// default
-	public PostEntry(String id, String postTitle, String postDesc, String username, String postDate, String postTime, String found) {
+	public PostEntry(String id, String postTitle, String postDesc, String username, String postDate, String postTime, String found, String iamgeLocation) {
 		setId(id);
 		setUsername(username);
 		setPostTitle(postTitle);
@@ -18,6 +19,7 @@ public class PostEntry {
 		setPostDate(postDate);
 		setPostTime(postTime);
 		setFound(found);
+		setImageLocation(imageLocation);
 	}
 	
 	public String getUsername() {
@@ -55,9 +57,17 @@ public class PostEntry {
 	public String getId() {
 		return mId;
 	}
-	
+
 	public void setId(String id) {
 		this.mId = id;
+	}
+
+	public void setImageLocation(String imageLocation) {
+		mImageLocation = imageLocation;
+	}
+
+	public String getImageLocation() {
+		return mImageLocation;
 	}
 	
 	public String getFound() {
