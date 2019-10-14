@@ -17,7 +17,7 @@ public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 	
 	@Override
 	protected Bitmap doInBackground(String... parameters) {
-		String urldisplay = urls[0];
+		String urldisplay = parameters[0];
 		Bitmap bmp = null;
 		try {
 			InputStream in = new java.net.URL(urldisplay).openStream();
