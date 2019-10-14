@@ -100,6 +100,6 @@ public class ConnectionManager {
 	}
 	
 	public static PreferenceEntry login(JSONObject details) throws JSONException {
-		return new PreferenceEntry(details.getString("name"), details.getString("username"), details.getString("email"));
+		return new PreferenceEntry(details.getString("name"), details.getString("username"), details.getString("email"), false, false);
 	}
 }

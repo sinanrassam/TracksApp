@@ -6,11 +6,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.*;
 import android.widget.Toast;
+import androidx.annotation.NonNull;
 import androidx.preference.PreferenceFragmentCompat;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 import androidx.preference.PreferenceScreen;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -27,6 +26,16 @@ public class SettingsFragment  extends PreferenceFragmentCompat implements Share
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.preference, rootKey);
     }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        return super.onOptionsItemSelected(item);
+    }q
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
