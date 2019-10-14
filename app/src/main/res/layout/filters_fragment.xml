@@ -10,6 +10,13 @@
             android:orientation="vertical"
             android:scrollbars="vertical"
             android:scrollbarAlwaysDrawVerticalTrack="true">
+
+        <TextView
+                android:id="@+id/sorting_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/sort_title"/>
+
         <Spinner android:id="@+id/sorting_spinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -87,23 +94,6 @@
                   android:text="@string/species_other"
                   android:onClick="onSpeciesCheckboxClicked"/>
 
-        <TextView android:id="@+id/gender_text_view"
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:text="@string/gender_title"/>
-
-        <CheckBox android:id="@+id/gender_checkbox_male"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="@string/gender_male"
-                  android:onClick="onGenderCheckboxClicked"/>
-
-        <CheckBox android:id="@+id/gender_checkbox_female"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="@string/gender_female"
-                  android:onClick="onGenderCheckboxClicked"/>
-
         <TextView android:id="@+id/colour_text_view"
                   android:layout_width="match_parent"
                   android:layout_height="match_parent"
@@ -168,21 +158,5 @@
                   android:text="@string/chipped_no"
                   android:onClick="onChippedCheckboxClicked"/>
 
-        <TextView android:id="@+id/neutered_text_view"
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:text="@string/neutered_title"/>
-
-        <CheckBox android:id="@+id/neutered_checkbox_yes"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="@string/neutered_yes"
-                  android:onClick="onNeuteredCheckboxClicked"/>
-
-        <CheckBox android:id="@+id/neutered_checkbox_no"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="@string/neutered_no"
-                  android:onClick="onNeuteredCheckboxClicked"/>
     </LinearLayout>
 </ScrollView>
