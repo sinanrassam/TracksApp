@@ -3,6 +3,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android">
 
         <SwitchPreferenceCompat
+                android:id="@id+/darkMode"
                 android:key="lightingMode"
                 android:title="Light or Dark Mode"/>
 
