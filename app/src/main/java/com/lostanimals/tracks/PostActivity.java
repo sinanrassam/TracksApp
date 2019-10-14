@@ -64,8 +64,12 @@ public class PostActivity extends AppCompatActivity {
 			}
 		});
 
-		ImageView img = findViewById(R.id.imageView);
-		img.setImageResource(R.drawable.place_holder);
+		String imageLocation = mPostEntry.getImageLocation();
+		if (imageLocation != null) {
+            ImageView img = findViewById(R.id.imageView);
+
+        }
+
 	}
 	
 	private void addComment() {
