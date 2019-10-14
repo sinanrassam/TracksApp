@@ -66,6 +66,7 @@
     <!-- Filters -->
     <string name="filters_confirm">Confirm</string>
     <string name="filters_cancel">Cancel</string>
+    <string name="sort_title">Sort By: </string>
     <string name="sort_newest_first">Newest First</string>
     <string name="sort_oldest_first">Oldest First</string>
     <string name="sort_closest_first">Closest First</string>
@@ -81,9 +82,6 @@
     <string name="species_guinea_pig">Guinea Pig</string>
     <string name="species_turtle">Turtle</string>
     <string name="species_other">Other</string>
-    <string name="gender_title">Gender: </string>
-    <string name="gender_male">Male</string>
-    <string name="gender_female">Female</string>
     <string name="colour_title">Colour: </string>
     <string name="colour_black">Black</string>
     <string name="colour_white">White</string>
@@ -95,7 +93,4 @@
     <string name="chipped_title">Microchipped: </string>
     <string name="chipped_yes">Microchipped</string>
     <string name="chipped_no">Not Microchipped</string>
-    <string name="neutered_title">Neutered: </string>
-    <string name="neutered_yes">Neutered</string>
-    <string name="neutered_no">Not Neutered</string>
 </resources>
