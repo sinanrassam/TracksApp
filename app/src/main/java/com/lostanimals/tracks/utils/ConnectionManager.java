@@ -12,7 +12,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
 public class ConnectionManager {
-	private static final String URL = "http://bosh.live:7536/phpmyadmin/tracks_api/";
+	public static final String URL = "http://bosh.live:7536/phpmyadmin/tracks_api/";
 	
 	public static String postEncoder(String type, String[] parameters) throws UnsupportedEncodingException {
 		for (int i = 0; i < parameters.length; i++) {

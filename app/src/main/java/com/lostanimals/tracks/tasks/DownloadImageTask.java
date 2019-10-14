@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ImageView;
+import com.lostanimals.tracks.utils.ConnectionManager;
 
 import java.io.InputStream;
 
@@ -17,7 +18,7 @@ public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 	
 	@Override
 	protected Bitmap doInBackground(String... parameters) {
-		String urldisplay = parameters[0];
+		String urldisplay = ConnectionManager.URL + parameters[0];
 		Bitmap bmp = null;
 		try {
 			InputStream in = new java.net.URL(urldisplay).openStream();
