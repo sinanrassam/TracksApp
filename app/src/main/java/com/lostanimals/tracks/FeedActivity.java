@@ -7,6 +7,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
+import android.widget.CheckBox;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -20,7 +21,8 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.Objects;
 
-public class FeedActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, FilterHandlerFragment.NoticeDialogListener{
+public class FeedActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
+		FilterHandlerFragment.NoticeDialogListener {
 	
 	private ActionBarDrawerToggle mToggle;
 	private DrawerLayout mDrawerLayout;
@@ -125,5 +127,114 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 	@Override
 	public void onDialogNegativeClick(DialogFragment dialogFragment) {
 
+	}
+
+	public void onSpeciesCheckboxClicked(View v) {
+		// Get references of the CheckBoxes
+		CheckBox cb_dog = (CheckBox) findViewById(R.id.species_checkbox_dog);
+		CheckBox cb_cat = (CheckBox) findViewById(R.id.species_checkbox_cat);
+		CheckBox cb_bird = (CheckBox) findViewById(R.id.species_checkbox_bird);
+		CheckBox cb_rabbit = (CheckBox) findViewById(R.id.species_checkbox_rabbit);
+		CheckBox cb_horse = (CheckBox) findViewById(R.id.species_checkbox_horse);
+		CheckBox cb_cow = (CheckBox) findViewById(R.id.species_checkbox_cow);
+		CheckBox cb_sheep = (CheckBox) findViewById(R.id.species_checkbox_sheep);
+		CheckBox cb_goat = (CheckBox) findViewById(R.id.species_checkbox_goat);
+		CheckBox cb_guniea_pig = (CheckBox) findViewById(R.id.species_checkbox_guinea_pig);
+		CheckBox cb_turtle = (CheckBox) findViewById(R.id.species_checkbox_turtle);
+		CheckBox cb_other = (CheckBox) findViewById(R.id.species_checkbox_other);
+
+		// If the view is now checked
+		boolean checked = ((CheckBox) v).isChecked();
+
+		switch (v.getId()) {
+			case R.id.species_checkbox_dog:
+				if (checked) {
+
+				}
+				else {
+
+				}
+				break;
+			case R.id.species_checkbox_cat:
+				if (checked) {
+
+				}
+				else {
+
+				}
+				break;
+			case R.id.species_checkbox_bird:
+				if (checked) {
+
+				}
+				else {
+
+				}
+				break;
+			case R.id.species_checkbox_rabbit:
+				if (checked) {
+
+				}
+				else {
+
+				}
+				break;
+			case R.id.species_checkbox_horse:
+				if (checked) {
+
+				}
+				else {
+
+				}
+				break;
+			case R.id.species_checkbox_cow:
+				if (checked) {
+
+				}
+				else {
+
+				}
+				break;
+			case R.id.species_checkbox_sheep:
+				if (checked) {
+
+				}
+				else {
+
+				}
+				break;
+			case R.id.species_checkbox_goat:
+				if (checked) {
+
+				}
+				else {
+
+				}
+				break;
+			case R.id.species_checkbox_guinea_pig:
+				if (checked) {
+
+				}
+				else {
+
+				}
+				break;
+			case R.id.species_checkbox_turtle:
+				if (checked) {
+
+				}
+				else {
+
+				}
+				break;
+			case R.id.species_checkbox_other:
+				if (checked) {
+
+				}
+				else {
+
+				}
+				break;
+		}
 	}
 }
