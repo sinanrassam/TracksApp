@@ -11,7 +11,7 @@ public class PostEntry {
 	private String mImageLocation;
 	
 	// default
-	public PostEntry(String id, String postTitle, String postDesc, String username, String postDate, String postTime, String found, String iamgeLocation) {
+	public PostEntry(String id, String postTitle, String postDesc, String username, String postDate, String postTime, String found, String imageLocation) {
 		setId(id);
 		setUsername(username);
 		setPostTitle(postTitle);
