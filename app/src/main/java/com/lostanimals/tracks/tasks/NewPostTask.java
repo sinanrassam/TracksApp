@@ -35,11 +35,19 @@ public class NewPostTask extends AsyncTask<String, Void, JSONObject> {
 		JSONObject json = null;
 		try {
 			String postData = ConnectionManager.postEncoder("new-post", parameters);
+
+			//todo: need to clean up (repeated code)
+			ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            mImage.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+            String encodedImage = Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT);
+            postData += "&" + URLEncoder.encode("image", "UTF-8") + "=" + URLEncoder.encode(encodedImage, "UTF-8");
+
 			json = ConnectionManager.processRequest("post.php", postData);
 			Log.d("JSON", json.toString());
 		} catch (JSONException | IOException e) {
 			e.printStackTrace();
 		}
+
 		return json;
 	}
 	
