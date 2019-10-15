@@ -1,4 +1,4 @@
-package com.lostanimals.tracks;
+package com.lostanimals.tracks.utils;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.DialogFragment;
+import com.lostanimals.tracks.R;
 
 /**
  * Utility class for access to runtime permissions.
