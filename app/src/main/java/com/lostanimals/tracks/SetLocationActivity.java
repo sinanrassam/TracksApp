@@ -13,14 +13,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import com.google.android.gms.maps.*;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMyLocationClickListener;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.vision.barcode.Barcode;
-import com.lostanimals.tracks.entries.PostEntry;
 import com.lostanimals.tracks.utils.BundleManager;
 import com.lostanimals.tracks.utils.PermissionManager;
 import com.lostanimals.tracks.utils.PostsUtility;
@@ -41,15 +42,17 @@ public class SetLocationActivity extends AppCompatActivity implements OnMyLocati
 
     private GoogleMap mMap;
 
+    private MarkerOptions lastSeenPin = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_get_location);
+        setContentView(R.layout.activity_set_location);
 
         String postID = BundleManager.getPostID();
 
         // This is how it will go:
-        PostsUtility.getPostEntry(Integer.parseInt(postID)).setLocation(new LatLng(5, 5));
+        // PostsUtility.getPostEntry(Integer.parseInt(postID)).setLocation(new LatLng(5, 5));
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         if (mapFragment != null) {
@@ -146,12 +149,25 @@ public class SetLocationActivity extends AppCompatActivity implements OnMyLocati
         PermissionManager.PermissionDeniedDialog.newInstance(true).show(getSupportFragmentManager(), "dialog");
     }
 
+    /**
+     * Listener method for long presses on the map.
+     * There is only allowed to be one pin on the map at a time.
+     * @param point the point on the map where the user long presses
+     */
     @Override
     public void onMapLongClick(LatLng point) {
         Toast.makeText(this, point.latitude+" "+point.longitude, Toast.LENGTH_SHORT).show();
-        mMap.addMarker(new MarkerOptions().position(point)
-                .title("Last seen")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+
+        if (lastSeenPin != null) {
+            mMap.clear();
+        }
+
+        lastSeenPin = new MarkerOptions()
+                .position(point)
+                .title("Last Seen")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+
+        mMap.addMarker(lastSeenPin);
     }
 
     @Override
