@@ -115,6 +115,13 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		FiltersFragment filtersFragment = new FiltersFragment();
 		filtersFragment.show(fragmentManager, "Filters Dialog");
+
+		//TODO: Fix Spinner!!
+		//Spinner sortingSpinner = (Spinner) findViewById(R.id.sorting_spinner);
+		//ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.sorting_array,
+		//		android.R.layout.simple_spinner_item);
+		//adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		//sortingSpinner.setAdapter(adapter);
 	}
 
 	@Override
@@ -149,15 +156,9 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 				if (checked) {
 
 				}
-				else {
-
-				}
 				break;
 			case R.id.species_checkbox_cat:
 				if (checked) {
-
-				}
-				else {
 
 				}
 				break;
@@ -165,15 +166,9 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 				if (checked) {
 
 				}
-				else {
-
-				}
 				break;
 			case R.id.species_checkbox_rabbit:
 				if (checked) {
-
-				}
-				else {
 
 				}
 				break;
@@ -181,15 +176,9 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 				if (checked) {
 
 				}
-				else {
-
-				}
 				break;
 			case R.id.species_checkbox_cow:
 				if (checked) {
-
-				}
-				else {
 
 				}
 				break;
@@ -197,15 +186,9 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 				if (checked) {
 
 				}
-				else {
-
-				}
 				break;
 			case R.id.species_checkbox_goat:
 				if (checked) {
-
-				}
-				else {
 
 				}
 				break;
@@ -213,23 +196,14 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 				if (checked) {
 
 				}
-				else {
-
-				}
 				break;
 			case R.id.species_checkbox_turtle:
 				if (checked) {
 
 				}
-				else {
-
-				}
 				break;
 			case R.id.species_checkbox_other:
 				if (checked) {
-
-				}
-				else {
 
 				}
 				break;
@@ -252,15 +226,9 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 				if (checked) {
 
 				}
-				else {
-
-				}
 				break;
 			case R.id.colour_checkbox_white:
 				if (checked) {
-
-				}
-				else {
 
 				}
 				break;
@@ -268,15 +236,9 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 				if (checked) {
 
 				}
-				else {
-
-				}
 				break;
 			case R.id.colour_checkbox_brown:
 				if (checked) {
-
-				}
-				else {
 
 				}
 				break;
@@ -284,23 +246,14 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 				if (checked) {
 
 				}
-				else {
-
-				}
 				break;
 			case R.id.colour_checkbox_red:
 				if (checked) {
 
 				}
-				else {
-
-				}
 				break;
 			case R.id.colour_checkbox_other:
 				if (checked) {
-
-				}
-				else {
 
 				}
 				break;
@@ -317,15 +270,9 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 			if (checked) {
 
 			}
-			else {
-
-			}
 		}
 		else {
 			if (checked) {
-
-			}
-			else {
 
 			}
 		}

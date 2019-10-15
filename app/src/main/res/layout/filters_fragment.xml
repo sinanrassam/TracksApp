@@ -32,66 +32,77 @@
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:text="@string/species_dog"
-                  android:onClick="onSpeciesCheckboxClicked"/>
+                  android:onClick="onSpeciesCheckboxClicked"
+                  android:checked="true"/>
 
         <CheckBox android:id="@+id/species_checkbox_cat"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:text="@string/species_cat"
+                  android:checked="true"
                   android:onClick="onSpeciesCheckboxClicked"/>
 
         <CheckBox android:id="@+id/species_checkbox_bird"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:text="@string/species_bird"
+                  android:checked="true"
                   android:onClick="onSpeciesCheckboxClicked"/>
 
         <CheckBox android:id="@+id/species_checkbox_rabbit"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:text="@string/species_rabbit"
+                  android:checked="true"
                   android:onClick="onSpeciesCheckboxClicked"/>
 
         <CheckBox android:id="@+id/species_checkbox_horse"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:text="@string/species_horse"
+                  android:checked="true"
                   android:onClick="onSpeciesCheckboxClicked"/>
 
         <CheckBox android:id="@+id/species_checkbox_cow"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:text="@string/species_cow"
+                  android:checked="true"
                   android:onClick="onSpeciesCheckboxClicked"/>
 
         <CheckBox android:id="@+id/species_checkbox_sheep"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:text="@string/species_sheep"
+                  android:checked="true"
                   android:onClick="onSpeciesCheckboxClicked"/>
 
         <CheckBox android:id="@+id/species_checkbox_goat"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:text="@string/species_goat"
+                  android:checked="true"
                   android:onClick="onSpeciesCheckboxClicked"/>
 
         <CheckBox android:id="@+id/species_checkbox_guinea_pig"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:text="@string/species_guinea_pig"
+                  android:checked="true"
                   android:onClick="onSpeciesCheckboxClicked"/>
 
         <CheckBox android:id="@+id/species_checkbox_turtle"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:text="@string/species_turtle"
+                  android:checked="true"
                   android:onClick="onSpeciesCheckboxClicked"/>
 
         <CheckBox android:id="@+id/species_checkbox_other"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:text="@string/species_other"
+                  android:checked="true"
                   android:onClick="onSpeciesCheckboxClicked"/>
 
         <TextView android:id="@+id/colour_text_view"
@@ -103,42 +114,49 @@
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:text="@string/colour_black"
+                  android:checked="true"
                   android:onClick="onColourCheckboxClicked"/>
 
         <CheckBox android:id="@+id/colour_checkbox_white"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:text="@string/colour_white"
+                  android:checked="true"
                   android:onClick="onColourCheckboxClicked"/>
 
         <CheckBox android:id="@+id/colour_checkbox_grey"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:text="@string/colour_grey"
+                  android:checked="true"
                   android:onClick="onColourCheckboxClicked"/>
 
         <CheckBox android:id="@+id/colour_checkbox_brown"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:text="@string/colour_brown"
+                  android:checked="true"
                   android:onClick="onColourCheckboxClicked"/>
 
         <CheckBox android:id="@+id/colour_checkbox_red"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:text="@string/colour_red"
+                  android:checked="true"
                   android:onClick="onColourCheckboxClicked"/>
 
         <CheckBox android:id="@+id/colour_checkbox_gold"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:text="@string/colour_gold"
+                  android:checked="true"
                   android:onClick="onColourCheckboxClicked"/>
 
         <CheckBox android:id="@+id/colour_checkbox_other"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:text="@string/colour_other"
+                  android:checked="true"
                   android:onClick="onColourCheckboxClicked"/>
 
         <TextView android:id="@+id/chipped_text_view"
@@ -150,12 +168,14 @@
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:text="@string/chipped_yes"
+                  android:checked="true"
                   android:onClick="onChippedCheckboxClicked"/>
 
         <CheckBox android:id="@+id/chipped_checkbox_no"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:text="@string/chipped_no"
+                  android:checked="true"
                   android:onClick="onChippedCheckboxClicked"/>
 
     </LinearLayout>
