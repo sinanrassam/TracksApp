@@ -15,7 +15,7 @@ public class ViewMapActivity extends FragmentActivity implements OnMapReadyCallb
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_location);
+        setContentView(R.layout.activity_view_map);
         SupportMapFragment mapFragment;
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 
