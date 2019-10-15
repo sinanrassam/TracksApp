@@ -42,7 +42,9 @@ public class GetLocationActivity extends AppCompatActivity implements OnMyLocati
         setContentView(R.layout.activity_get_location);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+        if (mapFragment != null) {
+            mapFragment.getMapAsync(this);
+        }
     }
 
     @Override
