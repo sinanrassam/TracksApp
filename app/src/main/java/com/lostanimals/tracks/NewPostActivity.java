@@ -70,7 +70,7 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
 		Bitmap image = ((BitmapDrawable) imageToUpload.getDrawable()).getBitmap();
 
 		if (!isEditTask) {
-			NewPostTask newPostTask = new NewPostTask(this);
+			NewPostTask newPostTask = new NewPostTask(this, image);
 			newPostTask.execute(title, description, PreferencesUtility.getUserInfo().getUsername());
 		} else {
 			EditTask editTask = new EditTask(this);
