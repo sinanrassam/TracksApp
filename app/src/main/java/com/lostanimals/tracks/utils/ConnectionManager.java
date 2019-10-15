@@ -58,6 +58,11 @@ public class ConnectionManager {
 			case "delete-post":
 				postData += URLEncoder.encode("id", "UTF-8") + "=" + URLEncoder.encode(parameters[0], "UTF-8");
 				break;
+			case "upload-image":
+				postData += URLEncoder.encode("image_type", "UTF-8") + "=" + URLEncoder.encode(parameters[0], "UTF-8") + "&";
+				postData += URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(parameters[1], "UTF-8") + "&";
+				postData += URLEncoder.encode("image", "UTF-8") + "=" + URLEncoder.encode(parameters[2], "UTF-8");
+				break;
 			case "get-image":
 				postData += URLEncoder.encode("url", "UTF-8") + "=" + URLEncoder.encode(URL + parameters[0], "UTF-8");
 				break;
