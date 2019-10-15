@@ -10,6 +10,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -25,6 +26,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.lostanimals.tracks.utils.BundleManager;
 import com.lostanimals.tracks.utils.PermissionManager;
 import com.lostanimals.tracks.utils.PostsUtility;
+
+import java.util.Objects;
 
 public class SetLocationActivity extends AppCompatActivity implements OnMyLocationButtonClickListener,
         OnMyLocationClickListener,
@@ -48,11 +51,14 @@ public class SetLocationActivity extends AppCompatActivity implements OnMyLocati
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_location);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-        String postID = BundleManager.getPostID();
-
-        // This is how it will go:
+        // This may be how it will go:
+        // String postID = BundleManager.getPostID();
         // PostsUtility.getPostEntry(Integer.parseInt(postID)).setLocation(new LatLng(5, 5));
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Long press to set a point");
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         if (mapFragment != null) {
