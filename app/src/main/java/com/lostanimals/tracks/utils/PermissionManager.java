@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.DialogFragment;
 import com.lostanimals.tracks.R;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Utility class for access to runtime permissions.
@@ -56,7 +57,7 @@ public abstract class PermissionManager {
          * Creates a new instance of this dialog and optionally finishes the calling Activity
          * when the 'Ok' button is clicked.
          */
-        public static PermissionDeniedDialog newInstance(boolean finishActivity) {
+        public static PermissionDeniedDialog newInstance(final boolean finishActivity) {
             Bundle arguments = new Bundle();
             arguments.putBoolean(ARGUMENT_FINISH_ACTIVITY, finishActivity);
 
@@ -65,8 +66,9 @@ public abstract class PermissionManager {
             return dialog;
         }
 
+        @NotNull
         @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
+        public Dialog onCreateDialog(final Bundle savedInstanceState) {
             mFinishActivity = getArguments().getBoolean(ARGUMENT_FINISH_ACTIVITY);
 
             return new AlertDialog.Builder(getActivity())
@@ -76,7 +78,7 @@ public abstract class PermissionManager {
         }
 
         @Override
-        public void onDismiss(DialogInterface dialog) {
+        public void onDismiss(@NotNull final DialogInterface dialog) {
             super.onDismiss(dialog);
             if (mFinishActivity) {
                 Toast.makeText(getActivity(), R.string.permission_required_toast,
@@ -103,8 +105,9 @@ public abstract class PermissionManager {
             return dialog;
         }
 
+        @NotNull
         @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
+        public Dialog onCreateDialog(final Bundle savedInstanceState) {
             Bundle arguments = getArguments();
             final int requestCode = arguments.getInt(ARGUMENT_PERMISSION_REQUEST_CODE);
             mFinishActivity = arguments.getBoolean(ARGUMENT_FINISH_ACTIVITY);
@@ -127,7 +130,7 @@ public abstract class PermissionManager {
         }
 
         @Override
-        public void onDismiss(DialogInterface dialog) {
+        public void onDismiss(@NotNull final DialogInterface dialog) {
             super.onDismiss(dialog);
             if (mFinishActivity) {
                 Toast.makeText(getActivity(),

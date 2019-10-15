@@ -1,10 +1,8 @@
 package com.lostanimals.tracks;
 
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AutoCompleteTextView;
@@ -20,11 +18,7 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
-/**
- *
- */
 public class LoginActivity extends AppCompatActivity {
-    private final static String TAG = "LOGIN_ACTIVITY";
 
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
@@ -44,8 +38,6 @@ public class LoginActivity extends AppCompatActivity {
         registerIntent = new Intent(this, RegisterActivity.class);
         registerIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, feedIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        NotificationUtility.createNotification(this, "Tracks", "Test", true, pendingIntent);
         PreferencesUtility.setSharedPreferences(this);
 
         if (!PreferencesUtility.getUserInfo().getUsername().equals("")) {
@@ -61,21 +53,11 @@ public class LoginActivity extends AppCompatActivity {
 
         Button mSignInBtn = findViewById(R.id.login_btn);
         mSignInBtn.setOnClickListener(new OnClickListener() {
-            /**
-             *
-             * @param view
-             */
             @Override
             public void onClick(View view) {
                 // TODO: Fix this
                 try {
-                    if (isOnline() == false) {
-                        Log.d("LOGIN_TASK", "internet avaliable");
                         attemptLogin();
-                    } else {
-                        attemptLogin();
-                        Log.d("LOGIN_TASK", "no internet");
-                    }
                 } catch (ExecutionException | InterruptedException | JSONException e) {
                     e.printStackTrace();
                 }
@@ -92,11 +74,6 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    // TODO: Fix this
-
-    /**
-     * @return
-     */
     public boolean isOnline() {
         Runtime runtime = Runtime.getRuntime();
         try {
@@ -110,11 +87,6 @@ public class LoginActivity extends AppCompatActivity {
         return false;
     }
 
-    /**
-     * @throws ExecutionException
-     * @throws InterruptedException
-     * @throws JSONException
-     */
     private void attemptLogin() throws ExecutionException, InterruptedException, JSONException {
         mEmailView.setError(null);
         mPasswordView.setError(null);
