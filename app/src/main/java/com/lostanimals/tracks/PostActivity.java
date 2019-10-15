@@ -65,12 +65,11 @@ public class PostActivity extends AppCompatActivity {
 			}
 		});
 
-		String imageLocation = mPostEntry.getImageLocation();
+		String imageLocation = mPostEntry.getId();
 		if (imageLocation != null) {
             ImageView img = findViewById(R.id.imageView);
             new DownloadImageTask(img).execute(imageLocation);
         }
-
 	}
 	
 	private void addComment() {
