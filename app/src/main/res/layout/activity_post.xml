@@ -46,7 +46,6 @@
                 app:layout_constraintTop_toTopOf="parent"/>
 
         <ImageView
-                android:id="@+id/clock"
                 android:layout_width="13dp"
                 android:layout_height="13dp"
                 android:layout_marginStart="30dp"
