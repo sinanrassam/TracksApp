@@ -131,6 +131,9 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 			case R.id.logOut_nav:
 				navigationIntent = new Intent(this, LogoutActivity.class);
 				break;
+			case R.id.settings_nav:
+				navigationIntent = new Intent(this, SettingsActivity.class);
+				break;
 			case R.id.myProfile_nav:
 				//navigationIntent = new Intent(this, MyProfileActivity.class);
 				loadFragment(new MyProfileActivity());
