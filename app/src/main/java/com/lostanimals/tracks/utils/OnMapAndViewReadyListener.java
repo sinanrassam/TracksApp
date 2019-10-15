@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.lostanimals.tracks;
+package com.lostanimals.tracks.utils;
 
 import android.annotation.SuppressLint;
 import android.os.Build;

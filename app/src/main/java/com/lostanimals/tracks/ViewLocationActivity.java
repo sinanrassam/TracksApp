@@ -6,21 +6,16 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.lostanimals.tracks.utils.BundleManager;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class ViewLocationActivity extends FragmentActivity implements OnMapReadyCallback {
     LatLng postLocation;
-
-    void setPostLocation(LatLng postLocation) {
-        this.postLocation = postLocation;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
+        setContentView(R.layout.activity_view_location);
         SupportMapFragment mapFragment;
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 
@@ -41,17 +36,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-
-        // Add a marker in Sydney and move the camera
-        //postLocation = new LatLng(-34, 151);
-        BundleManager.setPostLocation(new LatLng(-36.848461, 174.763336));
-        CircleOptions testCircle = new CircleOptions();
-        testCircle.center(BundleManager.getPostLocation());
-        testCircle.radius(50000);
-        testCircle.fillColor(2);
-        testCircle.clickable(true);
-        testCircle.visible(true);
-        googleMap.addCircle(testCircle);
+//        BundleManager.setPostLocation(new LatLng(-36.848461, 174.763336));
+//        CircleOptions testCircle = new CircleOptions();
+//        testCircle.center(BundleManager.getPostLocation());
+//        testCircle.radius(50000);
+//        testCircle.fillColor(2);
+//        testCircle.clickable(true);
+//        testCircle.visible(true);
+//        googleMap.addCircle(testCircle);
 
         //googleMap.addMarker(new MarkerOptions().position(postLocation).title("Location of missing animal."));
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(BundleManager.getPostLocation()));

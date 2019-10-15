@@ -70,20 +70,18 @@ public class PostActivity extends AppCompatActivity {
                 viewMap();
             }
         });
-
-
     }
 
     private void viewMap() {
-        // Clear the bundle before adding the details of the post.
+//         Clear the bundle before adding the details of the post.
         BundleManager.mPostBundle.clear();
 
         BundleManager.mPostBundle.putString("id", mPostEntry.getId());
         BundleManager.mPostBundle.putString("lat", "69");
         BundleManager.mPostBundle.putString("lng", "69");
 
-        //mapActivity.setPostLocation(new LatLng(69, 69));
-        startActivity(new Intent(this, MapsActivity.class));
+
+        startActivity(new Intent(this, ViewLocationActivity.class));
 
     }
 
@@ -243,5 +241,10 @@ public class PostActivity extends AppCompatActivity {
         DeleteTask deleteTask = new DeleteTask(this);
         deleteTask.execute(mPostEntry.getId());
         finish();
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+        super.onPointerCaptureChanged(hasCapture);
     }
 }

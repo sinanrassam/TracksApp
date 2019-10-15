@@ -58,7 +58,7 @@ public class MapsActivityGetCurrentLocation extends AppCompatActivity implements
         }
 
         // Retrieve the content view that renders the map.
-        setContentView(R.layout.activity_maps);
+        setContentView(R.layout.activity_view_location);
 
         // Construct a GeoDataClient.
         // mGeoDataClient = Places.getGeoDataClient(this, null);

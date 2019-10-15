@@ -17,13 +17,15 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/TracksTheme"
-            tools:ignore="GoogleAppIndexingWarning">
+            tools:ignore="GoogleAppIndexingWarning"
+
+    >
         <meta-data
                 android:name="com.google.android.geo.API_KEY"
                 android:value="@string/google_maps_key"/>
 
         <activity
-                android:name=".MapsActivity"
+                android:name=".ViewLocationActivity"
                 android:label="@string/title_activity_maps">
         </activity>
         <activity android:name=".PostActivity">
@@ -62,6 +64,8 @@
                 android:parentActivityName=".FeedActivity">
         </activity>
         <activity android:name=".MapsActivityGetCurrentLocation"/>
+        <activity android:name=".GetLocationActivity"/>
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
     </application>
 
 </manifest>

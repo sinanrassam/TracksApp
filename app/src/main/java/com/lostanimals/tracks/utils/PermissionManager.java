@@ -1,4 +1,4 @@
-package com.lostanimals.tracks;
+package com.lostanimals.tracks.utils;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -10,11 +10,12 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.DialogFragment;
+import com.lostanimals.tracks.R;
 
 /**
  * Utility class for access to runtime permissions.
  */
-public abstract class PermissionUtils {
+public abstract class PermissionManager {
 
     /**
      * Requests the fine location permission. If a rationale with an additional explanation should
@@ -24,7 +25,7 @@ public abstract class PermissionUtils {
                                          boolean finishActivity) {
         if (ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)) {
             // Display a dialog with rationale.
-            PermissionUtils.RationaleDialog.newInstance(requestId, finishActivity)
+            PermissionManager.RationaleDialog.newInstance(requestId, finishActivity)
                     .show(activity.getSupportFragmentManager(), "dialog");
         } else {
             // Location permission has not been granted yet, request it.
