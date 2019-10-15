@@ -81,7 +81,7 @@ public class PostActivity extends AppCompatActivity {
         BundleManager.mPostBundle.putString("lng", "69");
 
 
-        startActivity(new Intent(this, ViewLocationActivity.class));
+        startActivity(new Intent(this, ViewMapActivity.class));
 
     }
 

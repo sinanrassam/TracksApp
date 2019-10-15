@@ -9,7 +9,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.lostanimals.tracks.utils.BundleManager;
 
-public class ViewLocationActivity extends FragmentActivity implements OnMapReadyCallback {
+public class ViewMapActivity extends FragmentActivity implements OnMapReadyCallback {
     LatLng postLocation;
 
     @Override

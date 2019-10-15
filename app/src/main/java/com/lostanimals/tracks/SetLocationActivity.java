@@ -20,9 +20,12 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.vision.barcode.Barcode;
+import com.lostanimals.tracks.entries.PostEntry;
+import com.lostanimals.tracks.utils.BundleManager;
 import com.lostanimals.tracks.utils.PermissionManager;
+import com.lostanimals.tracks.utils.PostsUtility;
 
-public class GetLocationActivity extends AppCompatActivity implements OnMyLocationButtonClickListener,
+public class SetLocationActivity extends AppCompatActivity implements OnMyLocationButtonClickListener,
         OnMyLocationClickListener,
         OnMapReadyCallback,
         GoogleMap.OnMapLongClickListener,
@@ -42,6 +45,11 @@ public class GetLocationActivity extends AppCompatActivity implements OnMyLocati
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_location);
+
+        String postID = BundleManager.getPostID();
+
+        // This is how it will go:
+        PostsUtility.getPostEntry(Integer.parseInt(postID)).setLocation(new LatLng(5, 5));
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         if (mapFragment != null) {
