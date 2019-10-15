@@ -2,7 +2,11 @@ package com.lostanimals.tracks;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,8 +27,8 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
 	private EditText etTitle, etDescription;
     private Button backBtn, postBtn;
     private ImageButton imageBtn;
+	private static final int RESULT_LOAD_IMAGE = 1;
 	private ImageView imageToUpload;
-	private int IMAGE_SELECTED;
 
 	@SuppressLint ("SetTextI18n")
 	@Override
@@ -54,6 +58,8 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
 		imageBtn = this.findViewById(R.id.imageButton);
 		imageBtn.setOnClickListener(this);
 
+		imageToUpload = this.findViewById(R.id.imageToUpload);
+
 		backBtn = this.findViewById(R.id.back);
         backBtn.setOnClickListener(this);
 	}
@@ -61,6 +67,7 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
 	public void onNewPost(View view) {
 		String title = etTitle.getText().toString();
 		String description = etDescription.getText().toString();
+		Bitmap image = ((BitmapDrawable) imageToUpload.getDrawable()).getBitmap();
 
 		if (!isEditTask) {
 			NewPostTask newPostTask = new NewPostTask(this);
@@ -70,15 +77,6 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
 			editTask.execute(postID, title, description, postIsFound);
 		}
 		finish();
-	}
-
-	private void browseForImage() {
-		Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-		intent.setType("image/*");
-
-		intent.addCategory(Intent.CATEGORY_OPENABLE);
-		Intent finalIntent = Intent.createChooser(intent, "Select a post picture");
-		startActivityForResult(finalIntent, IMAGE_SELECTED);
 	}
 
 	@Override
@@ -98,11 +96,23 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
         switch (v.getId()) {
             case R.id.imageButton:
                 Log.d("Image", "Browse for image");
-                browseForImage();
+				Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+				galleryIntent.createChooser(galleryIntent, "Select a post picture");
+				startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE);
                 break;
             case R.id.back:
                 finish();
                 break;
         }
     }
+
+    @Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null) {
+			Log.d("onActivityResult", "yup");
+			Uri selectedImage = data.getData();
+			imageToUpload.setImageURI(selectedImage);
+		}
+	}
 }

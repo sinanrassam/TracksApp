@@ -22,7 +22,7 @@ public class NewPostTask extends AsyncTask<String, Void, JSONObject> {
 	public NewPostTask(Context context) {
 		mContext = context;
 	}
-	
+
 	
 	@Override
 	protected JSONObject doInBackground(String... parameters) {

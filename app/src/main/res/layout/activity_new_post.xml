@@ -73,9 +73,9 @@
 
 
         <ImageView
-                android:id="@+id/uploadImage"
-                android:layout_width="246dp"
-                android:layout_height="84dp"
+                android:id="@+id/imageToUpload"
+                android:layout_width="0dp"
+                android:layout_height="102dp"
                 android:contentDescription="@string/image_description"
                 android:layout_marginTop="8dp" android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp" app:layout_constraintBottom_toTopOf="@+id/back"
@@ -89,7 +89,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="onNewPost"
-                android:layout_marginEnd="24dp" android:layout_marginTop="104dp"
+                android:layout_marginEnd="16dp" android:layout_marginTop="120dp"
                 app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@+id/imageButton"/>
 
         <Button
@@ -97,7 +97,7 @@
                 android:text="@string/discard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="24dp" android:layout_marginTop="104dp"
+                android:layout_marginEnd="28dp" android:layout_marginTop="120dp"
                 app:layout_constraintEnd_toStartOf="@+id/post_btn_post"
                 app:layout_constraintTop_toBottomOf="@+id/imageButton"/>
 
