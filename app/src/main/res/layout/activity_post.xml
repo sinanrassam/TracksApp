@@ -16,6 +16,7 @@
             android:textColor="@color/secondaryTextColor"
             android:textSize="24sp"
             android:textStyle="bold"/>
+
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="50dp" tools:layout_editor_absoluteY="35dp">
@@ -57,7 +58,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     <TextView
             android:id="@+id/post_et_desc"
             android:layout_width="match_parent"
@@ -68,6 +68,22 @@
             android:text="@string/posts_description"
             android:textColor="@color/secondaryTextColor"
             app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp" tools:layout_editor_absoluteY="35dp"
+            android:id="@+id/unowned_options">
+
+        <Button
+                android:text="@string/action_follow_post"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/followPost_btn" android:layout_marginTop="8dp"
+                app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp" android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintHorizontal_bias="0.028"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

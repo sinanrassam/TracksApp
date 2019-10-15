@@ -34,11 +34,22 @@ public class UpdatePostsTask extends AsyncTask<String, Integer, Boolean> {
 	private ListFragment mFragment;
 	
 	private List<Map<String, String>> mPostList = new ArrayList<>();
-	
+
 	public UpdatePostsTask(ListFragment activity, ProgressBar progressBar) {
 		this.mFragment = activity;
 		this.mContext = mFragment.getContext();
 		this.mProgressBar = progressBar;
+		PostsUtility.clear();
+		mPostList = new ArrayList<>();
+	}
+
+
+	public UpdatePostsTask(ListFragment activity, Context context, ProgressBar progressBar) {
+		this.mFragment = activity;
+		this.mContext = context;
+		this.mProgressBar = progressBar;
+		PostsUtility.clear();
+		mPostList = new ArrayList<>();
 	}
 	
 	@Override
@@ -55,7 +66,7 @@ public class UpdatePostsTask extends AsyncTask<String, Integer, Boolean> {
 			}
 			
 			try {
-				json = processRequest("post.php", postData);
+				json = processRequest("test/post.php", postData);
 			} catch (JSONException | IOException e) {
 				e.printStackTrace();
 				success = false;
@@ -63,8 +74,6 @@ public class UpdatePostsTask extends AsyncTask<String, Integer, Boolean> {
 		}
 		
 		if (json != null) {
-			PostsUtility.clear();
-			mPostList = new ArrayList<>();
 			try {
 				JSONArray jsonArray = (JSONArray) json.get("posts");
 				Log.d("test", jsonArray.toString());
@@ -77,8 +86,9 @@ public class UpdatePostsTask extends AsyncTask<String, Integer, Boolean> {
 					String date = (String) jsonObject.get("post_date");
 					String time = (String) jsonObject.get("post_time");
 					String found = (String) jsonObject.get("found");
+					String following = (String) jsonObject.get("following");
 					
-					PostsUtility.addPostEntry(i, new PostEntry(id, title, desc, username, date, time, found));
+					PostsUtility.addPostEntry(i, new PostEntry(id, title, desc, username, date, time, found, following));
 					
 					Map<String, String> post = new HashMap<>(2);
 					
@@ -102,7 +112,9 @@ public class UpdatePostsTask extends AsyncTask<String, Integer, Boolean> {
 	
 	@Override
 	protected void onPostExecute(final Boolean success) {
-		mProgressBar.setVisibility(View.GONE);
+		if (mProgressBar != null) {
+			mProgressBar.setVisibility(View.GONE);
+		}
 		
 		SimpleAdapter adapter = new SimpleAdapter(mContext, mPostList, android.R.layout.simple_list_item_2, new String[] {"Title", "Desc"}, new int[] {android.R.id.text1, android.R.id.text2});
 		mFragment.setListAdapter(adapter);

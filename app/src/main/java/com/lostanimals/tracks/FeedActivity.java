@@ -25,7 +25,7 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_feed);
-		
+
 		mDrawerLayout = findViewById(R.id.drawer);
 
 		mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open_action_bar,
@@ -38,16 +38,17 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 		NavigationView navigationView = findViewById(R.id.navigation_view);
 		navigationView.setNavigationItemSelectedListener(this);
 
-//		View header = navigationView.getHeaderView(0);
+
+		View header = navigationView.getHeaderView(0);
 //		AppCompatTextView mUsername = header.findViewById(R.id.usernameHeader);
 //		AppCompatTextView mEmail = header.findViewById(R.id.emailHeader);
-		
+//
 //		mUsername.setText(PreferencesUtility.getUserInfo().getUsername());
 //		mEmail.setText(PreferencesUtility.getUserInfo().getEmail());
 
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setTitle("Feed");
-		
+
 	}
 	
 	public void openNewPostActivity(View view) {
@@ -80,6 +81,9 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 				break;
 			case R.id.myProfile_nav:
 				navigationIntent = new Intent(this, MyProfileActivity.class);
+				break;
+			case R.id.followedPosts_nav:
+				navigationIntent = new Intent(this, FollowedPostsActivity.class);
 				break;
 		}
 		

@@ -16,4 +16,8 @@
           android:title="@string/nav_log_out"
           android:icon="@drawable/ic_exit_to_app"
     />
+    <item android:id="@+id/followedPosts_nav"
+          android:icon="@drawable/ic_star_black_24dp"
+          android:title="@string/nav_followed_posts"
+    />
 </menu>

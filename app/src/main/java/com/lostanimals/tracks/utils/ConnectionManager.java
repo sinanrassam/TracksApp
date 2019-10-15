@@ -24,7 +24,9 @@ public class ConnectionManager {
 		switch (type) {
 			case "get-posts":
 				postData += URLEncoder.encode("number", "UTF-8") + "=" + URLEncoder.encode(parameters[0], "UTF-8") + "&";
-				postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(parameters[1], "UTF-8");
+				postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(parameters[1], "UTF-8") + "&";
+				postData += URLEncoder.encode("id", "UTF-8") + "=" + URLEncoder.encode(parameters[2], "UTF-8") + "&";
+				postData += URLEncoder.encode("myPosts", "UTF-8") + "=" + URLEncoder.encode(parameters[3], "UTF-8");
 				break;
 			case "new-comment":
 				postData += URLEncoder.encode("post_id", "UTF-8") + "=" + URLEncoder.encode(parameters[0], "UTF-8") + "&";
@@ -57,7 +59,15 @@ public class ConnectionManager {
 				break;
 			case "delete-post":
 				postData += URLEncoder.encode("id", "UTF-8") + "=" + URLEncoder.encode(parameters[0], "UTF-8");
-			
+				break;
+			case "unfollow-post": //fall through
+			case "follow-post":
+				postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(parameters[0], "UTF-8") + "&";
+				postData += URLEncoder.encode("post_id", "UTF-8") + "=" + URLEncoder.encode(parameters[1], "UTF-8");
+				break;
+			case "get-followed-posts":
+				postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(parameters[0], "UTF-8");
+				break;
 		}
 		return postData;
 	}
