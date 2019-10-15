@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.lostanimals.tracks.tasks.EditTask;
 import com.lostanimals.tracks.tasks.NewPostTask;
@@ -16,10 +17,13 @@ import com.lostanimals.tracks.utils.PreferencesUtility;
 
 import java.util.Objects;
 
-public class NewPostActivity extends AppCompatActivity {
+public class NewPostActivity extends AppCompatActivity implements View.OnClickListener {
+    private boolean isEditTask;
+    private String postID, postTitle, postDescription, postIsFound;
 	private EditText etTitle, etDescription;
-	private boolean isEditTask;
-	private String postID, postTitle, postDescription, postIsFound;
+    private Button backBtn, postBtn;
+    private ImageButton imageBtn;
+	private ImageView imageToUpload;
 	private int IMAGE_SELECTED;
 
 	@SuppressLint ("SetTextI18n")
@@ -47,22 +51,11 @@ public class NewPostActivity extends AppCompatActivity {
 			etDescription.setText(postDescription);
 		}
 
-		ImageButton imageBtn = this.findViewById(R.id.imageButton);
-		imageBtn.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Log.d("Image", "Browse for image");
-				browseForImage();
-			}
-		});
+		imageBtn = this.findViewById(R.id.imageButton);
+		imageBtn.setOnClickListener(this);
 
-		Button backButton = this.findViewById(R.id.back);
-		backButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				finish();
-			}
-		});
+		backBtn = this.findViewById(R.id.back);
+        backBtn.setOnClickListener(this);
 	}
 
 	public void onNewPost(View view) {
@@ -99,4 +92,17 @@ public class NewPostActivity extends AppCompatActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.imageButton:
+                Log.d("Image", "Browse for image");
+                browseForImage();
+                break;
+            case R.id.back:
+                finish();
+                break;
+        }
+    }
 }
