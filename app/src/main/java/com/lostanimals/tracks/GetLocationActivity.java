@@ -16,7 +16,9 @@ import androidx.core.content.ContextCompat;
 import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMyLocationClickListener;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.lostanimals.tracks.utils.PermissionManager;
 
@@ -122,8 +124,6 @@ public class GetLocationActivity extends AppCompatActivity implements OnMyLocati
     }
 
     private LatLng getUserLocation() {
-
-
         LocationManager locationMan = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Criteria criteria = new Criteria();
         // TODO: Fix this
@@ -134,9 +134,6 @@ public class GetLocationActivity extends AppCompatActivity implements OnMyLocati
         return new LatLng(lat, lng);
     }
 
-    /**
-     * Displays a dialog with error message explaining that the location permission is missing.
-     */
     private void showPermissionError() {
         PermissionManager.PermissionDeniedDialog.newInstance(true).show(getSupportFragmentManager(), "dialog");
     }
@@ -144,7 +141,9 @@ public class GetLocationActivity extends AppCompatActivity implements OnMyLocati
     @Override
     public void onMapLongClick(LatLng point) {
         Toast.makeText(this, point.latitude+" "+point.longitude, Toast.LENGTH_SHORT).show();
-
+        mMap.addMarker(new MarkerOptions().position(point)
+                .title("Last seen")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
     }
 
     @Override
