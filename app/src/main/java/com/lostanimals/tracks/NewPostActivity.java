@@ -52,12 +52,7 @@ public class NewPostActivity extends AppCompatActivity {
 			@Override
 			public void onClick(View v) {
 				Log.d("Image", "Browse for image");
-				Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-				intent.setType("image/*");
-
-				intent.addCategory(Intent.CATEGORY_OPENABLE);
-				Intent finalIntent = Intent.createChooser(intent, "Select a post picture");
-				startActivityForResult(finalIntent, IMAGE_SELECTED);
+				browseForImage();
 			}
 		});
 
@@ -82,6 +77,15 @@ public class NewPostActivity extends AppCompatActivity {
 			editTask.execute(postID, title, description, postIsFound);
 		}
 		finish();
+	}
+
+	private void browseForImage() {
+		Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+		intent.setType("image/*");
+
+		intent.addCategory(Intent.CATEGORY_OPENABLE);
+		Intent finalIntent = Intent.createChooser(intent, "Select a post picture");
+		startActivityForResult(finalIntent, IMAGE_SELECTED);
 	}
 
 	@Override
