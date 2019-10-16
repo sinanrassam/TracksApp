@@ -8,7 +8,6 @@ import androidx.fragment.app.DialogFragment;
 public class FilterHandlerFragment extends DialogFragment {
     public interface NoticeDialogListener {
         public void onDialogPositiveClick(DialogFragment dialogFragment);
-        public void onDialogNegativeClick(DialogFragment dialogFragment);
     }
 
     NoticeDialogListener listener;

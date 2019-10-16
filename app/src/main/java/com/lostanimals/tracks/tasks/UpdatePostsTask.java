@@ -1,7 +1,6 @@
 package com.lostanimals.tracks.tasks;
 
 import android.annotation.SuppressLint;
-import android.app.ListActivity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -10,7 +9,6 @@ import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 import androidx.fragment.app.ListFragment;
-import com.lostanimals.tracks.MyPostsFragment;
 import com.lostanimals.tracks.entries.PostEntry;
 import com.lostanimals.tracks.utils.ConnectionManager;
 import com.lostanimals.tracks.utils.PostsUtility;
@@ -79,8 +77,10 @@ public class UpdatePostsTask extends AsyncTask<String, Integer, Boolean> {
 					String date = (String) jsonObject.get("post_date");
 					String time = (String) jsonObject.get("post_time");
 					String found = (String) jsonObject.get("found");
+					String mircrochipped = (String) jsonObject.get("micro_chipped");
 					
-					PostsUtility.addPostEntry(i, new PostEntry(id, title, desc, username, date, time, found));
+					PostsUtility.addPostEntry(i, new PostEntry(id, title, desc, username, date, time, found,
+							mircrochipped));
 					
 					Map<String, String> post = new HashMap<>(2);
 					

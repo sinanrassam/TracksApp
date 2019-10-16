@@ -8,9 +8,11 @@ public class PostEntry {
 	private String mPostTime;
 	private String mId;
 	private String mFound;
+	private String mMircrochipped;
 	
 	// default
-	public PostEntry(String id, String postTitle, String postDesc, String username, String postDate, String postTime, String found) {
+	public PostEntry(String id, String postTitle, String postDesc, String username, String postDate, String postTime,
+					 String found, String microchipped) {
 		setId(id);
 		setUsername(username);
 		setPostTitle(postTitle);
@@ -18,6 +20,7 @@ public class PostEntry {
 		setPostDate(postDate);
 		setPostTime(postTime);
 		setFound(found);
+		setMircrochipped(microchipped);
 	}
 	
 	public String getUsername() {
@@ -82,5 +85,13 @@ public class PostEntry {
 	
 	private void setPostDesc(String postDesc) {
 		this.mPostDesc = postDesc;
+	}
+
+	public String getMircrochipped() {
+		return mMircrochipped;
+	}
+
+	public void setMircrochipped(String mircrochipped) {
+		mMircrochipped = mircrochipped;
 	}
 }

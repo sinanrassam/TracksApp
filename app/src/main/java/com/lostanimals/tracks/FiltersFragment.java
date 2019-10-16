@@ -19,12 +19,6 @@ public class FiltersFragment extends DialogFragment {
                     public void onClick(DialogInterface dialog, int which) {
                         // Filter the posts based on the selection
                     }
-                })
-                .setNegativeButton(R.string.filters_cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        FiltersFragment.this.getDialog().cancel();
-                    }
                 });
         return builder.create();
     }

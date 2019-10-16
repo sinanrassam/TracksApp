@@ -117,7 +117,7 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 		filtersFragment.show(fragmentManager, "Filters Dialog");
 
 		//TODO: Fix Spinner!!
-		//Spinner sortingSpinner = (Spinner) findViewById(R.id.sorting_spinner);
+		//android.widget.Spinner sortingSpinner = (android.widget.Spinner) findViewById(R.id.sorting_spinner);
 		//ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.sorting_array,
 		//		android.R.layout.simple_spinner_item);
 		//adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -126,11 +126,6 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 
 	@Override
 	public void onDialogPositiveClick(DialogFragment dialogFragment) {
-
-	}
-
-	@Override
-	public void onDialogNegativeClick(DialogFragment dialogFragment) {
 
 	}
 
