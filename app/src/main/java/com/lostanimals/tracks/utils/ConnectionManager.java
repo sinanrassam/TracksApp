@@ -49,12 +49,15 @@ public class ConnectionManager {
                 postData += URLEncoder.encode("title", "UTF-8") + "=" + URLEncoder.encode(parameters[0], "UTF-8") + "&";
                 postData += URLEncoder.encode("description", "UTF-8") + "=" + URLEncoder.encode(parameters[1], "UTF-8") + "&";
                 postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(parameters[2], "UTF-8");
+                postData += URLEncoder.encode("location", "UTF-8") + "=" + URLEncoder.encode(parameters[3], "UTF-8");
                 break;
             case "edit-post":
                 postData += URLEncoder.encode("id", "UTF-8") + "=" + URLEncoder.encode(parameters[0], "UTF-8") + "&";
                 postData += URLEncoder.encode("title", "UTF-8") + "=" + URLEncoder.encode(parameters[1], "UTF-8") + "&";
                 postData += URLEncoder.encode("description", "UTF-8") + "=" + URLEncoder.encode(parameters[2], "UTF-8") + "&";
                 postData += URLEncoder.encode("found", "UTF-8") + "=" + URLEncoder.encode(parameters[3], "UTF-8");
+                postData += URLEncoder.encode("location", "UTF-8") + "=" + URLEncoder.encode(parameters[4], "UTF-8");
+
                 break;
             case "delete-post":
                 postData += URLEncoder.encode("id", "UTF-8") + "=" + URLEncoder.encode(parameters[0], "UTF-8");
@@ -65,10 +68,10 @@ public class ConnectionManager {
 
     public static JSONObject processRequest(String script, String data) throws IOException, JSONException {
         Log.d("Common bro", data);
-        HttpURLConnection conn = openConnection(URL + script);
+        HttpURLConnection connection = openConnection(URL + script);
 
         // Send the request to the server
-        OutputStream outputStream = conn.getOutputStream();
+        OutputStream outputStream = connection.getOutputStream();
         BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
         bufferedWriter.write(data);
         bufferedWriter.flush();
@@ -76,7 +79,7 @@ public class ConnectionManager {
         outputStream.close();
 
         // Read the server response and return it as JSON
-        InputStream inputStream = conn.getInputStream();
+        InputStream inputStream = connection.getInputStream();
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.ISO_8859_1));
         String line;
         StringBuilder sb = new StringBuilder();
@@ -86,7 +89,7 @@ public class ConnectionManager {
         JSONObject json = new JSONObject(sb.toString());
         bufferedReader.close();
         inputStream.close();
-        conn.disconnect();
+        connection.disconnect();
         return json;
     }
 

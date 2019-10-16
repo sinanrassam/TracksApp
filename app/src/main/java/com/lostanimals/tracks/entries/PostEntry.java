@@ -1,6 +1,6 @@
 package com.lostanimals.tracks.entries;
 
-import com.google.android.gms.maps.model.LatLng;
+import org.jetbrains.annotations.NotNull;
 
 public class PostEntry {
     private String mUsername;
@@ -10,10 +10,11 @@ public class PostEntry {
     private String mPostTime;
     private String mId;
     private String mFound;
-    private LatLng mLocation;
+    private String mLocation;
 
     // default
-    public PostEntry(String id, String postTitle, String postDesc, String username, String postDate, String postTime, String found) {
+    public PostEntry(String id, String postTitle, String postDesc, String username, String postDate, String postTime,
+                     String found, String location) {
         setId(id);
         setUsername(username);
         setPostTitle(postTitle);
@@ -21,13 +22,14 @@ public class PostEntry {
         setPostDate(postDate);
         setPostTime(postTime);
         setFound(found);
+        setLocation(location);
     }
 
-    public LatLng getLocation() {
+    public String getLocation() {
         return mLocation;
     }
 
-    public void setLocation(LatLng location) {
+    public void setLocation(String location) {
         this.mLocation = location;
     }
 
@@ -79,6 +81,7 @@ public class PostEntry {
         this.mFound = found;
     }
 
+    @NotNull
     @Override
     public String toString() {
         if (getPostDesc() != null) {

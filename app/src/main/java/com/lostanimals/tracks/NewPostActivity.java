@@ -89,15 +89,15 @@ public class NewPostActivity extends AppCompatActivity {
 
         if (!isEditTask) {
             NewPostTask newPostTask = new NewPostTask(this);
-            newPostTask.execute(title, description, PreferencesUtility.getUserInfo().getUsername());
+            // newPostTask.execute(title, description, PreferencesUtility.getUserInfo().getUsername());
 
             // TODO: add field to PHP and newPost / editPost
-            // newPostTask.execute(title, description, PreferencesUtility.getUserInfo().getUsername(), location);
+            newPostTask.execute(title, description, PreferencesUtility.getUserInfo().getUsername(), location);
         } else {
             EditTask editTask = new EditTask(this);
-            editTask.execute(postID, title, description, postIsFound);
+            // editTask.execute(postID, title, description, postIsFound);
 
-            // editTask.execute(postID, title, description, postIsFound, location);
+            editTask.execute(postID, title, description, postIsFound, location);
         }
         finish();
     }
