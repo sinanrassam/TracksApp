@@ -9,12 +9,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.maps.model.LatLng;
 import com.lostanimals.tracks.tasks.EditTask;
 import com.lostanimals.tracks.tasks.NewPostTask;
-import com.lostanimals.tracks.utils.BundleManager;
-import com.lostanimals.tracks.utils.PostsUtility;
 import com.lostanimals.tracks.utils.PreferencesUtility;
 
 import java.util.Objects;
@@ -23,6 +22,8 @@ public class NewPostActivity extends AppCompatActivity {
     private EditText etTitle, etDescription;
     private boolean isEditTask;
     private String postID, postTitle, postDescription, postIsFound;
+    private String location;
+    static final int LOCATION_CHOOSE_REQUEST = 999;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -61,10 +62,25 @@ public class NewPostActivity extends AppCompatActivity {
         mapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                BundleManager.setPostID(postID);
-                startActivity(new Intent(view.getContext(), SetLocationActivity.class));
+                chooseLocation();
             }
         });
+    }
+
+    private void chooseLocation() {
+        Intent chooseOnMapIntent = new Intent(this, SetLocationActivity.class);
+        startActivityForResult(chooseOnMapIntent, LOCATION_CHOOSE_REQUEST);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == LOCATION_CHOOSE_REQUEST) {
+            // Make sure the request was successful
+            if (resultCode == RESULT_OK) {
+                location = String.valueOf(data.getParcelableExtra("point"));
+            }
+        }
     }
 
     public void onNewPost(View view) {
@@ -74,9 +90,14 @@ public class NewPostActivity extends AppCompatActivity {
         if (!isEditTask) {
             NewPostTask newPostTask = new NewPostTask(this);
             newPostTask.execute(title, description, PreferencesUtility.getUserInfo().getUsername());
+
+            // TODO: add field to PHP and newPost / editPost
+            // newPostTask.execute(title, description, PreferencesUtility.getUserInfo().getUsername(), location);
         } else {
             EditTask editTask = new EditTask(this);
             editTask.execute(postID, title, description, postIsFound);
+
+            // editTask.execute(postID, title, description, postIsFound, location);
         }
         finish();
     }
@@ -92,13 +113,4 @@ public class NewPostActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        if (PostsUtility.getPostEntry(Integer.parseInt(postID)).getLocation() != null) {
-//            Log.d("NEW POST NEW POST NEW POST", "onResume: "+ PostsUtility.getPostEntry
-//                    (Integer.parseInt(postID)).getLocation().toString());
-//        }
-//    }
 }

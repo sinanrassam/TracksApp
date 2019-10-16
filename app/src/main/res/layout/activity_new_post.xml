@@ -93,9 +93,9 @@
             android:layout_width="46dp" android:layout_height="44dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp" android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/post_et_desc"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.339"
-            app:layout_constraintStart_toEndOf="@+id/button2" app:layout_constraintTop_toBottomOf="@+id/post_txt_title"
-            app:layout_constraintVertical_bias="0.419" app:srcCompat="@drawable/ic_map_black_24dp"
-            android:contentDescription="@string/posts_map_button_desc"/>
+            android:layout_marginBottom="8dp" android:contentDescription="@string/posts_map_button_desc"
+            app:layout_constraintBottom_toTopOf="@+id/post_et_desc" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.056" app:layout_constraintStart_toEndOf="@+id/button2"
+            app:layout_constraintTop_toBottomOf="@+id/post_txt_title" app:layout_constraintVertical_bias="0.419"
+            app:srcCompat="@drawable/ic_map_black_24dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

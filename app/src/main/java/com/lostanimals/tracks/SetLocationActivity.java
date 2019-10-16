@@ -2,18 +2,22 @@ package com.lostanimals.tracks;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
@@ -30,9 +34,8 @@ import com.lostanimals.tracks.utils.PostsUtility;
 import java.util.Objects;
 
 public class SetLocationActivity extends AppCompatActivity implements OnMyLocationButtonClickListener,
-        OnMyLocationClickListener,
         OnMapReadyCallback,
-        GoogleMap.OnMapLongClickListener,
+        GoogleMap.OnMapClickListener,
         ActivityCompat.OnRequestPermissionsResultCallback {
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
@@ -62,6 +65,8 @@ public class SetLocationActivity extends AppCompatActivity implements OnMyLocati
         if (mapFragment != null) {
             mapFragment.getMapAsync(this);
         }
+
+
     }
 
     @Override
@@ -69,8 +74,7 @@ public class SetLocationActivity extends AppCompatActivity implements OnMyLocati
         mMap = map;
 
         mMap.setOnMyLocationButtonClickListener(this);
-        mMap.setOnMyLocationClickListener(this);
-        mMap.setOnMapLongClickListener(this);
+        mMap.setOnMapClickListener(this);
 
         enableUserLocation();
 
@@ -100,12 +104,6 @@ public class SetLocationActivity extends AppCompatActivity implements OnMyLocati
     public boolean onMyLocationButtonClick() {
         return false;
     }
-
-    @Override
-    public void onMyLocationClick(@NonNull Location location) {
-        Toast.makeText(this, "Long press on the map to add a pin", Toast.LENGTH_SHORT).show();
-    }
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
@@ -147,44 +145,6 @@ public class SetLocationActivity extends AppCompatActivity implements OnMyLocati
         PermissionManager.PermissionDeniedDialog.newInstance(true).show(getSupportFragmentManager(), "dialog");
     }
 
-    /**
-     * Listener method for long presses on the map.
-     * There is only allowed to be one pin on the map at a time.
-     * When a pin is added, the location is stored in a LatLng.
-     * @param point the point on the map where the user long presses
-     */
-    @Override
-    public void onMapLongClick(LatLng point) {
-        Toast.makeText(this, point.latitude+" "+point.longitude, Toast.LENGTH_SHORT).show();
-
-        if (lastSeenPin != null) {
-            mMap.clear();
-        }
-
-        lastSeenPin = new MarkerOptions()
-                .position(point)
-                .title("Last Seen")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-
-        mMap.addMarker(lastSeenPin);
-
-        pinLocation = lastSeenPin.getPosition();
-    }
-
-    /**
-     * On activity paused update the LatLng in the post entry.
-     */
-    @Override
-    protected void onPause() {
-        super.onPause();
-//        if (PostsUtility.getPostEntry(BundleManager.getPostID()) != null) {
-//            PostsUtility.getPostEntry(BundleManager.getPostID()).setLocation(pinLocation);
-//        }
-        if (pinLocation != null) {
-            Toast.makeText(this, "Paused! " + pinLocation.toString(), Toast.LENGTH_SHORT).show();
-        }
-    }
-
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
 
@@ -194,5 +154,26 @@ public class SetLocationActivity extends AppCompatActivity implements OnMyLocati
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    /**
+     * Listener method for user presses on the map.
+     * There is only allowed to be one pin on the map at a time.
+     * When a pin is added, the location is stored in a LatLng.
+     * @param point the point on the map where the user long presses
+     */
+    @Override
+    public void onMapClick(LatLng point) {
+        lastSeenPin = new MarkerOptions()
+                .title("Last Seen")
+                .position(point)
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mMap.addMarker(lastSeenPin);
+
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("point", point);
+        setResult(Activity.RESULT_OK, returnIntent);
+
+        finish();
     }
 }
