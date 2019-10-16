@@ -79,7 +79,6 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
 		boolean cancel = false;
 		View focusView = null;
 
-		// Check for a valid password, if the user entered one.
 		if (TextUtils.isEmpty(title)) {
 			etTitle.setError(getString(R.string.error_field_required));
 			focusView = etTitle;
