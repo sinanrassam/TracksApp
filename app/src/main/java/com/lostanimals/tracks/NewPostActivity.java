@@ -3,13 +3,18 @@ package com.lostanimals.tracks;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.gms.maps.model.LatLng;
 import com.lostanimals.tracks.tasks.EditTask;
 import com.lostanimals.tracks.tasks.NewPostTask;
+import com.lostanimals.tracks.utils.BundleManager;
+import com.lostanimals.tracks.utils.PostsUtility;
 import com.lostanimals.tracks.utils.PreferencesUtility;
 
 import java.util.Objects;
@@ -47,8 +52,17 @@ public class NewPostActivity extends AppCompatActivity {
         Button backButton = this.findViewById(R.id.back);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View ignored) {
                 finish();
+            }
+        });
+
+        ImageButton mapButton = this.findViewById(R.id.mapButton);
+        mapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                BundleManager.setPostID(postID);
+                startActivity(new Intent(view.getContext(), SetLocationActivity.class));
             }
         });
     }
@@ -78,4 +92,13 @@ public class NewPostActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        if (PostsUtility.getPostEntry(Integer.parseInt(postID)).getLocation() != null) {
+//            Log.d("NEW POST NEW POST NEW POST", "onResume: "+ PostsUtility.getPostEntry
+//                    (Integer.parseInt(postID)).getLocation().toString());
+//        }
+//    }
 }

@@ -29,6 +29,7 @@
     <string name="posts_author">By: AUTHOR</string>
     <string name="posts_date">Posted On: DATE</string>
     <string name="posts_description">DESCRIPTION</string>
+    <string name="posts_map_button_desc">Go to the map</string>
     <!-- comments -->
     <string name="loading_comments">Loading Comments</string>
     <string name="comments_none_exists">No Comments exists, be the first to comment!</string>
@@ -59,4 +60,5 @@
         it can be enabled from the System Settings &gt; Apps &gt; \'Google Maps API Demos\'.
     </string>
     <string name="permission_required_toast">Location permission is required for this demo.</string>
+
 </resources>

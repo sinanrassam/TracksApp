@@ -8,8 +8,8 @@ import java.util.Objects;
 public class BundleManager {
     public static Bundle mPostBundle = new Bundle();
 
-    public static String getPostID() {
-        return mPostBundle.getString("id");
+    public static int getPostID() {
+        return Integer.parseInt(Objects.requireNonNull(mPostBundle.getString("id")));
     }
 
     public static void setPostID(String newPostID) {

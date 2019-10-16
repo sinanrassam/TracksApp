@@ -66,18 +66,18 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"/>
     <Button
+            android:id="@+id/button2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="47dp" android:layout_marginEnd="8dp"
-            android:layout_marginBottom="54dp"
-            android:fontFamily="sans-serif-medium" android:onClick="onNewPost"
-            android:text="@string/post_btn_post" android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-            app:layout_constraintBottom_toTopOf="@+id/post_et_desc"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.505"
+            android:layout_marginStart="8dp" android:layout_marginTop="47dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="54dp" android:fontFamily="sans-serif-medium"
+            android:onClick="onNewPost" android:text="@string/post_btn_post"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            app:layout_constraintBottom_toTopOf="@+id/post_et_desc" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.505"
             app:layout_constraintStart_toEndOf="@+id/post_et_post_title"
-            app:layout_constraintTop_toBottomOf="@+id/post_txt_title"
-            app:layout_constraintVertical_bias="0.0"/>
+            app:layout_constraintTop_toBottomOf="@+id/post_txt_title" app:layout_constraintVertical_bias="0.0"/>
     <Button
             android:id="@+id/back"
             android:layout_width="wrap_content"
@@ -88,4 +88,14 @@
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.885"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@+id/post_et_desc"
             app:layout_constraintVertical_bias="0.0"/>
+    <ImageButton
+            android:id="@+id/mapButton"
+            android:layout_width="46dp" android:layout_height="44dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp" android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/post_et_desc"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.339"
+            app:layout_constraintStart_toEndOf="@+id/button2" app:layout_constraintTop_toBottomOf="@+id/post_txt_title"
+            app:layout_constraintVertical_bias="0.419" app:srcCompat="@drawable/ic_map_black_24dp"
+            android:contentDescription="@string/posts_map_button_desc"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -47,15 +47,13 @@ public class SetLocationActivity extends AppCompatActivity implements OnMyLocati
 
     private MarkerOptions lastSeenPin = null;
 
+    private LatLng pinLocation = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_location);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-
-        // This may be how it will go:
-        // String postID = BundleManager.getPostID();
-        // PostsUtility.getPostEntry(Integer.parseInt(postID)).setLocation(new LatLng(5, 5));
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Long press to set a point");
@@ -100,18 +98,12 @@ public class SetLocationActivity extends AppCompatActivity implements OnMyLocati
 
     @Override
     public boolean onMyLocationButtonClick() {
-//        Toast.makeText(this, "MyLocation button clicked", Toast.LENGTH_SHORT).show();
-        // Return false so that we don't consume the event and the default behavior still occurs
-        // (the camera animates to the user's current position).
         return false;
     }
 
     @Override
     public void onMyLocationClick(@NonNull Location location) {
-        //Toast.makeText(this, "Current location:\n" + location, Toast.LENGTH_LONG).show();
-//        double lat = location.getLatitude();
-//        double log = location.getLongitude();
-//        Toast.makeText(this, "Lat: " + lat + "Long: "+ log, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Long press on the map to add a pin", Toast.LENGTH_SHORT).show();
     }
 
 
@@ -158,6 +150,7 @@ public class SetLocationActivity extends AppCompatActivity implements OnMyLocati
     /**
      * Listener method for long presses on the map.
      * There is only allowed to be one pin on the map at a time.
+     * When a pin is added, the location is stored in a LatLng.
      * @param point the point on the map where the user long presses
      */
     @Override
@@ -174,10 +167,32 @@ public class SetLocationActivity extends AppCompatActivity implements OnMyLocati
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
 
         mMap.addMarker(lastSeenPin);
+
+        pinLocation = lastSeenPin.getPosition();
+    }
+
+    /**
+     * On activity paused update the LatLng in the post entry.
+     */
+    @Override
+    protected void onPause() {
+        super.onPause();
+//        if (PostsUtility.getPostEntry(BundleManager.getPostID()) != null) {
+//            PostsUtility.getPostEntry(BundleManager.getPostID()).setLocation(pinLocation);
+//        }
+        if (pinLocation != null) {
+            Toast.makeText(this, "Paused! " + pinLocation.toString(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
 
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }
