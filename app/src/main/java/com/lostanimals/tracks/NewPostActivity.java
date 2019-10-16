@@ -7,6 +7,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,11 +23,11 @@ import com.lostanimals.tracks.utils.PreferencesUtility;
 import java.util.Objects;
 
 public class NewPostActivity extends AppCompatActivity implements View.OnClickListener {
-    private boolean isEditTask;
-    private String postID, postTitle, postDescription, postIsFound;
+	private boolean isEditTask;
+	private String postID, postTitle, postDescription, postIsFound;
 	private EditText etTitle, etDescription;
-    private Button backBtn, postBtn;
-    private ImageButton imageBtn;
+	private Button backBtn, postBtn;
+	private ImageButton imageBtn;
 	private static final int RESULT_LOAD_IMAGE = 1;
 	private ImageView imageToUpload;
 
@@ -61,22 +62,48 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
 		imageToUpload = this.findViewById(R.id.imageToUpload);
 
 		backBtn = this.findViewById(R.id.back);
-        backBtn.setOnClickListener(this);
+		backBtn.setOnClickListener(this);
 	}
 
 	public void onNewPost(View view) {
+		etTitle.setError(null);
+		etDescription.setError(null);
+
 		String title = etTitle.getText().toString();
 		String description = etDescription.getText().toString();
-		Bitmap image = ((BitmapDrawable) imageToUpload.getDrawable()).getBitmap();
-
-		if (!isEditTask) {
-			NewPostTask newPostTask = new NewPostTask(this, image);
-			newPostTask.execute(title, description, PreferencesUtility.getUserInfo().getUsername());
-		} else {
-			EditTask editTask = new EditTask(this);
-			editTask.execute(postID, title, description, postIsFound);
+		Bitmap image = null;
+		if (imageToUpload.getDrawable() != null) {
+			image = ((BitmapDrawable) imageToUpload.getDrawable()).getBitmap();
 		}
-		finish();
+
+		boolean cancel = false;
+		View focusView = null;
+
+		// Check for a valid password, if the user entered one.
+		if (TextUtils.isEmpty(title)) {
+			etTitle.setError(getString(R.string.error_field_required));
+			focusView = etTitle;
+			cancel = true;
+		}
+
+		if (TextUtils.isEmpty(description)) {
+			etDescription.setError(getString(R.string.error_field_required));
+			focusView = etDescription;
+			cancel = true;
+		}
+
+		if (cancel) {
+			focusView.requestFocus();
+		} else {
+			if (!isEditTask) {
+				NewPostTask newPostTask = new NewPostTask(this, image);
+				newPostTask.execute(title, description, PreferencesUtility.getUserInfo().getUsername());
+			} else {
+				EditTask editTask = new EditTask(this);
+				editTask.execute(postID, title, description, postIsFound);
+			}
+			finish();
+		}
 	}
 
 	@Override
@@ -91,22 +118,22 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
 		return super.onOptionsItemSelected(item);
 	}
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.imageButton:
-                Log.d("Image", "Browse for image");
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+			case R.id.imageButton:
+				Log.d("Image", "Browse for image");
 				Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 				galleryIntent.createChooser(galleryIntent, "Select a post picture");
 				startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE);
-                break;
-            case R.id.back:
-                finish();
-                break;
-        }
-    }
+				break;
+			case R.id.back:
+				finish();
+				break;
+		}
+	}
 
-    @Override
+	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null) {
