@@ -10,7 +10,6 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,9 +20,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.lostanimals.tracks.utils.PermissionManager;
 
 import java.util.Objects;
@@ -154,15 +151,8 @@ public class SetLocationActivity extends AppCompatActivity implements OnMyLocati
      */
     @Override
     public void onMapClick(LatLng point) {
-//        MarkerOptions lastSeenPin = new MarkerOptions()
-//                .title("Last Seen")
-//                .position(point)
-//                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-//        mMap.addMarker(lastSeenPin);
-
         Intent returnIntent = new Intent();
         returnIntent.putExtra("point", point);
-        Log.d("LATLNG", "onMapClick: To STRING: " + point.toString());
         setResult(Activity.RESULT_OK, returnIntent);
 
         finish();

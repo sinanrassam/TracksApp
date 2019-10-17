@@ -13,9 +13,17 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.Objects;
 
+/**
+ * For viewing a map of the last seen location. Started from PostActivity.
+ */
 public class ViewMapActivity extends AppCompatActivity implements OnMapReadyCallback {
-    LatLng postLocation;
+    // The position of the marker on the map
+    private LatLng postLocation;
 
+    /**
+     * Create the Activity and setup the map marker.
+     * @param savedInstanceState ignored
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,29 +39,24 @@ public class ViewMapActivity extends AppCompatActivity implements OnMapReadyCall
             mapFragment.getMapAsync(this);
         }
 
-        // TODO: Add code to viewing. (reminder if no location set, what do?)
+        // Get the location of the post to add a marker to the map.
         String[] latLong = getIntent().getStringExtra("LOCATION").split(",");
-        double longitude = Double.parseDouble(latLong[0]);
-        double latitude = Double.parseDouble(latLong[1]);
-
-        postLocation = new LatLng(longitude, latitude);
+        postLocation = new LatLng(Double.parseDouble(latLong[0]), Double.parseDouble(latLong[1]));
     }
 
+    /**
+     * ActionBar Back button
+     * @return true to go back.
+     */
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
     }
 
-
     /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
+     * Make a map, display a marker where the post creator set and move the camera there.
+     * @param googleMap the GoogleMaps instance we use to display a marker
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
