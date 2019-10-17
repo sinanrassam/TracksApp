@@ -17,10 +17,11 @@ import java.util.Objects;
 
 public class NewPostActivity extends AppCompatActivity {
     static final int LOCATION_CHOOSE_REQUEST = 999;
+    private final String DEFAULT_LOCATION = "-36.854018,174.766719";
     private EditText etTitle, etDescription;
     private boolean isEditTask;
     private String postID, postTitle, postDescription, postIsFound;
-    private String location;
+    private String location = DEFAULT_LOCATION;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -78,6 +79,8 @@ public class NewPostActivity extends AppCompatActivity {
                 location = String.valueOf(data.getParcelableExtra("point"));
                 location = location.replace("lat/lng: (", "");
                 location = location.replace(")", "");
+            } else {
+                location = DEFAULT_LOCATION;
             }
         }
     }

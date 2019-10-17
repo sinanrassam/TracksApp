@@ -17,7 +17,6 @@ import com.lostanimals.tracks.entries.PostEntry;
 import com.lostanimals.tracks.tasks.DeleteTask;
 import com.lostanimals.tracks.tasks.EditTask;
 import com.lostanimals.tracks.tasks.NewCommentTask;
-import com.lostanimals.tracks.utils.BundleManager;
 import com.lostanimals.tracks.utils.PostsUtility;
 import com.lostanimals.tracks.utils.PreferencesUtility;
 
@@ -67,22 +66,11 @@ public class PostActivity extends AppCompatActivity {
         mMapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                viewMap();
+                Intent intent = new Intent(getBaseContext(), ViewMapActivity.class);
+                intent.putExtra("LOCATION", mPostEntry.getLocation());
+                startActivity(intent);
             }
         });
-    }
-
-    private void viewMap() {
-//         Clear the bundle before adding the details of the post.
-        BundleManager.mPostBundle.clear();
-
-        BundleManager.mPostBundle.putString("id", mPostEntry.getId());
-        BundleManager.mPostBundle.putString("lat", "69");
-        BundleManager.mPostBundle.putString("lng", "69");
-
-
-        startActivity(new Intent(this, ViewMapActivity.class));
-
     }
 
     private void addComment() {

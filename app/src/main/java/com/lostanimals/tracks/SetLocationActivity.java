@@ -43,10 +43,6 @@ public class SetLocationActivity extends AppCompatActivity implements OnMyLocati
 
     private GoogleMap mMap;
 
-    private MarkerOptions lastSeenPin = null;
-
-    private LatLng pinLocation = null;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,14 +50,12 @@ public class SetLocationActivity extends AppCompatActivity implements OnMyLocati
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Long press to set a point");
+        actionBar.setTitle("Tap on the map");
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         if (mapFragment != null) {
             mapFragment.getMapAsync(this);
         }
-
-
     }
 
     @Override
@@ -76,7 +70,7 @@ public class SetLocationActivity extends AppCompatActivity implements OnMyLocati
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             mMap.moveCamera(CameraUpdateFactory.newLatLng((getUserLocation())));
-            mMap.moveCamera(CameraUpdateFactory.zoomTo(10));
+            mMap.moveCamera(CameraUpdateFactory.zoomTo(15));
         }
     }
 
@@ -160,11 +154,11 @@ public class SetLocationActivity extends AppCompatActivity implements OnMyLocati
      */
     @Override
     public void onMapClick(LatLng point) {
-        lastSeenPin = new MarkerOptions()
-                .title("Last Seen")
-                .position(point)
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-        mMap.addMarker(lastSeenPin);
+//        MarkerOptions lastSeenPin = new MarkerOptions()
+//                .title("Last Seen")
+//                .position(point)
+//                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+//        mMap.addMarker(lastSeenPin);
 
         Intent returnIntent = new Intent();
         returnIntent.putExtra("point", point);

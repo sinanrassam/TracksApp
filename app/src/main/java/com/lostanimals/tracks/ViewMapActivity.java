@@ -1,15 +1,19 @@
 package com.lostanimals.tracks;
 
 import android.os.Bundle;
-import androidx.fragment.app.FragmentActivity;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.lostanimals.tracks.utils.BundleManager;
+import com.google.android.gms.maps.model.MarkerOptions;
 
-public class ViewMapActivity extends FragmentActivity implements OnMapReadyCallback {
+import java.util.Objects;
+
+public class ViewMapActivity extends AppCompatActivity implements OnMapReadyCallback {
     LatLng postLocation;
 
     @Override
@@ -18,10 +22,27 @@ public class ViewMapActivity extends FragmentActivity implements OnMapReadyCallb
         setContentView(R.layout.activity_view_map);
         SupportMapFragment mapFragment;
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Animal last seen");
 
         if (mapFragment != null) {
             mapFragment.getMapAsync(this);
         }
+
+        // TODO: Add code to viewing. (reminder if no location set, what do?)
+        String[] latLong = getIntent().getStringExtra("LOCATION").split(",");
+        double longitude = Double.parseDouble(latLong[0]);
+        double latitude = Double.parseDouble(latLong[1]);
+
+        postLocation = new LatLng(longitude, latitude);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
 
@@ -36,16 +57,13 @@ public class ViewMapActivity extends FragmentActivity implements OnMapReadyCallb
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-//        BundleManager.setPostLocation(new LatLng(-36.848461, 174.763336));
-//        CircleOptions testCircle = new CircleOptions();
-//        testCircle.center(BundleManager.getPostLocation());
-//        testCircle.radius(50000);
-//        testCircle.fillColor(2);
-//        testCircle.clickable(true);
-//        testCircle.visible(true);
-//        googleMap.addCircle(testCircle);
+        MarkerOptions lastSeenPin = new MarkerOptions()
+                .title("Last Seen")
+                .position(postLocation)
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        googleMap.addMarker(lastSeenPin);
 
-        //googleMap.addMarker(new MarkerOptions().position(postLocation).title("Location of missing animal."));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(BundleManager.getPostLocation()));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(postLocation));
+        googleMap.moveCamera(CameraUpdateFactory.zoomTo(15));
     }
 }
