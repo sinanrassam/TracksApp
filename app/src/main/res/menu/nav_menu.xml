@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/feed_nav"
-          android:title="@string/nav_feed"
           android:icon="@drawable/ic_feed"
+          android:title="@string/nav_feed"
     />
     <item android:id="@+id/myPosts_nav"
-          android:title="@string/nav_my_posts"
           android:icon="@drawable/ic_receipt_black"
+          android:title="@string/nav_my_posts"
     />
     <item android:id="@+id/myProfile_nav"
-          android:title="@string/nav_my_profile"
           android:icon="@drawable/ic_profile"
+          android:title="@string/nav_my_profile"
     />
     <item android:id="@+id/logOut_nav"
-          android:title="@string/nav_log_out"
           android:icon="@drawable/ic_exit_to_app"
+          android:title="@string/nav_log_out"
     />
 </menu>
