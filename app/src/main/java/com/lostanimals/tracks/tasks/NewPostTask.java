@@ -50,6 +50,7 @@ public class NewPostTask extends AsyncTask<String, Void, JSONObject> {
 				
 				NotificationUtility.createNotification(mContext, "Post Created Successfully", "", true, pendingIntent);
 				NotificationUtility.displayNotification(0);
+
 				mContext.startActivity(feedIntent);
 			}
 		} catch (JSONException e) {

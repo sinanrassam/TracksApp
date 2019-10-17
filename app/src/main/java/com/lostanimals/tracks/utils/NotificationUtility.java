@@ -68,8 +68,7 @@ public class NotificationUtility {
 	 */
 	
 	private static void setChannel() {
-		notificationChannel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME,
-				NotificationManager.IMPORTANCE_DEFAULT);
+		notificationChannel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT);
 		notificationChannel.setDescription(CHANNEL_DESCRIPTION);
 		
 	}

@@ -43,6 +43,14 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 		NavigationView navigationView = findViewById(R.id.navigation_view);
 		navigationView.setNavigationItemSelectedListener(this);
 
+
+		View header = navigationView.getHeaderView(0);
+//		AppCompatTextView mUsername = header.findViewById(R.id.usernameHeader);
+//		AppCompatTextView mEmail = header.findViewById(R.id.emailHeader);
+//
+//		mUsername.setText(PreferencesUtility.getUserInfo().getUsername());
+//		mEmail.setText(PreferencesUtility.getUserInfo().getEmail());
+
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setTitle("Feed");
 	}
@@ -73,7 +81,7 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 
 		return super.onOptionsItemSelected(item);
 	}
-
+	
 	@Override
 	public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 		Intent navigationIntent = null;
@@ -90,6 +98,9 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 				break;
 			case R.id.myProfile_nav:
 				navigationIntent = new Intent(this, MyProfileActivity.class);
+				break;
+			case R.id.followedPosts_nav:
+				navigationIntent = new Intent(this, FollowedPostsActivity.class);
 				break;
 		}
 		

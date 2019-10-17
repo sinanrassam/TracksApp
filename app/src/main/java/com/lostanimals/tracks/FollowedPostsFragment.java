@@ -9,19 +9,19 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import androidx.fragment.app.ListFragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import com.lostanimals.tracks.tasks.UpdatePostsTask;
+import com.lostanimals.tracks.tasks.GetFollowedPostsTask;
 import com.lostanimals.tracks.utils.PreferencesUtility;
 
-public class FeedFragment extends ListFragment {
+public class FollowedPostsFragment extends ListFragment {
 	private SwipeRefreshLayout refreshLayout;
-	private ProgressBar progressBar;
+	private ProgressBar mProgressBar;
+	private GetFollowedPostsTask task;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		final View view = inflater.inflate(R.layout.feed_fragment, container, false);
-		progressBar = view.findViewById(R.id.progress_bar);
-		progressBar.setProgress(0);
-		
+		final View view = inflater.inflate(R.layout.followed_posts_fragment, container, false);
+		mProgressBar = view.findViewById(R.id.progress_bar);
+
 		refreshLayout = view.findViewById(R.id.pullToRefresh);
 		refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 			@Override
@@ -30,26 +30,25 @@ public class FeedFragment extends ListFragment {
 				refreshLayout.setRefreshing(false);
 			}
 		});
-		
-		refresh();
-		
+
 		return view;
 	}
-	
-	@Override
-	public void onListItemClick(ListView l, View v, int position, long id) {
-		Intent intent = new Intent(getContext(), PostActivity.class);
-		intent.putExtra("position", position);
-		startActivity(intent);
-	}
-	
+
 	private void refresh() {
-		new UpdatePostsTask(this, progressBar).execute("", PreferencesUtility.getUserInfo().getUsername(), "", "");
+		task = new GetFollowedPostsTask(this, mProgressBar);
+		task.execute(PreferencesUtility.getUserInfo().getUsername());
 	}
-	
+
 	@Override
 	public void onResume() {
 		super.onResume();
 		refresh();
+	}
+
+	@Override
+	public void onListItemClick(ListView l, View v, int position, long id) {
+        Intent intent = new Intent(getContext(), PostActivity.class);
+        intent.putExtra("position", task.getActualId(position));
+        startActivity(intent);
 	}
 }

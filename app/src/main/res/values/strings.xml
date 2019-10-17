@@ -52,17 +52,22 @@
     <string name="loading_comments">Loading Comments</string>
     <string name="comments_error">Post Not Found</string>
     <string name="comments_none_exists">No Comments exists, be the first to comment!</string>
-    <string name="prompt_comment">Write a comment...</string>
+    <string name="prompt_comment">Write a comment…</string>
     <string name="action_comment">Comment</string>
     <string name="discard">Discard</string>
     <!-- Nav Drawer -->
     <string name="open_action_bar">Open</string>
     <string name="close_action_bar">Close</string>
     <string name="edit">Edit Details</string>
-    <!-- Maps -->
-    <string name="title_activity_maps">Map</string>
     <string name="logout">Logout</string>
     <string name="open_feed">Open Feed</string>
+    <string name="nav_feed">Feed</string>
+    <string name="nav_my_posts">My Posts</string>
+    <string name="nav_my_profile">My Profile</string>
+    <string name="nav_log_out">Log Out</string>
+    <string name="nav_followed_posts">Followed Posts</string>
+    <!-- Maps -->
+    <string name="title_activity_maps">Map</string>
     <!-- Filters -->
     <string name="filters_confirm">Confirm</string>
     <string name="filters_cancel">Cancel</string>
@@ -93,4 +98,14 @@
     <string name="chipped_title">Microchipped: </string>
     <string name="chipped_yes">Microchipped</string>
     <string name="chipped_no">Not Microchipped</string>
+    <string name="title_activity_login2">deleteme</string>
+    <!-- Popup -->
+    <string name="pop_found">Mark as \"Found\"</string>
+    <string name="pop_edit">Edit Post</string>
+    <string name="pop_delete">Delete Post</string>
+    <string name="action_follow_post">Follow Post</string>
+    <string name="action_unfollow_post">Unfollow Post</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

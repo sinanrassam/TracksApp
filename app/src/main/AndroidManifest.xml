@@ -16,7 +16,7 @@
             android:networkSecurityConfig="@xml/network_security_config"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:theme="@style/AppTheme"
+            android:theme="@style/TracksTheme"
             tools:ignore="GoogleAppIndexingWarning">
         <meta-data
                 android:name="com.google.android.geo.API_KEY"
@@ -60,6 +60,10 @@
         <activity
                 android:name=".MyProfileActivity"
                 android:parentActivityName=".FeedActivity">
+        </activity>
+        <activity
+                android:name=".FollowedPostsActivity"
+                android:parentActivityName=".FollowedPostsActivity">
         </activity>
     </application>
 
