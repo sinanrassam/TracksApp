@@ -3,15 +3,12 @@ package com.lostanimals.tracks;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import com.google.android.gms.maps.model.LatLng;
 import com.lostanimals.tracks.tasks.EditTask;
 import com.lostanimals.tracks.tasks.NewPostTask;
 import com.lostanimals.tracks.utils.PreferencesUtility;
@@ -19,11 +16,11 @@ import com.lostanimals.tracks.utils.PreferencesUtility;
 import java.util.Objects;
 
 public class NewPostActivity extends AppCompatActivity {
+    static final int LOCATION_CHOOSE_REQUEST = 999;
     private EditText etTitle, etDescription;
     private boolean isEditTask;
     private String postID, postTitle, postDescription, postIsFound;
     private String location;
-    static final int LOCATION_CHOOSE_REQUEST = 999;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -79,6 +76,8 @@ public class NewPostActivity extends AppCompatActivity {
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
                 location = String.valueOf(data.getParcelableExtra("point"));
+                location = location.replace("lat/lng: (", "");
+                location = location.replace(")", "");
             }
         }
     }
@@ -89,14 +88,9 @@ public class NewPostActivity extends AppCompatActivity {
 
         if (!isEditTask) {
             NewPostTask newPostTask = new NewPostTask(this);
-            // newPostTask.execute(title, description, PreferencesUtility.getUserInfo().getUsername());
-
-            // TODO: add field to PHP and newPost / editPost
             newPostTask.execute(title, description, PreferencesUtility.getUserInfo().getUsername(), location);
         } else {
             EditTask editTask = new EditTask(this);
-            // editTask.execute(postID, title, description, postIsFound);
-
             editTask.execute(postID, title, description, postIsFound, location);
         }
         finish();

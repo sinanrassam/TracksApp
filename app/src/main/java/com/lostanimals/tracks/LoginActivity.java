@@ -57,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // TODO: Fix this
                 try {
-                        attemptLogin();
+                    attemptLogin();
                 } catch (ExecutionException | InterruptedException | JSONException e) {
                     e.printStackTrace();
                 }

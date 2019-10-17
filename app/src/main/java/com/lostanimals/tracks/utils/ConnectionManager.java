@@ -48,14 +48,14 @@ public class ConnectionManager {
             case "new-post":
                 postData += URLEncoder.encode("title", "UTF-8") + "=" + URLEncoder.encode(parameters[0], "UTF-8") + "&";
                 postData += URLEncoder.encode("description", "UTF-8") + "=" + URLEncoder.encode(parameters[1], "UTF-8") + "&";
-                postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(parameters[2], "UTF-8");
+                postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(parameters[2], "UTF-8") + "&";
                 postData += URLEncoder.encode("location", "UTF-8") + "=" + URLEncoder.encode(parameters[3], "UTF-8");
                 break;
             case "edit-post":
                 postData += URLEncoder.encode("id", "UTF-8") + "=" + URLEncoder.encode(parameters[0], "UTF-8") + "&";
                 postData += URLEncoder.encode("title", "UTF-8") + "=" + URLEncoder.encode(parameters[1], "UTF-8") + "&";
                 postData += URLEncoder.encode("description", "UTF-8") + "=" + URLEncoder.encode(parameters[2], "UTF-8") + "&";
-                postData += URLEncoder.encode("found", "UTF-8") + "=" + URLEncoder.encode(parameters[3], "UTF-8");
+                postData += URLEncoder.encode("found", "UTF-8") + "=" + URLEncoder.encode(parameters[3], "UTF-8") + "&";
                 postData += URLEncoder.encode("location", "UTF-8") + "=" + URLEncoder.encode(parameters[4], "UTF-8");
 
                 break;

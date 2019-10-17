@@ -10,26 +10,21 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.SystemClock;
-import android.widget.Toast;
+import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
-import com.google.android.gms.maps.GoogleMap.OnMyLocationClickListener;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.lostanimals.tracks.utils.BundleManager;
 import com.lostanimals.tracks.utils.PermissionManager;
-import com.lostanimals.tracks.utils.PostsUtility;
 
 import java.util.Objects;
 
@@ -160,6 +155,7 @@ public class SetLocationActivity extends AppCompatActivity implements OnMyLocati
      * Listener method for user presses on the map.
      * There is only allowed to be one pin on the map at a time.
      * When a pin is added, the location is stored in a LatLng.
+     *
      * @param point the point on the map where the user long presses
      */
     @Override
@@ -172,6 +168,7 @@ public class SetLocationActivity extends AppCompatActivity implements OnMyLocati
 
         Intent returnIntent = new Intent();
         returnIntent.putExtra("point", point);
+        Log.d("LATLNG", "onMapClick: To STRING: " + point.toString());
         setResult(Activity.RESULT_OK, returnIntent);
 
         finish();
