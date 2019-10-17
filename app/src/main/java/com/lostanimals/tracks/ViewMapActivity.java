@@ -22,6 +22,7 @@ public class ViewMapActivity extends AppCompatActivity implements OnMapReadyCall
 
     /**
      * Create the Activity and setup the map marker.
+     *
      * @param savedInstanceState ignored
      */
     @Override
@@ -46,6 +47,7 @@ public class ViewMapActivity extends AppCompatActivity implements OnMapReadyCall
 
     /**
      * ActionBar Back button
+     *
      * @return true to go back.
      */
     @Override
@@ -56,6 +58,7 @@ public class ViewMapActivity extends AppCompatActivity implements OnMapReadyCall
 
     /**
      * Make a map, display a marker where the post creator set and move the camera there.
+     *
      * @param googleMap the GoogleMaps instance we use to display a marker
      */
     @Override

@@ -17,7 +17,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -25,19 +24,11 @@ import com.lostanimals.tracks.utils.PermissionManager;
 
 import java.util.Objects;
 
-public class SetLocationActivity extends AppCompatActivity implements OnMyLocationButtonClickListener,
-        OnMapReadyCallback,
-        GoogleMap.OnMapClickListener,
+public class SetLocationActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMapClickListener,
         ActivityCompat.OnRequestPermissionsResultCallback {
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
-
-    /**
-     * Flag indicating whether a requested permission has been denied after returning in
-     * {@link #onRequestPermissionsResult(int, String[], int[])}.
-     */
     private boolean mPermissionDenied = false;
-
     private GoogleMap mMap;
 
     @Override
@@ -58,10 +49,7 @@ public class SetLocationActivity extends AppCompatActivity implements OnMyLocati
     @Override
     public void onMapReady(GoogleMap map) {
         mMap = map;
-
-        mMap.setOnMyLocationButtonClickListener(this);
         mMap.setOnMapClickListener(this);
-
         enableUserLocation();
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -84,11 +72,6 @@ public class SetLocationActivity extends AppCompatActivity implements OnMyLocati
             // Access to the location has been granted to the app.
             mMap.setMyLocationEnabled(true);
         }
-    }
-
-    @Override
-    public boolean onMyLocationButtonClick() {
-        return false;
     }
 
     @Override
@@ -132,11 +115,6 @@ public class SetLocationActivity extends AppCompatActivity implements OnMyLocati
     }
 
     @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-
-    }
-
-    @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
@@ -144,8 +122,7 @@ public class SetLocationActivity extends AppCompatActivity implements OnMyLocati
 
     /**
      * Listener method for user presses on the map.
-     * There is only allowed to be one pin on the map at a time.
-     * When a pin is added, the location is stored in a LatLng.
+     * When a point is selected, end the activity and return the point to NewPostActivity.
      *
      * @param point the point on the map where the user long presses
      */
