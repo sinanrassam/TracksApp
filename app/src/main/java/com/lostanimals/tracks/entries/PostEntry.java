@@ -8,7 +8,9 @@ public class PostEntry {
 	private String mPostTime;
 	private String mId;
 	private String mFound;
-	
+	private boolean mReported;
+	private int[] mReportCount;
+
 	// default
 	public PostEntry(String id, String postTitle, String postDesc, String username, String postDate, String postTime, String found) {
 		setId(id);
@@ -18,6 +20,7 @@ public class PostEntry {
 		setPostDate(postDate);
 		setPostTime(postTime);
 		setFound(found);
+		mReportCount = new int[3];
 	}
 	
 	public String getUsername() {
@@ -82,5 +85,47 @@ public class PostEntry {
 	
 	private void setPostDesc(String postDesc) {
 		this.mPostDesc = postDesc;
+	}
+
+	public void setReported(boolean reported) {
+		this.mReported = reported;
+	}
+
+	public int[] getReportCount() {
+		return mReportCount;
+	}
+
+	/**
+	 * @param reportType the type of report. If 0, clear the reports.
+	 */
+	public void setReportCount(int reportType) {
+		final int REPORT_OTHER = 1;
+		final int REPORT_ABUSE = 2;
+		final int REPORT_VIOLATE = 3;
+
+		switch (reportType) {
+			case 0:
+				this.mReportCount = new int[3];
+				break;
+			case REPORT_OTHER:
+				if (mReportCount[REPORT_OTHER] > 10) {
+					this.mReportCount[REPORT_OTHER]++;
+				}
+				break;
+			case REPORT_ABUSE:
+				if (mReportCount[REPORT_ABUSE] > 10) {
+					this.mReportCount[REPORT_ABUSE]++;
+				}
+				break;
+			case REPORT_VIOLATE:
+				if (mReportCount[REPORT_VIOLATE] > 10) {
+					this.mReportCount[REPORT_VIOLATE]++;
+				}
+				break;
+		}
+	}
+
+	public boolean isReported() {
+		return mReported;
 	}
 }

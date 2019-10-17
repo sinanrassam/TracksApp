@@ -24,4 +24,13 @@ public class PostsUtility {
 			postEntryArray.clear();
 		}
 	}
+
+	public static void reportPost(int index, int type) {
+		if (type == 0) {
+			PostsUtility.getPostEntry(index).setReported(false);
+		} else {
+			PostsUtility.getPostEntry(index).setReported(true);
+		}
+		PostsUtility.getPostEntry(index).setReportCount(type);
+	}
 }
