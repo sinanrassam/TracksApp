@@ -126,9 +126,11 @@ public class LoginActivity extends AppCompatActivity {
 					try {
 						// The Task returned from this call is always completed, no need to attach
 						// a listener.
+						
 						Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
 						GoogleSignInAccount account = task.getResult(ApiException.class);
 						onLoggedIn(account);
+						Log.d("GOOGLE","GOOG signed in");
 					} catch (ApiException e) {
 						// The ApiException status code indicates the detailed failure reason.
 						Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
@@ -139,7 +141,7 @@ public class LoginActivity extends AppCompatActivity {
 
 	private void onLoggedIn(GoogleSignInAccount googleSignInAccount) {
 		Intent intent = new Intent(this, RegisterActivity.class);
-
+		Log.d("LOGIN","Starting register actiity");
 		intent.putExtra(FeedActivity.GOOGLE_ACCOUNT, googleSignInAccount);
 		startActivity(intent);
 

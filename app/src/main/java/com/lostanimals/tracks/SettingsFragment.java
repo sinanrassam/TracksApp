@@ -6,8 +6,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.*;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.annotation.Nullable;
@@ -16,19 +19,44 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.lostanimals.tracks.utils.PreferencesUtility;
 
 
-public class SettingsFragment  extends PreferenceFragmentCompat  implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class SettingsFragment  extends Fragment {
 
-    private String logout = "logout_KEY";
-    private final String information = "information";
-    private final String notif = "notification";
-    private SharedPreferences.OnSharedPreferenceChangeListener preferenceChangeListener;
 
-    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        final View view = inflater.inflate(R.layout.activity_settings, container, false);
+        Log.d("SETTINGS", "OnCreate");
+        ImageButton logoutButton = view.findViewById(R.id.logOutButton_settings2);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("SETTINGS", "CLICK");
+                Toast.makeText(getActivity(), "Yes", Toast.LENGTH_LONG).show();
+            }
+        });
+        return view;
+    }
+
+    /*public void onClick(View view){
+
+        if(view.getId() == R.id.logOutButton_settings){
+            Intent tempIntent = new Intent(getContext(), LogoutActivity.class);
+            startActivity(tempIntent);
+        }
+        /*switch(view.getId()){
+            case R.id.logOutButton_settings:
+                Intent tempIntent = new Intent(getContext(), LogoutActivity.class);
+                startActivity(tempIntent);
+                break;
+            default:
+        }*/
+    }
+
+    /*@Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.preference, rootKey);
         final Preference logoutPref = findPreference(logout);
 
-    }
+    }*/
 
     /*@Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -55,7 +83,7 @@ public class SettingsFragment  extends PreferenceFragmentCompat  implements Shar
         return super.onOptionsItemSelected(item);
     }*/
 
-    @Override
+    /*@Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 
         if(key.equals(logout)){
@@ -93,5 +121,5 @@ public class SettingsFragment  extends PreferenceFragmentCompat  implements Shar
     public void onResume() {
         super.onResume();
         getPreferenceManager().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(preferenceChangeListener);
-    }
-}
+    }*/
+
