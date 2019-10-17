@@ -87,7 +87,7 @@ public class PostEntry {
 		this.mPostDesc = postDesc;
 	}
 
-	public void setReported(boolean reported) {
+	private void setReported(boolean reported) {
 		this.mReported = reported;
 	}
 
@@ -106,21 +106,25 @@ public class PostEntry {
 		switch (reportType) {
 			case 0:
 				this.mReportCount = new int[3];
+				setReported(false);
 				break;
 			case REPORT_OTHER:
 				if (mReportCount[REPORT_OTHER] > 10) {
 					this.mReportCount[REPORT_OTHER]++;
 				}
+				setReported(true);
 				break;
 			case REPORT_ABUSE:
 				if (mReportCount[REPORT_ABUSE] > 10) {
 					this.mReportCount[REPORT_ABUSE]++;
 				}
+				setReported(true);
 				break;
 			case REPORT_VIOLATE:
 				if (mReportCount[REPORT_VIOLATE] > 10) {
 					this.mReportCount[REPORT_VIOLATE]++;
 				}
+				setReported(true);
 				break;
 		}
 	}

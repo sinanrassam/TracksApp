@@ -25,12 +25,7 @@ public class PostsUtility {
 		}
 	}
 
-	public static void reportPost(int index, int type) {
-		if (type == 0) {
-			PostsUtility.getPostEntry(index).setReported(false);
-		} else {
-			PostsUtility.getPostEntry(index).setReported(true);
-		}
-		PostsUtility.getPostEntry(index).setReportCount(type);
+	public static void reportPost(int index, final int REPORT_TYPE) {
+		PostsUtility.getPostEntry(index).setReportCount(REPORT_TYPE);
 	}
 }
