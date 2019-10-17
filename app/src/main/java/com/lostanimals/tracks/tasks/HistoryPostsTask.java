@@ -8,34 +8,39 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
+
 import androidx.fragment.app.ListFragment;
+
+import com.lostanimals.tracks.FeedFragment;
 import com.lostanimals.tracks.entries.PostEntry;
 import com.lostanimals.tracks.utils.ConnectionManager;
 import com.lostanimals.tracks.utils.PostsUtility;
+import com.lostanimals.tracks.utils.PreferencesUtility;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 
 import static com.lostanimals.tracks.utils.ConnectionManager.processRequest;
 
-public class UpdatePostsTask extends AsyncTask<String, Integer, Boolean> {
+public class HistoryPostsTask extends AsyncTask<String, Integer, Boolean> {
 	@SuppressLint ("StaticFieldLeak")
 	private Context mContext;
 	@SuppressLint ("StaticFieldLeak")
 	private ProgressBar mProgressBar;
-	
+
 	private ListFragment mFragment;
-	
+
 	private List<Map<String, String>> mPostList = new ArrayList<>();
-	
-	public UpdatePostsTask(ListFragment activity, ProgressBar progressBar) {
+
+	public HistoryPostsTask(ListFragment activity, ProgressBar progressBar) {
 		this.mFragment = activity;
 		this.mContext = mFragment.getContext();
 		this.mProgressBar = progressBar;
@@ -43,6 +48,8 @@ public class UpdatePostsTask extends AsyncTask<String, Integer, Boolean> {
 	
 	@Override
 	protected Boolean doInBackground(String... parameters) {
+		Queue<String> historyQ = FeedFragment.getHistoryQ();
+		String user=PreferencesUtility.getUserInfo().getUsername();
 		boolean success = true;
 		JSONObject json = null;
 		if (!this.isCancelled()) {
@@ -62,7 +69,7 @@ public class UpdatePostsTask extends AsyncTask<String, Integer, Boolean> {
 			try {
 				JSONArray jsonArray = (JSONArray) json.get("posts");
 				Log.d("test", jsonArray.toString());
-				for (int i = 0; i < jsonArray.length(); i++) {
+				for (int i = 0; i < historyQ.size(); i++) {
 					JSONObject jsonObject = (JSONObject) jsonArray.get(i);
 					String id = (String) jsonObject.get("id");
 					String title = (String) jsonObject.get("title");
@@ -71,15 +78,17 @@ public class UpdatePostsTask extends AsyncTask<String, Integer, Boolean> {
 					String date = (String) jsonObject.get("post_date");
 					String time = (String) jsonObject.get("post_time");
 					String found = (String) jsonObject.get("found");
-					
-					PostsUtility.addPostEntry(i, new PostEntry(id, title, desc, username, date, time, found));
-					
-					Map<String, String> post = new HashMap<>(2);
-					
-					post.put("Title", PostsUtility.getPostEntry(i).getPostTitle());
-					post.put("Desc", PostsUtility.getPostEntry(i).getPostDesc());
-					
-					mPostList.add(i, post);
+					if(historyQ.contains(id) && username!=user)
+					{
+						PostsUtility.addPostEntry(i, new PostEntry(id, title, desc, username, date, time, found));
+
+						Map<String, String> post = new HashMap<>(2);
+
+						post.put("Title", PostsUtility.getPostEntry(i).getPostTitle());
+						post.put("Desc", PostsUtility.getPostEntry(i).getPostDesc());
+
+						mPostList.add(post);
+					}
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();

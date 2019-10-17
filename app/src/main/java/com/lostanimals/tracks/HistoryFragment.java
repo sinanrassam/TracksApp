@@ -9,12 +9,13 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import androidx.fragment.app.ListFragment;
-import com.lostanimals.tracks.tasks.UpdatePostsTask;
+import com.lostanimals.tracks.tasks.HistoryPostsTask;
 
 import java.util.Queue;
 
 public class HistoryFragment extends ListFragment {
 
+    private HistoryPostsTask mHistory;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.feed_fragment, container, false);
@@ -25,12 +26,14 @@ public class HistoryFragment extends ListFragment {
 
         Log.d("history", "Q in history queue" + historyQ);
 
-        if (!(historyQ.size() == 0)) {
-			for (String string : historyQ) {
-				new UpdatePostsTask(this, progressBar).execute("", string, "");
 
-				Log.d("HISTORY", "onCreateView: " + string);
-			}
+        if (!(historyQ.size() == 0)) {
+            new HistoryPostsTask(this, progressBar).execute("", "", "");
+//			for (String string : historyQ) {
+//			    new HistoryPostsTask(this, progressBar).execute("", string, "");
+//
+//				Log.d("HISTORY", "onCreateView: " + string);
+//			}
         } else {
         	progressBar.setVisibility(View.GONE);
 		}
