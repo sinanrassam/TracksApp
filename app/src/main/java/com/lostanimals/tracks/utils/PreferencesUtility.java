@@ -34,19 +34,19 @@ public class PreferencesUtility {
         return editor.commit();
     }
 
-    public static boolean setDarkMode(boolean darkMode) {
+    public static void setDarkMode(boolean darkMode) {
         getUserInfo().setDarkModeEnabled(darkMode);
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         editor.putBoolean(KEY_DARK_MODE, getUserInfo().isDarkModeEnabled());
-        return editor.commit();
+        editor.apply();
     }
 
-    public static boolean setNotifications(boolean notifications) {
+    public static void setNotifications(boolean notifications) {
         getUserInfo().setNotificationsEnabled(notifications);
         NotificationUtility.setNotificationsEnabled(notifications);
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         editor.putBoolean(KEY_NOTIFICATIONS, getUserInfo().isNotificationsEnabled());
-        return editor.commit();
+        editor.apply();
     }
 
     public static PreferenceEntry getUserInfo() {
