@@ -26,8 +26,7 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
 	private boolean isEditTask;
 	private String postID, postTitle, postDescription, postIsFound;
 	private EditText etTitle, etDescription;
-	private Button backBtn, postBtn;
-	private ImageButton imageBtn;
+	private Button backBtn, postBtn, imageBtn;
 	private static final int RESULT_LOAD_IMAGE = 1;
 	private ImageView imageToUpload;
 
@@ -56,7 +55,7 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
 			etDescription.setText(postDescription);
 		}
 
-		imageBtn = this.findViewById(R.id.imageButton);
+		imageBtn = this.findViewById(R.id.post_upload_picture_bttn);
 		imageBtn.setOnClickListener(this);
 
 		imageToUpload = this.findViewById(R.id.imageToUpload);
@@ -120,12 +119,15 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-			case R.id.imageButton:
+			case R.id.post_upload_picture_bttn:
 				Log.d("Image", "Browse for image");
 				Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 				galleryIntent.setType("image/*.jpg");
 				galleryIntent.createChooser(galleryIntent, "Select a post picture");
 				startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE);
+				break;
+			case R.id.post_btn_post:
+				onNewPost();
 				break;
 			case R.id.back:
 				finish();
