@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:background="@color/primaryBackground"
+              android:clickable="true"
               android:gravity="center"
-    android:background="@color/primaryBackground"
-    android:clickable="true">
+              android:orientation="vertical">
 
     <ProgressBar
             android:id="@+id/progress_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/loading_posts"
+            android:layout_gravity="center"
             android:layout_marginTop="300dp"
-            android:layout_gravity="center"/>
+            android:text="@string/loading_posts"/>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/pullToRefresh"
@@ -26,8 +26,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
 
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"/>
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"/>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </LinearLayout>

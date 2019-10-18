@@ -1,25 +1,17 @@
 package com.lostanimals.tracks;
 
 
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.*;
-import android.widget.Button;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.Toast;
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceFragmentCompat;
-import androidx.annotation.Nullable;
-import androidx.preference.PreferenceScreen;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import com.lostanimals.tracks.utils.PreferencesUtility;
 
 
-public class SettingsFragment  extends Fragment {
+public class SettingsFragment extends Fragment {
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -49,7 +41,7 @@ public class SettingsFragment  extends Fragment {
                 break;
             default:
         }*/
-    }
+}
 
     /*@Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {

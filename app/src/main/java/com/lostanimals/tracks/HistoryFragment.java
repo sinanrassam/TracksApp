@@ -26,14 +26,14 @@ public class HistoryFragment extends ListFragment {
         Log.d("history", "Q in history queue" + historyQ);
 
         if (!(historyQ.size() == 0)) {
-			for (String string : historyQ) {
-				new UpdatePostsTask(this, progressBar).execute("", string, "");
+            for (String string : historyQ) {
+                new UpdatePostsTask(this, progressBar).execute("", string, "");
 
-				Log.d("HISTORY", "onCreateView: " + string);
-			}
+                Log.d("HISTORY", "onCreateView: " + string);
+            }
         } else {
-        	progressBar.setVisibility(View.GONE);
-		}
+            progressBar.setVisibility(View.GONE);
+        }
 
         return view;
     }
