@@ -27,6 +27,7 @@ public class ConnectionManager {
 				postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(parameters[1], "UTF-8") + "&";
 				postData += URLEncoder.encode("id", "UTF-8") + "=" + URLEncoder.encode(parameters[2], "UTF-8") + "&";
 				postData += URLEncoder.encode("myPosts", "UTF-8") + "=" + URLEncoder.encode(parameters[3], "UTF-8");
+				postData += URLEncoder.encode("filters", "UTF-8") + "=" + URLEncoder.encode(parameters[4], "UTF-8");
 				break;
 			case "new-comment":
 				postData += URLEncoder.encode("post_id", "UTF-8") + "=" + URLEncoder.encode(parameters[0], "UTF-8") + "&";

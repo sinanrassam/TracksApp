@@ -32,7 +32,6 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 		
 		mDrawerLayout = findViewById(R.id.drawer);
 
-
 		mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open_action_bar,
 				R.string.close_action_bar);
 		mDrawerLayout.addDrawerListener(mToggle);

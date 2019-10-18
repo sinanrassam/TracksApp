@@ -44,7 +44,8 @@ public class FeedFragment extends ListFragment {
 	}
 	
 	private void refresh() {
-		new UpdatePostsTask(this, progressBar).execute("", PreferencesUtility.getUserInfo().getUsername(), "", "");
+		new UpdatePostsTask(this, progressBar).execute("", PreferencesUtility.getUserInfo().getUsername(), "",
+                "", "");
 	}
 	
 	@Override
