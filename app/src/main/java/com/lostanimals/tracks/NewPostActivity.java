@@ -122,7 +122,8 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
 		switch (v.getId()) {
 			case R.id.imageButton:
 				Log.d("Image", "Browse for image");
-				Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+				Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+				galleryIntent.setType("image/*.jpg");
 				galleryIntent.createChooser(galleryIntent, "Select a post picture");
 				startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE);
 				break;
