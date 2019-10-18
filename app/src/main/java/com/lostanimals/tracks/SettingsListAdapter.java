@@ -1,6 +1,9 @@
 package com.lostanimals.tracks;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,23 +12,23 @@ import com.lostanimals.tracks.utils.PreferencesUtility;
 
 import java.util.ArrayList;
 
-public class SettingsListAdapter extends BaseAdapter implements ListAdapter, View.OnClickListener {
-    private ArrayList<String> list;
-    private Context context;
+public class SettingsListAdapter extends BaseAdapter implements ListAdapter {
+    private ArrayList<String> mItemsList;
+    private Context mContext;
 
     public SettingsListAdapter(ArrayList<String> list, Context context) {
-        this.list = list;
-        this.context = context;
+        this.mItemsList = list;
+        this.mContext = context;
     }
 
     @Override
     public int getCount() {
-        return list.size();
+        return mItemsList.size();
     }
 
     @Override
     public Object getItem(int pos) {
-        return list.get(pos);
+        return mItemsList.get(pos);
     }
 
     @Override
@@ -37,62 +40,82 @@ public class SettingsListAdapter extends BaseAdapter implements ListAdapter, Vie
     public View getView(final int position, View convertView, ViewGroup parent) {
         View view = convertView;
         if (view == null) {
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.settings_list_item, null);
         }
 
         final TextView listItemText = view.findViewById(R.id.list_item_text);
-        listItemText.setText(list.get(position));
-
-        final Switch toggle = view.findViewById(R.id.list_item_switch);
+        final Switch listItemSwitch = view.findViewById(R.id.list_item_switch);
         final ImageButton imageButton = view.findViewById(R.id.list_item_button);
-        final TextView versionText = view.findViewById(R.id.list_item_version);
+        final TextView appVersionText = view.findViewById(R.id.list_item_version);
 
-        switch (list.get(position)) {
+        listItemText.setText(mItemsList.get(position));
+        appVersionText.setText(R.string.app_version);
+
+        switch (mItemsList.get(position)) {
             case "Logout":
-                toggle.setOnClickListener(null);
-                toggle.setVisibility(View.INVISIBLE);
+                listItemSwitch.setOnClickListener(null);
+                listItemSwitch.setVisibility(View.INVISIBLE);
+                appVersionText.setVisibility(View.INVISIBLE);
 
-                versionText.setVisibility(View.INVISIBLE);
+                imageButton.setBackgroundResource(R.drawable.ic_exit_to_app);
 
-                // TODO: Set a proper icon.
-                imageButton.setBackgroundResource(android.R.drawable.ic_delete);
-                imageButton.setOnClickListener(this);
-                break;
-            case "Version":
-                toggle.setOnClickListener(null);
-                toggle.setVisibility(View.INVISIBLE);
-                imageButton.setOnClickListener(null);
-                imageButton.setVisibility(View.INVISIBLE);
-
-                versionText.setText(R.string.app_version);
-                break;
-            default:
-                switch (list.get(position)) {
-                    case "Dark Mode":
-                        toggle.setChecked(PreferencesUtility.getUserInfo().isDarkModeEnabled());
-                        break;
-                    case "Notifications":
-                        toggle.setChecked(PreferencesUtility.getUserInfo().isNotificationsEnabled());
-                        break;
-                }
-                imageButton.setOnClickListener(null);
-                imageButton.setVisibility(View.INVISIBLE);
-
-                versionText.setVisibility(View.INVISIBLE);
-
-                // TODO: move the onclick stuff into the overridden method.
-                toggle.setOnClickListener(new View.OnClickListener() {
+                imageButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        switch (list.get(position)) {
+                        AlertDialog confirmLogoutDialog = new AlertDialog.Builder(mContext).create();
+                        confirmLogoutDialog.setTitle("Logout");
+                        confirmLogoutDialog.setIcon(R.drawable.ic_exit_to_app);
+                        confirmLogoutDialog.setMessage("Are you sure you want to log out?");
+                        confirmLogoutDialog.setCancelable(true);
+                        confirmLogoutDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                mContext.startActivity(new Intent(mContext, LogoutActivity.class));
+                            }
+                        });
+                        confirmLogoutDialog.setButton(DialogInterface.BUTTON_POSITIVE, "No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                        confirmLogoutDialog.show();
+                    }
+                });
+                break;
+            case "Version":
+                listItemSwitch.setOnClickListener(null);
+                imageButton.setOnClickListener(null);
+                listItemSwitch.setVisibility(View.INVISIBLE);
+                imageButton.setVisibility(View.INVISIBLE);
+                break;
+            default:
+                switch (mItemsList.get(position)) {
+                    case "Dark Mode":
+                        listItemSwitch.setChecked(PreferencesUtility.getUserInfo().isDarkModeEnabled());
+                        break;
+                    case "Notifications":
+                        listItemSwitch.setChecked(PreferencesUtility.getUserInfo().isNotificationsEnabled());
+                        break;
+                }
+
+                imageButton.setOnClickListener(null);
+                imageButton.setVisibility(View.INVISIBLE);
+                appVersionText.setVisibility(View.INVISIBLE);
+
+                listItemSwitch.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View ignored) {
+                        switch (mItemsList.get(position)) {
                             case "Dark Mode":
-                                Toast.makeText(context, "Dark Mode Toggled!", Toast.LENGTH_SHORT).show();
-                                PreferencesUtility.setDarkMode(toggle.isEnabled());
+                                Toast.makeText(mContext, "Dark Mode Toggled!", Toast.LENGTH_SHORT).show();
+                                PreferencesUtility.setDarkMode(listItemSwitch.isEnabled());
                                 break;
                             case "Notifications":
-                                Toast.makeText(context, "Notifications Toggled!", Toast.LENGTH_SHORT).show();
-                                PreferencesUtility.setNotifications(toggle.isEnabled());
+                                Toast.makeText(mContext, "Notifications Toggled!", Toast.LENGTH_SHORT).show();
+                                PreferencesUtility.setNotifications(listItemSwitch.isEnabled());
                                 break;
                         }
                     }
@@ -100,10 +123,5 @@ public class SettingsListAdapter extends BaseAdapter implements ListAdapter, Vie
                 break;
         }
         return view;
-    }
-
-    @Override
-    public void onClick(View v) {
-        Toast.makeText(context, "LOGOUT!", Toast.LENGTH_SHORT).show();
     }
 }
