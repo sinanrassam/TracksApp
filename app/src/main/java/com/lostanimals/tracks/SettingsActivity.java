@@ -1,41 +1,31 @@
 package com.lostanimals.tracks;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import androidx.appcompat.app.ActionBar;
+import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
 public class SettingsActivity extends AppCompatActivity {
-    private final String information = "information";
-    private final String notif = "notification";
-    SharedPreferences mPreference;
-    private String logout = "logout_KEY";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Settings");
+        //generate arrayList
+        ArrayList<String> arrayList = new ArrayList<>();
+        arrayList.add("Dark Mode");
+        arrayList.add("Notifications");
+        arrayList.add("Logout");
+        arrayList.add("Version");
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.settingsContainer, new SettingsFragment()).commit();
+        //instantiate custom adapter
+        SettingsListAdapter adapter = new SettingsListAdapter(arrayList, this);
 
+        //handle listview and assign adapter
+        // ListView lView = findViewById(R.id.list);
+        ListView lView = findViewById(android.R.id.list);
+        lView.setAdapter(adapter);
     }
-
-
-
-    /*@Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-
-        if(key.equals(logout)){
-            Log.d("SHRD_PREF", "Bundle+ "+sharedPreferences.toString()+ " String: " + key);
-            Toast.makeText(this, "Hellow", Toast.LENGTH_SHORT).show();
-        } else if(key.equals(information)) {
-            Log.d("BUTTON CLICKED!!!!!!", information+"NFO NFO NFO");
-        } else if (key.equals(notif)) {
-            Log.d("BUTTON CLICKED!!!!!!", information+"NOTIF NOTIF NOTIF");
-        }
-    }*/
-
 }

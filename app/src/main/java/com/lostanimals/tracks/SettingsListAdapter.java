@@ -9,11 +9,11 @@ import com.lostanimals.tracks.utils.PreferencesUtility;
 
 import java.util.ArrayList;
 
-public class ConfigureAdapter extends BaseAdapter implements ListAdapter, View.OnClickListener {
+public class SettingsListAdapter extends BaseAdapter implements ListAdapter, View.OnClickListener {
     private ArrayList<String> list;
     private Context context;
 
-    public ConfigureAdapter(ArrayList<String> list, Context context) {
+    public SettingsListAdapter(ArrayList<String> list, Context context) {
         this.list = list;
         this.context = context;
     }
@@ -38,7 +38,7 @@ public class ConfigureAdapter extends BaseAdapter implements ListAdapter, View.O
         View view = convertView;
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.list_item, null);
+            view = inflater.inflate(R.layout.settings_list_item, null);
         }
 
         final TextView listItemText = view.findViewById(R.id.list_item_text);
@@ -55,6 +55,7 @@ public class ConfigureAdapter extends BaseAdapter implements ListAdapter, View.O
 
                 versionText.setVisibility(View.INVISIBLE);
 
+                // TODO: Set a proper icon.
                 imageButton.setBackgroundResource(android.R.drawable.ic_delete);
                 imageButton.setOnClickListener(this);
                 break;

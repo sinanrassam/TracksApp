@@ -16,9 +16,9 @@
             android:networkSecurityConfig="@xml/network_security_config"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:theme="@style/TracksThemeDark"
+            android:theme="@style/TracksThemeLight"
             tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ConfigureActivity">
+        <activity android:name=".SettingsActivity">
         </activity>
 
         <meta-data
@@ -61,11 +61,6 @@
                 android:name=".MyProfileActivity"
                 android:parentActivityName=".FeedActivity">
         </activity>
-        <activity
-                android:name=".SettingsActivity"
-                android:parentActivityName=".FeedActivity">
-        </activity>
-        <activity android:name=".ConfigureFragment"/>
     </application>
 
 </manifest>
