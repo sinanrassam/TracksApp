@@ -15,6 +15,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 import com.google.android.material.navigation.NavigationView;
+import com.lostanimals.tracks.utils.PreferencesUtility;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
@@ -159,7 +160,10 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 		switch (v.getId()) {
 			case R.id.species_checkbox_dog:
 				if (checked) {
-
+					PreferencesUtility.setmSpeciesDog("'dog'");
+				}
+				else {
+					PreferencesUtility.setmSpeciesDog("");
 				}
 				break;
 			case R.id.species_checkbox_cat:
@@ -273,12 +277,18 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 
 		if (v.getId() == R.id.chipped_checkbox_yes) {
 			if (checked) {
-
+				PreferencesUtility.setmMicroYes("'1'");
+			}
+			else {
+				PreferencesUtility.setmMicroYes("");
 			}
 		}
 		else {
 			if (checked) {
-
+				PreferencesUtility.setmMicroNo("'0'");
+			}
+			else {
+				PreferencesUtility.setmMicroNo("");
 			}
 		}
 	}
