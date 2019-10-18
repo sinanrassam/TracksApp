@@ -41,4 +41,15 @@
             android:textSize="18sp"
             android:textStyle="normal"/>
 
+    <Button
+            android:id="@+id/list_item_contact_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:paddingLeft="8dp"
+            android:textSize="16sp"
+            android:textStyle="normal"/>
+
 </RelativeLayout>

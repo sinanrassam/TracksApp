@@ -48,18 +48,26 @@ public class SettingsListAdapter extends BaseAdapter implements ListAdapter {
         final Switch listItemSwitch = view.findViewById(R.id.list_item_switch);
         final ImageButton imageButton = view.findViewById(R.id.list_item_button);
         final TextView appVersionText = view.findViewById(R.id.list_item_version);
+        final Button contactButton = view.findViewById(R.id.list_item_contact_button);
 
         listItemText.setText(mItemsList.get(position));
+        contactButton.setText(mItemsList.get(position));
         appVersionText.setText(R.string.app_version);
+
+//        listItemText.setVisibility(View.INVISIBLE);
+        listItemSwitch.setVisibility(View.INVISIBLE);
+        imageButton.setVisibility(View.INVISIBLE);
+        appVersionText.setVisibility(View.INVISIBLE);
+        contactButton.setVisibility(View.INVISIBLE);
+
+        listItemSwitch.setOnClickListener(null);
+        imageButton.setOnClickListener(null);
+        contactButton.setOnClickListener(null);
 
         switch (mItemsList.get(position)) {
             case "Logout":
-                listItemSwitch.setOnClickListener(null);
-                listItemSwitch.setVisibility(View.INVISIBLE);
-                appVersionText.setVisibility(View.INVISIBLE);
-
+                imageButton.setVisibility(View.VISIBLE);
                 imageButton.setBackgroundResource(R.drawable.ic_exit_to_app);
-
                 imageButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -87,10 +95,22 @@ public class SettingsListAdapter extends BaseAdapter implements ListAdapter {
                 });
                 break;
             case "Version":
-                listItemSwitch.setOnClickListener(null);
-                imageButton.setOnClickListener(null);
-                listItemSwitch.setVisibility(View.INVISIBLE);
-                imageButton.setVisibility(View.INVISIBLE);
+                appVersionText.setVisibility(View.VISIBLE);
+                break;
+            case "Contact":
+                listItemText.setVisibility(View.INVISIBLE);
+                contactButton.setVisibility(View.VISIBLE);
+                contactButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View ignored) {
+                        AlertDialog contactDialog = new AlertDialog.Builder(mContext).create();
+                        contactDialog.setTitle("Contact us:");
+                        contactDialog.setIcon(R.drawable.ic_mail_outline_black_24dp);
+                        contactDialog.setMessage("support@tracksapp.io");
+                        contactDialog.setCancelable(true);
+                        contactDialog.show();
+                    }
+                });
                 break;
             default:
                 switch (mItemsList.get(position)) {
@@ -101,11 +121,7 @@ public class SettingsListAdapter extends BaseAdapter implements ListAdapter {
                         listItemSwitch.setChecked(PreferencesUtility.getUserInfo().isNotificationsEnabled());
                         break;
                 }
-
-                imageButton.setOnClickListener(null);
-                imageButton.setVisibility(View.INVISIBLE);
-                appVersionText.setVisibility(View.INVISIBLE);
-
+                listItemSwitch.setVisibility(View.VISIBLE);
                 listItemSwitch.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View ignored) {

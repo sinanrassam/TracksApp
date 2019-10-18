@@ -20,6 +20,7 @@ public class SettingsActivity extends AppCompatActivity {
         arrayList.add("Notifications");
         arrayList.add("Logout");
         arrayList.add("Version");
+        arrayList.add("Contact");
 
         SettingsListAdapter adapter = new SettingsListAdapter(arrayList, this);
 
