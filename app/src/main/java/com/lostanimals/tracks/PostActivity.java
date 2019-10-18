@@ -84,7 +84,6 @@ public class PostActivity extends AppCompatActivity {
             cancel = true;
         }
 
-        String username = PreferencesUtility.getUserInfo().getUsername();
 
         String post_id = mPostEntry.getId();
         if (cancel) {
@@ -93,7 +92,7 @@ public class PostActivity extends AppCompatActivity {
             mCommentView.setText("");
             mCommentView.clearFocus();
             NewCommentTask addCommentTask = new NewCommentTask(this);
-            addCommentTask.execute(post_id, username, msg);
+            addCommentTask.execute(post_id, PreferencesUtility.getUserInfo().getUsername(), msg);
             commentsFragment.refresh();
         }
     }
@@ -105,7 +104,6 @@ public class PostActivity extends AppCompatActivity {
                 getMenuInflater().inflate(R.menu.nav_popup, menu);
             }
         }
-
         return true;
     }
 
@@ -122,7 +120,6 @@ public class PostActivity extends AppCompatActivity {
                 onDeleteClicked();
                 return true;
         }
-
         return false;
     }
 
