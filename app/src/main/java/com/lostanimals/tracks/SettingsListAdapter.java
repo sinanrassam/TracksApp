@@ -70,15 +70,16 @@ public class SettingsListAdapter extends BaseAdapter implements ListAdapter {
                         confirmLogoutDialog.setCancelable(true);
                         confirmLogoutDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Yes", new DialogInterface.OnClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                                mContext.startActivity(new Intent(mContext, LogoutActivity.class));
+                            public void onClick(DialogInterface alertDialog, int ignored) {
+                                Intent logoutIntent = new Intent(mContext, LogoutActivity.class);
+                                logoutIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                mContext.startActivity(logoutIntent);
                             }
                         });
                         confirmLogoutDialog.setButton(DialogInterface.BUTTON_POSITIVE, "No", new DialogInterface.OnClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
+                            public void onClick(DialogInterface alertDialog, int which) {
+                                alertDialog.dismiss();
                             }
                         });
                         confirmLogoutDialog.show();
