@@ -64,7 +64,7 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
 		backBtn.setOnClickListener(this);
 	}
 
-	public void onNewPost(View view) {
+	public void onNewPost() {
 		etTitle.setError(null);
 		etDescription.setError(null);
 
