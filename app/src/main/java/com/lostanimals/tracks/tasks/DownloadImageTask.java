@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import com.lostanimals.tracks.utils.ConnectionManager;
 
@@ -32,6 +33,10 @@ public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 	}
 
 	protected void onPostExecute(Bitmap result) {
-		mImageView.setImageBitmap(result);
+		if (result != null) {
+			mImageView.setImageBitmap(result);
+		} else {
+			mImageView.setVisibility(View.GONE);
+		}
 	}
 }
