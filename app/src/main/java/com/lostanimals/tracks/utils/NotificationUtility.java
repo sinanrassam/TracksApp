@@ -25,6 +25,7 @@ public class NotificationUtility {
     private static NotificationManager notificationManager;
     private static NotificationCompat.Builder builder;
     private static NotificationChannel notificationChannel;
+    private static boolean enabled = true;
 
     /**
      * Method for creating the notification, manager and channel.
@@ -96,9 +97,9 @@ public class NotificationUtility {
     }
 
     /**
-     * @param notificationID
-     * @param context
-     * @return
+     * @param notificationID the ID of the notification
+     * @param context System context
+     * @return the pending activity intent
      */
     private static PendingIntent getDismissedIntent(int notificationID, Context context) {
         String NOTIFICATION_ID = "NOTIFICATION ID";
@@ -109,11 +110,21 @@ public class NotificationUtility {
     }
 
     /**
-     * Create and show the notification.
+     * Setter method for enabling/disabling notifications.
+     * @param toggle the passed value for notification status.
+     */
+    public static void setNotificationsEnabled(boolean toggle) {
+        enabled = toggle;
+    }
+
+    /**
+     * Create and show the notification if notifications are enabled.
      *
      * @param notificationID passed in by the calling class, used to distinguish who created the notification.
      */
     public static void displayNotification(int notificationID) {
-        notificationManager.notify(notificationID, builder.build());
+        if (enabled) {
+            notificationManager.notify(notificationID, builder.build());
+        }
     }
 }

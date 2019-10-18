@@ -13,18 +13,16 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        //generate arrayList
         ArrayList<String> arrayList = new ArrayList<>();
+
+        // Settings items
         arrayList.add("Dark Mode");
         arrayList.add("Notifications");
         arrayList.add("Logout");
         arrayList.add("Version");
 
-        //instantiate custom adapter
         SettingsListAdapter adapter = new SettingsListAdapter(arrayList, this);
 
-        //handle listview and assign adapter
-        // ListView lView = findViewById(R.id.list);
         ListView lView = findViewById(android.R.id.list);
         lView.setAdapter(adapter);
     }

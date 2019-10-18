@@ -43,6 +43,7 @@ public class PreferencesUtility {
 
     public static boolean setNotifications(boolean notifications) {
         getUserInfo().setNotificationsEnabled(notifications);
+        NotificationUtility.setNotificationsEnabled(notifications);
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         editor.putBoolean(KEY_NOTIFICATIONS, getUserInfo().isNotificationsEnabled());
         return editor.commit();
