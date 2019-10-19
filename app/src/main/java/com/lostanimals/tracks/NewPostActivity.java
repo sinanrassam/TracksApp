@@ -59,9 +59,14 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
 		imageBtn.setOnClickListener(this);
 
 		imageToUpload = this.findViewById(R.id.imageToUpload);
+		imageToUpload.setVisibility(View.GONE);
 
 		backBtn = this.findViewById(R.id.back);
 		backBtn.setOnClickListener(this);
+
+		postBtn = findViewById(R.id.post_btn_post);
+		postBtn.setOnClickListener(this);
+
 	}
 
 	public void onNewPost() {
@@ -142,6 +147,7 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
 			Log.d("onActivityResult", "yup");
 			Uri selectedImage = data.getData();
 			imageToUpload.setImageURI(selectedImage);
+			imageToUpload.setVisibility(View.VISIBLE);
 		}
 	}
 }
