@@ -3,21 +3,27 @@ package com.lostanimals.tracks.tasks;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
+import android.util.Base64;
 import android.util.Log;
 import android.widget.Toast;
 import com.lostanimals.tracks.utils.ConnectionManager;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.net.URLEncoder;
 
 public class EditTask extends AsyncTask<String, Integer, JSONObject> {
 	@SuppressLint ("StaticFieldLeak")
 	private Context mContext;
+	private Bitmap mImage;
 	
-	public EditTask(Context context) {
+	public EditTask(Context context, Bitmap image) {
 		mContext = context;
+		mImage = image;
 	}
 	
 	@Override
@@ -26,6 +32,15 @@ public class EditTask extends AsyncTask<String, Integer, JSONObject> {
 		JSONObject json = null;
 		try {
 			String postData = ConnectionManager.postEncoder("edit-post", parameters);
+
+			if (mImage != null) {
+				//todo: need to clean up (repeated code)
+				ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+				mImage.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+				String encodedImage = Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT);
+				postData += "&" + URLEncoder.encode("image", "UTF-8") + "=" + URLEncoder.encode(encodedImage, "UTF-8");
+			}
+
 			json = ConnectionManager.processRequest("post.php", postData);
 		} catch (JSONException | IOException e) {
 			e.printStackTrace();

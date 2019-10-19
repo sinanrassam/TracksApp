@@ -215,7 +215,7 @@ public class PostActivity extends AppCompatActivity {
     }
 
     private void markAsFound() {
-        EditTask editTask = new EditTask(this);
+        EditTask editTask = new EditTask(this, null);
         editTask.execute(mPostEntry.getId(), mPostEntry.getPostTitle(), mPostEntry.getPostDesc(), "1");
     }
 

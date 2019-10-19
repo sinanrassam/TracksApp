@@ -105,7 +105,7 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
 				NewPostTask newPostTask = new NewPostTask(this, image);
 				newPostTask.execute(title, description, PreferencesUtility.getUserInfo().getUsername());
 			} else {
-				EditTask editTask = new EditTask(this);
+				EditTask editTask = new EditTask(this, image);
 				editTask.execute(postID, title, description, postIsFound);
 			}
 			finish();
