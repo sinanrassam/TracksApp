@@ -24,7 +24,7 @@ import com.lostanimals.tracks.utils.PostsUtility;
 import com.lostanimals.tracks.utils.PreferencesUtility;
 
 public class PostActivity extends AppCompatActivity {
-
+    private String mPostId;
     private PostEntry mPostEntry;
     private EditText mCommentView;
     private CommentsFragment commentsFragment;
@@ -37,6 +37,7 @@ public class PostActivity extends AppCompatActivity {
 
         int mPostPosition = getIntent().getIntExtra("position", 0);
         mPostEntry = PostsUtility.getPostEntry(mPostPosition);
+        mPostId = mPostEntry.getId();
 
         TextView mPostTitleView = findViewById(R.id.post_txt_title);
         TextView mPostDescView = findViewById(R.id.post_et_desc);
@@ -53,7 +54,7 @@ public class PostActivity extends AppCompatActivity {
 
         commentsFragment = new CommentsFragment();
         Bundle data = new Bundle();
-        data.putString("post_id", mPostEntry.getId());
+        data.putString("post_id", mPostId);
         commentsFragment.setArguments(data);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, commentsFragment).commit();
 
@@ -65,9 +66,11 @@ public class PostActivity extends AppCompatActivity {
             }
         });
 
-        String imageLocation = mPostEntry.getId();
-        ImageView img = findViewById(R.id.imageView);
-        new DownloadImageTask(img).execute("post", imageLocation);
+        if (mPostEntry.hasImage()) {
+            String imageLocation = mPostId;
+            ImageView img = findViewById(R.id.imageView);
+            new DownloadImageTask(img).execute("post", imageLocation);
+        }
     }
 
     private void addComment() {
@@ -85,14 +88,13 @@ public class PostActivity extends AppCompatActivity {
         }
 
 
-        String post_id = mPostEntry.getId();
         if (cancel) {
             focusView.requestFocus();
         } else {
             mCommentView.setText("");
             mCommentView.clearFocus();
             NewCommentTask addCommentTask = new NewCommentTask(this);
-            addCommentTask.execute(post_id, PreferencesUtility.getUserInfo().getUsername(), msg);
+            addCommentTask.execute(mPostId, PreferencesUtility.getUserInfo().getUsername(), msg);
             commentsFragment.refresh();
         }
     }
@@ -164,7 +166,7 @@ public class PostActivity extends AppCompatActivity {
         if (mPostEntry.getFound().equals("0")) {
             Intent myIntent = new Intent(this, NewPostActivity.class);
             myIntent.putExtra("isEditTask", true); // to set trigger in NewPostActivity to call EditTask
-            myIntent.putExtra("postID", mPostEntry.getId());
+            myIntent.putExtra("postID", mPostId);
             myIntent.putExtra("postTitle", mPostEntry.getPostTitle());
             myIntent.putExtra("postDesc", mPostEntry.getPostDesc());
             myIntent.putExtra("isFound", mPostEntry.getFound());
@@ -216,12 +218,12 @@ public class PostActivity extends AppCompatActivity {
 
     private void markAsFound() {
         EditTask editTask = new EditTask(this, null);
-        editTask.execute(mPostEntry.getId(), mPostEntry.getPostTitle(), mPostEntry.getPostDesc(), "1");
+        editTask.execute(mPostId, mPostEntry.getPostTitle(), mPostEntry.getPostDesc(), "1");
     }
 
     private void deletePost() {
         DeleteTask deleteTask = new DeleteTask(this);
-        deleteTask.execute(mPostEntry.getId());
+        deleteTask.execute(mPostId);
         finish();
     }
 }
