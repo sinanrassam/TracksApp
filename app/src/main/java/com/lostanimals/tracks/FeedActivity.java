@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -88,6 +89,15 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Feed");
+
+        ImageButton profileEditButton = (ImageButton)header.findViewById(R.id.editProfile);
+        profileEditButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FeedActivity.this, EditProfileActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 

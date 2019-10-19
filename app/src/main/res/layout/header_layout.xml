@@ -8,6 +8,7 @@
         android:orientation="vertical">
 
     <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/editProfile"
             android:layout_width="47dp"
             android:layout_height="23dp"
             android:layout_marginTop="8dp"

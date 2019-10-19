@@ -61,6 +61,10 @@
                 android:name=".MyProfileActivity"
                 android:parentActivityName=".FeedActivity">
         </activity>
+        <activity
+                android:name=".EditProfileActivity"
+                android:parentActivityName=".FeedActivity">
+        </activity>
     </application>
 
 </manifest>
