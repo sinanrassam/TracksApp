@@ -8,10 +8,10 @@ public class PostEntry {
 	private String mPostTime;
 	private String mId;
 	private String mFound;
-	private String mImageLocation;
+	private Boolean mHasImage;
 	
 	// default
-	public PostEntry(String id, String postTitle, String postDesc, String username, String postDate, String postTime, String found) {
+	public PostEntry(String id, String postTitle, String postDesc, String username, String postDate, String postTime, String found, String hasImage) {
 		setId(id);
 		setUsername(username);
 		setPostTitle(postTitle);
@@ -19,8 +19,9 @@ public class PostEntry {
 		setPostDate(postDate);
 		setPostTime(postTime);
 		setFound(found);
+		setHasImage(hasImage);
 	}
-	
+
 	public String getUsername() {
 		return mUsername;
 	}
@@ -83,5 +84,13 @@ public class PostEntry {
 	
 	private void setPostDesc(String postDesc) {
 		this.mPostDesc = postDesc;
+	}
+
+	public void setHasImage(String hasImage) {
+		mHasImage = Boolean.parseBoolean(hasImage);
+	}
+
+	public Boolean hasImage() {
+		return mHasImage;
 	}
 }
