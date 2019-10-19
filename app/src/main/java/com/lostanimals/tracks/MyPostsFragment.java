@@ -21,7 +21,7 @@ public class MyPostsFragment extends ListFragment {
 		
 		
 		String username = PreferencesUtility.getUserInfo().getUsername();
-		new UpdatePostsTask(this, progressBar).execute("4", username);
+		new UpdatePostsTask(this, progressBar).execute("4", username, "", "1");
 		
 		return view;
 	}
