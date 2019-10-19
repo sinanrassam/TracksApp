@@ -57,13 +57,23 @@
                 android:layout_height="24dp"
                 android:textAppearance="@style/TextAppearance.AppCompat"
                 android:layout_marginTop="@dimen/activity_vertical_margin" android:layout_marginStart="16dp"/>
-        <Button
-                android:id="@+id/post_upload_picture_bttn"
-                android:text="@string/post_upload_picture_bttn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="onNewPost"
-                android:layout_marginTop="16dp" android:layout_marginStart="16dp"/>
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:orientation="horizontal">
+            <Button
+                    android:id="@+id/post_upload_picture_bttn"
+                    android:text="@string/post_upload_picture_bttn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp" android:layout_marginStart="16dp"/>
+            <Button
+                    android:id="@+id/post_remove_picture_bttn"
+                    android:text="@string/post_remove_picture_bttn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp" android:layout_marginStart="16dp"/>
+
+        </LinearLayout>
 
         <ImageView
                 android:id="@+id/imageToUpload"
@@ -73,7 +83,7 @@
                 android:layout_gravity="center"/>
 
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                      android:orientation="horizontal" android:layout_gravity="">
+                      android:orientation="horizontal">
 
             <Button
                     android:id="@+id/post_btn_post"

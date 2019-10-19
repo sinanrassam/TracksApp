@@ -13,7 +13,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.lostanimals.tracks.tasks.EditTask;
@@ -26,7 +25,7 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
 	private boolean isEditTask;
 	private String postID, postTitle, postDescription, postIsFound;
 	private EditText etTitle, etDescription;
-	private Button backBtn, postBtn, imageBtn;
+	private Button mBackBtn, mPostBtn, mImageBtn, mRremoveImageBtn;
 	private static final int RESULT_LOAD_IMAGE = 1;
 	private ImageView imageToUpload;
 
@@ -55,17 +54,21 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
 			etDescription.setText(postDescription);
 		}
 
-		imageBtn = this.findViewById(R.id.post_upload_picture_bttn);
-		imageBtn.setOnClickListener(this);
+		mImageBtn = this.findViewById(R.id.post_upload_picture_bttn);
+		mImageBtn.setOnClickListener(this);
+
+		mRremoveImageBtn = this.findViewById(R.id.post_remove_picture_bttn);
+		mRremoveImageBtn.setOnClickListener(this);
+		mRremoveImageBtn.setVisibility(View.GONE);
 
 		imageToUpload = this.findViewById(R.id.imageToUpload);
 		imageToUpload.setVisibility(View.GONE);
 
-		backBtn = this.findViewById(R.id.back);
-		backBtn.setOnClickListener(this);
+		mBackBtn = this.findViewById(R.id.back);
+		mBackBtn.setOnClickListener(this);
 
-		postBtn = findViewById(R.id.post_btn_post);
-		postBtn.setOnClickListener(this);
+		mPostBtn = findViewById(R.id.post_btn_post);
+		mPostBtn.setOnClickListener(this);
 
 	}
 
@@ -134,6 +137,11 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
 			case R.id.post_btn_post:
 				onNewPost();
 				break;
+			case R.id.post_remove_picture_bttn:
+				imageToUpload.setImageURI(null);
+				mRremoveImageBtn.setVisibility(View.GONE);
+				imageToUpload.setVisibility(View.GONE);
+				break;
 			case R.id.back:
 				finish();
 				break;
@@ -148,6 +156,7 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
 			Uri selectedImage = data.getData();
 			imageToUpload.setImageURI(selectedImage);
 			imageToUpload.setVisibility(View.VISIBLE);
+			mRremoveImageBtn.setVisibility(View.VISIBLE);
 		}
 	}
 }
