@@ -87,7 +87,7 @@ public class PostEntry {
 	}
 
 	public void setHasImage(String hasImage) {
-		mHasImage = Boolean.parseBoolean(hasImage);
+		mHasImage = hasImage.equals("1");
 	}
 
 	public Boolean hasImage() {

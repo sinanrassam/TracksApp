@@ -15,15 +15,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
+import com.lostanimals.tracks.entries.PostEntry;
+import com.lostanimals.tracks.tasks.DownloadImageTask;
 import com.lostanimals.tracks.tasks.EditTask;
 import com.lostanimals.tracks.tasks.NewPostTask;
+import com.lostanimals.tracks.utils.PostsUtility;
 import com.lostanimals.tracks.utils.PreferencesUtility;
 
 import java.util.Objects;
 
 public class NewPostActivity extends AppCompatActivity implements View.OnClickListener {
 	private boolean isEditTask;
-	private String postID, postTitle, postDescription, postIsFound;
+	private int mPostPosition;
+	private PostEntry mPostEntry;
+	private boolean postHasImage;
 	private EditText etTitle, etDescription;
 	private Button mBackBtn, mPostBtn, mImageBtn, mRremoveImageBtn;
 	private static final int RESULT_LOAD_IMAGE = 1;
@@ -38,10 +43,13 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
 		Bundle b = this.getIntent().getExtras();
 		if (b != null) {
 			isEditTask = b.getBoolean("isEditTask");
-			postID = b.getString("postID");
-			postTitle = b.getString("postTitle");
-			postDescription = b.getString("postDesc");
-			postIsFound = b.getString("isFound");
+			mPostPosition = b.getInt("postPosition");
+			mPostEntry = PostsUtility.getPostEntry(mPostPosition);
+//			postID = b.getString("postID");
+//			postTitle = b.getString("postTitle");
+//			postDescription = b.getString("postDesc");
+//			postIsFound = b.getString("isFound");
+//			postHasImage = b.getBoolean("hasImage");
 		}
 
 		Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
@@ -49,20 +57,13 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
 		etTitle = findViewById(R.id.post_et_post_title);
 		etDescription = findViewById(R.id.post_et_desc);
 
-		if (isEditTask) {
-			etTitle.setText(postTitle);
-			etDescription.setText(postDescription);
-		}
-
 		mImageBtn = this.findViewById(R.id.post_upload_picture_bttn);
 		mImageBtn.setOnClickListener(this);
 
 		mRremoveImageBtn = this.findViewById(R.id.post_remove_picture_bttn);
 		mRremoveImageBtn.setOnClickListener(this);
-		mRremoveImageBtn.setVisibility(View.GONE);
 
 		imageToUpload = this.findViewById(R.id.imageToUpload);
-		imageToUpload.setVisibility(View.GONE);
 
 		mBackBtn = this.findViewById(R.id.back);
 		mBackBtn.setOnClickListener(this);
@@ -70,6 +71,18 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
 		mPostBtn = findViewById(R.id.post_btn_post);
 		mPostBtn.setOnClickListener(this);
 
+		if (isEditTask) {
+			etTitle.setText(mPostEntry.getPostTitle());
+			etDescription.setText(mPostEntry.getPostDesc());
+			if (mPostEntry.hasImage()) {
+				new DownloadImageTask(imageToUpload).execute("post", mPostEntry.getId());
+				imageToUpload.setVisibility(View.VISIBLE);
+				mRremoveImageBtn.setVisibility(View.VISIBLE);
+			}
+		} else {
+			imageToUpload.setVisibility(View.GONE);
+			mRremoveImageBtn.setVisibility(View.GONE);
+		}
 	}
 
 	public void onNewPost() {
@@ -106,7 +119,7 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
 				newPostTask.execute(title, description, PreferencesUtility.getUserInfo().getUsername());
 			} else {
 				EditTask editTask = new EditTask(this, image);
-				editTask.execute(postID, title, description, postIsFound);
+				editTask.execute(mPostEntry.getId(), title, description, mPostEntry.getFound());
 			}
 			finish();
 		}

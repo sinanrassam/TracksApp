@@ -24,6 +24,7 @@ import com.lostanimals.tracks.utils.PostsUtility;
 import com.lostanimals.tracks.utils.PreferencesUtility;
 
 public class PostActivity extends AppCompatActivity {
+    private int mPostListPosition;
     private String mPostId;
     private PostEntry mPostEntry;
     private EditText mCommentView;
@@ -35,8 +36,8 @@ public class PostActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
 
-        int mPostPosition = getIntent().getIntExtra("position", 0);
-        mPostEntry = PostsUtility.getPostEntry(mPostPosition);
+        mPostListPosition = getIntent().getIntExtra("position", 0);
+        mPostEntry = PostsUtility.getPostEntry(mPostListPosition);
         mPostId = mPostEntry.getId();
 
         TextView mPostTitleView = findViewById(R.id.post_txt_title);
@@ -66,10 +67,10 @@ public class PostActivity extends AppCompatActivity {
             }
         });
 
+        ImageView img = findViewById(R.id.imageView);
+        img.setVisibility(View.GONE);
         if (mPostEntry.hasImage()) {
-            String imageLocation = mPostId;
-            ImageView img = findViewById(R.id.imageView);
-            new DownloadImageTask(img).execute("post", imageLocation);
+            new DownloadImageTask(img).execute("post", mPostId);
         }
     }
 
@@ -86,7 +87,6 @@ public class PostActivity extends AppCompatActivity {
             focusView = mCommentView;
             cancel = true;
         }
-
 
         if (cancel) {
             focusView.requestFocus();
@@ -166,10 +166,11 @@ public class PostActivity extends AppCompatActivity {
         if (mPostEntry.getFound().equals("0")) {
             Intent myIntent = new Intent(this, NewPostActivity.class);
             myIntent.putExtra("isEditTask", true); // to set trigger in NewPostActivity to call EditTask
-            myIntent.putExtra("postID", mPostId);
-            myIntent.putExtra("postTitle", mPostEntry.getPostTitle());
-            myIntent.putExtra("postDesc", mPostEntry.getPostDesc());
-            myIntent.putExtra("isFound", mPostEntry.getFound());
+//            myIntent.putExtra("postID", mPostId);
+//            myIntent.putExtra("postTitle", mPostEntry.getPostTitle());
+//            myIntent.putExtra("postDesc", mPostEntry.getPostDesc());
+//            myIntent.putExtra("isFound", mPostEntry.getFound());
+            myIntent.putExtra("postPosition", mPostListPosition);
             startActivity(myIntent);
         } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
