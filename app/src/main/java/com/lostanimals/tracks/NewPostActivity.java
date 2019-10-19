@@ -93,6 +93,7 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
 		String description = etDescription.getText().toString();
 		Bitmap image = null;
 		if (imageToUpload.getDrawable() != null) {
+			Log.d("imageToUpload", "is not null");
 			image = ((BitmapDrawable) imageToUpload.getDrawable()).getBitmap();
 		}
 
@@ -152,6 +153,7 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
 				break;
 			case R.id.post_remove_picture_bttn:
 				imageToUpload.setImageURI(null);
+				imageToUpload.setImageDrawable(null);
 				mRremoveImageBtn.setVisibility(View.GONE);
 				imageToUpload.setVisibility(View.GONE);
 				break;
