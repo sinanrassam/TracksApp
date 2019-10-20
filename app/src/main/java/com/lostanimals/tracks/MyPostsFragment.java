@@ -19,7 +19,6 @@ public class MyPostsFragment extends ListFragment {
 		ProgressBar progressBar = view.findViewById(R.id.progress_bar);
 		progressBar.setProgress(0);
 		
-		
 		String username = PreferencesUtility.getUserInfo().getUsername();
 		new UpdatePostsTask(this, progressBar).execute("4", username, "", "1");
 		
