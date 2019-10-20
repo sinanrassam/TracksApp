@@ -117,8 +117,6 @@ public class LoginActivity extends AppCompatActivity {
             LoginTask loginTask = new LoginTask(this);
             loginTask.execute(email, password);
             if (loginTask.get().get("response").equals("successful")) {
-                NotificationUtility.displayNotification(0);
-
                 startActivity(feedIntent);
                 finish();
             }
