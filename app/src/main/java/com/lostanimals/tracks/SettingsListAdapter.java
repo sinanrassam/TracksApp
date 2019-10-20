@@ -8,6 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+
+import androidx.appcompat.app.AppCompatDelegate;
+
 import com.lostanimals.tracks.utils.PreferencesUtility;
 
 import java.util.ArrayList;
@@ -128,6 +131,7 @@ public class SettingsListAdapter extends BaseAdapter implements ListAdapter {
                         switch (mItemsList.get(position)) {
                             case "Dark Mode":
                                 Toast.makeText(mContext, "Dark Mode Toggled!", Toast.LENGTH_SHORT).show();
+                                AppCompatDelegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                                 PreferencesUtility.setDarkMode(listItemSwitch.isEnabled());
                                 break;
                             case "Notifications":
