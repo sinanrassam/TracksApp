@@ -107,5 +107,13 @@
                 android:layout_weight="1"/>
     </LinearLayout>
 
+    <Button
+            android:id="@+id/saved_profile_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="Save Changes"
+            android:layout_below="@+id/layout_text3"
+            android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

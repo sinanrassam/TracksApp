@@ -5,11 +5,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
-import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.FrameLayout;
-import android.widget.Switch;
-import android.widget.Toast;
+import android.widget.*;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -39,17 +35,6 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_feed);
-
-        /*View settingButton = findViewById(R.id.settings_button_nav);
-        settingButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(this, SettingsActivity.class);
-				startActivity(intent);
-			}
-			, View.OnClickListener
-
-		});*/
 
 
         /*aSwitch=findViewById(R.id.switch_toggle);
@@ -91,7 +76,15 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setTitle("Feed");
-		
+
+		ImageButton editProfileButton = header.findViewById(R.id.editProfile);
+		editProfileButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(FeedActivity.this, EditProfileActivity.class);
+				startActivity(intent);
+			}
+		});
 	}
 
 

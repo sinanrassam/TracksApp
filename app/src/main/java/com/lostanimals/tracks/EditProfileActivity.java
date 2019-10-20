@@ -17,8 +17,6 @@ public class EditProfileActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Edit Profile");
 
-
-
         getSupportFragmentManager().beginTransaction().replace(R.id.editProfileContainer, new EditProfileFragment()).commit();
     }
 }
