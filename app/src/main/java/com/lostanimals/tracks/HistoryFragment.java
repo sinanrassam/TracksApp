@@ -28,11 +28,7 @@ public class HistoryFragment extends ListFragment {
 
         if (!(historyQ.size() == 0)) {
             new HistoryPostsTask(this, progressBar).execute("", "", "");
-//			for (String string : historyQ) {
-//			    new HistoryPostsTask(this, progressBar).execute("", string, "");
-//
-//				Log.d("HISTORY", "onCreateView: " + string);
-//			}
+
         } else {
         	progressBar.setVisibility(View.GONE);
 		}
