@@ -3,24 +3,14 @@
 <resources>
     <!-- Default -->
     <color name="primaryColor">#1976d2</color>
-    <color name="primaryLightColor">#63a4ff</color>
     <color name="primaryLightColor2">#63a4ff</color>
-    <color name="primaryLightTransparent">#8063A4FF</color>
     <color name="primaryDarkColor">#004ba0</color>
     <color name="primaryAccent">#fdd835</color>
     <color name="primaryAccentLight">#FFE369</color>
-    <color name="primaryAccentDark">#D8B92F</color>
     <color name="primaryTextColor">#FFFFFF</color>
     <color name="primaryTextLight">#CACACA</color>
-    <color name="secondaryColor">#0d47a1</color>
-    <color name="secondaryLightColor">#5472d3</color>
-    <color name="secondaryDarkColor">#002171</color>
     <color name="secondaryTextColor">#000000</color>
 
     <!-- New Colours -->
-    <color name="primaryGreen">#5CDB95</color>
-    <color name="primaryDarkGreen">#379683</color>
-    <color name="primaryLightGreen">#B7FED2</color>
     <color name="primaryBackground">#F9F9FB</color>
-    <color name="primaryTextBlue">#05386B</color>
 </resources>

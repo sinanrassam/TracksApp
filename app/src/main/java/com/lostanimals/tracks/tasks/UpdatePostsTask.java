@@ -17,7 +17,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,95 +25,94 @@ import java.util.Map;
 import static com.lostanimals.tracks.utils.ConnectionManager.processRequest;
 
 public class UpdatePostsTask extends AsyncTask<String, Integer, Boolean> {
-	@SuppressLint ("StaticFieldLeak")
-	private Context mContext;
-	@SuppressLint ("StaticFieldLeak")
-	private ProgressBar mProgressBar;
-	
-	private ListFragment mFragment;
-	
-	private List<Map<String, String>> mPostList = new ArrayList<>();
-	
-	public UpdatePostsTask(ListFragment activity, ProgressBar progressBar) {
-		this.mFragment = activity;
-		this.mContext = mFragment.getContext();
-		this.mProgressBar = progressBar;
-	}
-	
-	@Override
-	protected Boolean doInBackground(String... parameters) {
-		boolean success = true;
-		JSONObject json = null;
-		if (!this.isCancelled()) {
-			String postData;
-			try {
-				postData = ConnectionManager.postEncoder("get-posts", parameters);
-				json = processRequest("post.php", postData);
-			} catch (JSONException | IOException e) {
-				e.printStackTrace();
-				success = false;
-			}
-		}
-		
-		if (json != null) {
-			PostsUtility.clear();
-			mPostList = new ArrayList<>();
-			try {
-				JSONArray jsonArray = (JSONArray) json.get("posts");
-				Log.d("test", jsonArray.toString());
-				for (int i = 0; i < jsonArray.length(); i++) {
-					JSONObject jsonObject = (JSONObject) jsonArray.get(i);
-					String id = (String) jsonObject.get("id");
-					String title = (String) jsonObject.get("title");
-					String desc = (String) jsonObject.get("description");
-					String username = (String) jsonObject.get("username");
-					String date = (String) jsonObject.get("post_date");
-					String time = (String) jsonObject.get("post_time");
-					String found = (String) jsonObject.get("found");
-					
-					PostsUtility.addPostEntry(i, new PostEntry(id, title, desc, username, date, time, found));
-					
-					Map<String, String> post = new HashMap<>(2);
-					
-					post.put("Title", PostsUtility.getPostEntry(i).getPostTitle());
-					post.put("Desc", PostsUtility.getPostEntry(i).getPostDesc());
-					
-					mPostList.add(i, post);
-				}
-			} catch (JSONException e) {
-				e.printStackTrace();
-				success = false;
-			}
-		}
-		return success;
-	}
-	
-	@Override
-	protected void onPreExecute() {
-		Toast.makeText(mContext, "Loading posts", Toast.LENGTH_SHORT).show();
-	}
-	
-	@Override
-	protected void onPostExecute(final Boolean success) {
-		mProgressBar.setVisibility(View.GONE);
-		
-		SimpleAdapter adapter = new SimpleAdapter(mContext, mPostList, android.R.layout.simple_list_item_2, new String[] {"Title", "Desc"}, new int[] {android.R.id.text1, android.R.id.text2});
-		mFragment.setListAdapter(adapter);
+    @SuppressLint("StaticFieldLeak")
+    private Context mContext;
+    @SuppressLint("StaticFieldLeak")
+    private ProgressBar mProgressBar;
 
-		adapter.notifyDataSetChanged();
-		
-		if (success) {
-			Toast.makeText(mContext, "Posts refreshed", Toast.LENGTH_LONG).show();
-		} else {
-			Toast.makeText(mContext, "Error loading posts", Toast.LENGTH_LONG).show();
-		}
-	}
-	
-	@Override
-	protected void onProgressUpdate(Integer... values) {
-		super.onProgressUpdate(values);
-		if (this.mProgressBar != null) {
-			mProgressBar.setProgress(values[0]);
-		}
-	}
+    private ListFragment mFragment;
+
+    private List<Map<String, String>> mPostList = new ArrayList<>();
+
+    public UpdatePostsTask(ListFragment activity, ProgressBar progressBar) {
+        this.mFragment = activity;
+        this.mContext = mFragment.getContext();
+        this.mProgressBar = progressBar;
+    }
+
+    @Override
+    protected Boolean doInBackground(String... parameters) {
+        boolean success = true;
+        JSONObject json = null;
+        if (!this.isCancelled()) {
+            String postData;
+            try {
+                postData = ConnectionManager.postEncoder("get-posts", parameters);
+                json = processRequest("post.php", postData);
+            } catch (JSONException | IOException e) {
+                e.printStackTrace();
+                success = false;
+            }
+        }
+
+        if (json != null) {
+            PostsUtility.clear();
+            mPostList = new ArrayList<>();
+            try {
+                JSONArray jsonArray = (JSONArray) json.get("posts");
+                Log.d("test", jsonArray.toString());
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+                    String id = (String) jsonObject.get("id");
+                    String title = (String) jsonObject.get("title");
+                    String desc = (String) jsonObject.get("description");
+                    String username = (String) jsonObject.get("username");
+                    String date = (String) jsonObject.get("post_date");
+                    String time = (String) jsonObject.get("post_time");
+                    String found = (String) jsonObject.get("found");
+
+                    PostsUtility.addPostEntry(i, new PostEntry(id, title, desc, username, date, time, found));
+
+                    Map<String, String> post = new HashMap<>(2);
+
+                    post.put("Title", PostsUtility.getPostEntry(i).getPostTitle());
+                    post.put("Desc", PostsUtility.getPostEntry(i).getPostDesc());
+
+                    mPostList.add(i, post);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+                success = false;
+            }
+        }
+        return success;
+    }
+
+    @Override
+    protected void onPreExecute() {
+        Toast.makeText(mContext, "Loading posts", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onPostExecute(final Boolean success) {
+        mProgressBar.setVisibility(View.GONE);
+
+        SimpleAdapter adapter = new SimpleAdapter(mContext, mPostList, android.R.layout.simple_list_item_2, new String[]{"Title", "Desc"}, new int[]{android.R.id.text1, android.R.id.text2});
+        mFragment.setListAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
+        if (success) {
+            Toast.makeText(mContext, "Posts refreshed", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(mContext, "Error loading posts", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    protected void onProgressUpdate(Integer... values) {
+        super.onProgressUpdate(values);
+        if (this.mProgressBar != null) {
+            mProgressBar.setProgress(values[0]);
+        }
+    }
 }

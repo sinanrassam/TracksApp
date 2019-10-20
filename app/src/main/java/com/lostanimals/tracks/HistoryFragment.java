@@ -26,7 +26,6 @@ public class HistoryFragment extends ListFragment {
 
         Log.d("history", "Q in history queue" + historyQ);
 
-
         if (!(historyQ.size() == 0)) {
             new HistoryPostsTask(this, progressBar).execute("", "", "");
 //			for (String string : historyQ) {

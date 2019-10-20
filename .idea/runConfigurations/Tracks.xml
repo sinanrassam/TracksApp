@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Tracks" type="AndroidRunConfigurationType" activateToolWindowBeforeRun="false">
     <module name="app" />
@@ -15,7 +14,7 @@
     <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
     <option name="FORCE_STOP_RUNNING_APP" value="true" />
     <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
-    <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+    <option name="USE_LAST_SELECTED_DEVICE" value="true" />
     <option name="PREFERRED_AVD" value="" />
     <option name="DEBUGGER_TYPE" value="Java" />
     <Java />
@@ -31,4 +30,3 @@
     </method>
   </configuration>
 </component>
-

@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -33,177 +32,180 @@ import java.util.concurrent.ExecutionException;
  *
  */
 public class LoginActivity extends AppCompatActivity {
-	private final static String TAG = "LOGIN_ACTIVITY";
-	
-	private AutoCompleteTextView mEmailView;
-	private EditText mPasswordView;
-	private SignInButton googleSignInButton;
-	private Intent feedIntent;
-	private Intent registerIntent;
-	private GoogleSignInClient googleSignInClient;
+    private final static String TAG = "LOGIN_ACTIVITY";
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		
-		ActionBar actionBar = getSupportActionBar();
-		actionBar.setTitle("Login");
-		
-		feedIntent = new Intent(this, FeedActivity.class);
-		feedIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-		registerIntent = new Intent(this, RegisterActivity.class);
-		registerIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-		
-		PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, feedIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-		NotificationUtility.createNotification(this, "Tracks", "Test", true, pendingIntent);
-		PreferencesUtility.setSharedPreferences(this);
-		
-		if (!PreferencesUtility.getUserInfo().getUsername().equals("")) {
-			startActivity(feedIntent);
-			this.finish();
-		}
-		
-		setContentView(R.layout.activity_login);
-		
-		// Set up the login form.
-		mEmailView = findViewById(R.id.login_username);
-		mPasswordView = findViewById(R.id.login_password);
-		googleSignInButton = findViewById(R.id.sign_in_button);
-		Button mSignInBtn = findViewById(R.id.login_btn);
-		mSignInBtn.setOnClickListener(new OnClickListener() {
-			/**
-			 *
-			 * @param view
-			 */
-			@Override
-			public void onClick(View view) {
-				// TODO: Fix this
-				try {
-					if (isOnline() == false) {
-						Log.d("LOGIN_TASK", "internet avaliable");
-						attemptLogin();
-					} else {
-						attemptLogin();
-						Log.d("LOGIN_TASK", "no internet");
-					}
-				} catch (ExecutionException | InterruptedException | JSONException e) {
-					e.printStackTrace();
-				}
-			}
-		});
+    private AutoCompleteTextView mEmailView;
+    private EditText mPasswordView;
+    private SignInButton googleSignInButton;
+    private Intent feedIntent;
+    private Intent registerIntent;
+    private GoogleSignInClient googleSignInClient;
 
-		googleSignInButton = findViewById(R.id.sign_in_button);
-		GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-				.requestEmail()
-				.build();
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-		googleSignInClient = GoogleSignIn.getClient(this, gso);
-		googleSignInButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent signInIntent = googleSignInClient.getSignInIntent();
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Login");
 
-			startActivityForResult(signInIntent, 101);
+        feedIntent = new Intent(this, FeedActivity.class);
+        feedIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        registerIntent = new Intent(this, RegisterActivity.class);
+        registerIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, feedIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        NotificationUtility.createNotification(this, "Tracks", "Test", true, pendingIntent);
+        PreferencesUtility.setSharedPreferences(this);
 
-			}
-		});
+        if (!PreferencesUtility.getUserInfo().getUsername().equals("")) {
+            startActivity(feedIntent);
+            this.finish();
+        }
 
-		Button mRegisterBtn = findViewById(R.id.login_register_btn);
-		mRegisterBtn.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				startActivity(registerIntent);
-				finish();
-			}
-		});
-	}
-	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-		if (resultCode == Activity.RESULT_OK)
-			switch (requestCode) {
-				case 101:
-					try {
-						// The Task returned from this call is always completed, no need to attach
-						// a listener.
-						Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-						GoogleSignInAccount account = task.getResult(ApiException.class);
-						onLoggedIn(account);
-					} catch (ApiException e) {
-						// The ApiException status code indicates the detailed failure reason.
-						Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
-					}
-					break;
-			}
-	}
+        setContentView(R.layout.activity_login);
 
-	private void onLoggedIn(GoogleSignInAccount googleSignInAccount) {
-		Intent intent = new Intent(this, RegisterActivity.class);
+        // Set up the login form.
+        mEmailView = findViewById(R.id.login_username);
+        mPasswordView = findViewById(R.id.login_password);
+        googleSignInButton = findViewById(R.id.sign_in_button);
+        Button mSignInBtn = findViewById(R.id.login_btn);
+        mSignInBtn.setOnClickListener(new OnClickListener() {
+            /**
+             *
+             * @param view
+             */
+            @Override
+            public void onClick(View view) {
+                // TODO: Fix this
+                try {
+                    if (isOnline() == false) {
+                        Log.d("LOGIN_TASK", "internet avaliable");
+                        attemptLogin();
+                    } else {
+                        attemptLogin();
+                        Log.d("LOGIN_TASK", "no internet");
+                    }
+                } catch (ExecutionException | InterruptedException | JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
-		intent.putExtra(FeedActivity.GOOGLE_ACCOUNT, googleSignInAccount);
-		startActivity(intent);
+        googleSignInButton = findViewById(R.id.sign_in_button);
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        googleSignInClient = GoogleSignIn.getClient(this, gso);
+        googleSignInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent signInIntent = googleSignInClient.getSignInIntent();
+
+                startActivityForResult(signInIntent, 101);
 
 
-		finish();
-	}
-	// TODO: Fix this
+            }
+        });
 
-	/**
-	 * @return
-	 */
-	public boolean isOnline() {
-		Runtime runtime = Runtime.getRuntime();
-		try {
-			Process ipProcess = runtime.exec("/system/bin/ping -c 1 8.8.8.8");
-			int exitValue = ipProcess.waitFor();
-			return (exitValue == 0);
-		} catch (IOException | InterruptedException e) {
-			e.printStackTrace();
-		}
-		
-		return false;
-	}
-	
-	/**
-	 * @throws ExecutionException
-	 * @throws InterruptedException
-	 * @throws JSONException
-	 */
-	private void attemptLogin() throws ExecutionException, InterruptedException, JSONException {
-		mEmailView.setError(null);
-		mPasswordView.setError(null);
-		
-		// Store values at the time of the login attempt.
-		String email = mEmailView.getText().toString().toLowerCase();
-		String password = mPasswordView.getText().toString();
-		
-		boolean cancel = false;
-		View focusView = null;
-		
-		// Check for a valid password, if the user entered one.
-		if (TextUtils.isEmpty(password)) {
-			mPasswordView.setError(getString(R.string.error_field_required));
-			focusView = mPasswordView;
-			cancel = true;
-		}
-		
-		if (TextUtils.isEmpty(email)) {
-			mEmailView.setError(getString(R.string.error_field_required));
-			focusView = mEmailView;
-			cancel = true;
-		}
-		
-		if (cancel) {
-			focusView.requestFocus();
-		} else {
-			LoginTask loginTask = new LoginTask(this);
-			loginTask.execute(email, password);
-			if (loginTask.get().get("response").equals("successful")) {
-				NotificationUtility.displayNotification(0);
-				
-				startActivity(feedIntent);
-				finish();
-			}
-		}
-	}
+        Button mRegisterBtn = findViewById(R.id.login_register_btn);
+        mRegisterBtn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(registerIntent);
+                finish();
+            }
+        });
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK)
+            switch (requestCode) {
+                case 101:
+                    try {
+                        // The Task returned from this call is always completed, no need to attach
+                        // a listener.
+
+                        Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+                        GoogleSignInAccount account = task.getResult(ApiException.class);
+                        onLoggedIn(account);
+                        Log.d("GOOGLE", "GOOG signed in");
+                    } catch (ApiException e) {
+                        // The ApiException status code indicates the detailed failure reason.
+                        Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
+                    }
+                    break;
+            }
+    }
+
+    private void onLoggedIn(GoogleSignInAccount googleSignInAccount) {
+        Intent intent = new Intent(this, RegisterActivity.class);
+        Log.d("LOGIN", "Starting register actiity");
+        intent.putExtra(FeedActivity.GOOGLE_ACCOUNT, googleSignInAccount);
+        startActivity(intent);
+
+
+        finish();
+    }
+    // TODO: Fix this
+
+    /**
+     * @return
+     */
+    public boolean isOnline() {
+        Runtime runtime = Runtime.getRuntime();
+        try {
+            Process ipProcess = runtime.exec("/system/bin/ping -c 1 8.8.8.8");
+            int exitValue = ipProcess.waitFor();
+            return (exitValue == 0);
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    /**
+     * @throws ExecutionException
+     * @throws InterruptedException
+     * @throws JSONException
+     */
+    private void attemptLogin() throws ExecutionException, InterruptedException, JSONException {
+        mEmailView.setError(null);
+        mPasswordView.setError(null);
+
+        // Store values at the time of the login attempt.
+        String email = mEmailView.getText().toString().toLowerCase();
+        String password = mPasswordView.getText().toString();
+
+        boolean cancel = false;
+        View focusView = null;
+
+        // Check for a valid password, if the user entered one.
+        if (TextUtils.isEmpty(password)) {
+            mPasswordView.setError(getString(R.string.error_field_required));
+            focusView = mPasswordView;
+            cancel = true;
+        }
+
+        if (TextUtils.isEmpty(email)) {
+            mEmailView.setError(getString(R.string.error_field_required));
+            focusView = mEmailView;
+            cancel = true;
+        }
+
+        if (cancel) {
+            focusView.requestFocus();
+        } else {
+            LoginTask loginTask = new LoginTask(this);
+            loginTask.execute(email, password);
+            if (loginTask.get().get("response").equals("successful")) {
+                NotificationUtility.displayNotification(0);
+
+                startActivity(feedIntent);
+                finish();
+            }
+        }
+    }
 }

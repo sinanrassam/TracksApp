@@ -1,19 +1,14 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="TracksTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+
+    <style name="TracksThemeDark" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
         <item name="colorAccent">@color/primaryLightColor2</item>
-        <item name="android:textColorHint">@color/secondaryTextColor</item>
-        <item name="android:windowBackground">@color/primaryBackground</item>
-        <item name="android:fontFamily">@font/product_sans_regular</item>
-    </style>
 
-    <style name="MyActionBarTitle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
-        <item name="android:textColor">@color/primaryTextColor</item>
     </style>
-
-    <style name="TracksThemeDark" parent="Theme.AppCompat.DayNight.DarkActionBar">
+    <style name="TracksThemeLight" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
