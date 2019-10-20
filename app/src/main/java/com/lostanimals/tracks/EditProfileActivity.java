@@ -1,11 +1,14 @@
 package com.lostanimals.tracks;
 
 import android.os.Bundle;
+import android.widget.TextView;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import com.lostanimals.tracks.utils.PreferencesUtility;
 
 public class EditProfileActivity extends AppCompatActivity {
 
+    private TextView mUsername, mEmail,mName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -14,7 +17,8 @@ public class EditProfileActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Edit Profile");
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.editProfileContainer, new EditProfileFragment()).commit();
 
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.editProfileContainer, new EditProfileFragment()).commit();
     }
 }
