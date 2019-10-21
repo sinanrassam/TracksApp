@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.lostanimals.tracks.entries.PostEntry;
 import com.lostanimals.tracks.tasks.DownloadImageTask;
@@ -169,9 +170,14 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
 		if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null) {
 			Log.d("onActivityResult", "yup");
 			Uri selectedImage = data.getData();
-			imageToUpload.setImageURI(selectedImage);
-			imageToUpload.setVisibility(View.VISIBLE);
-			mRremoveImageBtn.setVisibility(View.VISIBLE);
+			String path = selectedImage.getPath();
+			if (!(path.endsWith(".jpg") || path.endsWith(".png"))) {
+				imageToUpload.setImageURI(selectedImage);
+				imageToUpload.setVisibility(View.VISIBLE);
+				mRremoveImageBtn.setVisibility(View.VISIBLE);
+			} else {
+				Toast.makeText(this, R.string.file_format_err, Toast.LENGTH_SHORT).show();
+			}
 		}
 	}
 }

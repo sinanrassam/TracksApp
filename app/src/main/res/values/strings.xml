@@ -82,4 +82,5 @@
     <string name="permission_required_toast">Location permission is required for this demo.</string>
     <string name="post_upload_picture_bttn">Upload Picture</string>
     <string name="post_remove_picture_bttn">Remove Picture</string>
+    <string name="file_format_err">This is an unspported file format, please upload a jpg or a png!</string>
 </resources>
