@@ -158,6 +158,7 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
 				imageToUpload.setImageDrawable(null);
 				mRremoveImageBtn.setVisibility(View.GONE);
 				imageToUpload.setVisibility(View.GONE);
+				mImageBtn.setText(R.string.post_upload_picture_bttn);
 				break;
 			case R.id.back:
 				finish();
@@ -175,6 +176,7 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
 				imageToUpload.setImageURI(selectedImage);
 				imageToUpload.setVisibility(View.VISIBLE);
 				mRremoveImageBtn.setVisibility(View.VISIBLE);
+				mImageBtn.setText("Upload a different picture");
 			} else {
 				Toast.makeText(this, R.string.file_format_err, Toast.LENGTH_SHORT).show();
 			}
