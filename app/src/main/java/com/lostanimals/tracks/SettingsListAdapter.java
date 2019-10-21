@@ -131,7 +131,7 @@ public class SettingsListAdapter extends BaseAdapter implements ListAdapter {
                         switch (mItemsList.get(position)) {
                             case "Dark Mode":
                                 Toast.makeText(mContext, "Dark Mode Toggled!", Toast.LENGTH_SHORT).show();
-                                AppCompatDelegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                                // AppCompatDelegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                                 PreferencesUtility.setDarkMode(listItemSwitch.isEnabled());
                                 break;
                             case "Notifications":
@@ -144,5 +144,10 @@ public class SettingsListAdapter extends BaseAdapter implements ListAdapter {
                 break;
         }
         return view;
+
+    }
+
+    private static void toggleNight(boolean toggle) {
+        //ppCompatDelegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
     }
 }
