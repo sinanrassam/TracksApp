@@ -72,8 +72,6 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
             case R.id.myProfile_nav:
                 navigationIntent = new Intent(this, MyProfileActivity.class);
                 break;
-            case R.id.map_nav:
-                navigationIntent = new Intent(this, SetLocationActivity.class);
         }
 
         if (navigationIntent != null) {
