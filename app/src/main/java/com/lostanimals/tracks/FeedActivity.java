@@ -12,7 +12,6 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 import com.google.android.material.navigation.NavigationView;
 import com.lostanimals.tracks.utils.PreferencesUtility;
@@ -20,8 +19,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
-public class FeedActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
-		FilterHandlerFragment.NoticeDialogListener {
+public class FeedActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 	
 	private ActionBarDrawerToggle mToggle;
 	private DrawerLayout mDrawerLayout;
@@ -127,17 +125,12 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 		FiltersFragment filtersFragment = new FiltersFragment();
 		filtersFragment.show(fragmentManager, "Filters Dialog");
 
-		//TODO: Fix Spinner!!
-		//android.widget.Spinner sortingSpinner = (android.widget.Spinner) findViewById(R.id.sorting_spinner);
-		//ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.sorting_array,
-		//		android.R.layout.simple_spinner_item);
-		//adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		//sortingSpinner.setAdapter(adapter);
-	}
-
-	@Override
-	public void onDialogPositiveClick(DialogFragment dialogFragment) {
-
+		/*Spinner sortingSpinner = (Spinner) findViewById(R.id.sorting_spinner);
+		sortingSpinner.setOnItemSelectedListener(new SortingSpinnerHandler());
+		ArrayAdapter<String> adapter_state = new ArrayAdapter<>(this, R.array.sorting_array,
+				android.R.layout.simple_spinner_item);
+		adapter_state.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		sortingSpinner.setAdapter(adapter_state);*/
 	}
 
 	public void onSpeciesCheckboxClicked(@NotNull View v) {
