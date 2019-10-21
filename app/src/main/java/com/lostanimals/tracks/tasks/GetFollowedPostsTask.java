@@ -2,11 +2,9 @@ package com.lostanimals.tracks.tasks;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
-import android.widget.Toast;
 import androidx.fragment.app.ListFragment;
 import com.lostanimals.tracks.entries.PostEntry;
 import com.lostanimals.tracks.utils.PostsUtility;
@@ -71,7 +69,7 @@ public class GetFollowedPostsTask extends AsyncTask<String, Integer, Boolean> {
             }
         }
 
-        SimpleAdapter adapter = new SimpleAdapter(mContext, mFollowedPostsList, android.R.layout.simple_list_item_2, new String[] {"Title", "Desc"}, new int[] {android.R.id.text1, android.R.id.text2});
+        SimpleAdapter adapter = new SimpleAdapter(mContext, mFollowedPostsList, android.R.layout.simple_list_item_2, new String[]{"Title", "Desc"}, new int[]{android.R.id.text1, android.R.id.text2});
         mFragment.setListAdapter(adapter);
         adapter.notifyDataSetChanged();
         mProgressBar.setVisibility(View.GONE);

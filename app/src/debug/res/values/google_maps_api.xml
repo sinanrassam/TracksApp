@@ -9,7 +9,7 @@
     Info:
     Key is currently restricted.
     -->
-    <string name="google_maps_key" translatable="false" templateMergeStrategy="preserve">
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">
         AIzaSyDccZLVxohOBcXgLkMjxwIGIRtTAVtXOPA
     </string>
 </resources>
