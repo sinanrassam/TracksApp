@@ -171,7 +171,7 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
 			Log.d("onActivityResult", "yup");
 			Uri selectedImage = data.getData();
 			String path = selectedImage.getPath();
-			if (!(path.endsWith(".jpg") || path.endsWith(".png"))) {
+			if ((path.endsWith(".jpg") || path.endsWith(".png"))) {
 				imageToUpload.setImageURI(selectedImage);
 				imageToUpload.setVisibility(View.VISIBLE);
 				mRremoveImageBtn.setVisibility(View.VISIBLE);
