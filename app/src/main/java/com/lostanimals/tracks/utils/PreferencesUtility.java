@@ -14,27 +14,27 @@ public class PreferencesUtility {
 	private final static String KEY_EMAIL = "key_email";
 
 	// Filter Values
-	private static String mSorter = null;
-	private static String mSpeciesDog = null;
-	private static String mSpeciesCat = null;
-	private static String mSpeciesBird = null;
-	private static String mSpeciesRabbit = null;
-	private static String mSpeciesHorse = null;
-	private static String mSpeciesCow = null;
-	private static String mSpeciesSheep = null;
-	private static String mSpeciesGoat = null;
-	private static String mSpeciesGuineaPig = null;
-	private static String mSpeciesTurtle = null;
-	private static String mSpeciesOther = null;
-	private static String mColourBlack = null;
-	private static String mColourWhite = null;
-	private static String mColourGrey = null;
-	private static String mColourBrown = null;
-	private static String mColourRed = null;
-	private static String mColourGold = null;
-	private static String mColourOther = null;
-	private static String mMicroYes = null;
-	private static String mMicroNo = null;
+	private static String mSorter = "";
+	private static String mSpeciesDog = "";
+	private static String mSpeciesCat = "";
+	private static String mSpeciesBird = "";
+	private static String mSpeciesRabbit = "";
+	private static String mSpeciesHorse = "";
+	private static String mSpeciesCow = "";
+	private static String mSpeciesSheep = "";
+	private static String mSpeciesGoat = "";
+	private static String mSpeciesGuineaPig = "";
+	private static String mSpeciesTurtle = "";
+	private static String mSpeciesOther = "";
+	private static String mColourBlack = "";
+	private static String mColourWhite = "";
+	private static String mColourGrey = "";
+	private static String mColourBrown = "";
+	private static String mColourRed = "";
+	private static String mColourGold = "";
+	private static String mColourOther = "";
+	private static String mMicroYes = "";
+	private static String mMicroNo = "";
 
 
 	private static SharedPreferences mSharedPreferences;
