@@ -36,7 +36,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
-    private SignInButton googleSignInButton;
     private Intent feedIntent;
     private Intent registerIntent;
     private GoogleSignInClient googleSignInClient;
@@ -67,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
         // Set up the login form.
         mEmailView = findViewById(R.id.login_username);
         mPasswordView = findViewById(R.id.login_password);
-        googleSignInButton = findViewById(R.id.sign_in_button);
+        SignInButton googleSignInButton = findViewById(R.id.sign_in_button);
         Button mSignInBtn = findViewById(R.id.login_btn);
         mSignInBtn.setOnClickListener(new OnClickListener() {
             /**
