@@ -7,6 +7,7 @@ public class PreferenceEntry {
     private static boolean mNotifications = true;
     private static boolean mDarkMode = false;
 
+
     public PreferenceEntry(String name, String username, String email) {
         mName = name;
         mUsername = username;

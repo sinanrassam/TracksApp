@@ -14,7 +14,7 @@ import com.lostanimals.tracks.utils.PreferencesUtility;
 
 import java.util.Objects;
 
-public class EditProfileFragment extends Fragment {
+public class EditProfileFragment extends Fragment{
 
     TextView mUsername,mName,mEmail;
 
@@ -22,16 +22,7 @@ public class EditProfileFragment extends Fragment {
 
         final View view = inflater.inflate(R.layout.activity_edit_profile, container, false);
 
-        mUsername = (TextView)view.findViewById(R.id.username_edit);
-        mUsername.setText(PreferencesUtility.getUserInfo().getUsername());
-
-        mName = (TextView)view.findViewById(R.id.password_edit);
-        mName.setText(PreferencesUtility.getUserInfo().getName());
-
-        mEmail = (TextView)view.findViewById(R.id.email_edit);
-        mEmail.setText(PreferencesUtility.getUserInfo().getEmail());
-
-
         return view;
     }
+
 }
