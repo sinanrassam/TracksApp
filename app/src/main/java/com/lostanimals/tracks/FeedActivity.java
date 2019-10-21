@@ -4,9 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-
-import android.widget.*;
-
+import android.widget.ImageButton;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -18,25 +16,31 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.navigation.NavigationView;
 import com.lostanimals.tracks.utils.PreferencesUtility;
+
 import java.util.Objects;
 
-import static android.app.PendingIntent.getActivity;
 
+public class FeedActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    public static final String GOOGLE_ACCOUNT = "google_account";
+    private ActionBarDrawerToggle mToggle;
+    private ActionBar mActionBar;
+    private DrawerLayout mDrawerLayout;
 
-public class FeedActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mActionBar = getSupportActionBar();
+        setContentView(R.layout.activity_feed);
 
+        // Test data:
+        PreferencesUtility.setDarkMode(true);
 
-	private ActionBarDrawerToggle mToggle;
-	private DrawerLayout mDrawerLayout;
-	private Switch aSwitch;
-	public static final String GOOGLE_ACCOUNT = "google_account";
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-
-		setContentView(R.layout.activity_feed);
-
-
+        if (PreferencesUtility.getUserInfo().isDarkModeEnabled()) {
+            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+		
         /*aSwitch=findViewById(R.id.switch_toggle);
 		aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			@Override
@@ -55,114 +59,92 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 			}
 		});*/
 
-		mDrawerLayout = findViewById(R.id.drawer);
+        mDrawerLayout = findViewById(R.id.drawer);
 
-		mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open_action_bar,
-				R.string.close_action_bar);
-		mDrawerLayout.addDrawerListener(mToggle);
-		mToggle.syncState();
-		
-		Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-		
-		NavigationView navigationView = findViewById(R.id.navigation_view);
-		navigationView.setNavigationItemSelectedListener(this);
+        mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open_action_bar,
+                R.string.close_action_bar);
+        mDrawerLayout.addDrawerListener(mToggle);
+        mToggle.syncState();
 
-		View header = navigationView.getHeaderView(0);
-		AppCompatTextView mUsername = header.findViewById(R.id.usernameHeader);
-		AppCompatTextView mEmail = header.findViewById(R.id.emailHeader);
-		
-		mUsername.setText(PreferencesUtility.getUserInfo().getUsername());
-		mEmail.setText(PreferencesUtility.getUserInfo().getEmail());
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-		ActionBar actionBar = getSupportActionBar();
-		actionBar.setTitle("Feed");
+        NavigationView navigationView = findViewById(R.id.navigation_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
-		ImageButton editProfileButton = header.findViewById(R.id.editProfile);
-		editProfileButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(FeedActivity.this, EditProfileActivity.class);
-				startActivity(intent);
-			}
-		});
-	}
+        View header = navigationView.getHeaderView(0);
+        AppCompatTextView mUsername = header.findViewById(R.id.usernameHeader);
+        AppCompatTextView mEmail = header.findViewById(R.id.emailHeader);
 
+        mUsername.setText(PreferencesUtility.getUserInfo().getUsername());
+        mEmail.setText(PreferencesUtility.getUserInfo().getEmail());
 
-	
-	public void openNewPostActivity(View view) {
-		startActivity(new Intent(this, NewPostActivity.class));
-	}
-	
-	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		if (mToggle.onOptionsItemSelected(item)) {
-			return true;
-		}
-		
-		return super.onOptionsItemSelected(item);
-	}
-	
-	@Override
-	public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-		Intent navigationIntent = null;
-		ActionBar actionBar = getSupportActionBar();
+        mActionBar.setTitle("Feed");
 
+        ImageButton editProfileButton = header.findViewById(R.id.editProfile);
+        editProfileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FeedActivity.this, EditProfileActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
 
+    public void openNewPostActivity(View view) {
+        startActivity(new Intent(this, NewPostActivity.class));
+    }
 
-		switch (menuItem.getItemId()) {
-			case R.id.feed_nav:
-				//navigationIntent = new Intent(this, FeedActivity.class);
-				loadFragment(new FeedFragment());
-				actionBar.setTitle("Feed");
-				break;
-			case R.id.myPosts_nav:
-				//navigationIntent = new Intent(this, MyPostActivity.class);
-				loadFragment(new MyPostsFragment());
-				actionBar.setTitle("My Posts");
-				break;
-			case R.id.logOut_nav:
-				navigationIntent = new Intent(this, LogoutActivity.class);
-				break;
-			case R.id.settings_nav:
-				navigationIntent = new Intent(this, SettingsActivity.class);
-				break;
-			case R.id.myProfile_nav:
-				//navigationIntent = new Intent(this, MyProfileActivity.class);
-				loadFragment(new MyProfileActivity());
-				actionBar.setTitle("My Profile");
-				break;
-			case R.id.history_nav:
-				loadFragment(new HistoryFragment());
-				actionBar.setTitle("Recently Viewed");
-				break;
-		}
-		
-		if (navigationIntent != null) {
-			startActivity(navigationIntent);
-			if (navigationIntent.getComponent().getClassName().equals("LogoutActivity")) {
-				finish();
-			}
-		}
-		
-		mDrawerLayout.closeDrawers();
-		
-		// TODO: Why hardcode a false return?
-		return false;
-	}
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (mToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
 
-	public void loadFragment(Fragment fragment) {
-		FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-		transaction.replace(R.id.frame, fragment);
-		transaction.commit();
-	}
-	@Override
-	protected void onResume() {
-		super.onResume();
-	}
+        return super.onOptionsItemSelected(item);
+    }
 
-	public void openSettingsActivity(){
-		Intent intent = new Intent(this, SettingsActivity.class);
-		startActivity(intent);
-	}
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        Intent navigationIntent = null;
+        mActionBar = getSupportActionBar();
+
+        switch (menuItem.getItemId()) {
+            case R.id.feed_nav:
+                loadFragment(new FeedFragment());
+                mActionBar.setTitle("Feed");
+                break;
+            case R.id.myPosts_nav:
+                loadFragment(new MyPostsFragment());
+                mActionBar.setTitle("My Posts");
+                break;
+            case R.id.settings_nav:
+                navigationIntent = new Intent(this, SettingsActivity.class);
+                break;
+            case R.id.myProfile_nav:
+                loadFragment(new MyProfileActivity());
+                mActionBar.setTitle("My Profile");
+                break;
+            case R.id.history_nav:
+                loadFragment(new HistoryFragment());
+                mActionBar.setTitle("Recently Viewed");
+                break;
+        }
+
+        if (navigationIntent != null) {
+            startActivity(navigationIntent);
+            if (navigationIntent.getComponent().getClassName().equals("LogoutActivity")) {
+                finish();
+            }
+        }
+
+        mDrawerLayout.closeDrawers();
+
+        return false;
+    }
+
+    public void loadFragment(Fragment fragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame, fragment);
+        transaction.commit();
+    }
 }

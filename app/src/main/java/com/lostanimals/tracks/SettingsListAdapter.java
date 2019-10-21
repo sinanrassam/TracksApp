@@ -8,9 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
-
-import androidx.appcompat.app.AppCompatDelegate;
-
 import com.lostanimals.tracks.utils.PreferencesUtility;
 
 import java.util.ArrayList;
@@ -22,6 +19,10 @@ public class SettingsListAdapter extends BaseAdapter implements ListAdapter {
     public SettingsListAdapter(ArrayList<String> list, Context context) {
         this.mItemsList = list;
         this.mContext = context;
+    }
+
+    private static void toggleNight(boolean toggle) {
+        //ppCompatDelegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
     }
 
     @Override
@@ -57,7 +58,6 @@ public class SettingsListAdapter extends BaseAdapter implements ListAdapter {
         contactButton.setText(mItemsList.get(position));
         appVersionText.setText(R.string.app_version);
 
-//        listItemText.setVisibility(View.INVISIBLE);
         listItemSwitch.setVisibility(View.INVISIBLE);
         imageButton.setVisibility(View.INVISIBLE);
         appVersionText.setVisibility(View.INVISIBLE);
@@ -121,6 +121,7 @@ public class SettingsListAdapter extends BaseAdapter implements ListAdapter {
                         listItemSwitch.setChecked(PreferencesUtility.getUserInfo().isDarkModeEnabled());
                         break;
                     case "Notifications":
+                        Toast.makeText(mContext, "Notifications enabled", Toast.LENGTH_SHORT).show();
                         listItemSwitch.setChecked(PreferencesUtility.getUserInfo().isNotificationsEnabled());
                         break;
                 }
@@ -144,10 +145,5 @@ public class SettingsListAdapter extends BaseAdapter implements ListAdapter {
                 break;
         }
         return view;
-
-    }
-
-    private static void toggleNight(boolean toggle) {
-        //ppCompatDelegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
     }
 }

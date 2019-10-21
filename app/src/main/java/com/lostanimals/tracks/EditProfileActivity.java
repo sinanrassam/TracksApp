@@ -4,11 +4,11 @@ import android.os.Bundle;
 import android.widget.TextView;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import com.lostanimals.tracks.utils.PreferencesUtility;
 
 public class EditProfileActivity extends AppCompatActivity {
 
-    private TextView mUsername, mEmail,mName;
+    private TextView mUsername, mEmail, mName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

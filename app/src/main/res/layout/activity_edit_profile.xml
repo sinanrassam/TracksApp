@@ -3,10 +3,9 @@
 <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         tools:context=".EditProfileActivity">
 
     <FrameLayout
@@ -28,92 +27,91 @@
             android:id="@+id/profile_image_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Change Profile Image"
             android:layout_below="@+id/profileImage"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"
+            android:text="Change Profile Image"/>
 
     <LinearLayout
             android:id="@+id/layout_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2"
+            android:layout_below="@+id/profile_image_edit"
             android:layout_marginLeft="25dp"
-            android:layout_marginRight="30dp"
             android:layout_marginTop="20dp"
-            android:layout_below="@+id/profile_image_edit">
+            android:layout_marginRight="30dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
 
         <ImageView
-                android:src="@drawable/ic_person_outline_black"
-                android:layout_weight="1"
                 android:layout_width="300dp"
-                android:layout_height="40dp"/>
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_person_outline_black"/>
 
         <EditText
                 android:id="@+id/username_edit"
-                android:inputType="textPersonName"
                 android:layout_width="520dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:inputType="textPersonName"/>
     </LinearLayout>
 
     <LinearLayout
             android:id="@+id/layout_text2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2"
+            android:layout_below="@+id/layout_text"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="30dp"
+            android:orientation="horizontal"
             android:paddingTop="20dp"
-            android:layout_below="@+id/layout_text">
+            android:weightSum="2">
 
         <ImageView
-                android:src="@drawable/ic_lock_black"
-                android:layout_weight="1"
                 android:layout_width="300dp"
-                android:layout_height="40dp"/>
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_lock_black"/>
 
         <EditText
                 android:id="@+id/password_edit"
-                android:inputType="textPersonName"
                 android:layout_width="520dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:inputType="textPersonName"/>
     </LinearLayout>
 
     <LinearLayout
             android:id="@+id/layout_text3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2"
+            android:layout_below="@+id/layout_text2"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="30dp"
+            android:orientation="horizontal"
             android:paddingTop="20dp"
-            android:layout_below="@+id/layout_text2">
+            android:weightSum="2">
 
         <ImageView
-                android:src="@drawable/ic_email_black"
-                android:layout_weight="1"
                 android:layout_width="300dp"
-                android:layout_height="40dp"/>
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_email_black"/>
 
         <EditText
                 android:id="@+id/email_edit"
-                android:inputType="textPersonName"
                 android:layout_width="520dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:inputType="textPersonName"/>
     </LinearLayout>
 
     <Button
-            android:id="@+id/saved_profile_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:text="Save Changes"
             android:layout_below="@+id/layout_text3"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"
+            android:text="Save Changes"
+            android:textAlignment="center"/>
 
 </RelativeLayout>

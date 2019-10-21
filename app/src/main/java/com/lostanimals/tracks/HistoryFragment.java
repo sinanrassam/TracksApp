@@ -16,6 +16,7 @@ import java.util.Queue;
 public class HistoryFragment extends ListFragment {
 
     private HistoryPostsTask mHistory;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.feed_fragment, container, false);
@@ -30,8 +31,8 @@ public class HistoryFragment extends ListFragment {
             new HistoryPostsTask(this, progressBar).execute("", "", "");
 
         } else {
-        	progressBar.setVisibility(View.GONE);
-		}
+            progressBar.setVisibility(View.GONE);
+        }
 
         return view;
     }

@@ -14,7 +14,8 @@
             android:layout_marginStart="159dp" android:layout_marginTop="256dp"
             android:layout_marginEnd="148dp" android:layout_marginBottom="669dp"
             android:fontFamily="sans-serif-medium" android:text="@string/post_txt_title"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1" app:layout_constraintBottom_toBottomOf="parent"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.439" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.641"/>
@@ -38,7 +39,8 @@
             android:autofillHints="" android:ems="10"
             android:hint="@string/hint_post_title"
             android:inputType="textShortMessage"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1" app:layout_constraintBottom_toTopOf="@+id/post_txt_post_desc"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            app:layout_constraintBottom_toTopOf="@+id/post_txt_post_desc"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"/>
     <TextView
@@ -48,7 +50,8 @@
             android:layout_marginStart="44dp"
             android:layout_marginEnd="248dp" android:layout_marginBottom="8dp"
             android:text="@string/post_txt_post_desc"
-            android:textAppearance="@style/TextAppearance.AppCompat" app:layout_constraintBottom_toTopOf="@+id/post_et_desc"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            app:layout_constraintBottom_toTopOf="@+id/post_et_desc"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0" app:layout_constraintStart_toStartOf="parent"/>
     <EditText
@@ -70,9 +73,11 @@
             android:layout_marginTop="47dp" android:layout_marginEnd="8dp"
             android:layout_marginBottom="54dp"
             android:fontFamily="sans-serif-medium" android:onClick="onNewPost"
-            android:text="@string/post_btn_post" android:textAppearance="@style/TextAppearance.AppCompat.Caption" app:layout_constraintBottom_toTopOf="@+id/post_et_desc"
+            android:text="@string/post_btn_post" android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            app:layout_constraintBottom_toTopOf="@+id/post_et_desc"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.505"
-            app:layout_constraintStart_toEndOf="@+id/post_et_post_title" app:layout_constraintTop_toBottomOf="@+id/post_txt_title"
+            app:layout_constraintStart_toEndOf="@+id/post_et_post_title"
+            app:layout_constraintTop_toBottomOf="@+id/post_txt_title"
             app:layout_constraintVertical_bias="0.0"/>
     <Button
             android:id="@+id/back"

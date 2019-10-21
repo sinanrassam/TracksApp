@@ -46,7 +46,6 @@
     <string name="nav_feed">Feed</string>
     <string name="nav_my_posts">My Posts</string>
     <string name="nav_my_profile">My Profile</string>
-    <string name="nav_log_out">Log Out</string>
     <string name="nav_history">Recently Viewed</string>
     <!-- Maps -->
     <string name="title_activity_maps">Map</string>
@@ -54,6 +53,7 @@
     <string name="pop_found">Mark as \"Found\"</string>
     <string name="pop_edit">Edit Post</string>
     <string name="pop_delete">Delete Post</string>
+    <string name="settings_nav">Settings</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 </resources>
