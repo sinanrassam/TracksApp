@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.lostanimals.tracks.tasks.EditTask;
 import com.lostanimals.tracks.tasks.NewPostTask;
@@ -76,6 +77,7 @@ public class NewPostActivity extends AppCompatActivity {
         if (requestCode == LOCATION_CHOOSE_REQUEST) {
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
+                Toast.makeText(this, "Marker added!", Toast.LENGTH_SHORT).show();
                 location = String.valueOf(data.getParcelableExtra("point"));
                 location = location.replace("lat/lng: (", "");
                 location = location.replace(")", "");

@@ -1,14 +1,9 @@
 package com.lostanimals.tracks;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Criteria;
-import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -25,7 +20,7 @@ import com.lostanimals.tracks.utils.PermissionManager;
 import java.util.Objects;
 
 public class SetLocationActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMapClickListener,
-        ActivityCompat.OnRequestPermissionsResultCallback {
+        ActivityCompat.OnRequestPermissionsResultCallback, GoogleMap.OnMyLocationButtonClickListener {
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     private boolean mPermissionDenied = false;
@@ -50,13 +45,13 @@ public class SetLocationActivity extends AppCompatActivity implements OnMapReady
     public void onMapReady(GoogleMap map) {
         mMap = map;
         mMap.setOnMapClickListener(this);
+        mMap.setOnMyLocationButtonClickListener(this);
         enableUserLocation();
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
-            mMap.moveCamera(CameraUpdateFactory.newLatLng((getUserLocation())));
-            mMap.moveCamera(CameraUpdateFactory.zoomTo(15));
-        }
+        final LatLng DEFAULT_LOCATION = new LatLng(-36.854018, 174.766719);
+        mMap.moveCamera(CameraUpdateFactory.newLatLng((DEFAULT_LOCATION)));
+        mMap.moveCamera(CameraUpdateFactory.zoomTo(15));
+
     }
 
     /**
@@ -86,6 +81,7 @@ public class SetLocationActivity extends AppCompatActivity implements OnMapReady
             // Enable the my location layer if the permission has been granted.
             enableUserLocation();
         } else {
+            // Display the missing permission error dialog when the fragments resume.
             mPermissionDenied = true;
         }
     }
@@ -97,17 +93,6 @@ public class SetLocationActivity extends AppCompatActivity implements OnMapReady
             showPermissionError();
             mPermissionDenied = false;
         }
-    }
-
-    private LatLng getUserLocation() {
-        LocationManager locationMan = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        Criteria criteria = new Criteria();
-        // TODO: Fix this
-        @SuppressLint("MissingPermission") Location location = locationMan.getLastKnownLocation(locationMan.getBestProvider(criteria, false));
-        double lat = location.getLatitude();
-        double lng = location.getLongitude();
-
-        return new LatLng(lat, lng);
     }
 
     private void showPermissionError() {
@@ -133,5 +118,10 @@ public class SetLocationActivity extends AppCompatActivity implements OnMapReady
         setResult(Activity.RESULT_OK, returnIntent);
 
         finish();
+    }
+
+    @Override
+    public boolean onMyLocationButtonClick() {
+        return false;
     }
 }

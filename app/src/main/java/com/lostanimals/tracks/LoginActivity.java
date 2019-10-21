@@ -11,7 +11,6 @@ import android.widget.EditText;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import com.lostanimals.tracks.tasks.LoginTask;
-import com.lostanimals.tracks.utils.NotificationUtility;
 import com.lostanimals.tracks.utils.PreferencesUtility;
 import org.json.JSONException;
 
