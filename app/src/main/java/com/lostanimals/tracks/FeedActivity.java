@@ -160,62 +160,79 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 		switch (v.getId()) {
 			case R.id.species_checkbox_dog:
 				if (checked) {
-					PreferencesUtility.setmSpeciesDog("'dog'");
-					cb_dog.setChecked(checked);
-				}
-				else {
+					PreferencesUtility.setmSpeciesDog("'Dog'");
+				} else {
 					PreferencesUtility.setmSpeciesDog("");
-					cb_dog.setChecked(checked);
 				}
 				break;
 			case R.id.species_checkbox_cat:
 				if (checked) {
-
+					PreferencesUtility.setmSpeciesCat("'Cat'");
+				} else {
+					PreferencesUtility.setmSpeciesCat("");
 				}
 				break;
 			case R.id.species_checkbox_bird:
 				if (checked) {
-
+					PreferencesUtility.setmSpeciesBird("'Bird'");
+				} else {
+					PreferencesUtility.setmSpeciesBird("");
 				}
 				break;
 			case R.id.species_checkbox_rabbit:
 				if (checked) {
-
+					PreferencesUtility.setmSpeciesRabbit("'Rabbit'");
+				} else {
+					PreferencesUtility.setmSpeciesRabbit("");
 				}
 				break;
 			case R.id.species_checkbox_horse:
 				if (checked) {
-
+					PreferencesUtility.setmSpeciesHorse("'Horse'");
+				} else {
+					PreferencesUtility.setmSpeciesHorse("");
 				}
 				break;
 			case R.id.species_checkbox_cow:
 				if (checked) {
-
+					PreferencesUtility.setmSpeciesCow("'Cow'");
+				} else {
+					PreferencesUtility.setmSpeciesCow("");
 				}
 				break;
 			case R.id.species_checkbox_sheep:
 				if (checked) {
-
+					PreferencesUtility.setmSpeciesSheep("'Sheep'");
+				} else {
+					PreferencesUtility.setmSpeciesSheep("");
 				}
 				break;
 			case R.id.species_checkbox_goat:
 				if (checked) {
-
+					PreferencesUtility.setmSpeciesGoat("'Goat'");
+				} else {
+					PreferencesUtility.setmSpeciesGoat("");
 				}
 				break;
 			case R.id.species_checkbox_guinea_pig:
 				if (checked) {
-
+					PreferencesUtility.setmSpeciesGuineaPig("'Guinea Pig'");
+				} else {
+					PreferencesUtility.setmSpeciesGuineaPig("");
 				}
 				break;
 			case R.id.species_checkbox_turtle:
 				if (checked) {
-
+					PreferencesUtility.setmSpeciesTurtle("'Turtle'");
+				} else {
+					PreferencesUtility.setmSpeciesTurtle("");
 				}
 				break;
 			case R.id.species_checkbox_other:
 				if (checked) {
-
+					PreferencesUtility.setmSpeciesOther("'Other'");
+				} else {
+					PreferencesUtility.setmSpeciesOther("");
 				}
 				break;
 		}
@@ -235,37 +252,51 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 		switch (v.getId()) {
 			case R.id.colour_checkbox_black:
 				if (checked) {
-
+					PreferencesUtility.setmColourBlack("'Black'");
+				} else {
+					PreferencesUtility.setmColourBlack("");
 				}
 				break;
 			case R.id.colour_checkbox_white:
 				if (checked) {
-
+					PreferencesUtility.setmColourWhite("'White'");
+				} else {
+					PreferencesUtility.setmColourWhite("");
 				}
 				break;
 			case R.id.colour_checkbox_grey:
 				if (checked) {
-
+					PreferencesUtility.setmColourGrey("'Grey'");
+				} else {
+					PreferencesUtility.setmColourGrey("");
 				}
 				break;
 			case R.id.colour_checkbox_brown:
 				if (checked) {
-
+					PreferencesUtility.setmColourBrown("'Brown'");
+				} else {
+					PreferencesUtility.setmColourBrown("");
 				}
 				break;
 			case R.id.colour_checkbox_gold:
 				if (checked) {
-
+					PreferencesUtility.setmColourGold("'Gold'");
+				} else {
+					PreferencesUtility.setmColourGold("");
 				}
 				break;
 			case R.id.colour_checkbox_red:
 				if (checked) {
-
+					PreferencesUtility.setmColourRed("'Red'");
+				} else {
+					PreferencesUtility.setmColourRed("");
 				}
 				break;
 			case R.id.colour_checkbox_other:
 				if (checked) {
-
+					PreferencesUtility.setmColourOther("'Other'");
+				} else {
+					PreferencesUtility.setmColourOther("");
 				}
 				break;
 		}
