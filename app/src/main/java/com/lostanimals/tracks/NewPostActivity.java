@@ -1,7 +1,9 @@
 package com.lostanimals.tracks;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
@@ -145,7 +147,6 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
 			case R.id.post_upload_picture_bttn:
 				Log.d("Image", "Browse for image");
 				Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-				galleryIntent.setType("image/*.jpg");
 				galleryIntent.createChooser(galleryIntent, "Select a post picture");
 				startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE);
 				break;
@@ -168,15 +169,29 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null) {
-			Log.d("onActivityResult", "yup");
 			Uri selectedImage = data.getData();
-			String path = selectedImage.getPath();
+			String path = getRealPathFromURI(this, selectedImage).toLowerCase();
 			if ((path.endsWith(".jpg") || path.endsWith(".png"))) {
 				imageToUpload.setImageURI(selectedImage);
 				imageToUpload.setVisibility(View.VISIBLE);
 				mRremoveImageBtn.setVisibility(View.VISIBLE);
 			} else {
 				Toast.makeText(this, R.string.file_format_err, Toast.LENGTH_SHORT).show();
+			}
+		}
+	}
+
+	private String getRealPathFromURI(Context context, Uri contentUri) {
+		Cursor cursor = null;
+		try {
+			String[] proj = { MediaStore.Images.Media.DATA };
+			cursor = context.getContentResolver().query(contentUri,  proj, null, null, null);
+			int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+			cursor.moveToFirst();
+			return cursor.getString(column_index);
+		} finally {
+			if (cursor != null) {
+				cursor.close();
 			}
 		}
 	}
