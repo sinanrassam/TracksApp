@@ -161,9 +161,11 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 			case R.id.species_checkbox_dog:
 				if (checked) {
 					PreferencesUtility.setmSpeciesDog("'dog'");
+					cb_dog.setChecked(checked);
 				}
 				else {
 					PreferencesUtility.setmSpeciesDog("");
+					cb_dog.setChecked(checked);
 				}
 				break;
 			case R.id.species_checkbox_cat:

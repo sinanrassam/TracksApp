@@ -77,10 +77,12 @@ public class PreferencesUtility {
 		String command = "";
 
 		// Add microchipped filters to command
-		if (mMicroYes != null && mMicroNo != null) {
+		if (mMicroYes != null || !mMicroYes.equals("")) {
 			command += "AND microchipped = ";
 			command += mMicroYes;
+		}
 
+		if (mMicroNo != null || !mMicroYes.equals("")) {
 			command += "AND microchipped = ";
 			command += mMicroNo;
 		}
