@@ -92,7 +92,9 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" tools:layout_editor_absoluteY="35dp">
+                android:layout_height="wrap_content"
+                android:fillViewport="true"
+                tools:layout_editor_absoluteY="35dp">
 
 
             <EditText
