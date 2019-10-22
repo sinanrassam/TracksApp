@@ -10,12 +10,13 @@ public class PostEntry {
     private String mFound;
     private String mChipped;
     private boolean mFollowing;
+    private boolean mEdited;
     private Boolean mHasImage;
     private String mLocation;
 
     // default
     public PostEntry(String id, String postTitle, String postDesc, String username, String postDate, String postTime,
-                     String found, String microchipped, String following, String hasImage, String location) {
+                     String found, String microchipped, String following, String edited, String hasImage, String location) {
         setId(id);
         setUsername(username);
         setPostTitle(postTitle);
@@ -24,6 +25,7 @@ public class PostEntry {
         setPostTime(postTime);
         setFound(found);
         setFollowing(following);
+        setEdited(edited);
         setMircrochipped(microchipped);
         setHasImage(hasImage);
         setLocation(location);
@@ -99,6 +101,14 @@ public class PostEntry {
 
     public boolean isFollowed() {
         return mFollowing;
+    }
+
+    public void setEdited(String edited) {
+        mEdited = !edited.equals("0");
+    }
+
+    public boolean isEdited() {
+        return mEdited;
     }
 
     public String getMircrochipped() {
