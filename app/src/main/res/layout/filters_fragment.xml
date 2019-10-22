@@ -14,18 +14,6 @@
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/sort_title"/>
-
-        <Spinner
-                android:spinnerMode="dialog"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/linear_filter"
-                android:layout_toRightOf="@+id/linear_filter"/>
-
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
                 android:text="@string/species_title"/>
 
         <CheckBox android:id="@+id/species_checkbox_dog"
@@ -168,15 +156,13 @@
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:text="@string/chipped_yes"
-                  android:checked="true"
-                  android:onClick="onChippedCheckboxClicked"/>
-
+                  android:checked="true"/>
+        <!-- android:onClick="onChippedCheckboxClicked" -->
         <CheckBox android:id="@+id/chipped_checkbox_no"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:text="@string/chipped_no"
-                  android:checked="true"
-                  android:onClick="onChippedCheckboxClicked"/>
+                  android:checked="true"/>
 
     </LinearLayout>
 </ScrollView>
