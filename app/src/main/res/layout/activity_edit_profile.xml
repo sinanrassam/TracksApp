@@ -69,7 +69,7 @@
             android:layout_below="@+id/layout_text">
 
         <ImageView
-                android:src="@drawable/ic_lock_black"
+                android:src="@drawable/ic_person_outline_black"
                 android:layout_weight="1"
                 android:layout_width="300dp"
                 android:layout_height="40dp"/>
