@@ -65,6 +65,10 @@
                 android:name=".EditProfileActivity"
                 android:parentActivityName=".FeedActivity">
         </activity>
+        <activity
+                android:name=".ChangePasswordActivity"
+                android:parentActivityName=".FeedActivity">
+        </activity>
 
 
     </application>

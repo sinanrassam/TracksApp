@@ -16,6 +16,7 @@ public class PreferenceEntry {
         mEmail = email;
     }
 
+
     public boolean isNotificationsEnabled() {
         return mNotifications;
     }

@@ -111,10 +111,22 @@
             android:id="@+id/saved_profile_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:textAlignment="center"
-            android:text="Save Changes"
             android:layout_below="@+id/layout_text3"
-            android:layout_centerHorizontal="true"/>
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="50dp"
+            android:text="Save Changes"
+            android:textAlignment="center"/>
+
+    <Button
+            android:id="@+id/change_password_Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout_text3"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="32dp"
+            android:text="Change Password"
+            android:textAlignment="center"/>
 
 </RelativeLayout>

@@ -16,13 +16,10 @@ import java.util.Objects;
 
 public class EditProfileFragment extends Fragment{
 
-    TextView mUsername,mName,mEmail;
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         final View view = inflater.inflate(R.layout.activity_edit_profile, container, false);
 
         return view;
     }
-
 }
