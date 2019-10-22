@@ -67,7 +67,7 @@ public class FeedFragment extends ListFragment {
         Log.d("QUEUE", "Current queue" + historyQ);
     }
 
-    private void refresh() {
+    public void refresh() {
         new UpdatePostsTask(this, progressBar).execute("", PreferencesUtility.getUserInfo().getUsername(), "",
                 "", PreferencesUtility.getFiltersCommand());
     }
