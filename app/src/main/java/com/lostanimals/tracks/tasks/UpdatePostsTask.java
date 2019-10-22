@@ -78,7 +78,6 @@ public class UpdatePostsTask extends AsyncTask<String, Integer, Boolean> {
             mPostList = new ArrayList<>();
             try {
                 JSONArray jsonArray = (JSONArray) json.get("posts");
-                Log.d("test", jsonArray.toString());
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = (JSONObject) jsonArray.get(i);
                     String id = (String) jsonObject.get("id");
@@ -91,9 +90,10 @@ public class UpdatePostsTask extends AsyncTask<String, Integer, Boolean> {
                     String following = (String) jsonObject.get("following");
                     String mircrochipped = (String) jsonObject.get("micro_chipped");
                     String image_exists = (String) jsonObject.get("image_exists");
+                    String location = (String) jsonObject.get("location");
 
                     PostsUtility.addPostEntry(i, new PostEntry(id, title, desc, username, date, time, found,
-                            following, mircrochipped, image_exists));
+                            following, mircrochipped, image_exists, location));
 
                     Map<String, String> post = new HashMap<>(2);
 

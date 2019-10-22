@@ -8,13 +8,14 @@ public class PostEntry {
     private String mPostTime;
     private String mId;
     private String mFound;
-    private String mMircrochipped;
-    private boolean mfollowing;
+    private String mChipped;
+    private boolean mFollowing;
     private Boolean mHasImage;
+    private String mLocation;
 
     // default
     public PostEntry(String id, String postTitle, String postDesc, String username, String postDate, String postTime,
-                     String found, String microchipped, String following, String hasImage) {
+                     String found, String microchipped, String following, String hasImage, String location) {
         setId(id);
         setUsername(username);
         setPostTitle(postTitle);
@@ -25,6 +26,7 @@ public class PostEntry {
         setFollowing(following);
         setMircrochipped(microchipped);
         setHasImage(hasImage);
+        setLocation(location);
     }
 
     public String getUsername() {
@@ -92,19 +94,19 @@ public class PostEntry {
     }
 
     public void setFollowing(String following) {
-        mfollowing = !following.equals("0");
+        mFollowing = !following.equals("0");
     }
 
     public boolean isFollowed() {
-        return mfollowing;
+        return mFollowing;
     }
 
     public String getMircrochipped() {
-        return mMircrochipped;
+        return mChipped;
     }
 
     public void setMircrochipped(String mircrochipped) {
-        mMircrochipped = mircrochipped;
+        mChipped = mircrochipped;
     }
 
     public void setHasImage(String hasImage) {
@@ -113,5 +115,13 @@ public class PostEntry {
 
     public Boolean hasImage() {
         return mHasImage;
+    }
+
+    public String getLocation() {
+        return mLocation;
+    }
+
+    public void setLocation(String location) {
+        this.mLocation = location;
     }
 }

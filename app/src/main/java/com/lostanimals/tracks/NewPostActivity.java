@@ -13,10 +13,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import com.lostanimals.tracks.entries.PostEntry;
 import com.lostanimals.tracks.tasks.DownloadImageTask;
@@ -28,14 +25,17 @@ import com.lostanimals.tracks.utils.PreferencesUtility;
 import java.util.Objects;
 
 public class NewPostActivity extends AppCompatActivity implements View.OnClickListener {
+    static final int LOCATION_CHOOSE_REQUEST = 999;
+    private final String DEFAULT_LOCATION = "-36.854018,174.766719";
     private static final int RESULT_LOAD_IMAGE = 1;
     private boolean isEditTask;
     private int mPostPosition;
     private PostEntry mPostEntry;
     private boolean postHasImage;
     private EditText etTitle, etDescription;
-    private Button mBackBtn, mPostBtn, mImageBtn, mRremoveImageBtn;
+    private Button mBackBtn, mPostBtn, mImageBtn, mRemoveImageBtn;
     private ImageView imageToUpload;
+    private String location = DEFAULT_LOCATION;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -63,13 +63,21 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
         mImageBtn = this.findViewById(R.id.post_upload_picture_bttn);
         mImageBtn.setOnClickListener(this);
 
-        mRremoveImageBtn = this.findViewById(R.id.post_remove_picture_bttn);
-        mRremoveImageBtn.setOnClickListener(this);
+        mRemoveImageBtn = this.findViewById(R.id.post_remove_picture_bttn);
+        mRemoveImageBtn.setOnClickListener(this);
 
         imageToUpload = this.findViewById(R.id.imageToUpload);
 
         mBackBtn = this.findViewById(R.id.back);
         mBackBtn.setOnClickListener(this);
+
+        ImageButton mapButton = this.findViewById(R.id.mapButton);
+        mapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chooseLocation();
+            }
+        });
 
         mPostBtn = findViewById(R.id.post_btn_post);
         mPostBtn.setOnClickListener(this);
@@ -80,12 +88,17 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
             if (mPostEntry.hasImage()) {
                 new DownloadImageTask(imageToUpload).execute("post", mPostEntry.getId());
                 imageToUpload.setVisibility(View.VISIBLE);
-                mRremoveImageBtn.setVisibility(View.VISIBLE);
+                mRemoveImageBtn.setVisibility(View.VISIBLE);
             }
         } else {
             imageToUpload.setVisibility(View.GONE);
-            mRremoveImageBtn.setVisibility(View.GONE);
+            mRemoveImageBtn.setVisibility(View.GONE);
         }
+    }
+
+    private void chooseLocation() {
+        Intent chooseOnMapIntent = new Intent(this, SetLocationActivity.class);
+        startActivityForResult(chooseOnMapIntent, LOCATION_CHOOSE_REQUEST);
     }
 
     public void onNewPost() {
@@ -120,10 +133,10 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
         } else {
             if (!isEditTask) {
                 NewPostTask newPostTask = new NewPostTask(this, image);
-                newPostTask.execute(title, description, PreferencesUtility.getUserInfo().getUsername());
+                newPostTask.execute(title, description, PreferencesUtility.getUserInfo().getUsername(), location);
             } else {
                 EditTask editTask = new EditTask(this, image);
-                editTask.execute(mPostEntry.getId(), title, description, mPostEntry.getFound());
+                editTask.execute(mPostEntry.getId(), title, description, mPostEntry.getFound(), location);
             }
             finish();
         }
@@ -156,7 +169,7 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.post_remove_picture_bttn:
                 imageToUpload.setImageURI(null);
                 imageToUpload.setImageDrawable(null);
-                mRremoveImageBtn.setVisibility(View.GONE);
+                mRemoveImageBtn.setVisibility(View.GONE);
                 imageToUpload.setVisibility(View.GONE);
                 mImageBtn.setText(R.string.post_upload_picture_bttn);
                 break;
@@ -175,10 +188,20 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
             if ((path.endsWith(".jpg") || path.endsWith(".png"))) {
                 imageToUpload.setImageURI(selectedImage);
                 imageToUpload.setVisibility(View.VISIBLE);
-                mRremoveImageBtn.setVisibility(View.VISIBLE);
+                mRemoveImageBtn.setVisibility(View.VISIBLE);
                 mImageBtn.setText("Change Image");
             } else {
                 Toast.makeText(this, R.string.file_format_err, Toast.LENGTH_SHORT).show();
+            }
+        } else if (requestCode == LOCATION_CHOOSE_REQUEST) {
+            // Make sure the request was successful
+            if (resultCode == RESULT_OK) {
+                Toast.makeText(this, "Marker added!", Toast.LENGTH_SHORT).show();
+                location = String.valueOf(data.getParcelableExtra("point"));
+                location = location.replace("lat/lng: (", "");
+                location = location.replace(")", "");
+            } else {
+                location = DEFAULT_LOCATION;
             }
         }
     }

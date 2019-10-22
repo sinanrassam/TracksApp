@@ -48,6 +48,16 @@
                 android:layout_marginTop="@dimen/activity_vertical_margin" android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp" android:importantForAutofill="no"
                 app:layout_constraintTop_toBottomOf="@+id/post_txt_post_desc"/>
+        <ImageButton
+                android:id="@+id/mapButton"
+                android:layout_width="46dp" android:layout_height="44dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp" android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp" android:contentDescription="@string/posts_map_button_desc"
+                app:layout_constraintBottom_toTopOf="@+id/post_et_desc" app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.056"
+                app:layout_constraintTop_toBottomOf="@+id/post_txt_title" app:layout_constraintVertical_bias="0.419"
+                app:srcCompat="@drawable/ic_map_black_24dp"/>
 
         <TextView
                 android:text="@string/post_txt_upload_picture"

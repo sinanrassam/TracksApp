@@ -1,8 +1,6 @@
 <resources>
     <!-- App wide Strings -->
     <string name="app_name">Tracks</string>
-    <!-- Login Activity Strings -->
-    <!-- Register Activity Strings -->
     <!-- New Post Activity Strings -->
     <string name="post_txt_post_title">Post title</string>
     <string name="hint_post_title">Missing Dog in Kingsland…</string>
@@ -24,12 +22,15 @@
     <string name="action_register">Register</string>
     <string name="action_register_short">Register</string>
     <string name="email_incorrect">Incorrect Email</string>
+    <!-- Strings related to Logout -->
+    <string name="title_activity_logout">Logout</string>
     <!-- Strings related to the Feed -->
     <string name="loading_posts">Loading Posts</string>
     <string name="posts_title">TITLE</string>
     <string name="posts_author">By: AUTHOR</string>
     <string name="posts_date">Posted On: DATE</string>
     <string name="posts_description">DESCRIPTION</string>
+    <string name="posts_map_button_desc">Go to the map</string>
     <!-- comments -->
     <string name="loading_comments">Loading Comments</string>
     <string name="comments_none_exists">No Comments exists, be the first to comment!</string>
@@ -90,9 +91,12 @@
         can be enabled from the System Settings &gt; Apps &gt; \'Google Maps API Demos\'.
     </string>
     <string name="permission_required_toast">Location permission is required for this demo.</string>
+    <!-- Images -->
     <string name="post_upload_picture_bttn">Upload Picture</string>
     <string name="post_remove_picture_bttn">Remove Picture</string>
     <string name="file_format_err">This is an unspported file format, please upload a jpg or a png!</string>
+    <string name="activity_post_map_button">Map</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

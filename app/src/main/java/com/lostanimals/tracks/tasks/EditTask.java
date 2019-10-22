@@ -6,7 +6,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.util.Base64;
-import android.util.Log;
 import android.widget.Toast;
 import com.lostanimals.tracks.utils.ConnectionManager;
 import org.json.JSONException;
@@ -34,7 +33,6 @@ public class EditTask extends AsyncTask<String, Integer, JSONObject> {
             String postData = ConnectionManager.postEncoder("edit-post", parameters);
 
             if (mImage != null) {
-                Log.d("Image", "is not null");
                 //todo: need to clean up (repeated code)
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                 mImage.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
@@ -68,6 +66,5 @@ public class EditTask extends AsyncTask<String, Integer, JSONObject> {
     @Override
     protected void onCancelled() {
         super.onCancelled();
-        Log.d("EDIT_TASK", "onCancelled: EDIT_TASK_EDIT_TASK_EDIT_TASK_EDIT_TASK_EDIT_TASK");
     }
 }

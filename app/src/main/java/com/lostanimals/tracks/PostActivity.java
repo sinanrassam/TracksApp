@@ -84,6 +84,16 @@ public class PostActivity extends AppCompatActivity {
             new DownloadImageTask(img).execute("post", mPostId);
         }
 
+        Button mMapButton = findViewById(R.id.mapButton);
+        mMapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getBaseContext(), ViewMapActivity.class);
+                intent.putExtra("LOCATION", mPostEntry.getLocation());
+                startActivity(intent);
+            }
+        });
+
         if (PreferencesUtility.getUserInfo().getUsername().equals(mPostEntry.getUsername())) {
             findViewById(R.id.unowned_options).setVisibility(View.GONE);
         } else {
@@ -265,5 +275,10 @@ public class PostActivity extends AppCompatActivity {
         DeleteTask deleteTask = new DeleteTask(this);
         deleteTask.execute(mPostId);
         finish();
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+        super.onPointerCaptureChanged(hasCapture);
     }
 }

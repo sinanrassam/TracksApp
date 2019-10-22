@@ -1,6 +1,7 @@
 package com.lostanimals.tracks.utils;
 
-import android.util.Log;
+import com.lostanimals.*;
+
 import com.lostanimals.tracks.entries.PreferenceEntry;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -50,13 +51,15 @@ public class ConnectionManager {
             case "new-post":
                 postData += URLEncoder.encode("title", "UTF-8") + "=" + URLEncoder.encode(parameters[0], "UTF-8") + "&";
                 postData += URLEncoder.encode("description", "UTF-8") + "=" + URLEncoder.encode(parameters[1], "UTF-8") + "&";
-                postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(parameters[2], "UTF-8");
+                postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(parameters[2], "UTF-8") + "&";
+                postData += URLEncoder.encode("location", "UTF-8") + "=" + URLEncoder.encode(parameters[3], "UTF-8");
                 break;
             case "edit-post":
                 postData += URLEncoder.encode("id", "UTF-8") + "=" + URLEncoder.encode(parameters[0], "UTF-8") + "&";
                 postData += URLEncoder.encode("title", "UTF-8") + "=" + URLEncoder.encode(parameters[1], "UTF-8") + "&";
                 postData += URLEncoder.encode("description", "UTF-8") + "=" + URLEncoder.encode(parameters[2], "UTF-8") + "&";
-                postData += URLEncoder.encode("found", "UTF-8") + "=" + URLEncoder.encode(parameters[3], "UTF-8");
+                postData += URLEncoder.encode("found", "UTF-8") + "=" + URLEncoder.encode(parameters[3], "UTF-8") + "&";
+                postData += URLEncoder.encode("location", "UTF-8") + "=" + URLEncoder.encode(parameters[4], "UTF-8");
                 break;
             case "delete-post":
                 postData += URLEncoder.encode("id", "UTF-8") + "=" + URLEncoder.encode(parameters[0], "UTF-8");
@@ -82,7 +85,6 @@ public class ConnectionManager {
     }
 
     public static JSONObject processRequest(String script, String data) throws IOException, JSONException {
-        Log.d("Common bro", data);
         HttpURLConnection conn = openConnection(URL + script);
 
         // Send the request to the server
