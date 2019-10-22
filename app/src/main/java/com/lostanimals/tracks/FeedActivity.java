@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -23,6 +24,7 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 	
 	private ActionBarDrawerToggle mToggle;
 	private DrawerLayout mDrawerLayout;
+	private ArrayAdapter<String> dataAdapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +37,7 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 				R.string.close_action_bar);
 		mDrawerLayout.addDrawerListener(mToggle);
 		mToggle.syncState();
-		
+
 		Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 		
 		NavigationView navigationView = findViewById(R.id.navigation_view);
@@ -43,11 +45,6 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 
 
 		View header = navigationView.getHeaderView(0);
-//		AppCompatTextView mUsername = header.findViewById(R.id.usernameHeader);
-//		AppCompatTextView mEmail = header.findViewById(R.id.emailHeader);
-//
-//		mUsername.setText(PreferencesUtility.getUserInfo().getUsername());
-//		mEmail.setText(PreferencesUtility.getUserInfo().getEmail());
 
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setTitle("Feed");
@@ -126,9 +123,9 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 		filtersFragment.show(fragmentManager, "Filters Dialog");
 
 		/*Spinner sortingSpinner = (Spinner) findViewById(R.id.sorting_spinner);
-		sortingSpinner.setOnItemSelectedListener(new SortingSpinnerHandler());
-		ArrayAdapter<String> adapter_state = new ArrayAdapter<>(this, R.array.sorting_array,
-				android.R.layout.simple_spinner_item);
+		sortingSpinner.setOnItemSelectedListener(mSpinnerHandler);
+		ArrayAdapter<String> adapter_state = new ArrayAdapter(this,
+				android.R.layout.simple_spinner_item,  R.id.sorting_spinner);
 		adapter_state.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		sortingSpinner.setAdapter(adapter_state);*/
 	}

@@ -18,6 +18,7 @@
                 android:text="@string/sort_title"/>
 
         <Spinner android:id="@+id/sorting_spinner"
+                android:spinnerMode="dialog"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/linear_filter"
