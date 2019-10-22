@@ -6,10 +6,8 @@ import com.lostanimals.tracks.tasks.UpdatePostsTask;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.concurrent.ExecutionException;
-import java.util.logging.Filter;
 
 import static org.junit.Assert.assertEquals;
 

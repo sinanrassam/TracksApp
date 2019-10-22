@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-            android:title="Filters"
             android:id="@+id/filters_button"
+            android:title="Filters"
             android:icon="@drawable/ic_filter_list_black_24dp"
             android:orderInCategory="100"
             app:showAsAction="always"/>

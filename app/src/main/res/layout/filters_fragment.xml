@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/linear_filter"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+            android:id="@+id/linear_filter"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -12,19 +12,18 @@
             android:scrollbarAlwaysDrawVerticalTrack="true">
 
         <TextView
-                android:id="@+id/sorting_title"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/sort_title"/>
 
-        <Spinner android:id="@+id/sorting_spinner"
+        <Spinner
                 android:spinnerMode="dialog"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/linear_filter"
                 android:layout_toRightOf="@+id/linear_filter"/>
 
-        <TextView android:id="@+id/species_text_view"
+        <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/species_title"/>
@@ -106,10 +105,10 @@
                   android:checked="true"
                   android:onClick="onSpeciesCheckboxClicked"/>
 
-        <TextView android:id="@+id/colour_text_view"
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:text="@string/colour_title"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/colour_title"/>
 
         <CheckBox android:id="@+id/colour_checkbox_black"
                   android:layout_width="wrap_content"
@@ -160,10 +159,10 @@
                   android:checked="true"
                   android:onClick="onColourCheckboxClicked"/>
 
-        <TextView android:id="@+id/chipped_text_view"
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:text="@string/chipped_title"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/chipped_title"/>
 
         <CheckBox android:id="@+id/chipped_checkbox_yes"
                   android:layout_width="wrap_content"

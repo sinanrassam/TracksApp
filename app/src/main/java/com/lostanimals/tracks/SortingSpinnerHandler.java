@@ -10,5 +10,6 @@ public class SortingSpinnerHandler implements AdapterView.OnItemSelectedListener
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> parent) { }
+    public void onNothingSelected(AdapterView<?> parent) {
+    }
 }

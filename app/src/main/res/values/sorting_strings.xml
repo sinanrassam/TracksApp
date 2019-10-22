@@ -1,8 +1,3 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="sorting_array">
-        <item>Most Recent</item>
-        <item>Oldest</item>
-        <item>By Distance</item>
-    </string-array>
 </resources>

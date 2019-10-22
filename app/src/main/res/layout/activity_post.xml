@@ -37,7 +37,6 @@
                     android:layout_marginStart="36dp"/>
 
             <ImageView
-                    android:id="@+id/clock"
                     android:layout_width="13dp"
                     android:layout_height="13dp"
                     android:contentDescription="@string/image_description"
@@ -70,25 +69,25 @@
                 android:layout_height="223dp"
                 android:contentDescription="@string/image_description"/>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp" tools:layout_editor_absoluteY="35dp"
-            android:id="@+id/unowned_options">
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/unowned_options"
+                android:layout_width="match_parent" android:layout_height="50dp"
+                tools:layout_editor_absoluteY="35dp">
 
-        <Button
-                android:text="@string/action_follow_post"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/followPost_btn" android:layout_marginTop="8dp"
-                app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="8dp" android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintHorizontal_bias="0.028"/>
+            <Button
+                    android:id="@+id/followPost_btn"
+                    android:text="@string/action_follow_post"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp"
+                    android:layout_marginStart="8dp" android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.028"
+                    app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" tools:layout_editor_absoluteY="35dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" tools:layout_editor_absoluteY="35dp">
 
 
             <EditText

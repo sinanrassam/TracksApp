@@ -9,7 +9,4 @@
         <item name="android:fontFamily">@font/product_sans_regular</item>
     </style>
 
-    <style name="MyActionBarTitle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
-        <item name="android:textColor">@color/primaryTextColor</item>
-    </style>
 </resources>

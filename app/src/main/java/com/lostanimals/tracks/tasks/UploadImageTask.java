@@ -11,29 +11,29 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 public class UploadImageTask extends AsyncTask<String, Void, JSONObject> {
-	private Bitmap mImage;
+    private Bitmap mImage;
 
-	public UploadImageTask(Bitmap image) {
-		mImage = image;
-	}
+    public UploadImageTask(Bitmap image) {
+        mImage = image;
+    }
 
-	@Override
-	protected JSONObject doInBackground(String... parameters) {
-		// Try encode and send the NEW_POST request.
-		JSONObject json = null;
+    @Override
+    protected JSONObject doInBackground(String... parameters) {
+        // Try encode and send the NEW_POST request.
+        JSONObject json = null;
 
-		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-		mImage.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
-		String encodedImage = Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT);
-		parameters[2] = encodedImage;
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        mImage.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        String encodedImage = Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT);
+        parameters[2] = encodedImage;
 
-		try {
-			String postData = ConnectionManager.postEncoder("upload-image", parameters);
-			json = ConnectionManager.processRequest("image.php", postData);
-		} catch (JSONException | IOException e) {
-			e.printStackTrace();
-		}
+        try {
+            String postData = ConnectionManager.postEncoder("upload-image", parameters);
+            json = ConnectionManager.processRequest("image.php", postData);
+        } catch (JSONException | IOException e) {
+            e.printStackTrace();
+        }
 
-		return json;
-	}
+        return json;
+    }
 }

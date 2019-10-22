@@ -69,7 +69,7 @@ public class GetFollowedPostsTask extends AsyncTask<String, Integer, Boolean> {
             }
         }
 
-        SimpleAdapter adapter = new SimpleAdapter(mContext, mFollowedPostsList, android.R.layout.simple_list_item_2, new String[] {"Title", "Desc"}, new int[] {android.R.id.text1, android.R.id.text2});
+        SimpleAdapter adapter = new SimpleAdapter(mContext, mFollowedPostsList, android.R.layout.simple_list_item_2, new String[]{"Title", "Desc"}, new int[]{android.R.id.text1, android.R.id.text2});
         mFragment.setListAdapter(adapter);
         adapter.notifyDataSetChanged();
         mProgressBar.setVisibility(View.GONE);

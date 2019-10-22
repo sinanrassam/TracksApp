@@ -1,27 +1,12 @@
 <resources>
     <!-- App wide Strings -->
     <string name="app_name">Tracks</string>
-    <string name="channel_name">Tracks</string>
-    <string name="channel_description">Tracks Channel</string>
     <!-- Login Activity Strings -->
-    <string name="hint_username">Username</string>
-    <string name="hint_password">Password</string>
-    <string name="login_btn">Login</string>
-    <string name="login_btn_register">Register</string>
     <!-- Register Activity Strings -->
-    <string name="register_btn">Register</string>
-    <string name="hint_name">Name</string>
-    <string name="register_et_name">Username</string>
-    <string name="RegisterPasswordET">Password</string>
-    <string name="txt_name">Your full name:</string>
-    <string name="txt_username">Your username:</string>
-    <string name="txt_password">Your password:</string>
     <!-- New Post Activity Strings -->
-    <string name="post_txt_title">Create new post</string>
     <string name="post_txt_post_title">Post title</string>
     <string name="hint_post_title">Missing Dog in Kingsland…</string>
     <string name="post_txt_post_desc">Enter a description</string>
-    <string name="hint_desc">Description…</string>
     <string name="post_txt_upload_picture">Upload Picture</string>
     <string name="post_btn_post">Post</string>
     <string name="title_activity_login">Tracks</string>
@@ -30,11 +15,7 @@
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
     <string name="title_activity_register">Register</string>
     <!-- Strings related to register -->
     <string name="prompt_firstName">First Name</string>
@@ -51,7 +32,6 @@
     <string name="posts_description">DESCRIPTION</string>
     <!-- comments -->
     <string name="loading_comments">Loading Comments</string>
-    <string name="comments_error">Post Not Found</string>
     <string name="comments_none_exists">No Comments exists, be the first to comment!</string>
     <string name="prompt_comment">Write a comment…</string>
     <string name="action_comment">Comment</string>
@@ -59,7 +39,6 @@
     <!-- Nav Drawer -->
     <string name="open_action_bar">Open</string>
     <string name="close_action_bar">Close</string>
-    <string name="edit">Edit Details</string>
     <string name="logout">Logout</string>
     <string name="open_feed">Open Feed</string>
     <string name="nav_feed">Feed</string>
@@ -71,12 +50,8 @@
     <string name="title_activity_maps">Map</string>
     <!-- Filters -->
     <string name="filters_confirm">Confirm</string>
-    <string name="filters_cancel">Cancel</string>
-    <string name="sort_title">Sort By: </string>
-    <string name="sort_newest_first">Newest First</string>
-    <string name="sort_oldest_first">Oldest First</string>
-    <string name="sort_closest_first">Closest First</string>
-    <string name="species_title">Species: </string>
+    <string name="sort_title">Sort By:</string>
+    <string name="species_title">Species:</string>
     <string name="species_dog">Dog</string>
     <string name="species_cat">Cat</string>
     <string name="species_bird">Bird</string>
@@ -88,7 +63,7 @@
     <string name="species_guinea_pig">Guinea Pig</string>
     <string name="species_turtle">Turtle</string>
     <string name="species_other">Other</string>
-    <string name="colour_title">Colour: </string>
+    <string name="colour_title">Colour:</string>
     <string name="colour_black">Black</string>
     <string name="colour_white">White</string>
     <string name="colour_grey">Grey</string>
@@ -96,10 +71,9 @@
     <string name="colour_red">Red</string>
     <string name="colour_gold">Gold</string>
     <string name="colour_other">Other</string>
-    <string name="chipped_title">Microchipped: </string>
+    <string name="chipped_title">Microchipped:</string>
     <string name="chipped_yes">Microchipped</string>
     <string name="chipped_no">Not Microchipped</string>
-    <string name="title_activity_login2">deleteme</string>
     <!-- Popup -->
     <string name="pop_found">Mark as \"Found\"</string>
     <string name="pop_edit">Edit Post</string>
@@ -109,15 +83,16 @@
     <string name="image_description">Post image</string>
     <!-- Permissions -->
     <string name="permission_rationale_location">Access to the location service is required to demonstrate the \'my
-        location\' feature, which shows your current location on the map.</string>
+        location\' feature, which shows your current location on the map.
+    </string>
     <string name="location_permission_denied">This sample requires location permission to enable the \'my location\'
         layer. Please try again and grant access to use the location.\nIf the permission has been permanently denied, it
-        can be enabled from the System Settings &gt; Apps &gt; \'Google Maps API Demos\'.</string>
+        can be enabled from the System Settings &gt; Apps &gt; \'Google Maps API Demos\'.
+    </string>
     <string name="permission_required_toast">Location permission is required for this demo.</string>
     <string name="post_upload_picture_bttn">Upload Picture</string>
     <string name="post_remove_picture_bttn">Remove Picture</string>
     <string name="file_format_err">This is an unspported file format, please upload a jpg or a png!</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

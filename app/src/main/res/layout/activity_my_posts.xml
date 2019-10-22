@@ -7,10 +7,10 @@
 >
 
     <fragment
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
+            android:id="@+id/fragment_myposts"
             class="com.lostanimals.tracks.MyPostsFragment"
-            android:id="@+id/fragment_myposts"/>
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
