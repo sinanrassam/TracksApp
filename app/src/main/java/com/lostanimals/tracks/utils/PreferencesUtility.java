@@ -3,6 +3,7 @@ package com.lostanimals.tracks.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import com.lostanimals.tracks.entries.PreferenceEntry;
 
 public class PreferencesUtility {
@@ -35,15 +36,13 @@ public class PreferencesUtility {
     }
 
     public static void setDarkMode(boolean darkMode) {
-        getUserInfo().setDarkModeEnabled(darkMode);
+        PreferenceEntry.mDarkMode = darkMode;
         SharedPreferences.Editor editor = mSharedPreferences.edit();
-        editor.putBoolean(KEY_DARK_MODE, getUserInfo().isDarkModeEnabled());
-        // PreferencesUtility.getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        editor.putBoolean(KEY_DARK_MODE, darkMode);
         editor.apply();
     }
 
     public static void setNotifications(boolean notifications) {
-        getUserInfo().setNotificationsEnabled(notifications);
         NotificationUtility.setNotificationsEnabled(notifications);
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         editor.putBoolean(KEY_NOTIFICATIONS, getUserInfo().isNotificationsEnabled());

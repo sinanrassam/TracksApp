@@ -2,11 +2,13 @@ package com.lostanimals.tracks;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.Switch;
+import androidx.annotation.LongDef;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -17,6 +19,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.navigation.NavigationView;
+import com.lostanimals.tracks.entries.PreferenceEntry;
 import com.lostanimals.tracks.utils.PreferencesUtility;
 
 import java.util.Objects;
@@ -34,27 +37,22 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
         mActionBar = getSupportActionBar();
         setContentView(R.layout.activity_feed);
 
-        // Test data:
-//        PreferencesUtility.setDarkMode(true);
-//
-//        if (PreferencesUtility.getUserInfo().isDarkModeEnabled()) {
-//            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-//        } else {
-//            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-//        }
         final Switch aSwitch = findViewById(R.id.switch_toggle);
+        aSwitch.setChecked(PreferenceEntry.mDarkMode);
+
         aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    //if day mode is enabled, set night mode using AppCompatDelegate class.
-                    //		Toast.makeText(this, "Night selected", Toast.LENGTH_SHORT).show();
+            public void onCheckedChanged(CompoundButton ignored, boolean isChecked) {
+                PreferencesUtility.setDarkMode(aSwitch.isChecked());
+
+                if (aSwitch.isChecked()) {
                     getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                 } else {
-                    //if night mode is enabled, set day mode using AppCompatDelegate class.
-                    //Toast.makeText(this, "Day mode selected", Toast.LENGTH_SHORT).show();
                     getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 }
+
+                finish();
+                startActivity(getIntent());
             }
         });
 

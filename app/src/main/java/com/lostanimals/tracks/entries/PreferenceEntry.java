@@ -1,11 +1,13 @@
 package com.lostanimals.tracks.entries;
 
+import android.util.Log;
+
 public class PreferenceEntry {
     private static String mName = null;
     private static String mUsername = null;
     private static String mEmail = null;
-    private static boolean mNotifications = true;
-    private static boolean mDarkMode = false;
+    public static boolean mNotifications = true;
+    public static boolean mDarkMode = false;
 
 
     public PreferenceEntry(String name, String username, String email) {
@@ -19,16 +21,9 @@ public class PreferenceEntry {
         return mNotifications;
     }
 
-    public void setNotificationsEnabled(boolean notifications) {
-        PreferenceEntry.mNotifications = notifications;
-    }
 
     public boolean isDarkModeEnabled() {
         return mDarkMode;
-    }
-
-    public void setDarkModeEnabled(boolean darkMode) {
-        PreferenceEntry.mDarkMode = darkMode;
     }
 
     public String getName() {
