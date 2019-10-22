@@ -59,6 +59,15 @@ public class PostActivity extends AppCompatActivity {
         mPostDateView.setText(mPostEntry.getPostDate() + ", at: " + mPostEntry.getPostTime());
         mPostAuthorView.setText("By: " + mPostEntry.getUsername());
 
+        ImageView mEditSymbol = findViewById(R.id.editedSymbol);
+        mEditSymbol.setVisibility(View.GONE);
+
+        if (mPostEntry.isEdited()) {
+            mEditSymbol.setVisibility(View.VISIBLE);
+            mEditSymbol.setClickable(true);
+            mEditSymbol.setTooltipText("Edited");
+        }
+
         mCommentView = findViewById(R.id.comment_field);
 
         commentsFragment = new CommentsFragment();
@@ -297,7 +306,7 @@ public class PostActivity extends AppCompatActivity {
 
     private void markAsFound() {
         EditTask editTask = new EditTask(this, null);
-        editTask.execute(mPostEntry.getId(), mPostEntry.getPostTitle(), mPostEntry.getPostDesc(), "1");
+        editTask.execute(mPostEntry.getId(), mPostEntry.getPostTitle(), mPostEntry.getPostDesc(), "1", "");
     }
 
     private void deletePost() {
