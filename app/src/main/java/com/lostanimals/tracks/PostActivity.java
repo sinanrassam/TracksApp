@@ -116,7 +116,6 @@ public class PostActivity extends AppCompatActivity {
     private void followPost(boolean following) {
         Log.d("Follow Post", "Clicked");
         String followOrToUnfollow = (following) ? "un" : "";
-
         new FollowPostTask(this).execute(PreferencesUtility.getUserInfo().getUsername(), mPostEntry.getId(),
                 followOrToUnfollow);
     }
