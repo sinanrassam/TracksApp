@@ -8,6 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toolbar;
+
+import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.ListFragment;
 import com.lostanimals.tracks.tasks.HistoryPostsTask;
 
@@ -25,10 +28,11 @@ public class HistoryFragment extends ListFragment {
 
         Queue<String> historyQ = FeedFragment.getHistoryQ();
 
+
         Log.d("history", "Q in history queue" + historyQ);
 
         if (!(historyQ.size() == 0)) {
-            new HistoryPostsTask(this, progressBar).execute("", "", "");
+            new HistoryPostsTask(this, progressBar).execute("", "", "","","");
 
         } else {
             progressBar.setVisibility(View.GONE);
