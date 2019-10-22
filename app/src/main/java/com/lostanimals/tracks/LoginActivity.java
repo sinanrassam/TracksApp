@@ -5,7 +5,6 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AutoCompleteTextView;
@@ -17,7 +16,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.lostanimals.tracks.tasks.LoginTask;
@@ -28,15 +26,10 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
-/**
- *
- */
 public class LoginActivity extends AppCompatActivity {
-	private final static String TAG = "LOGIN_ACTIVITY";
-	
+
 	private AutoCompleteTextView mEmailView;
 	private EditText mPasswordView;
-	
 	private Intent feedIntent;
 	private Intent registerIntent;
     private GoogleSignInClient googleSignInClient;
@@ -52,9 +45,7 @@ public class LoginActivity extends AppCompatActivity {
 		feedIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 		registerIntent = new Intent(this, RegisterActivity.class);
 		registerIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-		
-		PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, feedIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-		NotificationUtility.createNotification(this, "Tracks", "Test", true, pendingIntent);
+
 		PreferencesUtility.setSharedPreferences(this);
 		
 		if (!PreferencesUtility.getUserInfo().getUsername().equals("")) {
@@ -76,17 +67,10 @@ public class LoginActivity extends AppCompatActivity {
 			 */
 			@Override
 			public void onClick(View view) {
-				// TODO: Fix this
 				try {
-					if (isOnline() == false) {
-						Log.d("LOGIN_TASK", "internet avaliable");
-						attemptLogin();
-					} else {
-						attemptLogin();
-						Log.d("LOGIN_TASK", "no internet");
-					}
-				} catch (ExecutionException | InterruptedException | JSONException e) {
-					e.printStackTrace();
+					attemptLogin();
+				} catch (ExecutionException | InterruptedException | JSONException ex) {
+					ex.printStackTrace();
 				}
 			}
 		});
@@ -103,8 +87,6 @@ public class LoginActivity extends AppCompatActivity {
                 Intent signInIntent = googleSignInClient.getSignInIntent();
 
                 startActivityForResult(signInIntent, 101);
-
-
             }
         });
 		
@@ -121,46 +103,20 @@ public class LoginActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK)
-            switch (requestCode) {
-                case 101:
-                    try {
-                        // The Task returned from this call is always completed, no need to attach
-                        // a listener.
-
-                        Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-                        GoogleSignInAccount account = task.getResult(ApiException.class);
-                        onLoggedIn(account);
-                        Log.d("GOOGLE", "GOOG signed in");
-                    } catch (ApiException e) {
-                        // The ApiException status code indicates the detailed failure reason.
-                        Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
-                    }
-                    break;
-            }
+			if (requestCode == 101) {
+				try {
+					Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+					GoogleSignInAccount account = task.getResult(ApiException.class);
+					onLoggedIn(account);
+				} catch (ApiException ignored) {
+				}
+			}
     }
-	
-	/**
-	 * @return
-	 */
-	public boolean isOnline() {
-		Runtime runtime = Runtime.getRuntime();
-		try {
-			Process ipProcess = runtime.exec("/system/bin/ping -c 1 8.8.8.8");
-			int exitValue = ipProcess.waitFor();
-			return (exitValue == 0);
-		} catch (IOException | InterruptedException e) {
-			e.printStackTrace();
-		}
-		
-		return false;
-	}
 
     private void onLoggedIn(GoogleSignInAccount googleSignInAccount) {
         Intent intent = new Intent(this, RegisterActivity.class);
-        Log.d("LOGIN", "Starting register actiity");
         intent.putExtra(FeedActivity.GOOGLE_ACCOUNT, googleSignInAccount);
         startActivity(intent);
-
 
         finish();
     }

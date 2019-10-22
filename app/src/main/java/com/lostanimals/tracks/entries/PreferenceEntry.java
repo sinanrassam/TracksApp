@@ -1,7 +1,5 @@
 package com.lostanimals.tracks.entries;
 
-import android.util.Log;
-
 public class PreferenceEntry {
 	private static String mName = null;
 	private static String mUsername = null;

@@ -10,8 +10,6 @@ public class ChangePasswordFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        final View view = inflater.inflate(R.layout.activity_change_password, container, false);
-
-        return view;
+        return inflater.inflate(R.layout.activity_change_password, container, false);
     }
 }

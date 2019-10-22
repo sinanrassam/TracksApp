@@ -2,7 +2,6 @@ package com.lostanimals.tracks;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +54,6 @@ public class FeedFragment extends ListFragment {
         mPostEntry = PostsUtility.getPostEntry(position);
         String post_id = mPostEntry.getId();
         //String post_id=Long.toString(id);
-        Log.d("QUEUE", "post id" + post_id);
         addHistory(post_id);
         startActivity(intent);
     }
@@ -64,7 +62,6 @@ public class FeedFragment extends ListFragment {
         if (!historyQ.contains(id)) {
             historyQ.add(id);
         }
-        Log.d("QUEUE", "Current queue" + historyQ);
     }
 
     public void refresh() {

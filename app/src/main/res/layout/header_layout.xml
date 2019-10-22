@@ -15,17 +15,18 @@
             android:layout_marginEnd="8dp"
             android:background="@color/primaryColor"
             android:clickable="true"
-            android:src="@drawable/ic_edit_black" app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/ic_edit_black"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
     <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/firstName"
+            android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:text="Hi USER"
+            android:text="Name"
             android:textColor="@color/primaryTextColor" android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@id/appCompatImageView" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"/>

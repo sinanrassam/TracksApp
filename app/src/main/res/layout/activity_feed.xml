@@ -48,10 +48,13 @@
             app:menu="@menu/nav_menu">
         <Switch
                 android:id="@+id/switch_toggle"
+                android:text="@string/menu_dark_mode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="80dp"/>
+                android:layout_gravity="bottom"
+                android:layout_marginHorizontal="32dp"
+                android:layout_marginBottom="32dp"
+                />
     </com.google.android.material.navigation.NavigationView>
 
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -64,7 +64,7 @@
         </activity>
         <activity
                 android:name=".ChangePasswordActivity"
-                android:parentActivityName=".FeedActivity">
+                android:parentActivityName=".EditProfileActivity">
         </activity>
         <activity
                 android:name=".FollowedPostsActivity"

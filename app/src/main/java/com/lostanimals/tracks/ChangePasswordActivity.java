@@ -6,11 +6,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import com.lostanimals.tracks.entries.PreferenceEntry;
-import com.lostanimals.tracks.utils.PreferencesUtility;
 
 public class ChangePasswordActivity extends AppCompatActivity implements View.OnClickListener {
     String oldPass, newPass, newPassConfirm;
@@ -51,7 +48,6 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
                 contactDialog.setMessage("Please eneter all text fields.");
                 contactDialog.setCancelable(true);
                 contactDialog.show();
-                /*Toast.makeText(getApplicationContext(), "Please enter all text fields." , Toast.LENGTH_SHORT).show();*/
             }
         }
     }
