@@ -94,8 +94,6 @@ public class LoginActivity extends AppCompatActivity {
                 Intent signInIntent = googleSignInClient.getSignInIntent();
 
                 startActivityForResult(signInIntent, 101);
-
-
             }
         });
 		

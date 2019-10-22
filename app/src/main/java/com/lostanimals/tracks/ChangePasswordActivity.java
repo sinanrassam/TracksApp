@@ -48,7 +48,6 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
                 contactDialog.setMessage("Please eneter all text fields.");
                 contactDialog.setCancelable(true);
                 contactDialog.show();
-                /*Toast.makeText(getApplicationContext(), "Please enter all text fields." , Toast.LENGTH_SHORT).show();*/
             }
         }
     }
