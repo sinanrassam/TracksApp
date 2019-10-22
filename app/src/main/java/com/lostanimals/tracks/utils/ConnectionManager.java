@@ -12,7 +12,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
 public class ConnectionManager {
-	private static final String URL = "http://bosh.live:7536/phpmyadmin/tracks_api/";
+	public static final String URL = "http://bosh.live:7536/phpmyadmin/tracks_api/";
 	
 	public static String postEncoder(String type, String[] parameters) throws UnsupportedEncodingException {
 		for (int i = 0; i < parameters.length; i++) {
@@ -24,8 +24,10 @@ public class ConnectionManager {
 		switch (type) {
 			case "get-posts":
 				postData += URLEncoder.encode("number", "UTF-8") + "=" + URLEncoder.encode(parameters[0], "UTF-8") + "&";
-                postData += URLEncoder.encode("id", "UTF-8") + "=" + URLEncoder.encode(parameters[1], "UTF-8") + "&";
-                postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(parameters[1], "UTF-8");
+				postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(parameters[1], "UTF-8") + "&";
+				postData += URLEncoder.encode("id", "UTF-8") + "=" + URLEncoder.encode(parameters[2], "UTF-8") + "&";
+				postData += URLEncoder.encode("myPosts", "UTF-8") + "=" + URLEncoder.encode(parameters[3], "UTF-8") + "&";
+                postData += URLEncoder.encode("filters", "UTF-8") + "=" + URLEncoder.encode(parameters[4], "UTF-8");
 				break;
 			case "new-comment":
 				postData += URLEncoder.encode("post_id", "UTF-8") + "=" + URLEncoder.encode(parameters[0], "UTF-8") + "&";
@@ -48,16 +50,35 @@ public class ConnectionManager {
 			case "new-post":
 				postData += URLEncoder.encode("title", "UTF-8") + "=" + URLEncoder.encode(parameters[0], "UTF-8") + "&";
 				postData += URLEncoder.encode("description", "UTF-8") + "=" + URLEncoder.encode(parameters[1], "UTF-8") + "&";
-				postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(parameters[2], "UTF-8");
+				postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(parameters[2], "UTF-8") + "&";
+                postData += URLEncoder.encode("location", "UTF-8") + "=" + URLEncoder.encode(parameters[3], "UTF-8");
 				break;
 			case "edit-post":
 				postData += URLEncoder.encode("id", "UTF-8") + "=" + URLEncoder.encode(parameters[0], "UTF-8") + "&";
 				postData += URLEncoder.encode("title", "UTF-8") + "=" + URLEncoder.encode(parameters[1], "UTF-8") + "&";
 				postData += URLEncoder.encode("description", "UTF-8") + "=" + URLEncoder.encode(parameters[2], "UTF-8") + "&";
-				postData += URLEncoder.encode("found", "UTF-8") + "=" + URLEncoder.encode(parameters[3], "UTF-8");
+				postData += URLEncoder.encode("found", "UTF-8") + "=" + URLEncoder.encode(parameters[3], "UTF-8") + "&";
+                postData += URLEncoder.encode("location", "UTF-8") + "=" + URLEncoder.encode(parameters[4], "UTF-8");
 				break;
 			case "delete-post":
 				postData += URLEncoder.encode("id", "UTF-8") + "=" + URLEncoder.encode(parameters[0], "UTF-8");
+				break;
+			case "unfollow-post": //fall through
+			case "follow-post":
+				postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(parameters[0], "UTF-8") + "&";
+				postData += URLEncoder.encode("post_id", "UTF-8") + "=" + URLEncoder.encode(parameters[1], "UTF-8");
+				break;
+			case "get-followed-posts":
+				postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(parameters[0], "UTF-8");
+				break;
+            case "upload-image":
+                postData += URLEncoder.encode("image_type", "UTF-8") + "=" + URLEncoder.encode(parameters[0], "UTF-8") + "&";
+                postData += URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(parameters[1], "UTF-8") + "&";
+                postData += URLEncoder.encode("image", "UTF-8") + "=" + URLEncoder.encode(parameters[2], "UTF-8");
+                break;
+            case "get-image":
+                postData += URLEncoder.encode("url", "UTF-8") + "=" + URLEncoder.encode(URL + parameters[0], "UTF-8");
+                break;
             case "update":
                 postData += URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(parameters[0], "UTF-8") + "&";
                 postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(parameters[1], "UTF-8") + "&";

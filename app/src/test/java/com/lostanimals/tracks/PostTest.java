@@ -30,6 +30,6 @@ public class PostTest {
     public void NewComment_test() throws ExecutionException, InterruptedException, JSONException {
         NewCommentTask newCommentTask = new NewCommentTask(null);
         newCommentTask.execute(TEST_POST_ID, TEST_USER_USERNAME, TEST_POST_MESSAGE).get();
-        //        assertEquals("success", result.get("response"));
+//        assertEquals("success", result.get("response"));
     }
 }

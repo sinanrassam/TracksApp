@@ -71,8 +71,15 @@ public class HistoryPostsTask extends AsyncTask<String, Integer, Boolean> {
                     String date = (String) jsonObject.get("post_date");
                     String time = (String) jsonObject.get("post_time");
                     String found = (String) jsonObject.get("found");
+                    String microchipped = jsonObject.getString("microchipped");
+                    String following = jsonObject.getString("following");
+                    String hasImage = jsonObject.getString("hasImage");
+                    String location = (String) jsonObject.get("location");
+
+
                     if (historyQ.contains(id) && username != user) {
-                        PostsUtility.addPostEntry(i, new PostEntry(id, title, desc, username, date, time, found));
+                        PostsUtility.addPostEntry(i, new PostEntry(id, title, desc, username, date, time, found,
+                                microchipped, following, hasImage, location));
 
                         Map<String, String> post = new HashMap<>(2);
 

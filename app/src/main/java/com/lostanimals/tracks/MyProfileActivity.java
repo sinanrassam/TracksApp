@@ -9,6 +9,8 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import com.lostanimals.tracks.utils.PreferencesUtility;
 
+import java.util.Objects;
+
 public class MyProfileActivity extends Fragment {
     View view;
 

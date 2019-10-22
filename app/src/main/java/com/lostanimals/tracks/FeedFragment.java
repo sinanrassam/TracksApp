@@ -13,6 +13,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.lostanimals.tracks.entries.PostEntry;
 import com.lostanimals.tracks.tasks.UpdatePostsTask;
 import com.lostanimals.tracks.utils.PostsUtility;
+import com.lostanimals.tracks.utils.PreferencesUtility;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -22,11 +23,7 @@ public class FeedFragment extends ListFragment {
     public ProgressBar progressBar;
     private SwipeRefreshLayout refreshLayout;
     private PostEntry mPostEntry;
-
-    public static Queue<String> getHistoryQ() {
-        return historyQ;
-    }
-
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		final View view = inflater.inflate(R.layout.feed_fragment, container, false);
@@ -47,6 +44,10 @@ public class FeedFragment extends ListFragment {
 		return view;
 	}
 
+    public static Queue<String> getHistoryQ() {
+        return historyQ;
+    }
+
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         Intent intent = new Intent(getContext(), PostActivity.class);
@@ -66,9 +67,10 @@ public class FeedFragment extends ListFragment {
         Log.d("QUEUE", "Current queue" + historyQ);
     }
 
-	private void refresh() {
-		new UpdatePostsTask(this, progressBar).execute("", "");
-	}
+    private void refresh() {
+        new UpdatePostsTask(this, progressBar).execute("", PreferencesUtility.getUserInfo().getUsername(), "",
+                "", PreferencesUtility.getFiltersCommand());
+    }
 	
 	@Override
 	public void onResume() {

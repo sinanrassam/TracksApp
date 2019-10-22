@@ -7,9 +7,9 @@
         tools:context=".FollowedPostsActivity">
 
     <fragment
-            android:id="@+id/followed_posts_fragment"
-            class="com.lostanimals.tracks.FollowedPostsFragment"
+            android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            class="com.lostanimals.tracks.FollowedPostsFragment"
+            android:id="@+id/followed_posts_fragment"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -40,8 +40,8 @@ public class LoginActivity extends AppCompatActivity {
 	private Intent feedIntent;
 	private Intent registerIntent;
     private GoogleSignInClient googleSignInClient;
-
-    @Override
+	
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
@@ -91,7 +91,7 @@ public class LoginActivity extends AppCompatActivity {
 			}
 		});
 
-		View googleSignInButton = findViewById(R.id.sign_in_button);
+        View googleSignInButton = findViewById(R.id.sign_in_button);
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
@@ -138,16 +138,6 @@ public class LoginActivity extends AppCompatActivity {
                     break;
             }
     }
-
-    private void onLoggedIn(GoogleSignInAccount googleSignInAccount) {
-        Intent intent = new Intent(this, RegisterActivity.class);
-        Log.d("LOGIN", "Starting register actiity");
-        intent.putExtra(FeedActivity.GOOGLE_ACCOUNT, googleSignInAccount);
-        startActivity(intent);
-
-
-        finish();
-    }
 	
 	/**
 	 * @return
@@ -164,6 +154,16 @@ public class LoginActivity extends AppCompatActivity {
 		
 		return false;
 	}
+
+    private void onLoggedIn(GoogleSignInAccount googleSignInAccount) {
+        Intent intent = new Intent(this, RegisterActivity.class);
+        Log.d("LOGIN", "Starting register actiity");
+        intent.putExtra(FeedActivity.GOOGLE_ACCOUNT, googleSignInAccount);
+        startActivity(intent);
+
+
+        finish();
+    }
 	
 	/**
 	 * @throws ExecutionException

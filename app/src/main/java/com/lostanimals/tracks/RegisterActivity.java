@@ -29,11 +29,11 @@ public class RegisterActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register);
-		
+
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		actionBar.setTitle("Register");
-		
+
 		mFirstNameView = findViewById(R.id.firstName);
 		mLastNameView = findViewById(R.id.lastName);
 		mEmailView = findViewById(R.id.email);
@@ -48,7 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
 		Button mRegisterBtn = findViewById(R.id.register_btn);
-		
+
 		mRegisterBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -56,24 +56,24 @@ public class RegisterActivity extends AppCompatActivity {
 			}
 		});
 	}
-	
+
 	private void attemptRegister() {
-		
+
 		mFirstNameView.setError(null);
 		mLastNameView.setError(null);
 		mEmailView.setError(null);
 		mUsernameView.setError(null);
 		mPasswordView.setError(null);
-		
+
 		String firstName = mFirstNameView.getText().toString();
 		String lastName = mLastNameView.getText().toString();
 		String email = mEmailView.getText().toString().toLowerCase();
 		String username = mUsernameView.getText().toString().toLowerCase();
 		String password = mPasswordView.getText().toString();
-		
+
 		boolean cancel = false;
 		View focusView = null;
-		
+
 		// validate info
 		if (TextUtils.isEmpty(password)) {
 			mPasswordView.setError(getString(R.string.error_field_required));
@@ -104,7 +104,7 @@ public class RegisterActivity extends AppCompatActivity {
 			focusView = mFirstNameView;
 			cancel = true;
 		}
-		
+
 		if (cancel) {
 			focusView.requestFocus();
 		} else {
