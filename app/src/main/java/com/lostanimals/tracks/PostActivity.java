@@ -9,10 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.*;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.lostanimals.tracks.entries.PostEntry;
@@ -120,6 +117,34 @@ public class PostActivity extends AppCompatActivity {
                 followOrToUnfollow);
     }
 
+    private void onReportClicked() {
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+
+        alertDialog.setTitle("Report Post.");
+        alertDialog.setMessage("Please select a reason for reporting.");
+
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Violating guidelines", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                Toast.makeText(getApplicationContext(), "Post Reported", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Abuse", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                Toast.makeText(getApplicationContext(), "Post Reported", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Other", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                Toast.makeText(getApplicationContext(), "Post Reported", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        alertDialog.setCancelable(true);
+        alertDialog.show();
+    }
+
     private void addComment() {
         mCommentView.setError(null);
         String msg = mCommentView.getText().toString();
@@ -153,6 +178,8 @@ public class PostActivity extends AppCompatActivity {
         if (mPostEntry != null) {
             if (mPostEntry.getUsername().equals(PreferencesUtility.getUserInfo().getUsername())) {
                 getMenuInflater().inflate(R.menu.nav_popup, menu);
+            } else {
+                getMenuInflater().inflate(R.menu.nav_report, menu);
             }
         }
 
@@ -170,6 +197,9 @@ public class PostActivity extends AppCompatActivity {
                 return true;
             case R.id.popup_delete:
                 onDeleteClicked();
+                return true;
+            case R.id.popup_report:
+                onReportClicked();
                 return true;
         }
 

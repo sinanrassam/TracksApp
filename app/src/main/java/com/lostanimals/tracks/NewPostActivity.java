@@ -51,10 +51,10 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
 		}
 		
 		Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        etTitle = findViewById(R.id.post_et_post_title);
+        etDescription = findViewById(R.id.post_et_desc);
 		
 		if (isEditTask) {
-            etTitle = findViewById(R.id.post_et_post_title);
-            etDescription = findViewById(R.id.post_et_desc);
             String postTitle = mPostEntry.getPostTitle();
             String postDescription = mPostEntry.getPostDesc();
 			etTitle.setText(postTitle);

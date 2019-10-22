@@ -84,6 +84,7 @@
     <string name="settings_nav">Settings</string>
     <string name="nav_followed_posts">Followed Posts</string>
     <string name="app_version">v0.69</string>
+    <string name="popup_report_post">Report post</string>
     <!-- Permissions -->
     <string name="permission_rationale_location">Access to the location service is required to demonstrate the \'my
         location\' feature, which shows your current location on the map.
