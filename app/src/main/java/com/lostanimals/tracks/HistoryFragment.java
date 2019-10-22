@@ -25,7 +25,7 @@ public class HistoryFragment extends ListFragment {
         Queue<String> historyQ = FeedFragment.getHistoryQ();
 
         if (!(historyQ.size() == 0)) {
-            new HistoryPostsTask(this, progressBar).execute("", "", "");
+            new HistoryPostsTask(this, progressBar).execute("", "", "","","");
 
         } else {
             progressBar.setVisibility(View.GONE);

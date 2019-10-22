@@ -83,10 +83,9 @@ public class UpdatePostsTask extends AsyncTask<String, Integer, Boolean> {
                     String following = jsonObject.getString("following");
                     String image_exists = jsonObject.getString("image_exists");
                     String location = jsonObject.getString("location");
-                    String stray = jsonObject.getString("stray");
 
                     PostsUtility.addPostEntry(i, new PostEntry(id, title, desc, username, date, time, found,
-                            microChipped, following, image_exists, location, stray));
+                            microChipped, following, image_exists, location));
 
                     Map<String, String> post = new HashMap<>(2);
 

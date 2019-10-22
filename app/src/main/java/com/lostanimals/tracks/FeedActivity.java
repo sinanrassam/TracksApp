@@ -50,9 +50,11 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
         View header = navigationView.getHeaderView(0);
         AppCompatTextView mUsername = header.findViewById(R.id.usernameHeader);
         AppCompatTextView mEmail = header.findViewById(R.id.emailHeader);
+        AppCompatTextView mName = header.findViewById(R.id.name);
 
         mUsername.setText(PreferencesUtility.getUserInfo().getUsername());
         mEmail.setText(PreferencesUtility.getUserInfo().getEmail());
+        mName.setText("Hello " + PreferencesUtility.getUserInfo().getName());
 
         mActionBar.setTitle("Feed");
 
@@ -143,6 +145,8 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
     public void loadFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame, fragment);
+        transaction.addToBackStack(null);
+
         transaction.commit();
     }
 

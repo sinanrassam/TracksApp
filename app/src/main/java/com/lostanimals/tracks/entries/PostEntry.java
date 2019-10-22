@@ -16,8 +16,7 @@ public class PostEntry {
 
     // default
     public PostEntry(String id, String postTitle, String postDesc, String username, String postDate, String postTime,
-                     String found, String microChipped, String following, String hasImage, String location,
-                     String stray) {
+                     String found, String microChipped, String following, String edited, String hasImage, String location) {
         setId(id);
         setUsername(username);
         setPostTitle(postTitle);
@@ -26,10 +25,10 @@ public class PostEntry {
         setPostTime(postTime);
         setFound(found);
         setFollowing(following);
+        setEdited(edited);
         setMircrochipped(microChipped);
         setHasImage(hasImage);
         setLocation(location);
-        setStray(stray);
     }
 
     public String getUsername() {
