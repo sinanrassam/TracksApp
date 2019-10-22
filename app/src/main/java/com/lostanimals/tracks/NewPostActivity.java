@@ -68,9 +68,6 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
         mRemoveImageBtn = this.findViewById(R.id.post_remove_picture_bttn);
         mRemoveImageBtn.setOnClickListener(this);
 
-        strayBox = this.findViewById(R.id.stray_checkbox);
-        strayBox.setOnClickListener(this);
-
         imageToUpload = this.findViewById(R.id.imageToUpload);
 
         Button mBackBtn = this.findViewById(R.id.back);
@@ -129,7 +126,7 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
                 NewPostTask newPostTask = new NewPostTask(this, image, stray);
                 newPostTask.execute(title, description, PreferencesUtility.getUserInfo().getUsername(), location);
             } else {
-                EditTask editTask = new EditTask(this, image, stray);
+                EditTask editTask = new EditTask(this, image);
                 editTask.execute(mPostEntry.getId(), title, description, mPostEntry.getFound(), location);
             }
             finish();
@@ -172,9 +169,6 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.mapButton:
                 Intent chooseOnMapIntent = new Intent(this, SetLocationActivity.class);
                 startActivityForResult(chooseOnMapIntent, LOCATION_CHOOSE_REQUEST);
-                break;
-            case R.id.stray_checkbox:
-                stray = strayBox.isChecked();
                 break;
         }
     }

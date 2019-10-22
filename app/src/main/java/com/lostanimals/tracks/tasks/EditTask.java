@@ -19,12 +19,10 @@ public class EditTask extends AsyncTask<String, Integer, JSONObject> {
     @SuppressLint("StaticFieldLeak")
     private Context mContext;
     private Bitmap mImage;
-    private boolean mStray;
 
-    public EditTask(Context context, Bitmap image, boolean stray) {
+    public EditTask(Context context, Bitmap image) {
         mContext = context;
         mImage = image;
-        mStray = stray;
     }
 
     @Override

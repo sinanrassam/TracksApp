@@ -7,12 +7,12 @@ public class PostEntry {
     private String mPostDate;
     private String mPostTime;
     private String mId;
+    private String mEdited;
     private String mFound;
     private String mChipped;
     private Boolean mHasImage;
     private String mLocation;
     private boolean mFollowing;
-    private boolean mStray;
 
     // default
     public PostEntry(String id, String postTitle, String postDesc, String username, String postDate, String postTime,
@@ -67,6 +67,14 @@ public class PostEntry {
         return mId;
     }
 
+    public boolean isEdited() {
+        return Integer.valueOf(mEdited).equals(1);
+    }
+
+    public void setEdited(String edited) {
+        this.mEdited = edited;
+    }
+
     public void setId(String id) {
         this.mId = id;
     }
@@ -117,14 +125,6 @@ public class PostEntry {
 
     public void setLocation(String location) {
         this.mLocation = location;
-    }
-
-    public boolean isStray() {
-        return mStray;
-    }
-
-    public void setStray(String stray) {
-        this.mStray = !stray.equals("0");
     }
 
     @Override
