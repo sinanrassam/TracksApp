@@ -1,5 +1,6 @@
 package com.lostanimals.tracks;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -44,7 +45,13 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
 
         if(v.getId() == R.id.save_changed_password_button){
             if(oldPass.isEmpty() || newPass.isEmpty() || newPassConfirm.isEmpty()){
-                Toast.makeText(getApplicationContext(), "Please enter all text fields." , Toast.LENGTH_SHORT).show();
+                AlertDialog contactDialog = new AlertDialog.Builder(getApplicationContext()).create();
+                contactDialog.setTitle("Error");
+                contactDialog.setIcon(R.drawable.ic_edit_black);
+                contactDialog.setMessage("Please eneter all text fields.");
+                contactDialog.setCancelable(true);
+                contactDialog.show();
+                /*Toast.makeText(getApplicationContext(), "Please enter all text fields." , Toast.LENGTH_SHORT).show();*/
             }
         }
     }

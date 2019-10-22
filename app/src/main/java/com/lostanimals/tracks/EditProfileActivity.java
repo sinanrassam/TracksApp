@@ -14,6 +14,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.Preference;
 import com.lostanimals.tracks.entries.PreferenceEntry;
+import com.lostanimals.tracks.tasks.UpdateUserDetailsTask;
 import com.lostanimals.tracks.utils.PreferencesUtility;
 
 public class EditProfileActivity extends AppCompatActivity implements View.OnClickListener {
@@ -57,22 +58,31 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         originalName = PreferencesUtility.getUserInfo().getName();
 
         if (v.getId() == R.id.saved_profile_button) {
-            if (savedName.equals(originalName)) {
-                if (savedEmail.equals(originalEmail)) {
-                    Toast.makeText(getApplicationContext(), "No Changes Made on Username, Name or Email", Toast.LENGTH_SHORT).show();
-                } else if (!savedEmail.equals(originalEmail)) {
-                    PreferencesUtility.setUserInfo(new PreferenceEntry(originalName, originalUsername, savedEmail));
-                    Toast.makeText(getApplicationContext(), "Changes made on EMAIL. Successful: " + PreferencesUtility.setUserInfo(new PreferenceEntry(originalName, originalUsername, savedEmail)), Toast.LENGTH_SHORT).show();
-                }
+            if ((!savedName.equals(originalName)) || (!savedEmail.equals(originalEmail))) {
+                new UpdateUserDetailsTask(this).execute(savedName, savedEmail, "", "");
             } else {
-                if (savedEmail.equals(originalEmail)) {
-                    PreferencesUtility.setUserInfo(new PreferenceEntry(savedName, originalUsername, originalEmail));
-                    Toast.makeText(getApplicationContext(), "Changes made on NAME. Successful: " + PreferencesUtility.setUserInfo(new PreferenceEntry(savedName, originalUsername, originalEmail)), Toast.LENGTH_SHORT).show();
-                } else if (savedEmail != originalEmail) {
-                    PreferencesUtility.setUserInfo(new PreferenceEntry(savedName, originalUsername, savedEmail));
-                    Toast.makeText(getApplicationContext(), "Changes made on EMAIL and NAME. Successful: " + PreferencesUtility.setUserInfo(new PreferenceEntry(savedName, originalUsername, savedEmail)), Toast.LENGTH_SHORT).show();
-                }
+                Toast.makeText(getApplicationContext(), "No Changes Made on Name or Email", Toast.LENGTH_SHORT);
             }
+
+
+
+
+//            if (savedName.equals(originalName)) {
+//                if (savedEmail.equals(originalEmail)) {
+//                    Toast.makeText(getApplicationContext(), "No Changes Made on Username, Name or Email", Toast.LENGTH_SHORT).show();
+//                } else if (!savedEmail.equals(originalEmail)) {
+//
+//                    Toast.makeText(getApplicationContext(), "Changes made on EMAIL. Successful: " + PreferencesUtility.setUserInfo(new PreferenceEntry(originalName, originalUsername, savedEmail)), Toast.LENGTH_SHORT).show();
+//                }
+//            } else {
+//                if (savedEmail.equals(originalEmail)) {
+//                    PreferencesUtility.setUserInfo(new PreferenceEntry(savedName, originalUsername, originalEmail));
+//                    Toast.makeText(getApplicationContext(), "Changes made on NAME. Successful: " + PreferencesUtility.setUserInfo(new PreferenceEntry(savedName, originalUsername, originalEmail)), Toast.LENGTH_SHORT).show();
+//                } else if (savedEmail != originalEmail) {
+//                    PreferencesUtility.setUserInfo(new PreferenceEntry(savedName, originalUsername, savedEmail));
+//                    Toast.makeText(getApplicationContext(), "Changes made on EMAIL and NAME. Successful: " + PreferencesUtility.setUserInfo(new PreferenceEntry(savedName, originalUsername, savedEmail)), Toast.LENGTH_SHORT).show();
+//                }
+//            }
         }
         else if(v.getId() == R.id.change_password_Button){
             Intent changePasswordIntent = new Intent(EditProfileActivity.this, ChangePasswordActivity.class);

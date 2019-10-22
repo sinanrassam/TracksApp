@@ -58,6 +58,12 @@ public class ConnectionManager {
                 break;
             case "delete-post":
                 postData += URLEncoder.encode("id", "UTF-8") + "=" + URLEncoder.encode(parameters[0], "UTF-8");
+            case "update":
+                postData += URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(parameters[0], "UTF-8") + "&";
+                postData += URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(parameters[1], "UTF-8") + "&";
+                postData += URLEncoder.encode("old_password", "UTF-8") + "=" + URLEncoder.encode(parameters[2], "UTF-8");
+                postData += URLEncoder.encode("new_password", "UTF-8") + "=" + URLEncoder.encode(parameters[3], "UTF-8");
+                break;
 
         }
         return postData;
