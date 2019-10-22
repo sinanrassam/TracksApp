@@ -29,11 +29,11 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
     private final String DEFAULT_LOCATION = "-36.854018,174.766719";
     private static final int RESULT_LOAD_IMAGE = 1;
     private boolean isEditTask;
-    private int mPostPosition;
     private PostEntry mPostEntry;
     private boolean postHasImage;
     private EditText etTitle, etDescription;
-    private Button mBackBtn, mPostBtn, mImageBtn, mRemoveImageBtn;
+    private Button mImageBtn;
+    private Button mRemoveImageBtn;
     private ImageView imageToUpload;
     private String location = DEFAULT_LOCATION;
 	
@@ -46,7 +46,7 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
 		Bundle b = this.getIntent().getExtras();
 		if (b != null) {
             isEditTask = b.getBoolean("isEditTask");
-            mPostPosition = b.getInt("postPosition");
+            int mPostPosition = b.getInt("postPosition");
             mPostEntry = PostsUtility.getPostEntry(mPostPosition);
 		}
 		
@@ -69,7 +69,7 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
 
         imageToUpload = this.findViewById(R.id.imageToUpload);
 
-        mBackBtn = this.findViewById(R.id.back);
+        Button mBackBtn = this.findViewById(R.id.back);
         mBackBtn.setOnClickListener(this);
 
         ImageButton mapButton = this.findViewById(R.id.mapButton);
@@ -80,7 +80,7 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
             }
         });
 
-        mPostBtn = findViewById(R.id.post_btn_post);
+        Button mPostBtn = findViewById(R.id.post_btn_post);
         mPostBtn.setOnClickListener(this);
 
         if (isEditTask) {
@@ -161,7 +161,7 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.post_upload_picture_bttn:
                 Log.d("Image", "Browse for image");
                 Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                galleryIntent.createChooser(galleryIntent, "Select a post picture");
+                Intent.createChooser(galleryIntent, "Select a post picture");
                 startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE);
                 break;
             case R.id.post_btn_post:
@@ -190,7 +190,7 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
                 imageToUpload.setImageURI(selectedImage);
                 imageToUpload.setVisibility(View.VISIBLE);
                 mRemoveImageBtn.setVisibility(View.VISIBLE);
-                mImageBtn.setText("Change Image");
+                mImageBtn.setText(getString(R.string.post_change_image));
             } else {
                 Toast.makeText(this, R.string.file_format_err, Toast.LENGTH_SHORT).show();
             }
@@ -210,8 +210,8 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
     private String getRealPathFromURI(Context context, Uri contentUri) {
         Cursor cursor = null;
         try {
-            String[] proj = {MediaStore.Images.Media.DATA};
-            cursor = context.getContentResolver().query(contentUri, proj, null, null, null);
+            String[] strings = {MediaStore.Images.Media.DATA};
+            cursor = context.getContentResolver().query(contentUri, strings, null, null, null);
             int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
             cursor.moveToFirst();
             return cursor.getString(column_index);

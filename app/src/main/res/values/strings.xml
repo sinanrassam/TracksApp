@@ -46,6 +46,7 @@
     <string name="nav_my_posts">My Posts</string>
     <string name="nav_my_profile">My Profile</string>
     <string name="nav_log_out">Log Out</string>
+    <string name="menu_dark_mode">Dark Mode</string>
     <!-- Maps -->
     <string name="title_activity_maps">Map</string>
     <!-- Filters -->
@@ -100,4 +101,6 @@
     <string name="file_format_err">This is an unspported file format, please upload a jpg or a png!</string>
     <string name="activity_post_map_button">Map</string>
     <string name="image_description">Post Image</string>
+    <string name="post_change_image">Change Image</string>
+
 </resources>
