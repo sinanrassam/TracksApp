@@ -35,8 +35,7 @@ public class FollowedPostsFragment extends ListFragment {
     }
 
     private void refresh() {
-        task = new GetFollowedPostsTask(this, mProgressBar);
-        task.execute(PreferencesUtility.getUserInfo().getUsername());
+        new GetFollowedPostsTask(this, mProgressBar).execute(PreferencesUtility.getUserInfo().getUsername());
     }
 
     @Override
