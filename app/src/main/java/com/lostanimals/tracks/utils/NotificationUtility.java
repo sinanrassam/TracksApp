@@ -25,6 +25,7 @@ public class NotificationUtility {
     private static NotificationManager notificationManager;
     private static NotificationCompat.Builder builder;
     private static NotificationChannel notificationChannel;
+    private static boolean enabled;
 
     /**
      * Method for creating the notification, manager and channel.
@@ -70,7 +71,6 @@ public class NotificationUtility {
     private static void setChannel() {
         notificationChannel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT);
         notificationChannel.setDescription(CHANNEL_DESCRIPTION);
-
     }
 
     /**
@@ -80,7 +80,6 @@ public class NotificationUtility {
      */
     private static void setManager(Context context) {
         notificationManager = getSystemService(context, NotificationManager.class);
-
     }
 
     /**
@@ -109,11 +108,22 @@ public class NotificationUtility {
     }
 
     /**
-     * Create and show the notification.
+     * Setter method for enabling/disabling notifications.
+     *
+     * @param toggle the passed value for notification status.
+     */
+    public static void setNotificationsEnabled(boolean toggle) {
+        enabled = toggle;
+    }
+
+    /**
+     * Create and show the notification if notifications are enabled.
      *
      * @param notificationID passed in by the calling class, used to distinguish who created the notification.
      */
     public static void displayNotification(int notificationID) {
-        notificationManager.notify(notificationID, builder.build());
+        if (enabled) {
+            notificationManager.notify(notificationID, builder.build());
+        }
     }
 }

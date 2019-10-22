@@ -8,15 +8,16 @@
         android:layout_height="match_parent"
         tools:context=".FeedActivity">
 
-    <fragment
-            android:id="@+id/fragment_feed"
-            class="com.lostanimals.tracks.FeedFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
     <FrameLayout
+            android:id="@+id/frame"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
+
+        <fragment
+                android:id="@+id/fragment_feed"
+                class="com.lostanimals.tracks.FeedFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
 
         <TextView
                 android:layout_width="wrap_content"
@@ -24,23 +25,33 @@
                 android:textSize="24sp"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/feed_btn_add"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|end"
                 android:layout_margin="32dp"
                 android:clickable="true"
                 android:onClick="openNewPostActivity"
-                android:src="@drawable/plus_button_thin"
-                app:backgroundTint="@color/primaryAccent"
                 app:rippleColor="@color/primaryAccentLight"
+                app:backgroundTint="@color/primaryAccent"
+                android:src="@drawable/plus_button_thin"
         />
     </FrameLayout>
 
     <com.google.android.material.navigation.NavigationView
             android:id="@+id/navigation_view"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            app:menu="@menu/nav_menu"
-    />
+            android:fitsSystemWindows="true"
+            app:headerLayout="@layout/header_layout"
+            app:menu="@menu/nav_menu">
+        <Switch
+            android:id="@+id/switch_toggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="80dp"/>
+    </com.google.android.material.navigation.NavigationView>
+
 </androidx.drawerlayout.widget.DrawerLayout>
