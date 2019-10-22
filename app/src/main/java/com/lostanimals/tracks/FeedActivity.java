@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
+import android.widget.Switch;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -33,31 +35,28 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_feed);
 
         // Test data:
-        PreferencesUtility.setDarkMode(true);
-
-        if (PreferencesUtility.getUserInfo().isDarkModeEnabled()) {
-            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        } else {
-            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        }
-		
-        /*aSwitch=findViewById(R.id.switch_toggle);
-		aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				if(isChecked)
-				{
-					//if day mode is enabled, set night mode using AppCompatDelegate class.
-			//		Toast.makeText(this, "Night selected", Toast.LENGTH_SHORT).show();
-					getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-				}
-				else {
-					//if night mode is enabled, set day mode using AppCompatDelegate class.
-					//Toast.makeText(this, "Day mode selected", Toast.LENGTH_SHORT).show();
-					getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-				}
-			}
-		});*/
+//        PreferencesUtility.setDarkMode(true);
+//
+//        if (PreferencesUtility.getUserInfo().isDarkModeEnabled()) {
+//            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+//        } else {
+//            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+//        }
+        final Switch aSwitch = findViewById(R.id.switch_toggle);
+        aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    //if day mode is enabled, set night mode using AppCompatDelegate class.
+                    //		Toast.makeText(this, "Night selected", Toast.LENGTH_SHORT).show();
+                    getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                } else {
+                    //if night mode is enabled, set day mode using AppCompatDelegate class.
+                    //Toast.makeText(this, "Day mode selected", Toast.LENGTH_SHORT).show();
+                    getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                }
+            }
+        });
 
         mDrawerLayout = findViewById(R.id.drawer);
 
