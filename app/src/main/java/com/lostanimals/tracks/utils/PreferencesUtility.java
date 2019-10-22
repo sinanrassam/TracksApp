@@ -38,6 +38,7 @@ public class PreferencesUtility {
         getUserInfo().setDarkModeEnabled(darkMode);
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         editor.putBoolean(KEY_DARK_MODE, getUserInfo().isDarkModeEnabled());
+        // PreferencesUtility.getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         editor.apply();
     }
 

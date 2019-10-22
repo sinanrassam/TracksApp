@@ -98,7 +98,7 @@ public class NotificationUtility {
 
     /**
      * @param notificationID the ID of the notification
-     * @param context System context
+     * @param context        System context
      * @return the pending activity intent
      */
     private static PendingIntent getDismissedIntent(int notificationID, Context context) {
@@ -111,6 +111,7 @@ public class NotificationUtility {
 
     /**
      * Setter method for enabling/disabling notifications.
+     *
      * @param toggle the passed value for notification status.
      */
     public static void setNotificationsEnabled(boolean toggle) {

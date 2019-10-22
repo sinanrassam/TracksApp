@@ -21,6 +21,10 @@ public class SettingsListAdapter extends BaseAdapter implements ListAdapter {
         this.mContext = context;
     }
 
+    private static void toggleNight(boolean toggle) {
+        //ppCompatDelegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+    }
+
     @Override
     public int getCount() {
         return mItemsList.size();
@@ -54,7 +58,6 @@ public class SettingsListAdapter extends BaseAdapter implements ListAdapter {
         contactButton.setText(mItemsList.get(position));
         appVersionText.setText(R.string.app_version);
 
-//        listItemText.setVisibility(View.INVISIBLE);
         listItemSwitch.setVisibility(View.INVISIBLE);
         imageButton.setVisibility(View.INVISIBLE);
         appVersionText.setVisibility(View.INVISIBLE);
@@ -118,6 +121,7 @@ public class SettingsListAdapter extends BaseAdapter implements ListAdapter {
                         listItemSwitch.setChecked(PreferencesUtility.getUserInfo().isDarkModeEnabled());
                         break;
                     case "Notifications":
+                        Toast.makeText(mContext, "Notifications enabled", Toast.LENGTH_SHORT).show();
                         listItemSwitch.setChecked(PreferencesUtility.getUserInfo().isNotificationsEnabled());
                         break;
                 }
@@ -128,6 +132,7 @@ public class SettingsListAdapter extends BaseAdapter implements ListAdapter {
                         switch (mItemsList.get(position)) {
                             case "Dark Mode":
                                 Toast.makeText(mContext, "Dark Mode Toggled!", Toast.LENGTH_SHORT).show();
+                                // AppCompatDelegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                                 PreferencesUtility.setDarkMode(listItemSwitch.isEnabled());
                                 break;
                             case "Notifications":

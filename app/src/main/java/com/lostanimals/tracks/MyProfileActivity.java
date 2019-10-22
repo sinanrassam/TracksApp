@@ -9,9 +9,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import com.lostanimals.tracks.utils.PreferencesUtility;
 
-
 public class MyProfileActivity extends Fragment {
-
     View view;
 
     @SuppressLint("SetTextI18n")
@@ -25,13 +23,12 @@ public class MyProfileActivity extends Fragment {
 
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        TextView mUsername = (TextView) getView().findViewById(R.id.usernameProfile);
-        TextView mName = (TextView) getView().findViewById(R.id.nameProfile);
-        TextView mEmail = (TextView) getView().findViewById(R.id.emailProfile);
+        TextView mUsername = getView().findViewById(R.id.usernameProfile);
+        TextView mName = getView().findViewById(R.id.nameProfile);
+        TextView mEmail = getView().findViewById(R.id.emailProfile);
 
         mUsername.setText("Your username is: " + PreferencesUtility.getUserInfo().getUsername());
         mName.setText("Hi, " + PreferencesUtility.getUserInfo().getName() + "!");
         mEmail.setText("Your email address is: " + PreferencesUtility.getUserInfo().getEmail());
-        //  Intent intent = new Intent(getActivity().getIntent());
     }
 }

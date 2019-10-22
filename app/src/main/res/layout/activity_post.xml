@@ -87,7 +87,8 @@
                 android:autofillHints=""
                 android:ems="10"
                 android:hint="@string/prompt_comment" android:inputType="text"
-                android:textColor="@color/secondaryTextColor" app:layout_constraintBottom_toBottomOf="@+id/fragmentContainer"
+                android:textColor="@color/secondaryTextColor"
+                app:layout_constraintBottom_toBottomOf="@+id/fragmentContainer"
                 app:layout_constraintEnd_toStartOf="@+id/fragmentContainer" app:layout_constraintHorizontal_bias="0.023"
                 app:layout_constraintStart_toStartOf="parent"/>
 

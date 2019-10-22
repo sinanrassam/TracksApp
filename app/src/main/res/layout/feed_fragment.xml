@@ -17,7 +17,7 @@
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/pullToRefresh"
-            android:layout_width="397dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
         <ListView

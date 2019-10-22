@@ -42,6 +42,9 @@ public class RegisterActivity extends AppCompatActivity {
         mPasswordView = findViewById(R.id.password);
 
         //TODO:stinky af but cant figure it out
+
+        //setDataOnView();
+
         if (GoogleSignIn.getLastSignedInAccount(this) != null) {
             try {
                 setDataOnView();
