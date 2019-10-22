@@ -297,7 +297,7 @@ public class PostActivity extends AppCompatActivity {
 
     private void markAsFound() {
         EditTask editTask = new EditTask(this, null);
-        editTask.execute(mPostEntry.getId(), mPostEntry.getPostTitle(), mPostEntry.getPostDesc(), "1");
+        editTask.execute(mPostEntry.getId(), mPostEntry.getPostTitle(), mPostEntry.getPostDesc(), "1", "");
     }
 
     private void deletePost() {
