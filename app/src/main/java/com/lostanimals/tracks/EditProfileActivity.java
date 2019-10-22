@@ -1,5 +1,6 @@
 package com.lostanimals.tracks;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.Editable;
@@ -17,9 +18,9 @@ import com.lostanimals.tracks.utils.PreferencesUtility;
 
 public class EditProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private String savedUsername, originalUsername, savedEmail, originalEmail, savedName, originalName;
+    private String originalUsername, savedEmail, originalEmail, savedName, originalName;
     private TextView mUsername, mEmail, mName;
-    private Button savedprofileButton;
+    private Button savedprofileButton, changedPasswordButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,11 +44,12 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         savedprofileButton = findViewById(R.id.saved_profile_button);
         savedprofileButton.setOnClickListener(this);
+        changedPasswordButton = findViewById(R.id.change_password_Button);
+        changedPasswordButton.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        savedUsername = this.mUsername.getText().toString();
         originalUsername = PreferencesUtility.getUserInfo().getUsername();
         savedEmail = this.mEmail.getText().toString();
         originalEmail = PreferencesUtility.getUserInfo().getEmail();
@@ -71,6 +73,10 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                     Toast.makeText(getApplicationContext(), "Changes made on EMAIL and NAME. Successful: " + PreferencesUtility.setUserInfo(new PreferenceEntry(savedName, originalUsername, savedEmail)), Toast.LENGTH_SHORT).show();
                 }
             }
+        }
+        else if(v.getId() == R.id.change_password_Button){
+            Intent changePasswordIntent = new Intent(EditProfileActivity.this, ChangePasswordActivity.class);
+            startActivity(changePasswordIntent);
         }
     }
 }
