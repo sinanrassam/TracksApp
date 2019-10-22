@@ -14,27 +14,38 @@ class Comment {
 		$this->table = "comment";
 	}
 
-	public function createComment($postId, $username, $description)
+	public function createComment($postId, $username, $description, $parent_id = null)
 	{
 		$json['purpose'] = 'new comment';
 		$sql = "INSERT INTO $this->table (post_id, username, description) VALUES ('$postId', '$username', '$description')";
 		// Insert the data into the table
 		if ($this->conn->query($sql) === TRUE) {
-			$json['response'] = 'successful';
+			$id = $this->conn->insert_id;
+			if ($parent_id != null) {
+				$sql = "UPDATE $this->table SET parent_id='$parent_id' WHERE id='$id'";
+				if ($this->conn->query($sql) === TRUE) {
+					$json['response'] = 'successful';
+				} else {
+					$json['response'] = 'failed';
+					$json['reason'] = "Comment creation failed.<br>Error: ".$mysql_query."<br>".$this->conn->error;
+				}
+			} else {
+				$json['response'] = 'successful';
+			}
 		} else {
 			$json['response'] = 'failed';
-			$json['reason'] = "Post creation failed.<br>Error: ".$mysql_query."<br>".$this->conn->error;
+			$json['reason'] = "Comment creation failed.<br>Error: ".$mysql_query."<br>".$this->conn->error;
 		}
 		echo json_encode($json);
 		mysqli_close($this->conn);
 	}
 
-	public function getComments($id)
+	public function getComments($post_id, $parent_id = null)
 	{
 		$json['purpose'] = 'get comments';
-		$query = "Select * from $this->table ";
-		if ($id != null) {
-			$query .= "WHERE post_id = '$id'";
+		$query = "Select * from $this->table WHERE post_id = '$post_id'";
+		if ($parent_id != null) {
+			$query .= " AND parent_id = '$parent_id'";
 		}
 		$result = mysqli_query($this->conn, $query);
 		$number = mysqli_num_rows($result);
@@ -44,11 +55,15 @@ class Comment {
 			$comments = array();
 			$i = 0;
 			while ($row = $result->fetch_assoc()) {
+				$date = date('d/m/Y', strtotime($row['date']));
+				$time = date('h:i', strtotime($row['date']));
 				$comment = array(
 					"id" => "$row[id]",
 					"post_id" => "$row[post_id]",
 					"username" => "$row[username]",
-					"description" => "$row[description]"
+					"description" => "$row[description]",
+					"date" => "$date",
+					"time" => "$time"
 				);
 				$comments[$i] = $comment;
 				$i++;
@@ -71,10 +86,9 @@ class Comment {
 			$json['response'] = 'failed';
 			$json['reason'] = "Failed to udpate entry.<br>Error: ".$mysql_query."<br>".$this->conn->error;
 		}
-		echo json_encode($json);
+		// echo json_encode($json);
 		mysqli_close($this->conn);
 	}
-
 }
 
 $comment = new Comment();
@@ -83,9 +97,7 @@ if(isset($_POST['type'])) {
 	if ($type == "get-comments") {
 		$comment->getComments($_POST['post_id']);
 	} else if ($type == "new-comment") {
-		$comment->createComment($_POST['post_id'], $_POST['username'], $_POST['description']);
-	} else if ($type == "delete-post-comments") {
-		$comment->deletePostComments($_POST['post_id']);
+		$comment->createComment($_POST['post_id'], $_POST['username'], $_POST['description'], $_POST['parent_id']);
 	}
 }
 

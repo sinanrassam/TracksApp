@@ -99,7 +99,8 @@ class Post {
 	public function editPost($id, $title, $description, $found, $location, $image, $stray)
 	{
 		$json['purpose'] = 'edit-post';
-		$sql = "UPDATE $this->table SET title='$title', description='$description', found='$found', edited='1', location='$location', stray='$stray' WHERE id='$id'";
+		$edited=1;
+		$sql = "UPDATE $this->table SET title='$title', description='$description', found='$found', edited='$edited', location='$location', stray='$stray' WHERE id='$id'";
 		if ($this->conn->query($sql) === TRUE) {
 			if ($image != null) {
 				$imageJson = upload_image("post", "pic_" . $id, $image);
@@ -159,7 +160,7 @@ if(isset($_POST['type'])) {
 	} else if ($type == "new-post") {
 		$json = $post->createPost($_POST['username'], $_POST['title'], $_POST['description'], $_POST['image'], $_POST['location'], $_POST['stray']);
 	} else if ($type == "edit-post") {
-		$json = $post->editPost($_POST['id'], $_POST['title'], $_POST['description'], $_POST['found'], $_POST['location'], $_POST['image'], $_POST['stray']);
+		$json = $post->editPost($_POST['id'], $_POST['title'], $_POST['description'], $_POST['found'], $_POST['location'], $_POST['image']);
 	} else if ($type == "delete-post") {
 		$json = $post->deletePost($_POST['id']);
 	}
