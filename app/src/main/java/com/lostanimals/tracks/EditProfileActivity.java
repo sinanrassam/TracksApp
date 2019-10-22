@@ -59,7 +59,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         if (v.getId() == R.id.saved_profile_button) {
             if ((!savedName.equals(originalName)) || (!savedEmail.equals(originalEmail))) {
-                new UpdateUserDetailsTask(this).execute(savedName, savedEmail, "", "");
+                new UpdateUserDetailsTask(this).execute(savedName, originalUsername, savedEmail, "", "");
             } else {
                 Toast.makeText(getApplicationContext(), "No Changes Made on Name or Email", Toast.LENGTH_SHORT);
             }
