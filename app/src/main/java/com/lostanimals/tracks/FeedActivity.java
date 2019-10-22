@@ -1,13 +1,11 @@
 package com.lostanimals.tracks;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import androidx.annotation.NonNull;
@@ -52,9 +50,11 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
         View header = navigationView.getHeaderView(0);
         AppCompatTextView mUsername = header.findViewById(R.id.usernameHeader);
         AppCompatTextView mEmail = header.findViewById(R.id.emailHeader);
+        AppCompatTextView mName = header.findViewById(R.id.name);
 
         mUsername.setText(PreferencesUtility.getUserInfo().getUsername());
         mEmail.setText(PreferencesUtility.getUserInfo().getEmail());
+        mName.setText("Hello " + PreferencesUtility.getUserInfo().getName());
 
         mActionBar.setTitle("Feed");
 
@@ -100,8 +100,6 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
         Intent navigationIntent = null;
         mActionBar = getSupportActionBar();
 
-
-
         switch (menuItem.getItemId()) {
             case R.id.feed_nav:
                 loadFragment(new FeedFragment());
@@ -136,8 +134,6 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 		}
 
 		mDrawerLayout.closeDrawers();
-
-		// TODO: Why hardcode a false return?
 		return false;
 	}
 
@@ -149,6 +145,8 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
     public void loadFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame, fragment);
+        transaction.addToBackStack(null);
+
         transaction.commit();
     }
 

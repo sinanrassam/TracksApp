@@ -43,7 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
         if (GoogleSignIn.getLastSignedInAccount(this) != null) {
             try {
                 setDataOnView();
-            } catch (NullPointerException e) {
+            } catch (NullPointerException ignored) {
             }
         }
 

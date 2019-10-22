@@ -7,15 +7,16 @@ public class PostEntry {
     private String mPostDate;
     private String mPostTime;
     private String mId;
+    private String mEdited;
     private String mFound;
     private String mChipped;
-    private boolean mFollowing;
     private Boolean mHasImage;
     private String mLocation;
+    private boolean mFollowing;
 
     // default
     public PostEntry(String id, String postTitle, String postDesc, String username, String postDate, String postTime,
-                     String found, String microchipped, String following, String hasImage, String location) {
+                     String found, String microChipped, String following, String edited, String hasImage, String location) {
         setId(id);
         setUsername(username);
         setPostTitle(postTitle);
@@ -24,7 +25,8 @@ public class PostEntry {
         setPostTime(postTime);
         setFound(found);
         setFollowing(following);
-        setMircrochipped(microchipped);
+        setEdited(edited);
+        setMircrochipped(microChipped);
         setHasImage(hasImage);
         setLocation(location);
     }
@@ -65,6 +67,14 @@ public class PostEntry {
         return mId;
     }
 
+    public boolean isEdited() {
+        return Integer.valueOf(mEdited).equals(1);
+    }
+
+    public void setEdited(String edited) {
+        this.mEdited = edited;
+    }
+
     public void setId(String id) {
         this.mId = id;
     }
@@ -75,14 +85,6 @@ public class PostEntry {
 
     public void setFound(String found) {
         this.mFound = found;
-    }
-
-    @Override
-    public String toString() {
-        if (getPostDesc() != null) {
-            return getPostDesc();
-        }
-        return "Problem loading content";
     }
 
     public String getPostDesc() {
@@ -123,5 +125,13 @@ public class PostEntry {
 
     public void setLocation(String location) {
         this.mLocation = location;
+    }
+
+    @Override
+    public String toString() {
+        if (getPostDesc() != null) {
+            return getPostDesc();
+        }
+        return "Problem loading content";
     }
 }

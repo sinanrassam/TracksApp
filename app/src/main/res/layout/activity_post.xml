@@ -53,6 +53,16 @@
                     android:layout_marginEnd="5dp"
                     android:layout_marginTop="5dp" android:layout_marginBottom="5dp"/>
 
+            <ImageView
+                    android:id="@+id/editedSymbol"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp" android:contentDescription="@string/edit_icon"
+                    android:layout_marginTop="4dp" android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.835"
+                    app:layout_constraintStart_toEndOf="@+id/post_author" app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_edit_black_24dp"/>
+
         </LinearLayout>
 
         <TextView
@@ -127,7 +137,6 @@
                 android:layout_height="wrap_content" android:fillViewport="true"
                 tools:layout_editor_absoluteY="35dp">
 
-            <!-- todo: bad practice found below :'( -->
             <FrameLayout
                     android:id="@+id/fragmentContainer"
                     android:layout_width="match_parent"

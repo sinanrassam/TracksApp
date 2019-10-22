@@ -2,7 +2,6 @@ package com.lostanimals.tracks.tasks;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.Toast;
 import com.lostanimals.tracks.utils.ConnectionManager;
 import com.lostanimals.tracks.utils.PreferencesUtility;
@@ -52,6 +51,5 @@ public class LoginTask extends AsyncTask<String, Integer, JSONObject> {
     @Override
     protected void onCancelled() {
         super.onCancelled();
-        Log.d("LOGIN_TASK", "onCancelled: LOGIN_TASK_LOGIN_TASK_LOGIN_TASK_LOGIN_TASK");
     }
 }

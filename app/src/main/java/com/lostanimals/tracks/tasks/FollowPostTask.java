@@ -3,7 +3,6 @@ package com.lostanimals.tracks.tasks;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.Toast;
 import com.lostanimals.tracks.utils.ConnectionManager;
 import org.json.JSONException;
@@ -40,7 +39,6 @@ public class FollowPostTask extends AsyncTask<String, Integer, JSONObject> {
 
     @Override
     protected void onPostExecute(JSONObject data) {
-        Log.d("Data", data.toString());
         try {
             if (data.get("response").equals("successful")) {
                 Toast.makeText(mContext, "Post " + mMsg + "followed", Toast.LENGTH_LONG).show();

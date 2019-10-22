@@ -33,7 +33,6 @@ public class EditTask extends AsyncTask<String, Integer, JSONObject> {
             String postData = ConnectionManager.postEncoder("edit-post", parameters);
 
             if (mImage != null) {
-                //todo: need to clean up (repeated code)
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                 mImage.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
                 String encodedImage = Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT);

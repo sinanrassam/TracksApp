@@ -1,6 +1,5 @@
 package com.lostanimals.tracks.utils;
 
-import android.util.Log;
 import com.lostanimals.tracks.entries.PreferenceEntry;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -91,7 +90,6 @@ public class ConnectionManager {
 	}
 	
 	public static JSONObject processRequest(String script, String data) throws IOException, JSONException {
-		Log.d("Common bro", data);
 		HttpURLConnection conn = openConnection(URL + script);
 		
 		// Send the request to the server
