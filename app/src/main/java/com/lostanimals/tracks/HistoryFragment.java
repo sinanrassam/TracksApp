@@ -2,7 +2,6 @@ package com.lostanimals.tracks;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,8 +23,6 @@ public class HistoryFragment extends ListFragment {
         progressBar.setProgress(0);
 
         Queue<String> historyQ = FeedFragment.getHistoryQ();
-
-        Log.d("history", "Q in history queue" + historyQ);
 
         if (!(historyQ.size() == 0)) {
             new HistoryPostsTask(this, progressBar).execute("", "", "");

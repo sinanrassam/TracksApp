@@ -3,7 +3,6 @@ package com.lostanimals.tracks.tasks;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.Toast;
 import com.lostanimals.tracks.utils.ConnectionManager;
 import org.json.JSONException;
@@ -50,6 +49,5 @@ public class DeleteTask extends AsyncTask<String, Integer, JSONObject> {
     @Override
     protected void onCancelled() {
         super.onCancelled();
-        Log.d("DELETE_TASK", "onCancelled: DELETE_TASK_DELETE_TASK_DELETE_TASK_DELETE_TASK_DELETE_TASK");
     }
 }

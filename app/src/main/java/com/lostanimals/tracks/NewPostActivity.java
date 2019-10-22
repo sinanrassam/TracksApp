@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
@@ -36,6 +35,8 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
     private Button mRemoveImageBtn;
     private ImageView imageToUpload;
     private String location = DEFAULT_LOCATION;
+    CheckBox strayBox;
+    boolean stray;
 	
 	@SuppressLint ("SetTextI18n")
 	@Override
@@ -67,18 +68,16 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
         mRemoveImageBtn = this.findViewById(R.id.post_remove_picture_bttn);
         mRemoveImageBtn.setOnClickListener(this);
 
+        strayBox = this.findViewById(R.id.stray_checkbox);
+        strayBox.setOnClickListener(this);
+
         imageToUpload = this.findViewById(R.id.imageToUpload);
 
         Button mBackBtn = this.findViewById(R.id.back);
         mBackBtn.setOnClickListener(this);
 
         ImageButton mapButton = this.findViewById(R.id.mapButton);
-        mapButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                chooseLocation();
-            }
-        });
+        mapButton.setOnClickListener(this);
 
         Button mPostBtn = findViewById(R.id.post_btn_post);
         mPostBtn.setOnClickListener(this);
@@ -92,15 +91,10 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
                 mRemoveImageBtn.setVisibility(View.VISIBLE);
             }
         } else {
-            imageToUpload.setVisibility(View.GONE);
-            mRemoveImageBtn.setVisibility(View.GONE);
+            imageToUpload.setVisibility(View.INVISIBLE);
+            mRemoveImageBtn.setVisibility(View.INVISIBLE);
         }
 	}
-
-    private void chooseLocation() {
-        Intent chooseOnMapIntent = new Intent(this, SetLocationActivity.class);
-        startActivityForResult(chooseOnMapIntent, LOCATION_CHOOSE_REQUEST);
-    }
 
     public void onNewPost() {
         etTitle.setError(null);
@@ -110,7 +104,6 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
         String description = etDescription.getText().toString();
         Bitmap image = null;
         if (imageToUpload.getDrawable() != null) {
-            Log.d("imageToUpload", "is not null");
             image = ((BitmapDrawable) imageToUpload.getDrawable()).getBitmap();
         }
 
@@ -133,10 +126,10 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
             focusView.requestFocus();
         } else {
             if (!isEditTask) {
-                NewPostTask newPostTask = new NewPostTask(this, image);
+                NewPostTask newPostTask = new NewPostTask(this, image, stray);
                 newPostTask.execute(title, description, PreferencesUtility.getUserInfo().getUsername(), location);
             } else {
-                EditTask editTask = new EditTask(this, image);
+                EditTask editTask = new EditTask(this, image, stray);
                 editTask.execute(mPostEntry.getId(), title, description, mPostEntry.getFound(), location);
             }
             finish();
@@ -159,7 +152,6 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.post_upload_picture_bttn:
-                Log.d("Image", "Browse for image");
                 Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 Intent.createChooser(galleryIntent, "Select a post picture");
                 startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE);
@@ -176,6 +168,13 @@ public class NewPostActivity extends AppCompatActivity implements View.OnClickLi
                 break;
             case R.id.back:
                 finish();
+                break;
+            case R.id.mapButton:
+                Intent chooseOnMapIntent = new Intent(this, SetLocationActivity.class);
+                startActivityForResult(chooseOnMapIntent, LOCATION_CHOOSE_REQUEST);
+                break;
+            case R.id.stray_checkbox:
+                stray = strayBox.isChecked();
                 break;
         }
     }

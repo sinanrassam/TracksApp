@@ -127,7 +127,6 @@
                 android:layout_height="wrap_content" android:fillViewport="true"
                 tools:layout_editor_absoluteY="35dp">
 
-            <!-- todo: bad practice found below :'( -->
             <FrameLayout
                     android:id="@+id/fragmentContainer"
                     android:layout_width="match_parent"

@@ -5,7 +5,6 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AutoCompleteTextView;
@@ -17,7 +16,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.lostanimals.tracks.tasks.LoginTask;
@@ -76,17 +74,10 @@ public class LoginActivity extends AppCompatActivity {
 			 */
 			@Override
 			public void onClick(View view) {
-				// TODO: Fix this
 				try {
-					if (isOnline() == false) {
-						Log.d("LOGIN_TASK", "internet avaliable");
-						attemptLogin();
-					} else {
-						attemptLogin();
-						Log.d("LOGIN_TASK", "no internet");
-					}
-				} catch (ExecutionException | InterruptedException | JSONException e) {
-					e.printStackTrace();
+					attemptLogin();
+				} catch (ExecutionException | InterruptedException | JSONException ex) {
+					ex.printStackTrace();
 				}
 			}
 		});
@@ -130,10 +121,7 @@ public class LoginActivity extends AppCompatActivity {
                         Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
                         GoogleSignInAccount account = task.getResult(ApiException.class);
                         onLoggedIn(account);
-                        Log.d("GOOGLE", "GOOG signed in");
-                    } catch (ApiException e) {
-                        // The ApiException status code indicates the detailed failure reason.
-                        Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
+                    } catch (ApiException ignored) {
                     }
                     break;
             }
@@ -157,10 +145,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private void onLoggedIn(GoogleSignInAccount googleSignInAccount) {
         Intent intent = new Intent(this, RegisterActivity.class);
-        Log.d("LOGIN", "Starting register actiity");
         intent.putExtra(FeedActivity.GOOGLE_ACCOUNT, googleSignInAccount);
         startActivity(intent);
-
 
         finish();
     }

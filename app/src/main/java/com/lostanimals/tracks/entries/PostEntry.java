@@ -9,13 +9,15 @@ public class PostEntry {
     private String mId;
     private String mFound;
     private String mChipped;
-    private boolean mFollowing;
     private Boolean mHasImage;
     private String mLocation;
+    private boolean mFollowing;
+    private boolean mStray;
 
     // default
     public PostEntry(String id, String postTitle, String postDesc, String username, String postDate, String postTime,
-                     String found, String microchipped, String following, String hasImage, String location) {
+                     String found, String microChipped, String following, String hasImage, String location,
+                     String stray) {
         setId(id);
         setUsername(username);
         setPostTitle(postTitle);
@@ -24,9 +26,10 @@ public class PostEntry {
         setPostTime(postTime);
         setFound(found);
         setFollowing(following);
-        setMircrochipped(microchipped);
+        setMircrochipped(microChipped);
         setHasImage(hasImage);
         setLocation(location);
+        setStray(stray);
     }
 
     public String getUsername() {
@@ -77,14 +80,6 @@ public class PostEntry {
         this.mFound = found;
     }
 
-    @Override
-    public String toString() {
-        if (getPostDesc() != null) {
-            return getPostDesc();
-        }
-        return "Problem loading content";
-    }
-
     public String getPostDesc() {
         return mPostDesc;
     }
@@ -123,5 +118,21 @@ public class PostEntry {
 
     public void setLocation(String location) {
         this.mLocation = location;
+    }
+
+    public boolean isStray() {
+        return mStray;
+    }
+
+    public void setStray(String stray) {
+        this.mStray = !stray.equals("0");
+    }
+
+    @Override
+    public String toString() {
+        if (getPostDesc() != null) {
+            return getPostDesc();
+        }
+        return "Problem loading content";
     }
 }

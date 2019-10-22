@@ -1,17 +1,14 @@
 package com.lostanimals.tracks.tasks;
 
 import android.annotation.SuppressLint;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.util.Base64;
-import android.util.Log;
 import android.widget.Toast;
 import com.lostanimals.tracks.FeedActivity;
 import com.lostanimals.tracks.utils.ConnectionManager;
-import com.lostanimals.tracks.utils.NotificationUtility;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -23,10 +20,12 @@ public class NewPostTask extends AsyncTask<String, Void, JSONObject> {
     @SuppressLint("StaticFieldLeak")
     private Context mContext;
     private Bitmap mImage;
+    private boolean mStray;
 
-    public NewPostTask(Context context, Bitmap image) {
+    public NewPostTask(Context context, Bitmap image, boolean stray) {
         mContext = context;
         mImage = image;
+        mStray = stray;
     }
 
     @Override
@@ -37,15 +36,17 @@ public class NewPostTask extends AsyncTask<String, Void, JSONObject> {
             String postData = ConnectionManager.postEncoder("new-post", parameters);
 
             if (mImage != null) {
-                //todo: need to clean up (repeated code)
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                 mImage.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
                 String encodedImage = Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT);
                 postData += "&" + URLEncoder.encode("image", "UTF-8") + "=" + URLEncoder.encode(encodedImage, "UTF-8");
             }
 
+            if (mStray) {
+                postData += "&" + URLEncoder.encode("stray", "UTF-8") + "=" + URLEncoder.encode("'1'", "UTF-8");
+            }
+
             json = ConnectionManager.processRequest("post.php", postData);
-            Log.d("JSON", json.toString());
         } catch (JSONException | IOException e) {
             e.printStackTrace();
         }
@@ -59,12 +60,6 @@ public class NewPostTask extends AsyncTask<String, Void, JSONObject> {
             if (jsonObject.get("response").equals("successful")) {
                 Intent feedIntent = new Intent(mContext, FeedActivity.class);
                 feedIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-
-                PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 0, feedIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-                NotificationUtility.createNotification(mContext, "Post Created Successfully", "", true, pendingIntent);
-                NotificationUtility.displayNotification(0);
-
                 mContext.startActivity(feedIntent);
             }
         } catch (JSONException e) {

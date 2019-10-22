@@ -3,7 +3,6 @@ package com.lostanimals.tracks.tasks;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
@@ -60,26 +59,25 @@ public class HistoryPostsTask extends AsyncTask<String, Integer, Boolean> {
             PostsUtility.clear();
             mPostList = new ArrayList<>();
             try {
-                JSONArray jsonArray = (JSONArray) json.get("posts");
-                Log.d("test", jsonArray.toString());
+                JSONArray jsonArray = json.getJSONArray("posts");
                 for (int i = 0; i < historyQ.size(); i++) {
-                    JSONObject jsonObject = (JSONObject) jsonArray.get(i);
-                    String id = (String) jsonObject.get("id");
-                    String title = (String) jsonObject.get("title");
-                    String desc = (String) jsonObject.get("description");
-                    String username = (String) jsonObject.get("username");
-                    String date = (String) jsonObject.get("post_date");
-                    String time = (String) jsonObject.get("post_time");
-                    String found = (String) jsonObject.get("found");
-                    String micro_chipped = jsonObject.getString("micro_chipped");
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    String id = jsonObject.getString("id");
+                    String title = jsonObject.getString("title");
+                    String desc = jsonObject.getString("description");
+                    String username = jsonObject.getString("username");
+                    String date = jsonObject.getString("post_date");
+                    String time = jsonObject.getString("post_time");
+                    String found = jsonObject.getString("found");
+                    String microChipped = jsonObject.getString("micro_chipped");
                     String following = jsonObject.getString("following");
-                    String image_exists = jsonObject.getString("image_exists");
-                    String location = (String) jsonObject.get("location");
+                    String imageExists = jsonObject.getString("image_exists");
+                    String location = jsonObject.getString("location");
+                    String stray = jsonObject.getString("stray");
 
-
-                    if (historyQ.contains(id) && username != user) {
+                    if (historyQ.contains(id) && !username.equals(user)) {
                         PostsUtility.addPostEntry(i, new PostEntry(id, title, desc, username, date, time, found,
-                                micro_chipped, following, image_exists, location));
+                                microChipped, following, imageExists, location, stray));
 
                         Map<String, String> post = new HashMap<>(2);
 

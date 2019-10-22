@@ -1,13 +1,11 @@
 package com.lostanimals.tracks;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import androidx.annotation.NonNull;
@@ -100,8 +98,6 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
         Intent navigationIntent = null;
         mActionBar = getSupportActionBar();
 
-
-
         switch (menuItem.getItemId()) {
             case R.id.feed_nav:
                 loadFragment(new FeedFragment());
@@ -136,8 +132,6 @@ public class FeedActivity extends AppCompatActivity implements NavigationView.On
 		}
 
 		mDrawerLayout.closeDrawers();
-
-		// TODO: Why hardcode a false return?
 		return false;
 	}
 

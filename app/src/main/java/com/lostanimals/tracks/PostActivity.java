@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,7 +23,8 @@ public class PostActivity extends AppCompatActivity {
     private String mPostId;
     private PostEntry mPostEntry;
     private EditText mCommentView;
-    private CommentsFragment commentsFragment;
+    private CommentsFragment mCommentsFragment;
+    private int mStray;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -61,11 +61,11 @@ public class PostActivity extends AppCompatActivity {
 
         mCommentView = findViewById(R.id.comment_field);
 
-        commentsFragment = new CommentsFragment();
+        mCommentsFragment = new CommentsFragment();
         Bundle data = new Bundle();
         data.putString("post_id", mPostId);
-        commentsFragment.setArguments(data);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, commentsFragment).commit();
+        mCommentsFragment.setArguments(data);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, mCommentsFragment).commit();
 
         Button mCommentBtn = findViewById(R.id.comment_btn);
         mCommentBtn.setOnClickListener(new View.OnClickListener() {
@@ -111,7 +111,6 @@ public class PostActivity extends AppCompatActivity {
     }
 
     private void followPost(boolean following) {
-        Log.d("Follow Post", "Clicked");
         String followOrToUnfollow = (following) ? "un" : "";
         new FollowPostTask(this).execute(PreferencesUtility.getUserInfo().getUsername(), mPostEntry.getId(),
                 followOrToUnfollow);
@@ -169,7 +168,7 @@ public class PostActivity extends AppCompatActivity {
             mCommentView.clearFocus();
             NewCommentTask addCommentTask = new NewCommentTask(this);
             addCommentTask.execute(post_id, username, msg);
-            commentsFragment.refresh();
+            mCommentsFragment.refresh();
         }
     }
 
@@ -296,8 +295,8 @@ public class PostActivity extends AppCompatActivity {
     }
 
     private void markAsFound() {
-        EditTask editTask = new EditTask(this, null);
-        editTask.execute(mPostEntry.getId(), mPostEntry.getPostTitle(), mPostEntry.getPostDesc(), "1");
+        EditTask editTask = new EditTask(this, null, false);
+        editTask.execute(mPostEntry.getId(), mPostEntry.getPostTitle(), mPostEntry.getPostDesc(), "1", "0,0", String.valueOf(mStray));
     }
 
     private void deletePost() {

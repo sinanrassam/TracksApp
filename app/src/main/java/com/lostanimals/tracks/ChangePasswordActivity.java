@@ -6,11 +6,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import com.lostanimals.tracks.entries.PreferenceEntry;
-import com.lostanimals.tracks.utils.PreferencesUtility;
 
 public class ChangePasswordActivity extends AppCompatActivity implements View.OnClickListener {
     String oldPass, newPass, newPassConfirm;
