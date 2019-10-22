@@ -23,6 +23,6 @@ public class CommentEntry {
 	
 	@Override
 	public String toString() {
-		return mDescription + "; posted on " + mDate + " at " + mDate;
+		return mDescription + "; posted on " + mDate + " at " + mTime;
 	}
 }

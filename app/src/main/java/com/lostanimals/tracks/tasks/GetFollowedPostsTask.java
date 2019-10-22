@@ -35,7 +35,7 @@ public class GetFollowedPostsTask extends AsyncTask<String, Integer, Boolean> {
     @Override
     protected void onPreExecute() {
         mUpdatePostsTask = new UpdatePostsTask(mFragment, mContext, mProgressBar);
-        mUpdatePostsTask.execute("", PreferencesUtility.getUserInfo().getUsername(), "", "");
+        mUpdatePostsTask.execute("", PreferencesUtility.getUserInfo().getUsername(), "", "", "");
     }
 
     @Override

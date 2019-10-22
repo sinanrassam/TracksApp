@@ -12,7 +12,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
 public class ConnectionManager {
-	private static final String URL = "http://bosh.live:7536/phpmyadmin/tracks_api/";
+	public static final String URL = "http://bosh.live:7536/phpmyadmin/tracks_api/";
 	
 	public static String postEncoder(String type, String[] parameters) throws UnsupportedEncodingException {
 		for (int i = 0; i < parameters.length; i++) {
@@ -69,6 +69,14 @@ public class ConnectionManager {
 			case "get-followed-posts":
 				postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(parameters[0], "UTF-8");
 				break;
+            case "upload-image":
+                postData += URLEncoder.encode("image_type", "UTF-8") + "=" + URLEncoder.encode(parameters[0], "UTF-8") + "&";
+                postData += URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(parameters[1], "UTF-8") + "&";
+                postData += URLEncoder.encode("image", "UTF-8") + "=" + URLEncoder.encode(parameters[2], "UTF-8");
+                break;
+            case "get-image":
+                postData += URLEncoder.encode("url", "UTF-8") + "=" + URLEncoder.encode(URL + parameters[0], "UTF-8");
+                break;
 		}
 		return postData;
 	}

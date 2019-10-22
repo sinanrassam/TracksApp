@@ -11,21 +11,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.lostanimals.tracks.entries.PostEntry;
-import com.lostanimals.tracks.tasks.DeleteTask;
-import com.lostanimals.tracks.tasks.EditTask;
-import com.lostanimals.tracks.tasks.FollowPostTask;
-import com.lostanimals.tracks.tasks.NewCommentTask;
+import com.lostanimals.tracks.tasks.*;
 import com.lostanimals.tracks.utils.PostsUtility;
 import com.lostanimals.tracks.utils.PreferencesUtility;
 
 import java.util.ArrayList;
 
 public class PostActivity extends AppCompatActivity {
-	
+    private int mPostListPosition;
+    private String mPostId;
 	private PostEntry mPostEntry;
 	private EditText mCommentView;
 	private CommentsFragment commentsFragment;
@@ -36,20 +35,21 @@ public class PostActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_post);
 
-		int mPostPosition = getIntent().getIntExtra("position", -1);
-		if (mPostPosition > -1) {
-			mPostEntry = PostsUtility.getPostEntry(mPostPosition);
-		} else {
-			String postTitle = getIntent().getStringExtra("title");
-			String postDesc = getIntent().getStringExtra("title");
-			ArrayList<PostEntry> posts = PostsUtility.getPostEntries();
-			for (PostEntry entry : posts) {
-				if (entry.getPostTitle().equals(postTitle) && entry.getPostTitle().equals(postDesc)) {
-					mPostEntry = entry;
-					break;
-				}
-			}
-		}
+        mPostListPosition = getIntent().getIntExtra("position", 0);
+        if (mPostListPosition > -1) {
+            mPostEntry = PostsUtility.getPostEntry(mPostListPosition);
+        } else {
+            String postTitle = getIntent().getStringExtra("title");
+            String postDesc = getIntent().getStringExtra("title");
+            ArrayList<PostEntry> posts = PostsUtility.getPostEntries();
+            for (PostEntry entry : posts) {
+                if (entry.getPostTitle().equals(postTitle) && entry.getPostTitle().equals(postDesc)) {
+                    mPostEntry = entry;
+                    break;
+                }
+            }
+        }
+        mPostId = mPostEntry.getId();
 		
 		TextView mPostTitleView = findViewById(R.id.post_txt_title);
 		TextView mPostDescView = findViewById(R.id.post_et_desc);
@@ -66,10 +66,10 @@ public class PostActivity extends AppCompatActivity {
 		
 		commentsFragment = new CommentsFragment();
 		Bundle data = new Bundle();
-		data.putString("post_id", mPostEntry.getId());
+		data.putString("post_id", mPostId);
 		commentsFragment.setArguments(data);
 		getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, commentsFragment).commit();
-
+		
 		Button mCommentBtn = findViewById(R.id.comment_btn);
 		mCommentBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -78,32 +78,38 @@ public class PostActivity extends AppCompatActivity {
 			}
 		});
 
-		if (PreferencesUtility.getUserInfo().getUsername().equals(mPostEntry.getUsername())) {
-			findViewById(R.id.unowned_options).setVisibility(View.GONE);
-		} else {
-			final Button mFollowPostBtn = findViewById(R.id.followPost_btn);
-			final boolean following = mPostEntry.isFollowed();
-			if (following) {
-				mFollowPostBtn.setText(R.string.action_unfollow_post);
-			}
-			findViewById(R.id.unowned_options).setVisibility(View.VISIBLE);
-			mFollowPostBtn.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					followPost(following);
-					mFollowPostBtn.setEnabled(false);
-				}
-			});
-		}
+        ImageView img = findViewById(R.id.imageView);
+        img.setVisibility(View.GONE);
+        if (mPostEntry.hasImage()) {
+            new DownloadImageTask(img).execute("post", mPostId);
+        }
+
+        if (PreferencesUtility.getUserInfo().getUsername().equals(mPostEntry.getUsername())) {
+            findViewById(R.id.unowned_options).setVisibility(View.GONE);
+        } else {
+            final Button mFollowPostBtn = findViewById(R.id.followPost_btn);
+            final boolean following = mPostEntry.isFollowed();
+            if (following) {
+                mFollowPostBtn.setText(R.string.action_unfollow_post);
+            }
+            findViewById(R.id.unowned_options).setVisibility(View.VISIBLE);
+            mFollowPostBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    followPost(following);
+                    mFollowPostBtn.setEnabled(false);
+                }
+            });
+        }
 	}
 
-	private void followPost(boolean following) {
-		Log.d("Follow Post", "Clicked");
-		String followOrToUnfollow = (following)? "un" : "";
+    private void followPost(boolean following) {
+        Log.d("Follow Post", "Clicked");
+        String followOrToUnfollow = (following)? "un" : "";
 
-		new FollowPostTask(this).execute(PreferencesUtility.getUserInfo().getUsername(), mPostEntry.getId(),
-				followOrToUnfollow);
-	}
+        new FollowPostTask(this).execute(PreferencesUtility.getUserInfo().getUsername(), mPostEntry.getId(),
+                followOrToUnfollow);
+    }
 	
 	private void addComment() {
 		mCommentView.setError(null);
@@ -166,7 +172,7 @@ public class PostActivity extends AppCompatActivity {
 		
 		if (mPostEntry.getFound().equals("0")) {
 			builder.setMessage("Are you sure you want to mark the post as found? It will no longer be "
-					+ "accessible in the main feed but you can view it in my posts.");
+                    + "accessible in the main feed but you can view it in my posts.");
 			builder.setTitle("Warning!");
 			
 			builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -203,10 +209,7 @@ public class PostActivity extends AppCompatActivity {
 		if (mPostEntry.getFound().equals("0")) {
 			Intent myIntent = new Intent(this, NewPostActivity.class);
 			myIntent.putExtra("isEditTask", true); // to set trigger in NewPostActivity to call EditTask
-			myIntent.putExtra("postID", mPostEntry.getId());
-			myIntent.putExtra("postTitle", mPostEntry.getPostTitle());
-			myIntent.putExtra("postDesc", mPostEntry.getPostDesc());
-			myIntent.putExtra("isFound", mPostEntry.getFound());
+            myIntent.putExtra("postPosition", mPostListPosition);
 			startActivity(myIntent);
 		} else {
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -254,13 +257,13 @@ public class PostActivity extends AppCompatActivity {
 	}
 	
 	private void markAsFound() {
-		EditTask editTask = new EditTask(this);
+		EditTask editTask = new EditTask(this, null);
 		editTask.execute(mPostEntry.getId(), mPostEntry.getPostTitle(), mPostEntry.getPostDesc(), "1");
 	}
 	
 	private void deletePost() {
 		DeleteTask deleteTask = new DeleteTask(this);
-		deleteTask.execute(mPostEntry.getId());
+		deleteTask.execute(mPostId);
 		finish();
 	}
 }
