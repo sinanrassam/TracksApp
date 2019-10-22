@@ -99,24 +99,60 @@ class User {
     mysqli_close($this->conn);
   }
 
-  public function update($name, $email, $password, $username)
+  public function update($name, $email, $oldPassword, $newPassword, $username)
   {
     $json['purpose'] = 'update';
-    $sql = "UPDATE $this->table SET name='$name', email='$email', password = '$password' WHERE username='$username'";
+    $sql = "UPDATE $this->table SET name='$name', email='$email' WHERE username='$username'";
     if ($this->conn->query($sql) === TRUE) {
       $json['response'] = 'successful';
       $userDetails = array(
         "name" => "$name",
         "email" => "$email",
-        "username" => "$username",
+        "username" => "$username"
       );
+      $json['details'] = $userDetails;
+      if ($oldPassword == "") {
+        $change_password_json = $this->change_password($username, $oldPassword, $newPassword);
+        if ($change_password_json["response"] != "successful") {
+          $json['response'] = 'failed';
+          $json['reason'] = "Account update successful. But " . $change_password_json["reason"];
+        }
+      }
     } else {
       $json['response'] = 'failed';
-      $json['reason'] = "Account creation failed. Error: ".$mysql_query." ".$this->conn->error;
+      $json['reason'] = "Account update failed. Error: ".$mysql_query." ".$this->conn->error;
     }
     echo json_encode($json);
     mysqli_close($this->conn);
   }
+
+  public function change_password($username, $oldPassword, $newPassword) {
+    $json['purpose'] = 'update-password';
+    $sql = "SELECT * from $this->table WHERE username='$username'";
+    $result = mysqli_query($this->conn, $sql);
+    $number = mysqli_num_rows($result);
+    if ($number == 1) {
+      $row = $result->fetch_assoc();
+      if ($oldPassword == "$row[password]") {
+        $sql = "UPDATE $this->table SET password='$newPassword' WHERE username='$username'";
+        if ($this->conn->query($sql) === TRUE) {
+          $json['response'] = 'successful';
+        } else {
+          $json['response'] = 'failed';
+          $json['reason'] = 'password change failed!';
+        }
+      } else {
+        $json['response'] = 'failed';
+        $json['reason'] = 'old password does not match!';
+      }
+    } else {
+      $json['response'] = 'failed';
+      $json['reason'] = 'username does not exist!';
+    }
+    mysqli_close($this->conn);
+    return $json;
+  }
+
 }
 
 $user = new User();
@@ -131,7 +167,9 @@ if(isset($_POST['type'], $_POST['username'])) {
     $name = $_POST['name'];
     $user->register($name, $email, $username, $encrypted_password);
   } else if ($type == "update") {
-    $user->update($_POST['name'], $email, $encrypted_password, $username);
+    $encrypted_old_password = sha1($_POST['old_password']);
+    $encrypted_new_password = sha1($_POST['new_password']);
+    $user->update($_POST['name'], $email, $encrypted_old_password, $encrypted_new_password, $username);
   }
 } else {
   $json['response'] = 'failed';
